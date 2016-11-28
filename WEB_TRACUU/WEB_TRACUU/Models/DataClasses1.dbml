@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Rent_Office" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=VuDang;Initial Catalog=Rent_Office;User ID=sa;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Rent_OfficeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Anh_CT_VP" Member="Anh_CT_VPs">
+    <Type Name="Anh_CT_VP">
+      <Column Name="MaVP" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AnhCT" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="VanPhong_Anh_CT_VP" Member="VanPhong" ThisKey="MaVP" OtherKey="MaVP" Type="VanPhong" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ViTri" Member="ViTris">
+    <Type Name="ViTri">
+      <Column Name="MaViTri" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenViTri" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="ViTri_VanPhong" Member="VanPhongs" ThisKey="MaViTri" OtherKey="MaViTri" Type="VanPhong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HinhThuc" Member="HinhThucs">
+    <Type Name="HinhThuc">
+      <Column Name="MaHinhThuc" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHinhThuc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="HinhThuc_VanPhong" Member="VanPhongs" ThisKey="MaHinhThuc" OtherKey="MaHinhThuc" Type="VanPhong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhachHang" Member="KhachHangs">
+    <Type Name="KhachHang">
+      <Column Name="MaKH" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CoQuan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoDT" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Pass" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FlagActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Admin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="KhachHang_TheoDoi" Member="TheoDois" ThisKey="MaKH" OtherKey="MaKH" Type="TheoDoi" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NguoiLH" Member="NguoiLHs">
+    <Type Name="NguoiLH">
+      <Column Name="MaNguoiLH" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNguoiLH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SoDT" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="NguoiLH_VanPhong" Member="VanPhongs" ThisKey="MaNguoiLH" OtherKey="MaNguoiLH" Type="VanPhong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PhanLoaiThue" Member="PhanLoaiThues">
+    <Type Name="PhanLoaiThue">
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="PhanLoaiThue_VanPhong" Member="VanPhongs" ThisKey="MaLoai" OtherKey="MaPLThue" Type="VanPhong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Quan" Member="Quans">
+    <Type Name="Quan">
+      <Column Name="MaQuan" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenQuan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Quan_VanPhong" Member="VanPhongs" ThisKey="MaQuan" OtherKey="MaQuan" Type="VanPhong" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TheoDoi" Member="TheoDois">
+    <Type Name="TheoDoi">
+      <Column Name="MaKH" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaVP" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="KhachHang_TheoDoi" Member="KhachHang" ThisKey="MaKH" OtherKey="MaKH" Type="KhachHang" IsForeignKey="true" />
+      <Association Name="VanPhong_TheoDoi" Member="VanPhong" ThisKey="MaVP" OtherKey="MaVP" Type="VanPhong" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VanPhong" Member="VanPhongs">
+    <Type Name="VanPhong">
+      <Column Name="MaVP" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenVP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoNha" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaQuan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DienTich" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="BanDo" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="MaNguoiLH" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="MaPLThue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaViTri" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaHinhThuc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LuotView" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Avarta" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="VanPhong_Anh_CT_VP" Member="Anh_CT_VPs" ThisKey="MaVP" OtherKey="MaVP" Type="Anh_CT_VP" />
+      <Association Name="VanPhong_TheoDoi" Member="TheoDois" ThisKey="MaVP" OtherKey="MaVP" Type="TheoDoi" />
+      <Association Name="HinhThuc_VanPhong" Member="HinhThuc" ThisKey="MaHinhThuc" OtherKey="MaHinhThuc" Type="HinhThuc" IsForeignKey="true" />
+      <Association Name="NguoiLH_VanPhong" Member="NguoiLH" ThisKey="MaNguoiLH" OtherKey="MaNguoiLH" Type="NguoiLH" IsForeignKey="true" />
+      <Association Name="PhanLoaiThue_VanPhong" Member="PhanLoaiThue" ThisKey="MaPLThue" OtherKey="MaLoai" Type="PhanLoaiThue" IsForeignKey="true" />
+      <Association Name="Quan_VanPhong" Member="Quan" ThisKey="MaQuan" OtherKey="MaQuan" Type="Quan" IsForeignKey="true" />
+      <Association Name="ViTri_VanPhong" Member="ViTri" ThisKey="MaViTri" OtherKey="MaViTri" Type="ViTri" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.fChuyenCoDauThanhKhongDau" Method="fChuyenCoDauThanhKhongDau" IsComposable="true">
+    <Parameter Name="inputVar" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Vp_Da_Theo_doi" Method="Vp_Da_Theo_doi" IsComposable="true">
+    <Parameter Name="maKh" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="Vp_Da_Theo_doiResult">
+      <Column Name="MaVP" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="TenVP" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SoNha" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DienTich" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,147 @@
+﻿<div ng-controller="timkiemCtrl">
+    <p>{{ht}}</p>
+    <div class="row"style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Từ Khóa</label>
+            <input type="text" placeholder="Tất cả" style="width: 100%; height: 30px" ng-model="query">
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Thành Phố</label>
+            <select style="width: 100%; height: 30px">
+                <option>Tất cả</option>
+                <option>Đà Nẵng</option>
+
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+            <select style="width: 100%; height: 30px" ng-model="select_Quan">
+                <option value="">Tất Cả</option>
+                <option ng-repeat="item in listQuan" value="{{ item.MaQuan }}">{{ item.TenQuan }}</option>
+                
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Hình Thức</label>
+            <select style="width: 100%; height: 30px" ng-model="select_HT">
+                <option value="" selected="selected">Tất cả</option>
+                <option ng-repeat="item in list_HT" value="{{ item.MaHinhThuc }}">{{ item.TenHinhThuc }}</option>
+            </select>
+        </div>
+
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Danh Mục</label>
+            <select style="width: 100%; height: 30px" ng-model="select_DanhMuc">
+                <option value="" selected="selected">Tất cả</option>
+                <option ng-repeat="item in list_DM" value="{{ item.MaLoai }}">{{ item.TenLoai }}</option>
+
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Giá (Min)</label>
+            <select style="width: 100%; height: 30px">
+                <option>0 tr</option>
+                <option>5 tr</option>
+                <option>10 tr</option>
+                <option>15 tr</option>
+                <option>20 tr</option>
+
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Giá (Max)</label>
+            <select style="width: 100%; height: 30px">
+                <option>50 tr</option>
+                <option>100 tr</option>
+                <option>150 tr</option>
+                <option>200 tr</option>
+                <option>500 tr</option>
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Diện Tích (Min)</label>
+            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
+                <input type="text" placeholder="Giá trị Min" style="width: 100%; height: 30px" ng-model="S_min">
+            </div>
+            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
+                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
+            </div>
+
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Diện Tích (Max)</label>
+            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
+                <input type="text" placeholder="Giá Trị Max" style="width: 100%; height: 30px" ng-model="S_max">
+            </div>
+            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
+                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
+            </div>
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4" style="float: left">
+
+            <input type="button" value="Tìm Kiếm" style="width: 60%; margin-top: 55px; height: 30px" ng-click="search_vp()">
+
+
+        </div>
+
+    </div>
+    <div class="row" style="">
+        <div class="col-md-6 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%" ng-repeat="item in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
+
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border: black solid 1px; background-color: #C1C1C1; padding: 0px 0px">
+
+                <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: black">
+                    <h3 style="margin-left: 10px; margin-bottom: 20px; height: 15%; white-space: nowrap; max-width: 450px; overflow: hidden; text-overflow: ellipsis;" class="hidden-sm hidden-xs">{{ item._TenVp }}</h3>
+                </a>
+                <!--<h4 style="margin-left: 10px;height: 15%;white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>-->
+                <div class="col-md-6 col-sm-6 col-xs-12" style="height: 70%">
+                    <img src="{{ app }}/{{ item._Anh }}" style="width: 100%; height: 100%">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12" style="height: 70%">
+                    <label style="border-bottom: 1px solid #dedede; background-color: red; float: none; padding: 9px 10px; height: 40%; color: white; width: 100%; text-align: center; white-space: nowrap">{{ change_money(item._Gia | currency:'':0) }} vnđ/tháng</label>
+                    <p style="height: 50%; max-height: 200px; overflow: hidden; text-overflow: ellipsis;" class=""> {{ item._Mota }}</p>
+                    <a href="#/ChiTiet/{{ item._MaVP }}" style="float: right" ng-click="scrolltotop()">Tìm Hiểu Thêm</a>
+                </div>
+                <div style="background-color: #444444; color: white; width: 100%; height: 15%; text-align: center; padding: 10px auto; float: right;">
+                    <label style="margin-top: 5px">Diện Tích : {{ item._Dientich }} m<span style="font-size: 8pt; position: absolute;">2</span></label>
+                </div>
+            </div>
+            <div class="col-md-1 col-sm-1 hidden-xs">
+            </div>
+        </div>
+        <div ng-if="filteredItems.length == 0">
+            <h3>No result</h3>
+        </div>
+    </div>
+
+    <div class="input-append">
+        <input type="text" class="input-large search-query" placeholder="Search" ng-model="query" ng-change="search()">
+        <span class="add-on"><i class="icon-search"></i></span>
+    </div>
+
+
+    <div style="text-align: center;">
+        <ul class="pagination">
+            <li ng-class="{disabled: currentPage == 0}">
+                <a href ng-click="prevPage()">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(pagedItems.length)"
+                ng-class="{active: n == currentPage}"
+                ng-click="setPage()">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                <a href ng-click="nextPage()">Next »</a>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+

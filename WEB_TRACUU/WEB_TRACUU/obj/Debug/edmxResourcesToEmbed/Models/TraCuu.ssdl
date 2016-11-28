@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Rent_OfficeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HinhThuc">
+    <Key>
+      <PropertyRef Name="MaHinhThuc" />
+    </Key>
+    <Property Name="MaHinhThuc" Type="int" Nullable="false" />
+    <Property Name="TenHinhThuc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoQuan" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoDT" Type="varchar" MaxLength="12" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="CMND" Type="varchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="NguoiLH">
+    <Key>
+      <PropertyRef Name="MaNguoiLH" />
+    </Key>
+    <Property Name="MaNguoiLH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenNguoiLH" Type="nvarchar" MaxLength="50" />
+    <Property Name="Anh" Type="varchar(max)" />
+    <Property Name="SoDT" Type="varchar" MaxLength="12" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PhanLoaiThue">
+    <Key>
+      <PropertyRef Name="MaLoai" />
+    </Key>
+    <Property Name="MaLoai" Type="int" Nullable="false" />
+    <Property Name="TenLoai" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Quan">
+    <Key>
+      <PropertyRef Name="MaQuan" />
+    </Key>
+    <Property Name="MaQuan" Type="int" Nullable="false" />
+    <Property Name="TenQuan" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TheoDoi">
+    <Key>
+      <PropertyRef Name="MaKH" />
+      <PropertyRef Name="MaVP" />
+    </Key>
+    <Property Name="MaKH" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MaVP" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VanPhong">
+    <Key>
+      <PropertyRef Name="MaVP" />
+    </Key>
+    <Property Name="MaVP" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TenVP" Type="nvarchar" MaxLength="50" />
+    <Property Name="SoNha" Type="nvarchar" MaxLength="50" />
+    <Property Name="MaQuan" Type="int" />
+    <Property Name="DienTich" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="Gia" Type="money" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="BanDo" Type="nchar" MaxLength="10" />
+    <Property Name="MaNguoiLH" Type="varchar" MaxLength="10" />
+    <Property Name="MaPLThue" Type="int" />
+    <Property Name="MaViTri" Type="int" />
+    <Property Name="MaHinhThuc" Type="int" />
+    <Property Name="LuotView" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Anh" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ViTri">
+    <Key>
+      <PropertyRef Name="MaViTri" />
+    </Key>
+    <Property Name="MaViTri" Type="int" Nullable="false" />
+    <Property Name="TenViTri" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_TheoDoi_KhachHang">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
+    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhachHang">
+        <PropertyRef Name="MaKH" />
+      </Principal>
+      <Dependent Role="TheoDoi">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TheoDoi_VanPhong">
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="1" />
+    <End Role="TheoDoi" Type="Self.TheoDoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VanPhong">
+        <PropertyRef Name="MaVP" />
+      </Principal>
+      <Dependent Role="TheoDoi">
+        <PropertyRef Name="MaVP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_HinhThuc">
+    <End Role="HinhThuc" Type="Self.HinhThuc" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HinhThuc">
+        <PropertyRef Name="MaHinhThuc" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaHinhThuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_NguoiLH">
+    <End Role="NguoiLH" Type="Self.NguoiLH" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiLH">
+        <PropertyRef Name="MaNguoiLH" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaNguoiLH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_PhanLoaiThue">
+    <End Role="PhanLoaiThue" Type="Self.PhanLoaiThue" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhanLoaiThue">
+        <PropertyRef Name="MaLoai" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaPLThue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_Quan">
+    <End Role="Quan" Type="Self.Quan" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quan">
+        <PropertyRef Name="MaQuan" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaQuan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_ViTri">
+    <End Role="ViTri" Type="Self.ViTri" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViTri">
+        <PropertyRef Name="MaViTri" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaViTri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Rent_OfficeModelStoreContainer">
+    <EntitySet Name="HinhThuc" EntityType="Self.HinhThuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguoiLH" EntityType="Self.NguoiLH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhanLoaiThue" EntityType="Self.PhanLoaiThue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quan" EntityType="Self.Quan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TheoDoi" EntityType="Self.TheoDoi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VanPhong" EntityType="Self.VanPhong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ViTri" EntityType="Self.ViTri" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TheoDoi_KhachHang" Association="Self.FK_TheoDoi_KhachHang">
+      <End Role="KhachHang" EntitySet="KhachHang" />
+      <End Role="TheoDoi" EntitySet="TheoDoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TheoDoi_VanPhong" Association="Self.FK_TheoDoi_VanPhong">
+      <End Role="VanPhong" EntitySet="VanPhong" />
+      <End Role="TheoDoi" EntitySet="TheoDoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_HinhThuc" Association="Self.FK_VanPhong_HinhThuc">
+      <End Role="HinhThuc" EntitySet="HinhThuc" />
+      <End Role="VanPhong" EntitySet="VanPhong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_NguoiLH" Association="Self.FK_VanPhong_NguoiLH">
+      <End Role="NguoiLH" EntitySet="NguoiLH" />
+      <End Role="VanPhong" EntitySet="VanPhong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_PhanLoaiThue" Association="Self.FK_VanPhong_PhanLoaiThue">
+      <End Role="PhanLoaiThue" EntitySet="PhanLoaiThue" />
+      <End Role="VanPhong" EntitySet="VanPhong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_Quan" Association="Self.FK_VanPhong_Quan">
+      <End Role="Quan" EntitySet="Quan" />
+      <End Role="VanPhong" EntitySet="VanPhong" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_ViTri" Association="Self.FK_VanPhong_ViTri">
+      <End Role="ViTri" EntitySet="ViTri" />
+      <End Role="VanPhong" EntitySet="VanPhong" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,100 @@
+﻿<div>
+
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="margin: auto">
+        <h2>Đăng Kí Tài Khoản</h2>
+        <form class="form-horizontal" role="form" name="form_dangki" novalidate ng-submit="register()">
+            <div class="form-group">
+                <label>Họ Tên:</label><span>*</span>
+                <input type="text" class="form-control" placeholder="Tên Đầy Đủ Của Bạn" required ng-model="hoten" ng-minlength="3" name="hoten">
+                <span style="color:red" ng-show="form_dangki.hoten.$touched && form_dangki.hoten.$invalid">
+                    <span ng-show="form_dangki.hoten.$error.required">Họ tên không được để trống.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label>User:</label><span>*</span>
+                <input type="text" class="form-control" placeholder="Tên Đăng Nhập" name="user" required ng-model="user" ng-minlength="8" ng-change="kt_taikhoan_tontai()">
+                <span style="color: red" ng-show="form_dangki.user.$touched && form_dangki.user.$invalid">
+                    <span ng-show="form_dangki.user.$error.required">Username không được để trống. </span>
+                    <span ng-show="form_dangki.user.$error.minlength">
+                       Username phải dài hơn 8 kí tự
+                    </span>
+                </span>
+                <span style="color:red" ng-show="test_tk==1">
+                        Username đã tồn tại.
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Password:</label><span>*</span>
+                <input type="password" class="form-control" id="pw" placeholder="Mật Khẩu" required ng-model="pass" ng-minlength="8" name="pass">
+                <span style="color:red" ng-show="form_dangki.pass.$touched && form_dangki.pass.$invalid">
+                    <span ng-show="form_dangki.pass.$error.required">Mật khẩu không được để trống. </span>
+                    <span ng-show="form_dangki.pass.$error.minlength">
+                        Mật khẩu phải dài hơn 8 kí tự. 
+                    </span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Nhập lại Password:</label><span>*</span>
+                <input type="password" class="form-control" id="xnpw" placeholder="Nhập lại mật khẩu" required ng-model="repeat_pass" name="repeat_pass">
+                <span style="color: red" ng-show="form_dangki.repeat_pass.$touched && form_dangki.repeat_pass.$invalid">
+                    <span ng-show="form_dangki.repeat_pass.$error.required">Không được để trống.</span>
+                    
+                </span>
+                <span style="color: red" ng-show="(pass != repeat_pass) && form_dangki.repeat_pass.$touched">Mật khẩu không đúng</span>
+            </div>
+            <div class="form-group">
+                <label>Địa Chỉ:</label><span>*</span>
+                <input type="text" class="form-control" placeholder="Địa chỉ" required ng-model="diachi" name="diachi">
+                <span style="color:red" ng-show="form_dangki.diachi.$touched && form_dangki.diachi.$invalid">
+                    <span ng-show="form_dangki.diachi.$error.required">Địa Chỉ không được để trống.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Số Điện Thoại:</label><span>*</span>
+                <input type="tel" class="form-control" placeholder="Số Điện Thoại" required ng-model="sodt" name="sodt">
+                <span style="color: red" ng-show="form_dangki.sodt.$touched && form_dangki.sodt.$invalid">
+                    <span ng-show="form_dangki.sodt.$error.required">Số điện thoại không được để trống.</span>
+                    <span ng-show="form_dangki.sodt.$error.tel">Số điện thoại không hợp lệ.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label>CMND:</label><span>*</span>
+                <input type="text" class="form-control" placeholder="Số Điện Thoại" required ng-model="cmnd" name="cmnd">
+                <span style="color:red" ng-show="form_dangki.cmnd.$touched && form_dangki.cmnd.$invalid">
+                    <span ng-show="form_dangki.cmnd.$error.required">CMND không được để trống.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Cơ Quan:</label>
+                <input type="text" class="form-control" placeholder="Cơ Quan">
+            </div>
+            <div class="form-group">
+                <label>Email:</label><span>*</span>
+                <input type="email" class="form-control" placeholder="Địa chỉ email" required ng-model="email" name="email">
+                <span style="color:red" ng-show="form_dangki.email.$touched && form_dangki.email.$invalid">
+                    <span ng-show="form_dangki.email.$error.required">Địa Chỉ email không được để trống.</span>
+                    <span ng-show="form_dangki.email.$error.email">Địa chỉ email không hợp lệ.</span>
+                </span>
+            </div>
+           
+            <div class="form-group" style="">
+                <label>Giới Tính:</label>
+                <label class="checkbox-inline">
+                    <input name="gender" type="radio" id="nam" value="nam" checked>Nam&nbsp&nbsp&nbsp
+                    <input name="gender" type="radio" id="nu" value="nu">Nữ
+                </label>
+
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="_check">Tôi đồng ý với các <a href="#">quy định </a>của Tra Cứu BDS. </label>
+            </div>
+            <br>
+            <input type="submit" class="btn btn-success" ng-disabled="(!_check) || form_dangki.user.$invalid || form_dangki.hoten.$invalid ||
+                   form_dangki.sodt.$invalid || form_dangki.email.$invalid ||form_dangki.pass.$invalid || form_dangki.repeat_pass.$invalid 
+                   || form_dangki.cmnd.$invalid" >
+            <button type="reset" class="btn btn-success">Cancel</button>
+        </form>
+        <br><br>
+    </div>
+</div>

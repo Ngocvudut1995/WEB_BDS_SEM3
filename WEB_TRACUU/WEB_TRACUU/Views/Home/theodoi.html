@@ -1,0 +1,42 @@
+﻿<div ng-controller="theodoiCtrl" ng-init ="getAPIKH(id_KH)">
+    <h1>Danh Sách Các Văn Phòng Đã Quan Tâm</h1>
+    <div  class="container" style="border: black solid 1px;background-color: #a2a2a2;padding-left: 0px; padding-right: 0px;margin-bottom: 28px;" ng-repeat="item in list_VP_KH">
+        <div style="height: 10%;padding-left: 10px">
+            <p style="font-size: 12pt;font-weight: bold;">{{ item._TenVp }}</p>
+        </div>
+        <div class="rơw" style="height: 70%">
+            <div class="col-md-2 col-xs-12 hidden-xs-down" style="height: 100%; background-color: gainsboro;padding-left: 10px;padding-right: 0px">
+                <img class="img-thumbnail" src="{{ app }}/{{ item._Anh }}" style="height: 100% ; width: 100%">
+            </div>
+            <div class="col-md-10 col-xs-12" style="height: 100%; background-color: gainsboro;position: relative ;padding-left: 5px;padding-right: 0px">
+                <div style="padding-top: 10px;height: 20%;width: 100%;background-color: rgba(255, 0, 0, 0.93)">
+                    <p style="color: white; text-align: center;font-weight: bold;">{{ change_money(item._Gia | currency:'':0) }} vnd/tháng</p>
+                </div>
+                <div class="row" style="height: 80%;width: 100%;background-color: gainsboro">
+                    <div class="col-md-9 col-sm-9 col-xs-12" style="height: 97px;background-color: silver;padding-bottom: 5px">
+                        <p style="height: 70%">
+                            {{ item._Mota }}
+                        </p>
+                        <a href ="#/ChiTiet/{{ item._MaVP }}" style="color: blue ; float: right ;height: 30% ;font-size: 15px" ng-click="scrolltotop()">
+                            Tìm Hiểu Thêm >>> <span class="" ></span>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 btn-group" style="text-align: center; padding-top: 2.5%;padding-bottom: 2.5%;height: 100%;padding-left: 0px;padding-right: 0px;">
+                        <button class="bt_contact" style="width: 80%;height: 33px; font-weight: bold;color: white" ng-click="open_contact()">Call Me Now</button>
+                        <!--<button class="hidden-md hidden-lg" style="width: 100%; font-weight: bold;">Call Me Now</button>-->
+                        <button class="bt_contact_sub" type="button" style="margin-left: -10px; width: 40px; height: 44px; border-radius: 42%; background-color: rgba(9, 9, 154, 0.74); color: white;border: solid;border-color: blue;" ng-click="open_contact()"><span class="glyphicon glyphicon-phone-alt"></span></button>
+                    </div>
+                </div>
+                <div class="demo" style="height: 35px;background-color: dimgray ;padding-top: 5px;padding-left: 10px;padding-right: 10px">
+                    <p style="color: black; float: left;font-weight: bold;">
+                        Diện tích :  {{ item._Dientich }}  m<span style="font-size: 8pt; position: absolute;">2</span>
+                    </p>
+                    <p style="float: right; color: black;font-weight: bold;">
+                        Ngày hết hạn : 11/11/2016
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

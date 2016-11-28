@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Rent_OfficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="HinhThuc">
+    <Key>
+      <PropertyRef Name="MaHinhThuc" />
+    </Key>
+    <Property Name="MaHinhThuc" Type="Int32" Nullable="false" />
+    <Property Name="TenHinhThuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.FK_VanPhong_HinhThuc" FromRole="HinhThuc" ToRole="VanPhong" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="MaKH" />
+    </Key>
+    <Property Name="MaKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CoQuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoDT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CMND" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.TheoDoi" FromRole="KhachHang" ToRole="VanPhong" />
+  </EntityType>
+  <EntityType Name="NguoiLH">
+    <Key>
+      <PropertyRef Name="MaNguoiLH" />
+    </Key>
+    <Property Name="MaNguoiLH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenNguoiLH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Anh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SoDT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.FK_VanPhong_NguoiLH" FromRole="NguoiLH" ToRole="VanPhong" />
+  </EntityType>
+  <EntityType Name="PhanLoaiThue">
+    <Key>
+      <PropertyRef Name="MaLoai" />
+    </Key>
+    <Property Name="MaLoai" Type="Int32" Nullable="false" />
+    <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.FK_VanPhong_PhanLoaiThue" FromRole="PhanLoaiThue" ToRole="VanPhong" />
+  </EntityType>
+  <EntityType Name="Quan">
+    <Key>
+      <PropertyRef Name="MaQuan" />
+    </Key>
+    <Property Name="MaQuan" Type="Int32" Nullable="false" />
+    <Property Name="TenQuan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.FK_VanPhong_Quan" FromRole="Quan" ToRole="VanPhong" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="VanPhong">
+    <Key>
+      <PropertyRef Name="MaVP" />
+    </Key>
+    <Property Name="MaVP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TenVP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoNha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MaQuan" Type="Int32" />
+    <Property Name="DienTich" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BanDo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="MaNguoiLH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MaPLThue" Type="Int32" />
+    <Property Name="MaViTri" Type="Int32" />
+    <Property Name="MaHinhThuc" Type="Int32" />
+    <Property Name="LuotView" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="HinhThuc" Relationship="Self.FK_VanPhong_HinhThuc" FromRole="VanPhong" ToRole="HinhThuc" />
+    <NavigationProperty Name="NguoiLH" Relationship="Self.FK_VanPhong_NguoiLH" FromRole="VanPhong" ToRole="NguoiLH" />
+    <NavigationProperty Name="PhanLoaiThue" Relationship="Self.FK_VanPhong_PhanLoaiThue" FromRole="VanPhong" ToRole="PhanLoaiThue" />
+    <NavigationProperty Name="Quan" Relationship="Self.FK_VanPhong_Quan" FromRole="VanPhong" ToRole="Quan" />
+    <NavigationProperty Name="ViTri" Relationship="Self.FK_VanPhong_ViTri" FromRole="VanPhong" ToRole="ViTri" />
+    <NavigationProperty Name="KhachHangs" Relationship="Self.TheoDoi" FromRole="VanPhong" ToRole="KhachHang" />
+    <Property Name="Anh" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ViTri">
+    <Key>
+      <PropertyRef Name="MaViTri" />
+    </Key>
+    <Property Name="MaViTri" Type="Int32" Nullable="false" />
+    <Property Name="TenViTri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="VanPhongs" Relationship="Self.FK_VanPhong_ViTri" FromRole="ViTri" ToRole="VanPhong" />
+  </EntityType>
+  <Association Name="FK_VanPhong_HinhThuc">
+    <End Role="HinhThuc" Type="Self.HinhThuc" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HinhThuc">
+        <PropertyRef Name="MaHinhThuc" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaHinhThuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_NguoiLH">
+    <End Role="NguoiLH" Type="Self.NguoiLH" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguoiLH">
+        <PropertyRef Name="MaNguoiLH" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaNguoiLH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_PhanLoaiThue">
+    <End Role="PhanLoaiThue" Type="Self.PhanLoaiThue" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhanLoaiThue">
+        <PropertyRef Name="MaLoai" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaPLThue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_Quan">
+    <End Role="Quan" Type="Self.Quan" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quan">
+        <PropertyRef Name="MaQuan" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaQuan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VanPhong_ViTri">
+    <End Role="ViTri" Type="Self.ViTri" Multiplicity="0..1" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViTri">
+        <PropertyRef Name="MaViTri" />
+      </Principal>
+      <Dependent Role="VanPhong">
+        <PropertyRef Name="MaViTri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TheoDoi">
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+    <End Role="VanPhong" Type="Self.VanPhong" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Rent_OfficeEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="HinhThucs" EntityType="Self.HinhThuc" />
+    <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
+    <EntitySet Name="NguoiLHs" EntityType="Self.NguoiLH" />
+    <EntitySet Name="PhanLoaiThues" EntityType="Self.PhanLoaiThue" />
+    <EntitySet Name="Quans" EntityType="Self.Quan" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="VanPhongs" EntityType="Self.VanPhong" />
+    <EntitySet Name="ViTris" EntityType="Self.ViTri" />
+    <AssociationSet Name="FK_VanPhong_HinhThuc" Association="Self.FK_VanPhong_HinhThuc">
+      <End Role="HinhThuc" EntitySet="HinhThucs" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_NguoiLH" Association="Self.FK_VanPhong_NguoiLH">
+      <End Role="NguoiLH" EntitySet="NguoiLHs" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_PhanLoaiThue" Association="Self.FK_VanPhong_PhanLoaiThue">
+      <End Role="PhanLoaiThue" EntitySet="PhanLoaiThues" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_Quan" Association="Self.FK_VanPhong_Quan">
+      <End Role="Quan" EntitySet="Quans" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VanPhong_ViTri" Association="Self.FK_VanPhong_ViTri">
+      <End Role="ViTri" EntitySet="ViTris" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <AssociationSet Name="TheoDoi" Association="Self.TheoDoi">
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+      <End Role="VanPhong" EntitySet="VanPhongs" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Rent_OfficeModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Rent_OfficeModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
