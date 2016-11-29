@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.75, 9.375" name="DataBDS">
+  <DataContextMoniker Name="/DataBDSDataContext" />
+  <nestedChildShapes>
+    <classShape Id="189721a7-3671-490a-a464-6294b863c91b" absoluteBounds="9, 5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DataBDSDataContext/Acreage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4fc542e6-1f95-4f01-9e3a-7ab0d64906ef" absoluteBounds="9.015, 5.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ef9adea0-8d30-4d58-a010-b691fa9a1de2" absoluteBounds="3.5, 1.875, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/DataBDSDataContext/Ward" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a110ed10-59d2-454c-8c1d-d5491f2f57bd" absoluteBounds="3.515, 2.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c00c0fc0-3095-4e1c-b755-46b0c4898611" absoluteBounds="9, 1.875, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/DataBDSDataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4ae73bad-01cf-41e8-8f11-f1e5e1a88e6d" absoluteBounds="9.015, 2.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7d697b9a-ca1e-4e71-834f-7a2cb5c6d384" absoluteBounds="11.75, 5.125, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/DataBDSDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b6f619cb-e394-4288-97e9-236b5be00ed2" absoluteBounds="11.765, 5.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b9426a35-f62b-4f11-9b91-0514de24f433" absoluteBounds="14.5, 2, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/DataBDSDataContext/Follow" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b973c655-1b1c-411c-9ca0-4e8d1b978482" absoluteBounds="14.515, 2.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="20f24d99-97bc-44b5-808c-220408db4473" absoluteBounds="14.5, 3.875, 2, 1.193992513020834">
+      <DataClassMoniker Name="/DataBDSDataContext/Image_Detail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="03509b88-b6b7-49b8-bc5a-aeac1f536594" absoluteBounds="14.515, 4.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" absoluteBounds="11.75, 1, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/DataBDSDataContext/Land" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d0d1446-8cc7-4ca6-8ec5-47670c2893ef" absoluteBounds="11.765, 1.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="718f3340-0c5c-44f8-81f8-3acf64e4bc60" absoluteBounds="6.25, 1.875, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/DataBDSDataContext/Street" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9d6ff7fb-e715-4edd-8f00-a2d0bfe42f89" absoluteBounds="6.265, 2.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ddc72a16-4b9d-456b-a7b1-4ce48c2b5850" absoluteBounds="9, 7.875, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/DataBDSDataContext/Type_Land" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2866f41c-6cb4-47a5-acf5-b58f1dfffbad" absoluteBounds="9.015, 8.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1e69d48-ebfb-4b99-acbe-3a9cc208dfc4" absoluteBounds="0.75, 2, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/DataBDSDataContext/Trouser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8ac65728-f297-4156-a3fb-70f4a5195e21" absoluteBounds="0.765, 2.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.75 : 5.125); (14.125 : 4.75); (14.125 : 2.59699625651042); (14.5 : 2.59699625651042)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Customer/Customer_Follow" />
+      <nodes>
+        <classShapeMoniker Id="7d697b9a-ca1e-4e71-834f-7a2cb5c6d384" />
+        <classShapeMoniker Id="b9426a35-f62b-4f11-9b91-0514de24f433" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13.75 : 2.23599812825521); (14.5 : 2.23599812825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Land/Land_Follow" />
+      <nodes>
+        <classShapeMoniker Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" />
+        <classShapeMoniker Id="b9426a35-f62b-4f11-9b91-0514de24f433" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.75 : 4.1170068359375); (12.75 : 4.59300017447917); (14.0416666666667 : 4.59300017447917 : JumpStart); (14.2083333333333 : 4.59300017447917 : JumpEnd); (14.5 : 4.59300017447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Land/Land_Image_Detail" />
+      <nodes>
+        <classShapeMoniker Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" />
+        <classShapeMoniker Id="20f24d99-97bc-44b5-808c-220408db4473" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 5.00091745577925); (11.375 : 4.62591745577925); (11.375 : 2.55850341796875); (11.4479166666667 : 2.55850341796875 : JumpStart); (11.6145833333333 : 2.55850341796875 : JumpEnd); (11.75 : 2.55850341796875)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Acreage/Acreage_Land" />
+      <nodes>
+        <classShapeMoniker Id="189721a7-3671-490a-a464-6294b863c91b" />
+        <classShapeMoniker Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 2.97239868164063); (11.2916666666667 : 2.97239868164062 : JumpStart); (11.6145833333333 : 2.97239868164063 : JumpEnd); (11.75 : 2.97239868164063)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Address/Address_Land" />
+      <nodes>
+        <classShapeMoniker Id="c00c0fc0-3095-4e1c-b755-46b0c4898611" />
+        <classShapeMoniker Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.56814697265625); (9 : 2.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Street/Street_Address" />
+      <nodes>
+        <classShapeMoniker Id="718f3340-0c5c-44f8-81f8-3acf64e4bc60" />
+        <classShapeMoniker Id="c00c0fc0-3095-4e1c-b755-46b0c4898611" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 2.56814697265625); (6.25 : 2.56814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Ward/Ward_Street" />
+      <nodes>
+        <classShapeMoniker Id="ef9adea0-8d30-4d58-a010-b691fa9a1de2" />
+        <classShapeMoniker Id="718f3340-0c5c-44f8-81f8-3acf64e4bc60" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 7.90714495227364); (11.53125 : 7.37589495227364); (11.53125 : 1.74799970898438); (11.75 : 1.74799970898438)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Type_Land/Type_Land_Land" />
+      <nodes>
+        <classShapeMoniker Id="ddc72a16-4b9d-456b-a7b1-4ce48c2b5850" />
+        <classShapeMoniker Id="136e7a7d-40e9-4255-a588-f2152c9cbabd" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.59699625651042); (3.5 : 2.59699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataBDSDataContext/Trouser/Trouser_Ward" />
+      <nodes>
+        <classShapeMoniker Id="f1e69d48-ebfb-4b99-acbe-3a9cc208dfc4" />
+        <classShapeMoniker Id="ef9adea0-8d30-4d58-a010-b691fa9a1de2" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="32ac7f9d-3f5a-46bf-a372-691501856352" absoluteBounds="0.75, 4.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DataBDSDataContext/Address_Lan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8be46f12-b1c7-45eb-b1f2-cdc30ed6538b" absoluteBounds="0.765, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7c1aded0-f374-479e-8279-7f995ab111ea" absoluteBounds="3.75, 4.75, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/DataBDSDataContext/Overview_Land" />
+      <nestedChildShapes>
+        <elementListCompartment Id="64bd0a45-ebd7-4fe4-bce2-17793adad904" absoluteBounds="3.765, 5.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

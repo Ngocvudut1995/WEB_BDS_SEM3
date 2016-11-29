@@ -1,0 +1,151 @@
+﻿a {
+    cursor: pointer;
+}
+
+.navtab {
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: center;
+}
+
+    .navtab > a {
+        color: white;
+        font-size: 18pt;
+    }
+
+        .navtab > a:hover {
+            background-color: black;
+        }
+
+    .navtab.active {
+        background-color: black;
+        color: white;
+    }
+
+.my_drop_menu {
+    /*background-color: rgb(20, 2, 119);*/
+    background-color: #a19999;
+    font-size: 18pt;
+}
+
+.tab_menu {
+    background-color: #1b1b1b;
+}
+
+    .tab_menu > a:hover .tab_menu > a:focus {
+        background-color: #363535;
+    }
+
+.khung_den {
+    background-color: rgba(0, 0, 0, 0.77);
+    position: fixed;
+    width: 100%;
+    height: 1000px;
+    z-index: 13;
+}
+
+.dangnhap {
+    position: relative;
+    -webkit-transition: all ease 0.4s;
+    z-index: 20;
+    /*height: 330px;*/
+    border: solid 3px green;
+    background-color: white;
+    top: 10%;
+}
+
+h3 img {
+    max-height: 50px;
+}
+
+#map {
+    height: 400px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+.contact {
+    background-color: rgba(0, 0, 0, 0.77);
+    position: fixed;
+    
+    /*min-height: 1000px;
+    max-height: 9000px;*/
+    z-index: 13;
+    bottom: 0px;
+    right: 0px;
+}
+
+.form_contact {
+    position: relative;
+    -webkit-transition: all ease 0.4s;
+    z-index: 20;
+    
+    /*height: 330px;*/
+    border: solid 3px green;
+    background-color: white;
+  
+}
+
+.bt_contact_sub {
+    background-image: -webkit-linear-gradient(bottom, #040133 0%, #0a1cf3 100%);
+    background-image: -o-linear-gradient(bottom, #040133 0%, #0a1cf3 100%);
+    background-image: -webkit-gradient(linear, top, bottom, from(#040133), to(#0a1cf3));
+    background-image: linear-gradient(to bottom, #040133 0%, #0a1cf3 100%);
+}
+
+.bt_contact {
+    background-image: -webkit-linear-gradient(top, #040133 0%, #0a1cf3 100%);
+    background-image: -o-linear-gradient(top, #040133 0%, #0a1cf3 100%);
+    background-image: -webkit-gradient(linear, bottom, top, from(#040133), to(#0a1cf3));
+    background-image: linear-gradient(to top, #040133 0%, #0a1cf3 100%);
+}
+
+.animate-repeat {
+    line-height: 30px;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+    .animate-repeat.ng-enter {
+        -webkit-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -moz-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -ms-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+        position: relative;
+        display: block;
+    }
+
+    .animate-repeat.ng-leave.ng-leave-active,
+    .animate-repeat.ng-enter {
+        opacity: 0.3;
+        /*left: -5px;*/
+        height: 0px;
+    }
+
+        .animate-repeat.ng-leave,
+        .animate-repeat.ng-enter.ng-enter-active {
+            opacity: 1;
+            left: 0;
+            height: 0px;
+        }
+
+.rotate {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transform-origin: bottom right;
+}
+.icon_society {
+   float: left;
+    text-align: center;
+    width: 114px;
+    height: 40px;
+    background-color: rgba(100, 99, 99, 0.52);
+    color: white;
+    font-weight: bold;
+    padding: 9px;
+    font-size: 15px;
+    border: solid 1px white;
+}
