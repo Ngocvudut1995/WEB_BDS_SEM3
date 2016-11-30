@@ -18,24 +18,27 @@
         }
 
     .navtab.active {
-        background-color: black;
+        background-color: rgb(9, 30, 116);
         color: white;
+    }
+     .navtab.active > a:hover {
+        background-color: rgb(9, 30, 116);
+        
     }
 
 .my_drop_menu {
-    /*background-color: rgb(20, 2, 119);*/
-    background-color: #a19999;
+    background-color: #5f5d5d;
     font-size: 18pt;
 }
 
 .tab_menu {
-    background-color: #1b1b1b;
+    background-color:#1b1b1b;
 }
 
     .tab_menu > a:hover .tab_menu > a:focus {
         background-color: #363535;
     }
-
+        
 .khung_den {
     background-color: rgba(0, 0, 0, 0.77);
     position: fixed;

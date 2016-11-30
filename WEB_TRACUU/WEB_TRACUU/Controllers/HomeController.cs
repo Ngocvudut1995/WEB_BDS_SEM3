@@ -11,7 +11,6 @@ namespace WEB_TRACUU.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
             return View();
         }
         public ActionResult TimKiem()
@@ -53,6 +52,11 @@ namespace WEB_TRACUU.Controllers
         {
             ViewBag.id = id;
             return View();
+        }
+        public ActionResult PostBai()
+        {
+            var result = new FilePathResult("../Views/Home/post.html", "text/html");
+            return result;
         }
     }
 }

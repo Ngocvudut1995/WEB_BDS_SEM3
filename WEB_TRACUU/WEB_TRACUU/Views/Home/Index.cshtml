@@ -113,15 +113,15 @@
         </div>
     </div>
     <div style="z-index: 19; position: fixed;width: 100%;">
-        <ul class="nav row" style="background-color: #a19999;">@*background-color: rgb(20, 2, 119);*@
-            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu">
+        <ul class="nav row" style="background-color: #5f5d5d"> @*rgb(20, 2, 119)*@
+            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu" style="width: 10%">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-th-list"></span>
 
                 </a>
-                <ul class="dropdown-menu my_drop_menu" style="width: 100%">
+                <ul class="dropdown-menu my_drop_menu" style="width: 133%">
 
-                    <li><a href="#/Home">Home</a></li>
+                    <li><a href="#/PostBai">Home</a></li>
                     <li><a href="#/TimKiem">Tìm Kiếm</a></li>
                     <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
                     <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
@@ -130,11 +130,11 @@
                     <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
                 </ul>
             </li>
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]"><a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">Tìm Kiếm</a></li>
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 45%"><a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">Tìm Kiếm</a></li>
 
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]"><a href="#/TheoDoi/{{ taikhoan.username }}" ng-click="change_tab(2)" style="white-space: nowrap;">Đã Theo Dõi</a></li>
-            <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
-            <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]"  style="width: 45%"><a href="#/TheoDoi/{{ taikhoan.username }}" ng-click="change_tab(2)" style="white-space: nowrap;">Đã Theo Dõi</a></li>
+            <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1"  style="width: 45%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
+            <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2"  style="width: 45%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>
 
         </ul>
     </div>

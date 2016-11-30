@@ -90,7 +90,7 @@
                 <label><input type="checkbox" ng-model="_check">Tôi đồng ý với các <a href="#">quy định </a>của Tra Cứu BDS. </label>
             </div>
             <br>
-            <input type="submit" class="btn btn-success" ng-disabled="(!_check) || form_dangki.user.$invalid || form_dangki.hoten.$invalid ||
+            <input type="submit" class="btn btn-success" ng-disabled="(pass != repeat_pass) || (!_check) || form_dangki.user.$invalid || form_dangki.hoten.$invalid ||
                    form_dangki.sodt.$invalid || form_dangki.email.$invalid ||form_dangki.pass.$invalid || form_dangki.repeat_pass.$invalid 
                    || form_dangki.cmnd.$invalid" >
             <button type="reset" class="btn btn-success">Cancel</button>

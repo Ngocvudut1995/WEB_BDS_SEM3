@@ -1,160 +1,230 @@
-﻿<div class="">
-    <div class="row" style="margin-left: 30px;background-color: #ebf2ff;padding-bottom: 40px;border: black solid 1px;">
-
+﻿<div ng-controller="timkiemCtrl">
+    <!--<p>{{ht}}</p>-->
+    <div class="row"style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Từ Khóa</label>-->
-            <input type="text" placeholder="Tất cả" style="width: 100%;height: 30px;border-radius: 4px;;margin-top: 30px;">
+            <input type="text" placeholder="Từ Khóa" style="width: 100%;height: 30px;border-radius: 4px;;margin-top: 30px;" ng-model="query">
 
         </div>
 
 
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-            <select style="width: 100%; height: 30px;border-radius: 4px;;margin-top: 30px;">
-                <option value="" selected="selected">Quận Huyện</option>
-
+            <select style="width: 100%; height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
             </select>
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Phường xã</label>-->
-            <select style="width: 100%;height: 30px;border-radius: 4px;;margin-top: 30px;">
-                <option value="" selected="selected">Phường xã</option>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
+                <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
             </select>
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
-            <select style="width: 100%;height: 30px;border-radius: 4px;;margin-top: 30px;">
-                <option value="" selected="selected">Đường</option>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_Duong">
+                <option value="0" selected="selected">--- Chọn Đường ---</option>
+                <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
 
             </select>
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>-->
-            <select style="width: 100%;height: 30px;border-radius: 4px;margin-top: 30px;">
-                <option value="" selected="selected">Kiểu Dự Án</option>
-
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_Kieu">
+                <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
             </select>
         </div>
 
 
+
+
         <div class="col-md-3 col-xs-6 col-sm-4">
-            <!--<label style="width: 100%;margin-top: 30px">Danh Mục</label>-->
-            <select style="width: 100%; height: 30px;border-radius: 4px;margin-top: 30px;">
-                <option value="" selected="selected">Danh Mục</option>
-
-
+            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_DienTich">
+                <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
+                <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+               
             </select>
         </div>
 
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
-            <select style="width: 100%;height: 30px;border-radius: 4px;margin-top: 30px;">
-                <option value="" selected="selected">Giá (Min)</option>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 30px;" ng-model="select_Gia">
+                <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
+                <option value="" selected="selected">Thượng Lượng</option>
+            </select>
+        </div>
+        <!--<div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Từ Khóa</label>
+            <input type="text" placeholder="Tất cả" style="width: 100%; height: 30px" ng-model="query">
+
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Thành Phố</label>
+            <select style="width: 100%; height: 30px">
+                <option>Tất cả</option>
+                <option>Đà Nẵng</option>
+
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+            <select style="width: 100%; height: 30px" ng-model="select_Quan">
+                <option value="0">Tất Cả</option>
+                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
             </select>
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
-            <!--<label style="width: 100%;margin-top: 30px">Giá (Max)</label>-->
-            <select style="width: 100%;height: 30px;border-radius: 4px;margin-top: 30px;">
-                <option value="" selected="selected">Giá (Max)</option>
+            <label style="width: 100%; margin-top: 30px">Hình Thức</label>
+            <select style="width: 100%; height: 30px" ng-model="select_HT">
+                <option value="0" selected="selected">Tất cả</option>
+                <option ng-repeat="item in list_HT" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+            </select>
+        </div>
+
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Danh Mục</label>
+            <select style="width: 100%; height: 30px" ng-model="select_DanhMuc">
+                <option value="0" selected="selected">Tất cả</option>
+                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Giá (Min)</label>
+            <select style="width: 100%; height: 30px">
+                <option>0 tr</option>
+                <option>5 tr</option>
+                <option>10 tr</option>
+                <option>15 tr</option>
+                <option>20 tr</option>
+
             </select>
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
-            <!--<label style="width: 100%; margin-top: 30px">Diện Tích (Min)</label>-->
-            <div class="col-md-10 col-xs-8" style="padding-left: 0px;padding-right: 0px;margin-top: 30px;">
-                <input type="text" placeholder="Giá trị Min" style="width: 100%; height: 30px;border-radius: 4px;">
+            <label style="width: 100%; margin-top: 30px">Giá (Max)</label>
+            <select style="width: 100%; height: 30px">
+                <option>50 tr</option>
+                <option>100 tr</option>
+                <option>150 tr</option>
+                <option>200 tr</option>
+                <option>500 tr</option>
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Diện Tích (Min)</label>
+            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
+                <input type="text" placeholder="Giá trị Min" style="width: 100%; height: 30px" ng-model="S_min">
             </div>
-            <div class="col-md-2 col-xs-4" style="padding-left: 3px;margin-top: 35px">
-                <label>m<span style="font-size: 8pt;position: absolute;">2</span></label>
+            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
+                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
             </div>
 
 
         </div>
         <div class="col-md-3 col-xs-6 col-sm-4">
-            <!--<label style="width: 100%;margin-top: 30px">Diện Tích (Max)</label>-->
-            <div class="col-md-10 col-xs-8" style="padding-left: 0px;padding-right: 0px;margin-top: 30px;">
-                <input type="text" placeholder="Giá Trị Max" style="width: 100%; height: 30px;border-radius: 4px;">
+            <label style="width: 100%; margin-top: 30px">Diện Tích (Max)</label>
+            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
+                <input type="text" placeholder="Giá Trị Max" style="width: 100%; height: 30px" ng-model="S_max">
             </div>
-            <div class="col-md-2 col-xs-4" style="padding-left: 3px;margin-top: 35px">
-                <label>m<span style="font-size: 8pt;position: absolute;">2</span></label>
+            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
+                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
             </div>
 
-        </div>
+        </div>-->
         <div class="col-md-3 col-xs-6 col-sm-4" style="float: left">
 
-            <input type="button" value="Tìm Kiếm" style="width: 60%; margin-top: 30px; height: 30px;border-radius: 4px;background-color: white">
-
+            <input type="button" value="Tìm Kiếm" style="width: 60%; margin-top: 30px; height: 30px;border-radius: 4px;background-color: white" ng-click="search_vp()">
+            <input type="button" value="Làm Lại" style="width: 34%; margin-left: 9px; height: 30px;border-radius: 4px;background-color: white" ng-click="reload_seach()">
 
         </div>
+       
 
     </div>
-    <div class="row" style="">
-        <div class="col-md-9 col-xs-12 col-sm-12">
-            <div class="col-md-6 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+<div class="row" style="">
+    <div class="col-md-9">
+        <div class="col-md-12 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%" ng-repeat="item in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
 
-                <div style="background-color: white; padding: 0px 0px">
-                    <div style="">
-                        <img src="../../Content/Images/vanphong2.jpg" style="width: 100%; height: 225px">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="border: black solid 1px; background-color: #C1C1C1; padding: 0px 0px">
+                <div>
+                    <div class="col-md-4 col-sm-6 col-xs-12" style="height: 70%;padding-left: 0px;">
+                        <img src="{{ app }}/{{ item._Anh }}" style="width: 100%; height: 100%">
                     </div>
-                    <h3 style="margin-left: 10px; margin-bottom: 10px; height: 15%; white-space: pre-wrap" class="hidden-sm hidden-xs">Bán nhà MT đường 3, gần AEON, 5x20m, đúc 3.5 tấm mới, 5.5 tỷ</h3>
-                    <h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap" class="hidden-md hidden-lg col-xs-12 col-sm-12">Bán nhà MT đường 3, gần AEON, 5x20m, đúc 3.5 tấm mới, 5.5 tỷ</h4>
-
-                    <div class="hidden-xs" style="height: 70%;padding: 10px">
-                        <p style="font-size: 1em; " class=""> VỊ TRÍ TÒA NHÀ VID Tower 1 tọa lạc tại phố Trần Hưng Đạo, một trong những tuyến đường trọng…</p>
-
-                    </div>
-                    <div>
-                        <div class="col-md-6 col-xs-6 col-sm-6 " style="background-color: #ebf2ff; width: 50%; height: 15%; text-align: center; padding: 10px auto; ">
-                            <label style="border-bottom: 1px solid #dedede;  float: none; padding: 9px 5px; height: 40%; color: black; width: 100%; text-align: center; white-space: nowrap">DT : 100 m<span style="font-size: 8pt; position: absolute;">2</span></label>
-                        </div>
-                        <div class="col-md-6 col-xs-6 col-sm-6 " style="background-color: rgba(196, 51, 43, 0.85); color: white; width: 50%; height: 15%; text-align: center; padding: 10px auto;">
-                            <label style="border-bottom: 1px solid #dedede;  float: none; padding: 9px 5px; height: 40%; color: white; width: 100%; text-align: center; white-space: nowrap">5555 vnđ/tháng</label>
-                        </div>
+                    <div class="col-md-8 col-sm-6 col-xs-12" style="height: 70%;padding: 1px 0px 0px 5px;">
+                        <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: #0b3dab">
+                            <p style="font-size: 18pt;font-weight: bolder;margin-top: 5px; height: 15%; /*white-space: nowrap;*/ max-width: 100%; overflow: hidden; text-overflow: ellipsis;" class="hidden-sm hidden-xs">{{ item._TenVp }}</p>
+                        </a>
+                        <h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>
+                        <p style="margin-bottom: 0px;margin-top: -4px;"><b>Cập Nhật:</b>Tin Mới</p>
+                        <p style="margin-bottom: 0px;margin-top: -4px;"><b>Diện Tích:</b> {{ item._Dientich }} m2</p>
+                        <p style="margin-bottom: 0px; margin-top: -4px;"><b>Giá:</b> {{ item._Gia }} triệu/tháng</p>
+                        <p style="margin-bottom: 0px;margin-top: -4px;white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;"><b>Địc Chỉ:</b> {{ item._SoNha }} {{ item._Duong }}, Quận {{ item._TenQuan }}, Phường {{ item._Phuong }}, TP Đà Nẵng</p>
+                        
+                        
+                        <!--<a href="#/ChiTiet/{{ item._MaVP }}" style="float: right" ng-click="scrolltotop()">Tìm Hiểu Thêm</a>-->
                     </div>
                 </div>
-                <div class="col-md-1 col-sm-1 hidden-xs">
+                <div style="float: right; margin: 5px;overflow:hidden;
+                           text-overflow: ellipsis;
+                           display :-webkit-box;
+                           -webkit-line-clamp: 2;
+                           -webkit-box-orient :vertical;">
+                    <p><b>Mô Tả:</b> Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng. Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng.</p>
                 </div>
 
+                <div style="background-color: #737374; color: white; width: 100%; height: 15%; text-align: center; padding: 10px auto; float: right;">
 
+                    <!--<label style="float: left; margin-top: 5px">Quan Tâm</label>-->
+                    <a style="float: left; margin: 10px; color: black;font-size: 15pt;"><i class="fa fa-heart"></i> Quan Tâm</a>
+                    <a href="#/ChiTiet/{{ item._MaVP }}" style="float: right; margin: 10px; color: black;font-size: 15pt;"><i class="fa fa-eye"></i> Chi Tiết</a>
+                </div>
             </div>
-            <div class="col-md-6 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                <div style="background-color: white; padding: 0px 0px">
-                    <div style="">
-                        <img src="../../Content/Images/vanphong.jpg" style="width: 100%; height: 225px">
-                    </div>
-                    <h3 style="margin-left: 10px; margin-bottom: 10px; height: 15%; white-space: pre-wrap" class="hidden-sm hidden-xs">Bán nhà MT đường 3, gần AEON, 5x20m, đúc 3.5 tấm mới, 5.5 tỷ</h3>
-                    <h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap" class="hidden-md hidden-lg col-xs-12 col-sm-12">Bán nhà MT đường 3, gần AEON, 5x20m, đúc 3.5 tấm mới, 5.5 tỷ</h4>
-
-                    <div class="hidden-xs" style="height: 70%;padding: 10px">
-                        <p style="font-size: 1em; " class=""> VỊ TRÍ TÒA NHÀ VID Tower 1 tọa lạc tại phố Trần Hưng Đạo, một trong những tuyến đường trọng…</p>
-
-                    </div>
-                    <div>
-                        <div class="col-md-6 col-xs-6 col-sm-6 " style="background-color: #ebf2ff; width: 50%; height: 15%; text-align: center; padding: 10px auto; ">
-                            <label style="border-bottom: 1px solid #dedede;  float: none; padding: 9px 5px; height: 40%; color: black; width: 100%; text-align: center; white-space: nowrap">DT : 100 m<span style="font-size: 8pt; position: absolute;">2</span></label>
-                        </div>
-                        <div class="col-md-6 col-xs-6 col-sm-6 " style="background-color: rgba(196, 51, 43, 0.85); color: white; width: 50%; height: 15%; text-align: center; padding: 10px auto;">
-                            <label style="border-bottom: 1px solid #dedede;  float: none; padding: 9px 5px; height: 40%; color: white; width: 100%; text-align: center; white-space: nowrap">5555 vnđ/tháng</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1 col-sm-1 hidden-xs">
-                </div>
-
-
+            <div class="col-md-1 col-sm-1 hidden-xs">
             </div>
-
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm" style="background-color: green; height: 500px">
-
-        </div>
-
-
     </div>
+    <div class="col-md-3"></div>
+    
+    <!--<div class="col-md-6 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%" ng-repeat="item in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
 
+        <div class="col-md-12 col-sm-12 col-xs-12" style="border: black solid 1px; background-color: #C1C1C1; padding: 0px 0px">
 
+            <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: black">
+                <h3 style="margin-left: 10px; margin-bottom: 20px; height: 15%; white-space: nowrap; max-width: 450px; overflow: hidden; text-overflow: ellipsis;" class="hidden-sm hidden-xs">{{ item._TenVp }}</h3>
+            </a>
+            <h4 style="margin-left: 10px;height: 15%;white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="height: 70%">
+                <img src="{{ app }}/{{ item._Anh }}" style="width: 100%; height: 100%">
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="height: 70%">
+                <label style="border-bottom: 1px solid #dedede; background-color: red; float: none; padding: 9px 10px; height: 40%; color: white; width: 100%; text-align: center; white-space: nowrap">{{ change_money(item._Gia | currency:'':0) }} vnđ/tháng</label>
+                <p style="height: 50%; max-height: 200px; overflow: hidden; text-overflow: ellipsis;" class=""> {{ item._Mota }}</p>
+                <a href="#/ChiTiet/{{ item._MaVP }}" style="float: right" ng-click="scrolltotop()">Tìm Hiểu Thêm</a>
+            </div>
+            <div style="background-color: #444444; color: white; width: 100%; height: 15%; text-align: center; padding: 10px auto; float: right;">
+                <label style="margin-top: 5px">Diện Tích : {{ item._Dientich }} m<span style="font-size: 8pt; position: absolute;">2</span></label>
+            </div>
+        </div>
+        <div class="col-md-1 col-sm-1 hidden-xs">
+        </div>
+    </div>-->
+    <div ng-if="filteredItems.length == 0">
+        <h3>No result</h3>
+    </div>
+</div>
+
+    <div class="input-append">
+        <input type="text" class="input-large search-query" placeholder="Search" ng-model="query" ng-change="search()">
+        <span class="add-on"><i class="icon-search"></i></span>
+    </div>
 
 
     <div style="text-align: center;">
@@ -175,3 +245,4 @@
 
 
 </div>
+

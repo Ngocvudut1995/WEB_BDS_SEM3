@@ -12,11 +12,11 @@ namespace WEB_TRACUU.Controllers
     public class TheoDoiController : ApiController
     {
         //DataClasses1DataContext db = new DataClasses1DataContext();
-        //TKVanPhong tkVanPhong = new TKVanPhong();
-        //public IEnumerable<TKVanPhong> get_VP_By_MaKH(string makh)
+        
+        //public IEnumerable<TKVanPhong> get_VP_By_MaKH(Guid makh)
         //{   IList<TKVanPhong> list = new List<TKVanPhong>();
-        //    Guid ma_kh = Guid.Parse(makh);
-        //    var sql = db.Vp_Da_Theo_doi(ma_kh).ToList();
+        //   // Guid ma_kh = Guid.Parse(makh);
+        //    var sql = db.Vp_Da_Theo_doi(makh).ToList();
         //    foreach (var item  in sql)
         //    {   
         //        list.Add(new TKVanPhong

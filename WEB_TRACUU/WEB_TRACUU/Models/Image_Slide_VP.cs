@@ -10,5 +10,16 @@ namespace WEB_TRACUU.Models
         
         public string Anh { get; set; }
         public string Title { get; set; }
+
+        public Image_Slide_VP(string anh, string title)
+        {
+            Anh = anh;
+            Title = title;
+        }
+
+        public Image_Slide_VP()
+        {
+            
+        }
     }
 }

@@ -26,15 +26,15 @@ app.directive('slider', function ($timeout) {
                 scope.currentIndex > 0 ? scope.currentIndex-- : scope.currentIndex = scope.images.length - 1;
             };
             scope.down = function () {
-                if (scope.miniimages.length - 1 >= scope.index_mini + 2) {
-                    scope.index_mini += 2;
+                if (scope.miniimages.length - 1 >= scope.index_mini + 3) {
+                    scope.index_mini += 3;
                 }
                 
             };
 
             scope.up = function () {
-                if (scope.index_mini - 2 >= 0) {
-                    scope.index_mini -= 2;
+                if (scope.index_mini - 3 >= 0) {
+                    scope.index_mini -= 3;
                 }
                 //scope.currentIndex > 0 ? scope.currentIndex-- : scope.currentIndex = scope.images.length - 1;
             };
@@ -54,7 +54,7 @@ app.directive('slider', function ($timeout) {
                 scope.miniimages.forEach(function (image) {
                     image.visible = false;
                 });
-                for (var i = scope.index_mini - 1; i < scope.index_mini + 2; i++)
+                for (var i = scope.index_mini - 1; i < scope.index_mini + 3; i++)
                 {
                     scope.miniimages[i].visible = true;
                 }
@@ -82,6 +82,6 @@ app.directive('slider', function ($timeout) {
             };
             /* End : For Automatic slideshow*/
         },
-        templateUrl: host+"Home/Slide"
+        templateUrl: host+"/Home/Slide"
     };
 });
