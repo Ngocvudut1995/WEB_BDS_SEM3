@@ -1,5 +1,5 @@
 ﻿<div>
-    <div class="title row" style="height: 60px">
+    <div class="title row" style="">
         <p style="padding-left: 12px; color: white; font-style: italic; font-weight: bold; font-size: 18pt;float: left">{{info._Name}}</p>
         <p style="float: right; color: white; font-style: italic; font-weight: bold; font-size: 18pt; position: relative;
                                                                                                                                                                                                                                                      margin-right: 10px;">
@@ -7,24 +7,27 @@
         </p>
     </div>
     <div class="row" style="">
-        <div class="col-md-10 col-sm-10 col-xs-12" style="padding-left: 0px">
-            <div class="slider" style="height: 466px;">
+        <div class="col-md-10 col-sm-10 col-xs-12" style="padding-left: 0px;padding-right: 0px;">
+            <div class="slider" ng-style="((body_width < 700) && {'height': '173px'} && (body_width >= 400) )|| ((body_width < 400) && {'height': '125px'})">
                 <div class="slide" ng-repeat="image in images" ng-show="image.visible">
-                    <img ng-src="{{ host }}/{{image.Anh}}" />
+                    <img ng-src="{{ host }}/{{image.Anh}}"/>
+                    
                 </div>
-                <div class="arrows_left">
+                <div class="arrows_left" style="position: relative" ng-style="(body_width < 700) && {'top': '60px'}">
                     <a ng-click="prev()">
                         <img src="{{ host }}/Content/Images/left-arrow.png" />
                     </a>
                 </div>
-                <div class="arrows_right">
+                <div class="arrows_right" ng-style="(body_width < 700) && {'top': '55px'}">
                     <a ng-click="next()">
-                        <img src="{{ host }}/Content/Images/right-arrow.png" />
+                        <img src="{{ host }}/Content/Images/right-arrow.png"/>
                     </a>
                 </div>
+
+
             </div>
         </div>
-        <div class="col-md-2 col-sm-2 hidden-xs" style="height: 100%;max-height: 420px;">
+        <div class="col-md-2 col-sm-2 hidden-xs" style="">
 
             <!--<label style="background-color: red; width: 100%; color: white; height: 40px; padding: 10px 20px 10px 20px;white-space: nowrap;">{{change_money(info._Price| currency:'':0)}} vnđ/tháng</label>-->
             <div class="slide_mini" style="width: 100%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
@@ -32,7 +35,7 @@
                     <a ng-click="show($index)"><img style="width: 100%; height: 90px" src="{{host}}/{{item.Anh}}" /></a>
                 </div>
             </div>
-            <div style="text-align: center">
+            <div style="text-align: center;margin-bottom: 21px;">
                 <a style="font-size: 25px; color: black;cursor: pointer" ng-click="up()"><span class="glyphicon glyphicon-chevron-up"></span></a>
                 <a style="font-size: 25px; color: black;cursor: pointer" ng-click="down()"><span class="glyphicon glyphicon-chevron-down"></span></a>
             </div>
@@ -46,8 +49,14 @@
 
         </div>
     </div>
-    <div class="title" style="height: 45px;">
-        <p style="padding-left: 12px;color: white; font-style: italic; font-weight: bold;font-size: 15pt">Địa chỉ: {{info._SoNha}}</p>
+    <div class="row title" style="">
+        <div class="col-md-10 col-xs-12">
+            <p style="padding-left: 12px; color: white; font-style: italic; font-weight: bold; font-size: 15pt">Địa chỉ: {{info._NumberHouse}} {{info._Street}},TP Đà Nẵng</p>
+        </div>
+        <div class="col-md-2 col-xs-12" style="background-color: orange;margin-top: -10px;padding: 11px;height: 49px;">
+            <p style="padding-left: 28px; color: white; font-style: italic; font-weight: bold; font-size: 15pt">Cho Thuê</p>
+        </div>
+       
     </div>
 </div>
 

@@ -40,7 +40,7 @@ namespace WEB_TRACUU.Controllers
                     _IDLand = sql.IDLand,
                     _Image = sql.Image,
                     _Acreage = sql.Acreage,
-                    _Price = sql.Price,
+                    _Price = sql.IDPrice,
 
                     _Name = sql.Name,
                     _NumberHouse = sql.NumberHouse,

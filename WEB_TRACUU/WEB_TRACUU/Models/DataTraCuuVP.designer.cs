@@ -45,6 +45,9 @@ namespace WEB_TRACUU.Models
     partial void InsertLand(Land instance);
     partial void UpdateLand(Land instance);
     partial void DeleteLand(Land instance);
+    partial void InsertPrice(Price instance);
+    partial void UpdatePrice(Price instance);
+    partial void DeletePrice(Price instance);
     partial void InsertStreet(Street instance);
     partial void UpdateStreet(Street instance);
     partial void DeleteStreet(Street instance);
@@ -139,6 +142,14 @@ namespace WEB_TRACUU.Models
 			get
 			{
 				return this.GetTable<Land>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Price> Prices
+		{
+			get
+			{
+				return this.GetTable<Price>();
 			}
 		}
 		
@@ -1091,13 +1102,17 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<System.DateTime> _ModifyDate;
 		
-		private System.Nullable<decimal> _Price;
-		
 		private string _Decription_mini;
+		
+		private System.Nullable<bool> _Flag_Approval;
+		
+		private System.Nullable<int> _IDPrice;
 		
 		private EntityRef<Acreage> _Acreage;
 		
 		private EntityRef<Address> _Address;
+		
+		private EntityRef<Price> _Price;
 		
 		private EntityRef<Type_Land> _Type_Land;
 		
@@ -1125,16 +1140,19 @@ namespace WEB_TRACUU.Models
     partial void OnCreateDateChanged();
     partial void OnModifyDateChanging(System.Nullable<System.DateTime> value);
     partial void OnModifyDateChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
-    partial void OnPriceChanged();
     partial void OnDecription_miniChanging(string value);
     partial void OnDecription_miniChanged();
+    partial void OnFlag_ApprovalChanging(System.Nullable<bool> value);
+    partial void OnFlag_ApprovalChanged();
+    partial void OnIDPriceChanging(System.Nullable<int> value);
+    partial void OnIDPriceChanged();
     #endregion
 		
 		public Land()
 		{
 			this._Acreage = default(EntityRef<Acreage>);
 			this._Address = default(EntityRef<Address>);
+			this._Price = default(EntityRef<Price>);
 			this._Type_Land = default(EntityRef<Type_Land>);
 			OnCreated();
 		}
@@ -1351,26 +1369,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money")]
-		public System.Nullable<decimal> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Decription_mini", DbType="NVarChar(400)")]
 		public string Decription_mini
 		{
@@ -1387,6 +1385,50 @@ namespace WEB_TRACUU.Models
 					this._Decription_mini = value;
 					this.SendPropertyChanged("Decription_mini");
 					this.OnDecription_miniChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Approval", DbType="Bit")]
+		public System.Nullable<bool> Flag_Approval
+		{
+			get
+			{
+				return this._Flag_Approval;
+			}
+			set
+			{
+				if ((this._Flag_Approval != value))
+				{
+					this.OnFlag_ApprovalChanging(value);
+					this.SendPropertyChanging();
+					this._Flag_Approval = value;
+					this.SendPropertyChanged("Flag_Approval");
+					this.OnFlag_ApprovalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int")]
+		public System.Nullable<int> IDPrice
+		{
+			get
+			{
+				return this._IDPrice;
+			}
+			set
+			{
+				if ((this._IDPrice != value))
+				{
+					if (this._Price.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDPriceChanging(value);
+					this.SendPropertyChanging();
+					this._IDPrice = value;
+					this.SendPropertyChanged("IDPrice");
+					this.OnIDPriceChanged();
 				}
 			}
 		}
@@ -1459,6 +1501,40 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Price_Land", Storage="_Price", ThisKey="IDPrice", OtherKey="IDPrice", IsForeignKey=true)]
+		public Price Price
+		{
+			get
+			{
+				return this._Price.Entity;
+			}
+			set
+			{
+				Price previousValue = this._Price.Entity;
+				if (((previousValue != value) 
+							|| (this._Price.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Price.Entity = null;
+						previousValue.Lands.Remove(this);
+					}
+					this._Price.Entity = value;
+					if ((value != null))
+					{
+						value.Lands.Add(this);
+						this._IDPrice = value.IDPrice;
+					}
+					else
+					{
+						this._IDPrice = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Price");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Type_Land", ThisKey="IDType", OtherKey="IDType", IsForeignKey=true)]
 		public Type_Land Type_Land
 		{
@@ -1511,6 +1587,120 @@ namespace WEB_TRACUU.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Price")]
+	public partial class Price : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDPrice;
+		
+		private string _Price1;
+		
+		private EntitySet<Land> _Lands;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDPriceChanging(int value);
+    partial void OnIDPriceChanged();
+    partial void OnPrice1Changing(string value);
+    partial void OnPrice1Changed();
+    #endregion
+		
+		public Price()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IDPrice
+		{
+			get
+			{
+				return this._IDPrice;
+			}
+			set
+			{
+				if ((this._IDPrice != value))
+				{
+					this.OnIDPriceChanging(value);
+					this.SendPropertyChanging();
+					this._IDPrice = value;
+					this.SendPropertyChanged("IDPrice");
+					this.OnIDPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Price", Storage="_Price1", DbType="NVarChar(50)")]
+		public string Price1
+		{
+			get
+			{
+				return this._Price1;
+			}
+			set
+			{
+				if ((this._Price1 != value))
+				{
+					this.OnPrice1Changing(value);
+					this.SendPropertyChanging();
+					this._Price1 = value;
+					this.SendPropertyChanged("Price1");
+					this.OnPrice1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Price_Land", Storage="_Lands", ThisKey="IDPrice", OtherKey="IDPrice")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Price = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Price = null;
 		}
 	}
 	
@@ -2096,20 +2286,6 @@ namespace WEB_TRACUU.Models
 	public partial class Overview_Land
 	{
 		
-		private System.Guid _IDLand;
-		
-		private string _Name;
-		
-		private string _Image;
-		
-		private System.Nullable<System.DateTime> _CreateDate;
-		
-		private System.Nullable<System.DateTime> _ModifyDate;
-		
-		private System.Nullable<decimal> _Price;
-		
-		private string _Decription_mini;
-		
 		private string _Acreage;
 		
 		private string _TypeName;
@@ -2132,120 +2308,24 @@ namespace WEB_TRACUU.Models
 		
 		private int _IDAcreage;
 		
+		private System.Guid _IDLand;
+		
+		private System.Nullable<System.DateTime> _ModifyDate;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private System.Nullable<int> _IDPrice;
+		
+		private System.Nullable<bool> _Flag_Approval;
+		
+		private string _Image;
+		
+		private string _Name;
+		
+		private string _Decrition;
+		
 		public Overview_Land()
 		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid IDLand
-		{
-			get
-			{
-				return this._IDLand;
-			}
-			set
-			{
-				if ((this._IDLand != value))
-				{
-					this._IDLand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
-		public string Image
-		{
-			get
-			{
-				return this._Image;
-			}
-			set
-			{
-				if ((this._Image != value))
-				{
-					this._Image = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreateDate
-		{
-			get
-			{
-				return this._CreateDate;
-			}
-			set
-			{
-				if ((this._CreateDate != value))
-				{
-					this._CreateDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifyDate
-		{
-			get
-			{
-				return this._ModifyDate;
-			}
-			set
-			{
-				if ((this._ModifyDate != value))
-				{
-					this._ModifyDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money")]
-		public System.Nullable<decimal> Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this._Price = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Decription_mini", DbType="NVarChar(400)")]
-		public string Decription_mini
-		{
-			get
-			{
-				return this._Decription_mini;
-			}
-			set
-			{
-				if ((this._Decription_mini != value))
-				{
-					this._Decription_mini = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Acreage", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
@@ -2420,6 +2500,134 @@ namespace WEB_TRACUU.Models
 				if ((this._IDAcreage != value))
 				{
 					this._IDAcreage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid IDLand
+		{
+			get
+			{
+				return this._IDLand;
+			}
+			set
+			{
+				if ((this._IDLand != value))
+				{
+					this._IDLand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifyDate
+		{
+			get
+			{
+				return this._ModifyDate;
+			}
+			set
+			{
+				if ((this._ModifyDate != value))
+				{
+					this._ModifyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this._CreateDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int")]
+		public System.Nullable<int> IDPrice
+		{
+			get
+			{
+				return this._IDPrice;
+			}
+			set
+			{
+				if ((this._IDPrice != value))
+				{
+					this._IDPrice = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Approval", DbType="Bit")]
+		public System.Nullable<bool> Flag_Approval
+		{
+			get
+			{
+				return this._Flag_Approval;
+			}
+			set
+			{
+				if ((this._Flag_Approval != value))
+				{
+					this._Flag_Approval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this._Image = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Decrition", DbType="NVarChar(MAX)")]
+		public string Decrition
+		{
+			get
+			{
+				return this._Decrition;
+			}
+			set
+			{
+				if ((this._Decrition != value))
+				{
+					this._Decrition = value;
 				}
 			}
 		}

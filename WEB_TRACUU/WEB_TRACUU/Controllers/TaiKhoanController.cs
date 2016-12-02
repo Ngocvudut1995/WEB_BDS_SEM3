@@ -12,7 +12,7 @@ namespace WEB_TRACUU.Controllers
 {
     public class TaiKhoanController : ApiController
     {
-        //DataClasses1DataContext db = new DataClasses1DataContext();
+        DataTraCuuVPDataContext db;
         //[HttpGet]
         //public int KT_TaiKhoan_TonTai(string user)
         //{
@@ -85,6 +85,63 @@ namespace WEB_TRACUU.Controllers
         //        return NotFound();
         //    }
         //}
+        [HttpGet]
+        public IEnumerable<BDS_Detail> get_Land_by_IDCustumer(Guid makh)
+        {   
+            List<BDS_Detail> list = new List<BDS_Detail>();
+            using (db = new DataTraCuuVPDataContext())
+            {
+                db.Connection.Open();
+                var sql = from a in db.Lands
+                    join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                    join d in db.Customers on a.IDCustomer equals d.IDCustomer
+                    select new
+                    {
+                        a.IDLand,
+                        d.CustomerName,
+                        c,
+                        
+                    };
+                
+                
+                            
+                foreach (var item in sql)
+                {
+                    list.Add(new BDS_Detail
+                    {
+                        _IDLand = item.IDLand,
+                        _NumberHouse =  item.c.NumberHouse,
+                        
+
+                    });
+                }
+                db.Connection.Close();
+                return list;
+               
+            }
+
+        }
+
+        [HttpGet]
+        public IEnumerable<Customer> get_all_customer()
+        {   List<Customer> list = new List<Customer>();
+            using (db = new DataTraCuuVPDataContext())
+            {
+                db.Connection.Open();
+                var query = (from a in db.Customers select a).ToList();
+                foreach (var item in query)
+                {
+                    list.Add(new Customer
+                    {
+                        IDCustomer = item.IDCustomer,
+                        CustomerName = item.CustomerName,
+
+                    });
+                }
+                db.Connection.Close();
+                return list;
+            }
+        } 
 
     }
 }

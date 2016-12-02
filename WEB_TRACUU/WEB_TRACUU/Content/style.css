@@ -52,7 +52,7 @@
     -webkit-transition: all ease 0.4s;
     z-index: 20;
     /*height: 330px;*/
-    border: solid 3px green;
+    border: solid 3px blue;
     background-color: white;
     top: 10%;
 }
@@ -152,3 +152,12 @@ h3 img {
     font-size: 15px;
     border: solid 1px white;
 }
+.edit_quantri > li > a {
+    color: black;
+}
+div.scrollmenu {
+       
+        overflow: auto;
+        white-space: nowrap;
+        max-height: 400px;
+    }

@@ -33,6 +33,11 @@ app.config(function ($routeProvider) {
             controller: "taikhoanCtrl",
             title: "Tài Khoản"
         })
+        .when("/TaiKhoan/:select", {
+            templateUrl: app + "Home/TaiKhoan",
+            controller: "taikhoanCtrl",
+            title: "Tài Khoản"
+        })
         .when("/DangKy", {
             templateUrl: app + "Home/DangKy",
             controller: "dangkiCtrl",
@@ -41,6 +46,7 @@ app.config(function ($routeProvider) {
 
     .otherwise({ redirectTo: "/TimKiem" });
 });
+app.run
 var sortingOrder = 'name';
 app.run(['$location', '$rootScope', function ($location, $rootScope) {
     $rootScope.$on('$routeChangeSuccess', function (event, current) {
@@ -50,6 +56,9 @@ app.run(['$location', '$rootScope', function ($location, $rootScope) {
 app.controller('timkiemCtrl', [
     '$scope', '$http', '$window', '$filter', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $filter, $rootScope, $routeParams, $location) {
         var _MAX = 1000000000;
+        // 
+
+        // Function reset
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
             $scope.select_Gia = '0';
@@ -62,7 +71,7 @@ app.controller('timkiemCtrl', [
             $scope.load_duong();
 
         };
-       
+        // Bắt paramester url
         if ($routeParams.page != null) {
             $scope.currentPage = $routeParams.page - 1;
         } else {
@@ -72,7 +81,7 @@ app.controller('timkiemCtrl', [
         if ($routeParams.h != null) {
             $scope.select_Huyen = $routeParams.h;
         } else {
-            $scope.select_Huyen = '0'; 
+            $scope.select_Huyen = '0';
         }
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + $scope.select_Huyen).then(function (response) {
             $scope.listPhuong = response.data;
@@ -92,13 +101,13 @@ app.controller('timkiemCtrl', [
 
             $scope.search();
         });
-       
+
         if ($routeParams.q != null) {
             $scope.query = $routeParams.q;
         } else {
             $scope.query = '';
         }
-       
+
         if ($routeParams.k != null) {
             $scope.select_Kieu = $routeParams.k;
         } else {
@@ -114,7 +123,7 @@ app.controller('timkiemCtrl', [
         } else {
             $scope.select_Gia = '0';
         }
-       
+        // Click nut search goi ham truyen len url
         $scope.search_vp = function () {
 
             var url = '/TimKiem/' + $scope.select_Huyen + '/'
@@ -135,12 +144,12 @@ app.controller('timkiemCtrl', [
             //$scope.search();
         };
         //$scope.currentPage = 0;
-       
+
         $rootScope.tab_index = 1;
 
         var list_all = [];
         $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
-           
+
             list_all = response.data;
             $scope.search();
         });
@@ -148,7 +157,7 @@ app.controller('timkiemCtrl', [
             $scope.listQuan = response.data;
 
         });
-        
+
         $scope.load_phuong = function () {
             $scope.select_Phuong = '0';
             $scope.load_duong();
@@ -157,7 +166,7 @@ app.controller('timkiemCtrl', [
                 $scope.listPhuong = response.data;
             });
         };
-        
+
         $scope.load_duong = function () {
             $scope.select_Duong = '0';
             $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
@@ -173,7 +182,7 @@ app.controller('timkiemCtrl', [
                 $scope.listdientich = response.data;
             });
         };
-       
+
         $http.get(host + "/api/TimKiem/get_DanhMuc").then(function (response) {
             $scope.list_DM = response.data;
 
@@ -200,7 +209,7 @@ app.controller('timkiemCtrl', [
 
 
         // init the filtered items
-       
+
         $scope.search = function () {
             $scope.filteredItems = $filter('filter')(list_all, function (item) {
 
@@ -244,11 +253,18 @@ app.controller('timkiemCtrl', [
 
         $scope.range = function (start, end) {
             var ret = [];
-            if (!end) {
-                end = start;
+            //if (!end) {
+            //    end = start;
+            //    start = 0;
+            //}
+            if (start < 0) {
                 start = 0;
+                end = 5;
             }
             for (var i = start; i < end; i++) {
+
+                if (i == $scope.pagedItems.length)
+                    break;
                 ret.push(i);
             }
             return ret;
@@ -284,6 +300,7 @@ app.controller('timkiemCtrl', [
     }]);
 app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', function ($scope, $http, $routeParams, Map) {
     $scope.id_VP = $routeParams.id;
+
     $scope.hosts = host;
     $scope.follow = 0;
     $scope.change_follow = function () {
@@ -300,7 +317,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', functio
     });
     console.log($scope);
 
-    var thanhpho = 'Đà Nẵng';
+    var thanhpho = 'Tp Đà Nẵng';
     //$scope.images = [{ src: 'img1.png', title: 'Pic 1' }, { src: 'img2.jpg', title: 'Pic 2' }, { src: 'img3.jpg', title: 'Pic 3' }, { src: 'img4.png', title: 'Pic 4' }, { src: 'img5.png', title: 'Pic 5' }];
     // $scope.miniImage = [{ src: 'img1.png', title: 'Pic 1' }, { src: 'img2.jpg', title: 'Pic 2' }, { src: 'img3.jpg', title: 'Pic 3' }, { src: 'img4.png', title: 'Pic 4' }, { src: 'img5.png', title: 'Pic 5' }];
     $scope.getAPIid = function (id) {
@@ -309,10 +326,10 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', functio
 
             $scope.show_slide = 1;
             Map.init(16.063636, 108.21812499999999);
-            Map.search($scope.info._NumberHouse + " " + $scope._Street + "," + thanhpho)
+            Map.search($scope.info._NumberHouse + " " + $scope.info._Street + "," + thanhpho)
                 .then(
                     function (res) { // success
-                        Map.addMarker(res, $scope.info._SoNha);
+                        Map.addMarker(res, $scope.info._NumberHouse + " " + $scope.info._Street + "," + thanhpho);
                         $scope.place.name = res.name;
                         $scope.place.lat = res.geometry.location.lat();
                         $scope.place.lng = res.geometry.location.lng();
@@ -353,9 +370,6 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', functio
 app.controller('homeCtrl', function ($scope) {
 
 });
-app.controller('taikhoanCtrl', function ($scope) {
-
-});
 app.controller('theodoiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', function ($scope, $http, $rootScope, $routeParams) {
     $rootScope.tab_index = 2;
     $scope.id_KH = $routeParams.id;
@@ -366,15 +380,18 @@ app.controller('theodoiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 
     };
 }]);
 app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', function ($scope, $http, $rootScope, $routeParams) {
-    $scope.hoten = '';
-    $scope.user = '';
-    $scope.pass = '';
-    $scope.repeat_pass = '';
-    $scope.email = '';
+    $scope.fullname = '';
+    $scope.gender = 'male';
+    $scope.nick_name = '';
     $scope.coquan = '';
-    $scope.sodt = '';
-    $scope.diachi = '';
+    $scope.phone = '';
+    $scope.address = '';
     $scope.cmnd = '';
+    $scope.email = "";
+    $scope.username = "";
+    $scope.password = "";
+    $scope.rePassword = '';
+    $scope.birthdate = "";
     $scope.test_tk = 0;
     $scope._check = 0;
     $scope.kt_taikhoan_tontai = function () {
@@ -411,4 +428,13 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
             swal("Thông báo", "Server unavailable", "error");
         });
     };
+}]);
+app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
+    
+    if ($routeParams.select != null) {
+        $scope.selectedValue = $routeParams.select;
+    } else {
+        $scope.selectedValue = 'ql_baidangchuaduyet';
+    }
+
 }]);

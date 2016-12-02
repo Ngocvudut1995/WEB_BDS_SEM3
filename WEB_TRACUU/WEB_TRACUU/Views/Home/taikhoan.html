@@ -1,1 +1,396 @@
-﻿<h2>Trang Thông Tin Khách Hàng</h2>
+﻿<div class="row" style="" ng-controller="taikhoanCtrl">
+    <div class="col-md-4" style="">
+        <div style="background-color: #C1C1C1; height: 40px">
+            <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Tài Khoản</h3>
+        </div>
+        <div style="padding: 20px; font-size: 13pt">
+            <div class="clearfix list-group" style="display: block; list-style-type: square;">
+                <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'dogs'">Tên Tài Khoản </a>
+                <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'cars'">Đăng Tin</a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Các Tin Đã Đăng </a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Các Tin Hết Hạn </a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Các Tin Chưa Duyệt </a>
+                <a class="list-group-item col-md-12 col-xs-12">Thay Đổi Mật Khẩu </a>
+                <div class="list-group-item col-md-12 col-xs-12 dropdown" style="padding: 0px;">
+                    <button class="list-group-item btn btn-lg" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            style="text-align: left; width: 100%" value="Quản Trị Hệ Thống" ng-disabled="(1==0)">
+                        Quản Trị Hệ Thống<span class="glyphicon glyphicon-list" style="float: right"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_khachhang">Quản Lý Khách Hàng</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_dangbai">Quản Lý Bài Đăng</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_tracuu">Quản Lý Hệ Thống Tra Cứu</a></li>
+
+
+                    </ul>
+
+
+                </div>
+                <a class="list-group-item col-md-12 col-xs-12">Thoát Khỏi Hệ Thống </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8" style="height: 100%;">
+
+        <div ng-switch="selectedValue">
+
+            <div ng-switch-when="ql_tracuu" class="list-group">
+                <div style="background-color: #C1C1C1;margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h3>
+                </div>
+                <div class="panel panel-default" style="">
+                    <div class="panel-heading">DS Các Quận</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
+                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">DS Các Phường</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Phuong" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Phường ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
+                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">DS Các Đường Trong Phường</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Duong" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Đường ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
+                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-when="ql_khachhang" style="margin: 20px" class="list-group">
+                <div style="background-color: #C1C1C1;margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Danh Sách Khách Hàng</div>
+                    <div class="panel-body scrollmenu">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Địa Chỉ</th>
+                                    <th>Phone</th>
+                                    <th>Cơ Quan</th>
+                                    <th>CMND</th>
+                                    <th>Admin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>1sdsdasfasf</td>
+                                    <td>Doeàasfsdas</td>
+                                    <td>john@example.com</td>
+                                    <td>john@example.com</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>1sdsdasfasf</td>
+                                    <td>Doeàasfsdas</td>
+                                    <td>john@example.com</td>
+                                    <td>john@example.com</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>1sdsdasfasf</td>
+                                    <td>Doeàasfsdas</td>
+                                    <td>john@example.com</td>
+                                    <td>john@example.com</td>
+                                    <td><input type="checkbox" /></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-when="ql_baidangchuaduyet">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h3>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Bài Đăng Số Mã Số 1</div>
+                    <div class="panel-body">
+                        <ul class="clearfix" style="display: block; list-style-type: square;">
+                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
+                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
+                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: </li>
+                            <li class="col-md-6 col-xs-12">Diện Tích: </li>
+                            <li class="col-md-6 col-xs-12">Giá: </li>
+                            <li class="col-md-6 col-xs-12">Vị Trí: </li>
+                            <li class="col-md-6 col-xs-12">Loại Dự Án: </li>
+                            <li class="col-md-12 col-xs-12">
+                                Mô tả:
+                                <p>
+                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
+                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
+                                </p>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Bìa:</p>
+                                <div class="col-md-3">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Chi Tiết:</p>
+
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                        </ul>
+                        <button style="float: right; margin-left: 10px">Duyệt</button>
+                        <button style="float: right">Hủy</button>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="ql_baidanghethan">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h3>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Bài Đăng Số Mã Số 1</div>
+                    <div class="panel-body">
+                        <ul class="clearfix" style="display: block; list-style-type: square;">
+                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
+                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
+                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: </li>
+                            <li class="col-md-6 col-xs-12">Diện Tích: </li>
+                            <li class="col-md-6 col-xs-12">Giá: </li>
+                            <li class="col-md-6 col-xs-12">Vị Trí: </li>
+                            <li class="col-md-6 col-xs-12">Loại Dự Án: </li>
+                            <li class="col-md-12 col-xs-12">
+                                Mô tả:
+                                <p>
+                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
+                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
+                                </p>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Bìa:</p>
+                                <div class="col-md-3">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Chi Tiết:</p>
+
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                        </ul>
+                        <button style="float: right; margin-left: 10px">Lưu</button>
+                        <button style="float: right">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="ql_baidangdadang">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đã Đăng</h3>
+                </div>
+                <label>Search</label>
+                <input type="text"/>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Bất Động Sản Tòa Nhà A - Bài Đăng Số 1000</div>
+                    <div class="panel-body">
+                        <ul class="clearfix" style="display: block; list-style-type: square;">
+                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
+                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
+                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: <input type="date" /> </li>
+                            <li class="col-md-6 col-xs-12">
+                              
+                                <span style="width: 40%">Diện Tích:</span> <select style="float: right;width: 60%; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                            </li>
+                            <li class="col-md-6 col-xs-12">
+                                <span style="width: 40%">Giá:</span> <select style="float: right;width: 60%;border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                            </li>
+                            <li class="col-md-6 col-xs-12">
+                                Vị Trí: 
+                            </li>
+                            <li class="col-md-6 col-xs-12">
+                                <span style="width: 40%">Loại Dự Án:</span> <select style="float: right;width: 60%; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                                </select>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                Mô tả:
+                                <p>
+                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
+                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
+                                </p>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Bìa:</p>
+                                <div class="col-md-3">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                            <li class="col-md-12 col-xs-12">
+                                <p>Hình ảnh Chi Tiết:</p>
+
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                                <div class="col-md-3" style="margin-bottom: 10px">
+                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                </div>
+                            </li>
+                        </ul>
+                        <button style="float: right; margin-left: 10px">Lưu</button>
+                        <button style="float: right">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿<div>
+﻿<!--<div>
 
     <div class="col-md-3"></div>
     <div class="col-md-6" style="margin: auto">
@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label>Họ Tên:</label><span>*</span>
                 <input type="text" class="form-control" placeholder="Tên Đầy Đủ Của Bạn" required ng-model="hoten" ng-minlength="3" name="hoten">
-                <span style="color:red" ng-show="form_dangki.hoten.$touched && form_dangki.hoten.$invalid">
+                <span style="color: red" ng-show="form_dangki.hoten.$touched && form_dangki.hoten.$invalid">
                     <span ng-show="form_dangki.hoten.$error.required">Họ tên không được để trống.</span>
                 </span>
             </div>
@@ -20,14 +20,14 @@
                        Username phải dài hơn 8 kí tự
                     </span>
                 </span>
-                <span style="color:red" ng-show="test_tk==1">
+                <span style="color: red" ng-show="test_tk==1">
                         Username đã tồn tại.
                 </span>
             </div>
             <div class="form-group">
                 <label>Password:</label><span>*</span>
                 <input type="password" class="form-control" id="pw" placeholder="Mật Khẩu" required ng-model="pass" ng-minlength="8" name="pass">
-                <span style="color:red" ng-show="form_dangki.pass.$touched && form_dangki.pass.$invalid">
+                <span style="color: red" ng-show="form_dangki.pass.$touched && form_dangki.pass.$invalid">
                     <span ng-show="form_dangki.pass.$error.required">Mật khẩu không được để trống. </span>
                     <span ng-show="form_dangki.pass.$error.minlength">
                         Mật khẩu phải dài hơn 8 kí tự. 
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label>Địa Chỉ:</label><span>*</span>
                 <input type="text" class="form-control" placeholder="Địa chỉ" required ng-model="diachi" name="diachi">
-                <span style="color:red" ng-show="form_dangki.diachi.$touched && form_dangki.diachi.$invalid">
+                <span style="color: red" ng-show="form_dangki.diachi.$touched && form_dangki.diachi.$invalid">
                     <span ng-show="form_dangki.diachi.$error.required">Địa Chỉ không được để trống.</span>
                 </span>
             </div>
@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label>CMND:</label><span>*</span>
                 <input type="text" class="form-control" placeholder="Số Điện Thoại" required ng-model="cmnd" name="cmnd">
-                <span style="color:red" ng-show="form_dangki.cmnd.$touched && form_dangki.cmnd.$invalid">
+                <span style="color: red" ng-show="form_dangki.cmnd.$touched && form_dangki.cmnd.$invalid">
                     <span ng-show="form_dangki.cmnd.$error.required">CMND không được để trống.</span>
                 </span>
             </div>
@@ -72,12 +72,12 @@
             <div class="form-group">
                 <label>Email:</label><span>*</span>
                 <input type="email" class="form-control" placeholder="Địa chỉ email" required ng-model="email" name="email">
-                <span style="color:red" ng-show="form_dangki.email.$touched && form_dangki.email.$invalid">
+                <span style="color: red" ng-show="form_dangki.email.$touched && form_dangki.email.$invalid">
                     <span ng-show="form_dangki.email.$error.required">Địa Chỉ email không được để trống.</span>
                     <span ng-show="form_dangki.email.$error.email">Địa chỉ email không hợp lệ.</span>
                 </span>
             </div>
-           
+
             <div class="form-group" style="">
                 <label>Giới Tính:</label>
                 <label class="checkbox-inline">
@@ -92,9 +92,190 @@
             <br>
             <input type="submit" class="btn btn-success" ng-disabled="(pass != repeat_pass) || (!_check) || form_dangki.user.$invalid || form_dangki.hoten.$invalid ||
                    form_dangki.sodt.$invalid || form_dangki.email.$invalid ||form_dangki.pass.$invalid || form_dangki.repeat_pass.$invalid 
-                   || form_dangki.cmnd.$invalid" >
+                   || form_dangki.cmnd.$invalid">
             <button type="reset" class="btn btn-success">Cancel</button>
         </form>
         <br><br>
+    </div>
+</div>-->
+<div ng-controller="dangkiCtrl">
+   
+    <div class="row">
+        <div class="col-md-3 col-xs-3 col-sm-3"></div>
+        <div class="col-md-6 col-xs-6 col-sm-6" id="all">
+
+            <form class="form-horizontal" role="form" name="myForm" novalidate ng-submit="register()">
+                <div style="font-family: Arial;font-size: 40px; color:blue;margin: 20px 10px 20px 10px;" align="center"><b>Đăng ký thành viên</b></div>
+                <div style="color: #2aabd2;" align="center">Mời Quý vị đăng ký thành viên để được hưởng nhiều lợi ích và hỗ trợ từ chúng tôi!</div><br>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Tên đầy đủ<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="fullname" name="fullname" class="form-control" placeholder="Enter full name" required>
+                        <span style="color:red" ng-show="myForm.fullname.$touched && myForm.fullname.$invalid">
+                            <span ng-show="myForm.fullname.$error.required">Tên đầy đủ is required.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Bí danh<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="nick_name" name="nick_name" class="form-control" placeholder="Enter nick name" required>
+                        <span style="color: red" ng-show="myForm.nick_name.$touched && myForm.nick_name.$invalid">
+                            <span ng-show="myForm.nick_name.$error.required">Bí danh is required. </span>
+                        </span>
+                    </div>
+                    
+                  
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4">Email<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="email" ng-model="email" name="email" class="form-control" placeholder="Enter email" required>
+                        <span style="color:red" ng-show="myForm.email.$touched && myForm.email.$invalid">
+                            <span ng-show="myForm.email.$error.required">Email is required.</span>
+                            <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Tên đăng ký<span style="color: red;white-space: nowrap">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="username"  name="username" ng-minlength="8" class="form-control" placeholder="Enter register name" required>
+                        <span style="color: red" ng-show="myForm.username.$touched && myForm.username.$invalid">
+                            <span ng-show="myForm.username.$error.required">Tên đăng ký is required.</span>
+                            <span ng-show="myForm.username.$error.minlength">
+                                Tên đăng ký must be at least 8 characters
+                            </span>
+                        </span>
+                        <span style="color: red" ng-show="test_tk==1">
+                            Tên Đăng Kí đã tồn tại.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Mật khẩu<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="password" ng-model="password" name="password" class="form-control" id="pwd" ng-minlength="6" placeholder="Enter password" required>
+                        <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid">
+                            <span ng-show="myForm.password.$error.required">Password is required.</span>
+                            <span ng-show="myForm.password.$error.minlength">Password must be at least 6 characters.</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Nhập lại mật khẩu<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="password" ng-model="rePassword" name="rePassword" class="form-control" id="repwd" ng-minlength="6" placeholder="Enter password again" required>
+                        <span style="color:red" ng-disabled="!myForm.$dirty || (myForm.$dirty && myForm.$invalid)">
+                            <span style="color:red" ng-show="(rePassword != password) && myForm.rePassword.$touched">RePassword not valid.</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Ngày sinh<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="date" ng-model="birthdate" name="birthdate" class="form-control" placeholder="Enter your birthday" required>
+                        <span style="color:red" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid">
+                            <span ng-show="myForm.birthdate.$error.required">Birthday is required.</span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Giới Tính:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <label><input type="radio" ng-model="gender" name="gender" value="male" checked>&nbsp;Nam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label><input type="radio"  ng-model="gender" name="gender" value="female">&nbsp;Nữ</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4">Địa chỉ:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <textarea class="form-control" placeholder="Your address" style="height: 100px" ng-model="address" name="address"></textarea>
+                    </div>
+                    <span style="color: red" ng-show="myForm.address.$touched && myForm.address.$invalid">
+                        <span ng-show="myForm.address.$error.required">ID is required.</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">CMND<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="cmnd" name="cmnd" class="form-control" placeholder="Enter ID" required>
+                        <span style="color: red" ng-show="myForm.cmnd.$touched && myForm.cmnd.$invalid">
+                            <span ng-show="myForm.cmnd.$error.required">ID is required.</span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Cơ Quan:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="coquan" name="coquan" class="form-control" placeholder="Enter ID" required>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Điện thoại di động<span style="color: red">(*)</span>:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <input type="text" ng-model="phone" name="phone" class="form-control" placeholder="Enter your phone" required>
+                        <span style="color:red" ng-show="myForm.phone.$touched && myForm.phone.$invalid">
+                            <span ng-show="myForm.phone.$error.required">Phone is required.</span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd" >Tài khoản:</label>
+                    <div class="col-md-8 col-xs-8 col-sm-8">
+                        <label><input type="radio" name="account" id="personal" checked>&nbsp;Personal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <label><input type="radio" name="account" id="company">&nbsp;Company&nbsp;&nbsp;&nbsp;</label>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                <!--<div class="col-sm-offset-2 col-sm-10">-->
+                <!--<div class="checkbox">-->
+                <!--<label><input type="checkbox"> Remember me</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<div class="col-sm-offset-2 col-sm-10">-->
+                <!--<button type="submit" class="btn btn-default">Submit</button>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div style="color: #2aabd2">
+                    <b>Chúng tôi sẽ gửi đến hộp thư của bạn 1 email xác nhận đăng ký thành viên sau khi đăng ký thành viên hoàn tất.</b><br>
+                    Chú ý: bạn không thể thay đổi những thông tin: tên đăng nhập, email, số điện thoại di động sau khi đăng ký
+                </div>
+
+                <div style="text-align: center">
+                    <input type="submit" class="btn btn-info" ng-disabled="(password != rePassword) || myForm.fullname.$invalid || myForm.username.$invalid ||
+                   myForm.phone.$invalid || myForm.email.$invalid ||myForm.password.$invalid || myForm.address.$invalid
+                   || myForm.cmnd.$invalid || myForm.birthdate.$invalid || myForm.nick_name.$invalid">
+                    <button type="reset" class="btn btn-info">Cancel</button>
+                </div>
+
+                <div>
+                    <p>
+                        Nếu gặp bất kỳ khó khăn gì trong việc đăng ký, đăng nhập, đăng tin hay trong việc sử dụng website nói chung,
+                        Quý vị hãy liên hệ ngay với chúng tôi theo số
+                        đt:<b>0936.365.158</b>  hoặc email:<b> hotro@batdongsan.com.vn</b> để được trợ giúp
+                    </p>
+                </div>
+            </form>
+            <!--<div id="all">-->
+            <!--<table width="500" align="center">-->
+            <!--</table>-->
+            <!--<div style="text-align: center">-->
+            <!--<input type="submit" value="Đăng ký" id="but">-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="col-md-3 col-xs-3 col-sm-3"></div>
     </div>
 </div>

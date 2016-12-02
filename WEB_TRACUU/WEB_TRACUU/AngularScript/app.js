@@ -60,7 +60,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $scope.username = "";
     $scope.password = "";
     $scope.body_width = window.innerWidth;
-    $rootScope.taikhoan = { test: 0, tenkh:"",username: "" };
+    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" };
     var expireDate = new Date();
     expireDate.setMonth(11);
     expireDate.setDate(expireDate.getDate() + 1);
@@ -71,9 +71,15 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     if (str != null) {
         $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
             var data = res.data;
-            $rootScope.taikhoan.test = 1;
-            $rootScope.taikhoan.username = data._User;
-            $rootScope.taikhoan.tenkh = data._TenKH;
+            if (data == null) {
+                $rootScope.taikhoan.test = 0;
+
+            } else {
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+            }
+
         });
     }
     $rootScope.dangky = function () {
@@ -120,9 +126,34 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', function ($location, $rootScope) {
-
+app.run(['$location', '$rootScope', '$cookies', '$http', function ($location, $rootScope, $cookies, $http) {
+    
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.title = current.$$route.title;
+    });
+    var routespermision=['/TaiKhoan'];
+    $rootScope.$on('$routeChangeStart', function () {
+        console.log($location.path());
+        
+        var str = $cookies.get('user');
+        console.log(str);
+        if (str != null) {
+            $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
+                var data = res.data;
+                if (data == null) {
+                    $rootScope.taikhoan.test = 0;
+
+                } else {
+                    $rootScope.taikhoan.test = 1;
+                    $rootScope.taikhoan.username = data._User;
+                    $rootScope.taikhoan.tenkh = data._TenKH;
+                }
+
+            });
+        }
+        console.log(routespermision.indexOf($location.path()));
+        if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+            $location.path('/');
+        }
     });
 }]);

@@ -14,6 +14,7 @@ app.directive('slider', function ($timeout) {
         link: function(scope, elem, attrs) {
             scope.currentIndex = 0;
             scope.index_mini = 1;
+            scope.body_width = window.innerWidth;
             scope.myVar = 1;
             scope.next = function () {
                 scope.currentIndex < scope.images.length - 1 ? scope.currentIndex++ : scope.currentIndex = 0;
