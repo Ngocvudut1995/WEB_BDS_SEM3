@@ -16,17 +16,6 @@ namespace WEB_TRACUU.Controllers
     {
        // Rent_OfficeEntities db = new Rent_OfficeEntities();
         private DataTraCuuVPDataContext db;
-        //= new DataTraCuuVPDataContext();
-       TKVanPhong tkVanPhong = new TKVanPhong();
-        public IEnumerable<TKVanPhong> get_VP()
-        {   
-            IList<TKVanPhong> list = new List<TKVanPhong>();
-            list = tkVanPhong.getALL();
-            return list;
-        }
-
-
-      
         //Get DS Các Quận
         public IEnumerable<Trouser> get_trouser()
         {
@@ -56,13 +45,21 @@ namespace WEB_TRACUU.Controllers
             }
            
         }
+       
+        TKVanPhong tkVanPhong = new TKVanPhong();
+        public IEnumerable<TKVanPhong> get_VP()
+        {
+            IList<TKVanPhong> list = new List<TKVanPhong>();
+            list = tkVanPhong.getALL();
+            return list;
+        }
         //Get DS Cac phuong
         public IEnumerable<Ward> get_ward_by_IDTrousers(int id)
         {
             var list = new List<Ward>();
             using (db = new DataTraCuuVPDataContext())
             {
-                db.Connection.Open();
+              
                 var query = (from a in db.Wards
                           where a.IDTrousers == id
                           select a).OrderBy(b => b.Ward1).ToList();
@@ -74,7 +71,7 @@ namespace WEB_TRACUU.Controllers
                         Ward1 = item.Ward1
                     });
                 }
-                db.Connection.Close();
+               
                 return list;
             }
         }
@@ -86,7 +83,7 @@ namespace WEB_TRACUU.Controllers
             IList<Street> list = new List<Street>();
             using (db = new DataTraCuuVPDataContext())
             {
-                db.Connection.Open();
+               
                 try
                 {
                     if (id == 0)
@@ -122,10 +119,7 @@ namespace WEB_TRACUU.Controllers
                     return null;
 
                 }
-                finally
-                {
-                    db.Connection.Close();
-                }
+              
             }
            
         }
@@ -151,23 +145,46 @@ namespace WEB_TRACUU.Controllers
 
         
         //Get DS Hinh Thuc
-        public IEnumerable<Type_Land> get_DanhMuc()
+        public IEnumerable<Type_Land> get_DanhMuc_By_Sell(bool sell)
         {
             IList<Type_Land> list = new List<Type_Land>();
             using (db = new DataTraCuuVPDataContext())
             {
-                var sql = (from a in db.Type_Lands select a).ToList();
+                var sql = (from a in db.Type_Lands where a.Sell == sell select a).ToList();
                 foreach (var item in sql)
                 {
                     list.Add(new Type_Land
                     {
                         IDType = item.IDType,
-                        TypeName = item.TypeName
+                        TypeName = item.TypeName,
+                        Sell = item.Sell
                     });
                 }
                 return list;
             }
             
+        }
+        public IEnumerable<Price> get_Price(bool sell)
+        {
+            IList<Price> list = new List<Price>();
+            using (db = new DataTraCuuVPDataContext())
+            {
+                
+              
+                var sql = (from a in db.Prices where a.Sell == sell select a).ToList();
+                foreach (var item in sql)
+                {
+                    list.Add(new Price
+                    {
+                        IDPrice = item.IDPrice,
+                        Price1 = item.Price1,
+                        Sell = item.Sell
+                        
+                    });
+                }
+                return list;
+            }
+
         }
         //[HttpPut]
         //public IHttpActionResult add_office_follow(JObject data)

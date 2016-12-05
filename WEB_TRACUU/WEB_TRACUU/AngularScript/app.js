@@ -11,6 +11,15 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
         money = money.replace(/,/g, ".");
         return money;
     };
+     $rootScope.format_date = function (date) {
+        var today = new Date(date);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var format = dd + '/' + mm + '/' + yyyy;
+       // console.log(format);
+        return format;
+    };
     // $rootScope.app = "";
     $scope.img1 = "Content/Images/view.jpg";
     $scope.img2 = "Content/Images/banner_ser_vpa.png";
@@ -60,7 +69,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $scope.username = "";
     $scope.password = "";
     $scope.body_width = window.innerWidth;
-    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" };
+    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" ,makh:""};
     var expireDate = new Date();
     expireDate.setMonth(11);
     expireDate.setDate(expireDate.getDate() + 1);
@@ -99,6 +108,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
                     $rootScope.taikhoan.test = 1;
                     $rootScope.taikhoan.username = data._User;
                     $rootScope.taikhoan.tenkh = data._TenKH;
+                    $rootScope.taikhoan.makh = data._MaKH;
                 });
                 swal("Thông báo", "Đăng nhập thành công", "success");
                 //$window.alert("Login success!");
@@ -126,34 +136,47 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', '$cookies', '$http', function ($location, $rootScope, $cookies, $http) {
+app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($location, $rootScope, $cookies, $http, $window) {
     
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.title = current.$$route.title;
     });
-    var routespermision=['/TaiKhoan'];
+    console.log($location.path());
+
+    var str = $cookies.get('user');
+    console.log(str);
+    if (str != null) {
+        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
+            var data = res.data;
+            if (data == null) {
+                $rootScope.taikhoan.test = 0;
+
+            } else {
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+                $rootScope.taikhoan.makh = data._MaKH;
+            }
+
+        });
+    }
+    var routespermision = ['/TaiKhoan'];
+    var routespermision2 = ['/TheoDoi/'];
     $rootScope.$on('$routeChangeStart', function () {
-        console.log($location.path());
-        
-        var str = $cookies.get('user');
-        console.log(str);
-        if (str != null) {
-            $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
-                var data = res.data;
-                if (data == null) {
-                    $rootScope.taikhoan.test = 0;
-
-                } else {
-                    $rootScope.taikhoan.test = 1;
-                    $rootScope.taikhoan.username = data._User;
-                    $rootScope.taikhoan.tenkh = data._TenKH;
-                }
-
-            });
-        }
-        console.log(routespermision.indexOf($location.path()));
+       
+        //console.log(routespermision.indexOf($location.path()));
         if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-            $location.path('/');
+            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+            $window.history.back();
+
+           //$location.path();
+        }
+        if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+            $window.history.back();
+
+           //$location.path();
         }
     });
+    
 }]);

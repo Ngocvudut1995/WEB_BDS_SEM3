@@ -241,6 +241,7 @@
     <Compile Include="Controllers\ChiTietController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TheoDoiController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
@@ -280,6 +281,7 @@
     <Content Include="Content\Images\banner_ser_vpa.png" />
     <Content Include="Content\Images\left-arrow.png" />
     <Content Include="Content\Images\maxresdefault.jpg" />
+    <Content Include="Content\Images\quangcao2.png" />
     <Content Include="Content\Images\right-arrow.png" />
     <Content Include="Content\Images\Slider\slide1.jpg" />
     <Content Include="Content\Images\Slider\slide2.jpg" />
@@ -372,6 +374,7 @@
     <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="Views\Home\chitiet.html" />
     <Content Include="Views\Home\dangki.html" />
+    <Content Include="Views\Home\gioithieu.html" />
     <Content Include="Views\Home\post.html" />
     <Content Include="Views\Home\taikhoan.html" />
     <Content Include="Views\Home\theodoi.html" />

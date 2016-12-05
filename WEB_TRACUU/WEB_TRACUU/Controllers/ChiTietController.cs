@@ -40,8 +40,7 @@ namespace WEB_TRACUU.Controllers
                     _IDLand = sql.IDLand,
                     _Image = sql.Image,
                     _Acreage = sql.Acreage,
-                    _Price = sql.IDPrice,
-
+                    _Price = sql.Price,
                     _Name = sql.Name,
                     _NumberHouse = sql.NumberHouse,
                     _Trousers = sql.Trousers,
@@ -50,11 +49,13 @@ namespace WEB_TRACUU.Controllers
                     _Street = sql.Street,
                     _TypeName = sql.TypeName,
                     _Ward = sql.Ward,
+                    _Decription = sql.Decrition,
+                    _ExpireDate = sql.ExpiredDate,
+                    _IDType = sql.IDType
 
 
                 };
-                var sql_local = (from a in db.Lands where a.IDLand == mavp select new { a.Decrition }).SingleOrDefault();
-                vp._Decription = sql_local.Decrition;
+              
                 var images = (from b in db.Image_Details where b.IDLand == mavp select b).ToList();
                 IList<Image_Slide_VP> list = new List<Image_Slide_VP>();
                 foreach (var item in images)
@@ -68,5 +69,41 @@ namespace WEB_TRACUU.Controllers
             }
            
         }
+       public class BDS
+       {
+           public Guid _IDLand;
+            public string _Name;
+            public string _Image;
+           public bool? _Sell;
+       }
+        public IEnumerable<BDS> get_VP_by_type(int idtype)
+        {
+            IList<BDS> list = new List<BDS>();
+            using (db= new DataTraCuuVPDataContext())
+            {
+                var query = (from a in db.Overview_Lands
+                             where a.IDType == idtype
+                             select new
+                             {
+                                 a.IDLand,
+                                 a.Name,
+                                 a.Image,
+                                 a.Sell
+                             }).Take(3).ToList();
+                foreach (var item in query)
+                {
+                    list.Add(new BDS
+                    {
+                        _IDLand = item.IDLand,
+                        _Image = item.Image,
+                        _Name = item.Name,
+                        _Sell = item.Sell
+                    });
+                }
+                return list;
+            }
+           
+        }
+
     }
 }

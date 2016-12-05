@@ -26,7 +26,7 @@
 
     .slide img {
         width: 100%;
-        height: 100%;
+        /*height: 100%;*/
     }
 
 .arrows_right {
@@ -81,7 +81,7 @@ h1 {
     background-image: -o-linear-gradient(right, #040133 0%, #0a1cf3 100%);
     background-image: -webkit-gradient(linear, left, rigth, from(#040133), to(#0a1cf3));
     background-image: linear-gradient(to right, #040133 0%, #0a1cf3 100%);
-    padding-top: 12px;
+    padding-top: 10px;
 }
 .slide_mini.ng-hide-remove,
 slide_mini.ng-hide-add {

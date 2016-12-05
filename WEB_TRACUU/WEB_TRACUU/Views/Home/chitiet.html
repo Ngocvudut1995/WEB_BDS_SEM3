@@ -5,7 +5,7 @@
 
 
     <slider images="images" miniimages="miniImage" info="info" host="hosts" ng-if="show_slide == 1" />
-    <div style="height: 35px;">
+    <div style="height: 35px;margin-bottom: 20px;">
         <p style="float: left; text-align: center; width:100px; height: 39px; background-color: #646363; color:white; font-weight: bold; padding: 9px; font-size: 15px;">Share:</p>
         <a class="icon_society" target="_blank" href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=ngocvudut1995@gmail.com" onclick="javascript: window.open(this.href, '', 'width=400,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes')"><i class="fa fa-google fa-lg"></i>  GMail</a>
 
@@ -16,113 +16,191 @@
         <a class="icon_society" style="float: right;white-space: nowrap" ng-show="follow == 0" ng-click="change_follow()"><i class="fa fa-heart fa-lg"></i> Quan Tâm</a>
     </div>
 
-    <div style="width: 100%">
-        <div style="width: 75%">
-            <div style="background-color: #eee;">
-                <div style="background-color: #C1C1C1; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Giới thiệu</h3>
-                </div>
-                <div style="background-color: white; padding: 20px; font-size: 13pt">
-                    <p ng-bind-html="info._Decription"></p>
-                    <!--<p>Văn Phòng quận Cầu Giấy tòa nhà Hoàng Ngọc phố Trần Thái Tông. Diện tích cho thuê từ 70m đến 530m, giá thuê 11$/m2/tháng đã bao gồm VAT và phí dịch vụ.</p>
-                    <p>Hoàng Ngọc Tower tọa lạc tại lô C2C ngõ 72 Trần Thái tông với mặt tiền rộng 30m thuộc tuyến 2 phố Duy Tân, cắt giữa phố Trần Thái Tông và đường Phạm Hùng, tuyến đường huyết mạch của cửa ngõ phía Tây Hà Nội, Tòa nhà Hoàng Ngọc sở hữu một góc nhìn cảnh quan tuyệt đẹp hướng ra hai mặt đường.</p>
-                    <p>Được xây dựng trên khu đất có diện tích 1300m2. Tòa nhà Hoàng Ngọc gồm 11 tầng với diện tích 5700m2 gộp, một tầng hầm rộng 530m2, khoảng sân rộng hơn 600m2 cùng hai mặt vỉa hè thông thoáng được bố trí làm bãi đỗ xe thuận tiện.</p>
-                    <p>Hiện tại, Hoàng Ngọc Tower còn trống một số diện tích sàn cho thuê như sau:</p>
-                    <p>
-                        – Tầng 1: Trống 530 m2 (diện tích thuê tối thiểu là 120m2); Giá thuê: 319.5 nghìn/m2/tháng.<br>
-                        – Tầng 3: Trống 141 m2 (diện tích thuê tối thiểu là 71m2); Giá thuê: 213 nghìn/m2/tháng.<br>
-                        – Tầng 9: Trống 354m2 (diện tích thuê tối thiểu là 71m2); Giáthuê: 213 nghìn/m2/tháng.
-                    </p>
-                    <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
-                </div>
-                <div style="background-color: #C1C1C1; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Bổ Sung</h3>
-                </div>
-                <div style="background-color: white; padding: 20px; font-size: 13pt">
-                    <ul class="clearfix" style="display: block; list-style-type: square;">
-                        <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
-                        <li class="col-md-6 col-xs-12">Ngày Hết Hạn: </li>
-                        <li class="col-md-6 col-xs-12">Diện Tích: </li>
-                        <li class="col-md-6 col-xs-12">Giá: </li>
-                        <li class="col-md-6 col-xs-12">Vị Trí: </li>
-                        <li class="col-md-6 col-xs-12">Loại Dự Án: </li>
-                    </ul>
-                </div>
-                <div style="background-color: #C1C1C1; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Các thiết bị có sẵn</h3>
-                </div>
-                <div style="background-color: white; padding: 20px; font-size: 14pt">
-                    <ul class="clearfix" style="display: block; list-style-type: square;">
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/bao-ve/">Bảo Vệ 24/24h</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cho-de-oto/">Chỗ Để Ôtô</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cho-de-xe-may/">Chỗ Để Xe Máy</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cong-to-dien/">Công Tơ Điện Riêng</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dau-cho-dien-thoai/">Đầu Chờ Điện Thoại</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dau-cho-internet/">Đầu Chờ Internet</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dien-3-pha/">Điện 3 Pha</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dieu-hoa-he-thong/">Điều Hòa Hệ Thông</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/he-thong-camera/">Hệ Thống Camera</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/he-thong-pccc/">Hệ Thống PCCC</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/may-phat-dien/">Máy Phát Điện</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/quay-le-tan/">Quầy Lễ Tân</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/san-be-tong/">Sàn Bê Tông</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/tang-ham/">Tầng Hầm</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/thang-may/">Thang Máy</a></li>
-                        <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/tran-thach-cao/">Trần Thạch Cao</a></li>
-                    </ul>
-                </div>
-                <div style="background-color: #C1C1C1; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Bản đồ</h3>
-                </div>
-                <div style="height: 400px; background-color: white">
-                    <div id="map" style="width: 100%; height: 100%"></div>
 
-                </div>
-                <div style="background-color: #C1C1C1; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Các Bất Động Sản Tương Tự</h3>
-                </div>
-                <div style="background-color: white; padding: 20px; font-size: 13pt;height: 278px">
-                    <div class="col-md-4">
-                        <a href="/#" style="color: black">
-                            <div style="position: relative; cursor: pointer">
-                                <img style="width: 100%" src="../../Content/Images/vanphong3.jpg"/>
-                                <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange">Cho Thuê</div>
-                            </div>
-                        </a>
+    <div class="row">
+        <div style="background-color: #eee;" class="col-md-9 col-xs-12">
+            <div style="background-color: #C1C1C1; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Giới thiệu</h3>
+            </div>
+            <div style="background-color: white; padding: 20px; font-size: 13pt">
+                <p ng-bind-html="info._Decription"></p>
+                <!--<p>Văn Phòng quận Cầu Giấy tòa nhà Hoàng Ngọc phố Trần Thái Tông. Diện tích cho thuê từ 70m đến 530m, giá thuê 11$/m2/tháng đã bao gồm VAT và phí dịch vụ.</p>
+                <p>Hoàng Ngọc Tower tọa lạc tại lô C2C ngõ 72 Trần Thái tông với mặt tiền rộng 30m thuộc tuyến 2 phố Duy Tân, cắt giữa phố Trần Thái Tông và đường Phạm Hùng, tuyến đường huyết mạch của cửa ngõ phía Tây Hà Nội, Tòa nhà Hoàng Ngọc sở hữu một góc nhìn cảnh quan tuyệt đẹp hướng ra hai mặt đường.</p>
+                <p>Được xây dựng trên khu đất có diện tích 1300m2. Tòa nhà Hoàng Ngọc gồm 11 tầng với diện tích 5700m2 gộp, một tầng hầm rộng 530m2, khoảng sân rộng hơn 600m2 cùng hai mặt vỉa hè thông thoáng được bố trí làm bãi đỗ xe thuận tiện.</p>
+                <p>Hiện tại, Hoàng Ngọc Tower còn trống một số diện tích sàn cho thuê như sau:</p>
+                <p>
+                    – Tầng 1: Trống 530 m2 (diện tích thuê tối thiểu là 120m2); Giá thuê: 319.5 nghìn/m2/tháng.<br>
+                    – Tầng 3: Trống 141 m2 (diện tích thuê tối thiểu là 71m2); Giá thuê: 213 nghìn/m2/tháng.<br>
+                    – Tầng 9: Trống 354m2 (diện tích thuê tối thiểu là 71m2); Giáthuê: 213 nghìn/m2/tháng.
+                </p>
+                <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
+            </div>
+            <div style="background-color: #C1C1C1; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Bổ Sung</h3>
+            </div>
+            <div style="background-color: white; padding: 20px; font-size: 13pt">
+                <ul class="clearfix" style="display: block; list-style-type: square;">
+                    <li class="col-md-6 col-xs-12">Ngày Đăng Tin: {{ format_date(info._ModifyDate) }}</li>
+                    <li class="col-md-6 col-xs-12">Ngày Hết Hạn: {{ format_date(info._ExpireDate) }}</li>
+                    <li class="col-md-6 col-xs-12">Diện Tích: {{ info._Acreage }}</li>
+                    <li class="col-md-6 col-xs-12">Giá: {{info._Price}}</li>
+                    <li class="col-md-6 col-xs-12">Vị Trí: </li>
+                    <li class="col-md-6 col-xs-12">Loại Dự Án: {{info._TypeName}}</li>
+                </ul>
+            </div>
+            <div style="background-color: #C1C1C1; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Các thiết bị có sẵn</h3>
+            </div>
+            <div style="background-color: white; padding: 20px; font-size: 14pt">
+                <ul class="clearfix" style="display: block; list-style-type: square;">
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/bao-ve/">Bảo Vệ 24/24h</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cho-de-oto/">Chỗ Để Ôtô</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cho-de-xe-may/">Chỗ Để Xe Máy</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cong-to-dien/">Công Tơ Điện Riêng</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dau-cho-dien-thoai/">Đầu Chờ Điện Thoại</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dau-cho-internet/">Đầu Chờ Internet</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dien-3-pha/">Điện 3 Pha</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/dieu-hoa-he-thong/">Điều Hòa Hệ Thông</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/he-thong-camera/">Hệ Thống Camera</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/he-thong-pccc/">Hệ Thống PCCC</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/may-phat-dien/">Máy Phát Điện</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/quay-le-tan/">Quầy Lễ Tân</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/san-be-tong/">Sàn Bê Tông</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/tang-ham/">Tầng Hầm</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/thang-may/">Thang Máy</a></li>
+                    <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/tran-thach-cao/">Trần Thạch Cao</a></li>
+                </ul>
+            </div>
+            <div style="background-color: #C1C1C1; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Bản đồ</h3>
+            </div>
+            <div style="height: 400px; background-color: white">
+                <div id="map" style="width: 100%; height: 100%"></div>
 
-                        <div style="margin-top: 10px">
-                            <a style="font-weight: bold">Cho Thuê Nhà Làm Văn Phòng Cầu Giấy Mặt Đường Lớn</a>
+            </div>
+            <div style="background-color: #C1C1C1; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Các Bất Động Sản Tương Tự</h3>
+            </div>
+            <div style="background-color: white; padding: 20px; font-size: 13pt; height: 278px">
+                <div class="col-md-4" ng-repeat="item in list_BDS_LQ">
+                    <a href="/#" style="color: black">
+                        <div style="position: relative; cursor: pointer">
+                            <img style="width: 100%" src="{{ app }}/{{ item._Image }}" />
+                            <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == true">Cần Bán</div>
+                            <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == false">Cho Thuê</div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="/#" style="color: black">
-                            <div style="position: relative; cursor: pointer">
-                                <img style="width: 100%" src="../../Content/Images/vanphong3.jpg"/>
-                                <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange">Cho Thuê</div>
-                            </div>
-                        </a>
+                    </a>
 
-                        <div style="margin-top: 10px">
-                            <a style="font-weight: bold">Cho Thuê Nhà Làm Văn Phòng Cầu Giấy Mặt Đường Lớn</a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="/#" style="color: black">
-                            <div style="position: relative; cursor: pointer">
-                                <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange">Cho Thuê</div>
-                            </div>
-                        </a>
-
-                        <div style="margin-top: 10px">
-                            <a style="font-weight: bold">Cho Thuê Nhà Làm Văn Phòng Cầu Giấy Mặt Đường Lớn</a>
-                        </div>
+                    <div style="margin-top: 10px">
+                        <a href="#/ChiTiet/{{item._IDLand}}" style="font-weight: bold">{{item._Name}}</a>
                     </div>
                 </div>
 
             </div>
-        </div>
-        <div style="width: 25%"></div>
-    </div>
 
+        </div>
+        <div class="col-md-3 hidden-xs">
+            <img style="width: 100%;" src="../../Content/Images/quangcao2.png" />
+            <div style="background-color: #C1C1C1;">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         float: none; padding: 9px 20px 10px;">
+                    Tìm Kiếm Nhà Đất
+                </h3>
+            </div>
+            <div style="font-size: 13pt">
+                <div class="clearfix list-group" style="display: block; list-style-type: square; background-color: white;">
+                    <div class="col-md-12 col-xs-6 col-sm-4">
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
+                                <option value="0">Tất Cả</option>
+                                <option value="false">Cho Thuê</option>
+                                <option value="true">Cần Bán</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                                <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Phường xã</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
+                                <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                                <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
+                                <option value="0" selected="selected">--- Chọn Đường ---</option>
+                                <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Kieu">
+                                <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="col-md-12 col-xs-6 col-sm-4">
+                            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_DienTich">
+                                <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
+                                <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 ">
+                            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+                            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Gia">
+                                <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
+                                <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12" style="float: left; margin-bottom: 20px;">
+
+                            <input type="button" value="Tìm Kiếm" style="width: 55%; margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
+                            <input type="button" value="Reset" style="width: 34%; margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
+
+                        </div>
+
+                    </div>
+                </div>
+                <div style="background-color: #C1C1C1;">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               float: none; padding: 9px 20px 10px;">
+                        Cho thuê văn phòng trọ gần trường đại học
+                    </h3>
+                </div>
+                <div style="font-size: 13pt">
+                    <div class="clearfix list-group" style="display: block; list-style-type: square;">
+                        <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_top_land">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'cars'">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 </div>

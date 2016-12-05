@@ -1,585 +1,111 @@
-﻿<div class="thu2">
-    <h2>Đăng tin rao bán, cho thuê nhà đất</h2>
-</div>
-<div class="thongtinchitiet">
-    <div class="dangtin2">
-        <div id="dangtin">Thông tin cơ bản</div>
-        @*Hiển Thị Tiêu Đề*@
-        <div class="row_dangtin">
-            <div class="row100">
-                <form class="form-inline">
-                    <div class="dm_dangtin">
-                        <p>Tiêu Đề Đăng (<span class="sao">*</span>)</p>
-                        <div class="nd_dangtin">
-                            <input type="text" class="form-control" placeholder="Nhập Tiêu Đề">
-                        </div>
-                    </div>
-                </form>
-                @*Hiển Thị Hình Thức*@
-                <div class="row_dangtin">
-                    <div class="row100">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Hình Thức (<span class="sao">*</span>)</p>
-                                <div class="R100">
-                                    <select class="form-control" name="Select">
-                                        <option value="">Chọn 1 Loại Tin Rao</option>
-                                        <option value="1">Nhà Đất Bán</option>
-                                        <option value="2">Nhà Cho Thuê</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                @*Hiển Thị Loại BDS*@
-                <div class="row_dangtin">
-                    <div class="row50">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Chọn Loại BDS(<span class="sao">*</span>)</p>
-                                <div class="R100">
-                                    <select class="form-control" name="Select">
-                                        <option value="">Chọn Loại Nhà Đất</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row50">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Vị Trí(<span class="sao">*</span>)</p>
-                                <div class="R100">
-                                    <select class="form-control" name="Select">
-                                        <option value="">Vui Lòng Chọn.....</option>
-                                        <option value="1">Mặt Tiền Đường</option>
-                                        <option value="2">Đường Nội Bộ</option>
-                                        <option value="3">Đường Ngõ Lớn</option>
-                                        <option value="4">Đường Ngõ Nhỏ</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                @*Hiển Thị Địa Chỉ*@
-                <div class="row_dangtin">
-                    <div class="row100">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Địa Chỉ(<span class="sao">*</span>)</p>
-                                <div class="nd_dangtin">
-                                    <div class="row50">
-                                        <input type="text" class="form-control" placeholder="Nhập Địa Chi">
-                                    </div>
-                                    <div class="row50">
-                                        <select class="form-control" name="Select">
-                                            <option value="3">Tp.HCM</option>
-                                            <option value="2">Hà Nội</option>
-                                            <option value="13">Bình Dương</option>
-                                            <option value="4">Hải Phòng</option>
-                                            <option value="5">Đà Nẵng</option>
-                                            <option value="19">Cần Thơ</option>
-                                            <option value="115">Đồng Nai</option>
-                                            <option value="8">Bà Rịa Vũng Tàu</option>
-                                            <option value="125">Khánh Hòa</option>
-                                            <option value="132">Long An</option>
+﻿<div ng-controller="postCtrl">
+    <div class="row" style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <label style="width: 100%;margin-top: 30px">Tiêu đề</label>
+            <input type="text" placeholder="Từ Khóa" style="width: 100%;height: 30px;border-radius: 4px;margin-top: 10px;" ng-model="txtName">
 
-                                            <option value="6">Thừa Thiên Huế</option>
-                                            <option value="7">An Giang</option>
-
-                                            <option value="9">Bạc Liêu</option>
-                                            <option value="10">Bắc Cạn</option>
-                                            <option value="1">Bắc Giang</option>
-                                            <option value="11">Bắc Ninh</option>
-                                            <option value="12">Bắc Giang</option>
-
-                                            <option value="14">Bình Định</option>
-                                            <option value="15">Bình Phước</option>
-                                            <option value="16">Bình Thuận</option>
-                                            <option value="17">Cà Mau</option>
-                                            <option value="18">Cao Bằng</option>
+        </div>
 
 
-                                            <option value="103">Đắk Lắk</option>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Quận Huyện</label>
+            <select style="width: 100%; height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
-                                            <option value="116">Đồng Tháp</option>
-                                            <option value="117">Gia Lai</option>
-                                            <option value="118">Hà  Giang</option>
-                                            <option value="119">Hà Nam</option>
-                                            <option value="121">Hà Tĩnh</option>
-                                            <option value="122">Hải Dương</option>
-                                            <option value="123">Hòa Bình</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Phường xã</label>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
+                <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%; margin-top: 30px">Đường</label>
+            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="load_dientich()">
+                <option value="0" selected="selected">--- Chọn Đường ---</option>
+                <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
 
-                                            <option value="124">Hưng Yên</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Số Nhà</label>
+            <input style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="SoNha" />
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Kieu" ng-change="load_KieuBDS()">
+                <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+            </select>
+        </div>
 
-                                            <option value="126">Kiên Giang</option>
-                                            <option value="127">Kon Tum</option>
-                                            <option value="128">Lai Châu</option>
-                                            <option value="129">Lạng Sơn</option>
-                                            <option value="130">Lào Cai</option>
-                                            <option value="131">Lâm Đồng</option>
 
 
-                                            <option value="133">Nam Định</option>
-                                            <option value="134">Nghệ An</option>
-                                            <option value="135">Ninh Bình</option>
-                                            <option value="136">Ninh Thuận</option>
-                                            <option value="137">Phú Thọ</option>
-                                            <option value="138">Phú Yên</option>
-                                            <option value="139">Quảng Bình</option>
-                                            <option value="140">Quảng Nam</option>
-                                            <option value="141">Quảng Ngãi</option>
 
-                                            <option value="142">Quảng Ninh</option>
-                                            <option value="143">Quảng Trị</option>
-                                            <option value="144">Sóc Trăng</option>
-                                            <option value="145">Sơn La</option>
-                                            <option value="146">Tây Ninh</option>
-                                            <option value="147">Thái Bình</option>
-                                            <option value="148">Thái Nguyên</option>
-                                            <option value="149">Thanh Hóa</option>
-                                            <option value="150">Tiền Giang</option>
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Diện tích</label>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_DienTich" ng-change="load_Gia()">
+                <option value="0" selected="selected">--- Chọn Diện tích ---</option>
 
-                                            <option value="151">Trà Vinh</option>
-                                            <option value="152">Tuyên Quang</option>
-                                            <option value="153">Vĩnh Long</option>
-                                            <option value="154">Vĩnh Phúc</option>
-                                            <option value="155">Yên Bái</option>
-                                            <option value="156">Điện Biên</option>
-                                            <option value="157">Đắk Nông</option>
-                                            <option value="158">Hậu Giang</option>
+                <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
 
-                                        </select>(<span class="sao">*</span>)
-                                    </div>
-                                    <div class="row50">
-                                        <select class="form-control" name="Select">
-                                            <option value="">Chọn Quận/Huyện</option>
-                                        </select>(<span class="sao">*</span>)
-                                    </div>
-                                    <div class="row50">
-                                        <select class="form-control" name="Select">
-                                            <option value="">Chọn Phường/Xã</option>
-                                        </select>(<span class="sao">*</span>)
-                                    </div>
-                                    <div class="row50">
-                                        <select class="form-control" name="Select">
-                                            <option value="">Chọn Đường/Phố</option>
-                                        </select>(<span class="sao">*</span>)
-                                    </div>
-                                    <div class="row50">
-                                        <select class="form-control" name="Select">
-                                            <option value="">Chọn Dự Án</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                @*Hiển Thị Diện Tích*@
-                <div class="row_dangtin">
-                    <div class="row50">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Diện Tích</p>
-                                <div class="nd_dangtin">
-                                    <input type="text" class="form-control" placeholder="Nhập Diện Tích">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="row50">
-                        <form class="form-inline">
-                            <div class="dm_dangtin">
-                                <p>Đơn Vị</p>
-                                <div class="nd_dangtin">
-                                    <div class="R100">
-                                        <select id="" class="form-control" name="Select">
-                                            <option>m2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                @*Hiển Thị Giá*@
-                <div class="row_dangtin">
-                    <div class="row100">
-                        <div class="dm_dangtin">
-                            <p>Giá(<span class="sao">*</span>)</p>
-                        </div>
-                        <div class="nd_dangtin">
-                            <div class="row50">
-                                <input type="text" class="form-control" placeholder="Nhập Giá">
-                            </div>
-                            <div class="row50">
-                                <select class="form-control" name="Select">
-                                    <option value="">--Chọn Đơn Giá--</option>
-                                </select>
-                            </div>
-                            <div class="row50">
-                                Tổng Tiền :
-                                <font color="red"><span id="">Thoản Thuận</span></font>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </select>
+        </div>
+
+        <div class="col-md-6 col-xs-6 col-sm-4">
+            <label style="width: 100%;margin-top: 30px">Giá </label>
+            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Gia" ng-change="load_HinhThuc()">
+                <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
+                <option value="1" selected="selected">20000000</option>
+
+            </select>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            <label style="width: 100%; margin-top: 30px">Hình thức</label>
+            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_HinhThuc" ng-change="load_ThoiHang()">
+                <option value="0" selected="selected">---Chọn hình thức---</option>
+                <option value="1" selected="selected">Cho thuê</option>
+                <option value="2" selected="selected">Bán</option>
+
+            </select>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6">
+            <label style="width: 100%; margin-top: 30px">Thời hạng</label>
+            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Hang">
+                <option value="0" selected="selected">--- Chọn thời hạng ---</option>
+                <option value="1" selected="selected">1 tháng</option>
+                <option value="2" selected="selected">2 tháng</option>
+                <option value="3" selected="selected">3 tháng</option>
+                <option value="4" selected="selected">6 tháng</option>
+                <option value="5" selected="selected">12 tháng</option>
+
+            </select>
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
+            <img ng-src="{{image_source}}" style="height: 50px; width: 50px;margin-top: 10px">
+            <input type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" style="margin-top: 10px" accept="image/*">
+
+
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <label style="width: 100%;margin-top: 30px">Mô Tả</label>
+            <textarea style="width: 100%;height: 200px;border-radius: 4px;margin-top: 10px;" ng-model="Mota"></textarea>
+        </div>
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="col-md-6 col-xs-6 col-sm-6">
+                <input type="submit" value="Đăng tin" style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="postBai()" />
+
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6">
+                <input type="button" value="Hủy bỏ" style="width: 20%; margin-top: 30px; text-align: center" ng-click="huy()" />
+
             </div>
         </div>
-    </div>
-    @*Thông Tin Chi Tiết*@
-    <div class="tt_chitiet">
-        <div class="dangtin2">
-            <div id="dangtin">Thông tin chi tiết</div>
-        </div>
-        <div class="dangtin2">
-            <div class="row_dangtin">
-                <div class="row100">
-                    <div class="dm_dangtin">
-                        Giới Thiệu Tóm Tắt (<span class="sao">*</span>)
-                    </div>
-                    <div class="nd_dangtin">
-                        <form class="form-inline">
-                            <div class="R100">
-                                <textarea name="text" class="form-control" id="" cols="20" rows="2" style="margin: 0px; width: 621px; height: 226px;"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row_dangtin">
-                <div class="row100">
-                    <div class="dm_dangtin">Chọn ảnh đăng tin (Tối đa 12 ảnh size < 2Mb)</div>
-                    <div class="nd_dangtin">
-                        <div class="row100">
-                            <div style="width: 200px; height: 18px; border: solid 1px #7FAAFF; background-color: #C5D9FF; padding: 2px;">
-                                <object id="" type="application" class="upload" data="" width="200" height="18">
-                                    <param name="anh" value="anh" />
 
 
-
-                                </object>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*Thông Tin Khác*@
-    <div class="tt_chitiet">
-        <div class="dangtin2">
-            <div id="dangtin">Thông tin khác</div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Tình trạng pháp lý</p>
-                            <div class="nd_dangtin">
-                                <div class="R100">
-                                    <select id="" class="form-control" name="Select">
-                                        <option value="">Vui lòng chọn...</option>
-                                        <option value="0">Không xác định</option>
-                                        <option value="1">Sổ hồng</option>
-                                        <option value="2">Giấy đỏ</option>
-                                        <option value="3">Giấy tay</option>
-                                        <option value="4">Đang hợp thức hóa</option>
-                                        <option value="5">Giấy tờ hợp lệ</option>
-                                        <option value="6">Chủ quyền tư nhân</option>
-                                        <option value="7">Hợp đồng</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Đường vào(Đơn vị m)</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Đơn Vị">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Chọn Hướng Nhà</p>
-                            <div class="nd_dangtin">
-                                <div class="R100">
-                                    <select id="" class="form-control" name="Select">
-                                        <option value="1">Không xác định</option>
-                                        <option value="2">Đông</option>
-                                        <option value="3">Tây</option>
-                                        <option value="4">Nam</option>
-                                        <option value="5">Bắc</option>
-                                        <option value="6">Đông Bắc</option>
-                                        <option value="7">Tây Bắc</option>
-                                        <option value="8">Tây Nam</option>
-                                        <option value="9">Đông Nam</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Số Tầng</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Số Tầng Lầu">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Số Phòng</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Số Phòng">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Số toilet</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Toilet">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*Thông Tin Liên Hệ*@
-    <div class="tt_chitiet">
-        <div class="dangtin2">
-            <div id="dangtin">Thông Liên Hệ</div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p> Họ Và Tên (<span class="sao">*</span>)</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Họ Và Tên">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Địa Chỉ</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Địa Chỉ">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Điện Thoại</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Số Điện Thoại">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Di Động (<span class="sao">*</span>)</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="VD : 090...,012...,">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Email</p>
-                            <div class="nd_dangtin">
-                                <input type="text" class="form-control" placeholder="Nhập Email">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    @*Thông Tin Bản Đồ*@
-    <div class="tt_chitiet">
-        <div class="dangtin2">
-            <div id="dangtin">Bản Đồ</div>
-        </div>
-    </div>
-
-    @*Thông Tin Xác Thực*@
-    <div class="tt_chitiet">
-        <div class="dangtin2">
-            <div id="dangtin">Xác Thực Thông Tin</div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <form class="form-inline">
-                        <div class="dm_dangtin">
-                            <p>Mã Xác Nhận (<span class="sao">*</span>)</p>
-                        </div>
-                        <div class="nd_dangtin">
-                            <div class="R100">
-                                <input id="" type="text" class="form-control" name="txtsecode" placeholder="">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="row50">
-                    <div class="dm_dangtin"></div>
-                    <div class="nd_dangtin">
-                        <div class="R100">
-                            @*Cap Cha o day*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row_dangtin">
-                <div class="row50">
-                    <input id="" type="submit" value="Đăng Tin" />
-                </div>
-                <div class="row50">
-                    <input id="" type="button" value="Hủy Bỏ" />
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-
-<style>
-    .thu2 {
-        background: #5EAB1F;
-        color: #FFF;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 13px;
-        padding: 7px 20px;
-        margin-bottom: 5px;
-    }
-
-    #dangtin {
-        font-size: 17px;
-        color: #0090E8;
-        padding-bottom: 5px;
-        border-bottom: 1px solid #DFDFDF;
-        margin-bottom: 10px;
-    }
-
-    .thongtinchitiet {
-        overflow: hidden;
-        border-radius: 4px;
-        border: 1px solid #dbdbdb;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .sao {
-        color: red;
-    }
-
-    .tieude {
-        width: 100%;
-        float: left;
-        margin-bottom: 10px;
-    }
-
-    .dangtin2 {
-        padding: 10px;
-        overflow: hidden;
-    }
-
-    .nd_dangtin {
-    }
-
-    .row_dangtin {
-        width: 100%;
-        float: left;
-    }
-
-    .R100 {
-        width: 100%;
-        float: left;
-        margin-bottom: 10px;
-    }
-
-    .row50 {
-        margin-bottom: 10px;
-        width: 50%;
-        float: left;
-    }
-
-    .row100 {
-        margin-bottom: 10px;
-        width: 100%;
-        float: left;
-    }
-
-    .dm_dangtin {
-        min-height: 21px;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .R50 {
-        width: 100%;
-        float: left;
-        margin-bottom: 10px;
-    }
-
-    .R100 textarea {
-        width: 700px;
-        border-radius: 4px;
-        height: 210px;
-    }
-
-    .upload {
-        vertical-align: top;
-    }
-
-    .row_dangtin:last-child .row50:first-child input[type="submit"] {
-        float: right;
-        margin-right: 10px;
-    }
-
-    .row50 input[type="button"], .row50 input[type="submit"] {
-        height: 29px;
-        border: 1px solid #161616;
-        border-radius: 4px;
-        text-transform: uppercase;
-        color: #fff;
-        width: 137px;
-        background-color: black;
-    }
-
-    .row_dangtin:last-child .row50 input[type="button"] {
-        height: 29px;
-        border: 1px solid #161616;
-        border-radius: 4px;
-        text-transform: uppercase;
-        color: #fff;
-        width: 137px;
-        background-color: black;
-    }
-</style>

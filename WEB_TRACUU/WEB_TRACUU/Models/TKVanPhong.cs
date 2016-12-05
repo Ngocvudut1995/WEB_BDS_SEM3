@@ -8,10 +8,10 @@ namespace WEB_TRACUU.Models
 {
     public class TKVanPhong
     {
-        DataTraCuuVPDataContext db = new DataTraCuuVPDataContext();
+        private DataTraCuuVPDataContext db;
         public Guid _MaVP { get; set; }
         public string _TenVp { get; set; }
-        public System.Nullable<decimal> _Gia { get; set; }
+
         public string _Dientich { get; set; }
         public int _MaDT { get; set; }
         public string _Mota { get; set; }
@@ -24,7 +24,13 @@ namespace WEB_TRACUU.Models
         public int _MaQuan { get; set; }
         public string _TenQuan { get; set; }
         public int _MaPL { get; set; }
-        
+        public System.Nullable<System.DateTime> _ModifyDate;
+
+        public System.Nullable<System.DateTime> _CreateDate;
+        public System.Nullable<System.DateTime> _ExpiredDate;
+        public System.Nullable<int> _IDPrice;
+        public string _Gia;
+        public System.Nullable<bool> _Sell;
         public TKVanPhong()
         {
 
@@ -34,30 +40,39 @@ namespace WEB_TRACUU.Models
         public List<TKVanPhong> getALL()
         {
             List<TKVanPhong> list = new List<TKVanPhong>();
-            var vp = (from a in db.Overview_Lands
-                      select a).ToList();
-            foreach (var item in vp)
+            using (db = new DataTraCuuVPDataContext())
             {
-                list.Add(new TKVanPhong
+                var vp = (from a in db.Overview_Lands
+                          select a).ToList();
+                foreach (var item in vp)
                 {
-                    _MaVP = item.IDLand,
-                    _Anh = item.Image,
-                    _MaDT = item.IDAcreage,
-                    _Dientich = item.Acreage,
-                    _Gia = item.IDPrice,
-                    _Mota = item.Decrition,
-                    _TenVp = item.Name,
-                    _SoNha = item.NumberHouse,
-                    _MaQuan = (int)item.IDTrousers,
-                    _TenQuan = item.Trousers,
-                    _MaPL = (int)item.IDType,
-                    _Duong = item.Street,
-                    _Phuong = item.Ward,
-                    _MaPhuong = item.IDWard,
-                    _MaDuong = item.IDStreet,
-                });
+                    list.Add(new TKVanPhong
+                    {
+                        _MaVP = item.IDLand,
+                        _Anh = item.Image,
+                        _MaDT = item.IDAcreage,
+                        _Dientich = item.Acreage,
+                        _IDPrice = item.IDPrice,
+                        _Mota = item.Decrition,
+                        _TenVp = item.Name,
+                        _SoNha = item.NumberHouse,
+                        _MaQuan = (int)item.IDTrousers,
+                        _TenQuan = item.Trousers,
+                        _MaPL = (int)item.IDType,
+                        _Duong = item.Street,
+                        _Phuong = item.Ward,
+                        _MaPhuong = item.IDWard,
+                        _MaDuong = item.IDStreet,
+                        _CreateDate = item.CreateDate,
+                        _ModifyDate = item.ModifyDate,
+                        _Sell = item.Sell,
+                        _ExpiredDate = item.ExpiredDate,
+                        _Gia = item.Price
+                    });
+                }
+                return list;
             }
-            return list;
-    }
+
         }
+    }
 }

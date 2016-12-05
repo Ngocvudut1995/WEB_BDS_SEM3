@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,18 +13,24 @@ namespace WEB_TRACUU.Models
         public string _Name { get; set; }
 
         public string _Image { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.Nullable<System.DateTime> _CreateDate { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.Nullable<System.DateTime> _ModifyDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public System.Nullable<System.DateTime> _ExpireDate { get; set; }
 
-        public System.Nullable<decimal> _Price { get; set; }
+        public string _Price { get; set; }
 
         public string _Decription { get; set; }
 
         public string _Acreage { get; set; }
 
         public string _TypeName { get; set; }
+        public int _IDType { get; set; }
 
         public string _Street { get; set; }
 

@@ -60,7 +60,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $scope.username = "";
     $scope.password = "";
     $scope.body_width = window.innerWidth;
-    $rootScope.taikhoan = { test: 0, makh:"",username: "" };
+    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" ,makh:""};
     var expireDate = new Date();
     expireDate.setMonth(11);
     expireDate.setDate(expireDate.getDate() + 1);
@@ -69,11 +69,17 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     var str = $cookies.get('user');
     console.log(str);
     if (str != null) {
-        $http.get(host + "api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
+        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
             var data = res.data;
-            $rootScope.taikhoan.test = 1;
-            $rootScope.taikhoan.username = data._User;
-            $rootScope.taikhoan.makh = data._MaKH;
+            if (data == null) {
+                $rootScope.taikhoan.test = 0;
+
+            } else {
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+            }
+
         });
     }
     $rootScope.dangky = function () {
@@ -82,16 +88,17 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     // Kiem tra qua tring dang nhap
     $scope.ktdangnhap = function () {
  
-        var url = host + "api/DangNhap/KT_DangNhap/?user=" + $scope.username + "&pass=" + $scope.password;
+        var url = host + "/api/DangNhap/KT_DangNhap/?user=" + $scope.username + "&pass=" + $scope.password;
         $http.get(url).then(function (response) {
             var test = response.data;
             if (test != null) {
                 
                 $cookies.put('user', test);
-                $http.get(host + "api/DangNhap/ThongTinKH/?makh="+test).then(function (res) {
+                $http.get(host + "/api/DangNhap/ThongTinKH/?makh="+test).then(function (res) {
                     var data = res.data;
                     $rootScope.taikhoan.test = 1;
                     $rootScope.taikhoan.username = data._User;
+                    $rootScope.taikhoan.tenkh = data._TenKH;
                     $rootScope.taikhoan.makh = data._MaKH;
                 });
                 swal("Thông báo", "Đăng nhập thành công", "success");
@@ -120,9 +127,43 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', function ($location, $rootScope) {
-
+app.run(['$location', '$rootScope', '$cookies', '$http', function ($location, $rootScope, $cookies, $http) {
+    
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         $rootScope.title = current.$$route.title;
     });
+    console.log($location.path());
+
+    var str = $cookies.get('user');
+    console.log(str);
+    if (str != null) {
+        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
+            var data = res.data;
+            if (data == null) {
+                $rootScope.taikhoan.test = 0;
+
+            } else {
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+                $rootScope.taikhoan.makh = data._MaKH;
+            }
+
+        });
+    }
+    var routespermision = ['/TaiKhoan'];
+    var routespermision2 = ['/TheoDoi/'];
+    $rootScope.$on('$routeChangeStart', function () {
+       
+        //console.log(routespermision.indexOf($location.path()));
+        if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+            $location.path('/');
+        }
+        if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+            $location.path('/');
+        }
+    });
+    
 }]);

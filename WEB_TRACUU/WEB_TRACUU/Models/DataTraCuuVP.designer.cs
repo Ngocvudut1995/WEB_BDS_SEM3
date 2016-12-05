@@ -51,12 +51,12 @@ namespace WEB_TRACUU.Models
     partial void InsertStreet(Street instance);
     partial void UpdateStreet(Street instance);
     partial void DeleteStreet(Street instance);
-    partial void InsertType_Land(Type_Land instance);
-    partial void UpdateType_Land(Type_Land instance);
-    partial void DeleteType_Land(Type_Land instance);
     partial void InsertTrouser(Trouser instance);
     partial void UpdateTrouser(Trouser instance);
     partial void DeleteTrouser(Trouser instance);
+    partial void InsertType_Land(Type_Land instance);
+    partial void UpdateType_Land(Type_Land instance);
+    partial void DeleteType_Land(Type_Land instance);
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
@@ -161,14 +161,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Type_Land> Type_Lands
-		{
-			get
-			{
-				return this.GetTable<Type_Land>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Trouser> Trousers
 		{
 			get
@@ -190,6 +182,14 @@ namespace WEB_TRACUU.Models
 			get
 			{
 				return this.GetTable<Overview_Land>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Type_Land> Type_Lands
+		{
+			get
+			{
+				return this.GetTable<Type_Land>();
 			}
 		}
 	}
@@ -1108,6 +1108,10 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<int> _IDPrice;
 		
+		private System.Nullable<bool> _Sell;
+		
+		private System.Nullable<System.DateTime> _ExpiredDate;
+		
 		private EntityRef<Acreage> _Acreage;
 		
 		private EntityRef<Address> _Address;
@@ -1146,6 +1150,10 @@ namespace WEB_TRACUU.Models
     partial void OnFlag_ApprovalChanged();
     partial void OnIDPriceChanging(System.Nullable<int> value);
     partial void OnIDPriceChanged();
+    partial void OnSellChanging(System.Nullable<bool> value);
+    partial void OnSellChanged();
+    partial void OnExpiredDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExpiredDateChanged();
     #endregion
 		
 		public Land()
@@ -1433,6 +1441,46 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this.OnSellChanging(value);
+					this.SendPropertyChanging();
+					this._Sell = value;
+					this.SendPropertyChanged("Sell");
+					this.OnSellChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ExpiredDate
+		{
+			get
+			{
+				return this._ExpiredDate;
+			}
+			set
+			{
+				if ((this._ExpiredDate != value))
+				{
+					this.OnExpiredDateChanging(value);
+					this.SendPropertyChanging();
+					this._ExpiredDate = value;
+					this.SendPropertyChanged("ExpiredDate");
+					this.OnExpiredDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Acreage_Land", Storage="_Acreage", ThisKey="IDAcreage", OtherKey="IDAcreage", IsForeignKey=true)]
 		public Acreage Acreage
 		{
@@ -1600,6 +1648,8 @@ namespace WEB_TRACUU.Models
 		
 		private string _Price1;
 		
+		private System.Nullable<bool> _Sell;
+		
 		private EntitySet<Land> _Lands;
 		
     #region Extensibility Method Definitions
@@ -1610,6 +1660,8 @@ namespace WEB_TRACUU.Models
     partial void OnIDPriceChanged();
     partial void OnPrice1Changing(string value);
     partial void OnPrice1Changed();
+    partial void OnSellChanging(System.Nullable<bool> value);
+    partial void OnSellChanged();
     #endregion
 		
 		public Price()
@@ -1618,7 +1670,7 @@ namespace WEB_TRACUU.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int IDPrice
 		{
 			get
@@ -1654,6 +1706,26 @@ namespace WEB_TRACUU.Models
 					this._Price1 = value;
 					this.SendPropertyChanged("Price1");
 					this.OnPrice1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this.OnSellChanging(value);
+					this.SendPropertyChanging();
+					this._Sell = value;
+					this.SendPropertyChanged("Sell");
+					this.OnSellChanged();
 				}
 			}
 		}
@@ -1880,120 +1952,6 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Street = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Type_Land")]
-	public partial class Type_Land : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDType;
-		
-		private string _TypeName;
-		
-		private EntitySet<Land> _Lands;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDTypeChanging(int value);
-    partial void OnIDTypeChanged();
-    partial void OnTypeNameChanging(string value);
-    partial void OnTypeNameChanged();
-    #endregion
-		
-		public Type_Land()
-		{
-			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDType
-		{
-			get
-			{
-				return this._IDType;
-			}
-			set
-			{
-				if ((this._IDType != value))
-				{
-					this.OnIDTypeChanging(value);
-					this.SendPropertyChanging();
-					this._IDType = value;
-					this.SendPropertyChanged("IDType");
-					this.OnIDTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TypeName
-		{
-			get
-			{
-				return this._TypeName;
-			}
-			set
-			{
-				if ((this._TypeName != value))
-				{
-					this.OnTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._TypeName = value;
-					this.SendPropertyChanged("TypeName");
-					this.OnTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Lands", ThisKey="IDType", OtherKey="IDType")]
-		public EntitySet<Land> Lands
-		{
-			get
-			{
-				return this._Lands;
-			}
-			set
-			{
-				this._Lands.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Type_Land = this;
-		}
-		
-		private void detach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Type_Land = null;
 		}
 	}
 	
@@ -2324,6 +2282,14 @@ namespace WEB_TRACUU.Models
 		
 		private string _Decrition;
 		
+		private System.Guid _Expr1;
+		
+		private System.Nullable<System.DateTime> _ExpiredDate;
+		
+		private System.Nullable<bool> _Sell;
+		
+		private string _Price;
+		
 		public Overview_Land()
 		{
 		}
@@ -2630,6 +2596,208 @@ namespace WEB_TRACUU.Models
 					this._Decrition = value;
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Expr1", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid Expr1
+		{
+			get
+			{
+				return this._Expr1;
+			}
+			set
+			{
+				if ((this._Expr1 != value))
+				{
+					this._Expr1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ExpiredDate
+		{
+			get
+			{
+				return this._ExpiredDate;
+			}
+			set
+			{
+				if ((this._ExpiredDate != value))
+				{
+					this._ExpiredDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this._Sell = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="NVarChar(50)")]
+		public string Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Type_Land")]
+	public partial class Type_Land : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDType;
+		
+		private string _TypeName;
+		
+		private System.Nullable<bool> _Sell;
+		
+		private EntitySet<Land> _Lands;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDTypeChanging(int value);
+    partial void OnIDTypeChanged();
+    partial void OnTypeNameChanging(string value);
+    partial void OnTypeNameChanged();
+    partial void OnSellChanging(System.Nullable<bool> value);
+    partial void OnSellChanged();
+    #endregion
+		
+		public Type_Land()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDType
+		{
+			get
+			{
+				return this._IDType;
+			}
+			set
+			{
+				if ((this._IDType != value))
+				{
+					this.OnIDTypeChanging(value);
+					this.SendPropertyChanging();
+					this._IDType = value;
+					this.SendPropertyChanged("IDType");
+					this.OnIDTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TypeName
+		{
+			get
+			{
+				return this._TypeName;
+			}
+			set
+			{
+				if ((this._TypeName != value))
+				{
+					this.OnTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._TypeName = value;
+					this.SendPropertyChanged("TypeName");
+					this.OnTypeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this.OnSellChanging(value);
+					this.SendPropertyChanging();
+					this._Sell = value;
+					this.SendPropertyChanged("Sell");
+					this.OnSellChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Lands", ThisKey="IDType", OtherKey="IDType")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Type_Land = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Type_Land = null;
 		}
 	}
 }

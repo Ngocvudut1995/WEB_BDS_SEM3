@@ -18,9 +18,9 @@ namespace WEB_TRACUU.Controllers
             var result = new FilePathResult("../Views/Home/timkiem.html", "text/html");
             return result;
         }
-        public ActionResult TrangChinh()
+        public ActionResult GioiThieu()
         {
-            var result = new FilePathResult("../Views/Home/trangchinh.html", "text/html");
+            var result = new FilePathResult("../Views/Home/gioithieu.html", "text/html");
             return result;
         }
         public ActionResult TheoDoi()

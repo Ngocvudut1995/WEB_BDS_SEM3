@@ -32,7 +32,7 @@
 }
 
 .tab_menu {
-    background-color:#1b1b1b;
+    /*background-color:#1b1b1b;*/
 }
 
     .tab_menu > a:hover .tab_menu > a:focus {

@@ -28,6 +28,7 @@
 </head>
 <script>
     var host = "http://" + document.location.hostname + ":" + window.location.port;
+    //var host = "http://" + document.location.hostname + "/VanPhong" ;
     console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.5);">
@@ -88,70 +89,70 @@
 
         <div class="khung_den" ng-show="show_dn == 1">
             <div class="col-lg-4"></div>
-                <div class="col-lg-4 col-xs-12 dangnhap">
-                    <div class="col-md-12" style="margin: auto">
-                        <h3 style="font-family: Arial;font-size: 40px; color:blue;margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
-                        <form class="form-horizontal" role="form">
+            <div class="col-lg-4 col-xs-12 dangnhap">
+                <div class="col-md-12" style="margin: auto">
+                    <h3 style="font-family: Arial;font-size: 40px; color:blue;margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
+                    <form class="form-horizontal" role="form">
 
-                            <div class="form-group">
-                                <label>User:</label>
-                                <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username">
-                            </div>
-                            <div class="form-group">
-                                <label>Password:</label>
-                                <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
-                            </div>
+                        <div class="form-group">
+                            <label>User:</label>
+                            <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
+                        </div>
 
-                            <div style="text-align: center">
-                                <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
-                                <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
-                            </div>
+                        <div style="text-align: center">
+                            <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
+                            <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
+                        </div>
 
-                        </form>
-                        <br><br>
-                    </div>
+                    </form>
+                    <br><br>
                 </div>
+            </div>
 
             @*<div class="col-md-4 col-xs-4 col-sm-4"></div>
-            <div class="col-md-4 col-xs-4 col-sm-4 dangnhap" id="all">
+                <div class="col-md-4 col-xs-4 col-sm-4 dangnhap" id="all">
 
-                <form class="form-horizontal" ng-app="myApp" ng-controller="dangkiCtr" name="myForm" novalidate>
-                    <div style="font-family: Arial;font-size: 40px; align: center; color:blue;margin: 20px 10px 20px 10px;" align="center"><b>Đăng nhập</b></div>
+                    <form class="form-horizontal" ng-app="myApp" ng-controller="dangkiCtr" name="myForm" novalidate>
+                        <div style="font-family: Arial;font-size: 40px; align: center; color:blue;margin: 20px 10px 20px 10px;" align="center"><b>Đăng nhập</b></div>
 
-                    <div class="form-group">
-                        <!--<label class="control-label col-sm-2" for="pwd">Register Name<span style="color: red">(*)</span>:</label>-->
-                        <div class="col-md-12 col-xs-12 col-sm-12">
-                            <input type="text" ng-model="reName" name="reName" class="form-control" placeholder="Nhập tên đăng kí" required>
-                            <span style="color:red" ng-show="myForm.reName.$touched && myForm.reName.$invalid">
-                                <span ng-show="myForm.reName.$error.required">Register name is required.</span>
-                            </span>
+                        <div class="form-group">
+                            <!--<label class="control-label col-sm-2" for="pwd">Register Name<span style="color: red">(*)</span>:</label>-->
+                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                <input type="text" ng-model="reName" name="reName" class="form-control" placeholder="Nhập tên đăng kí" required>
+                                <span style="color:red" ng-show="myForm.reName.$touched && myForm.reName.$invalid">
+                                    <span ng-show="myForm.reName.$error.required">Register name is required.</span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <!--<label class="control-label col-sm-2" for="pwd">Password<span style="color: red">(*)</span>:</label>-->
-                        <div class="col-md-12 col-xs-12 col-sm-12">
-                            <input type="password" ng-model="password" name="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" required>
-                            <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid">
-                                <span ng-show="myForm.password.$error.required">Password is required.</span>
-                            </span>
+                        <div class="form-group">
+                            <!--<label class="control-label col-sm-2" for="pwd">Password<span style="color: red">(*)</span>:</label>-->
+                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                <input type="password" ng-model="password" name="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" required>
+                                <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid">
+                                    <span ng-show="myForm.password.$error.required">Password is required.</span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox">Nhớ tài khoản</label>
-                    </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox">Nhớ tài khoản</label>
+                        </div>
 
-                    <div style="text-align: center; padding: 5px 15px">
-                        <input type="submit" value="Đăng nhập" id="but">
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-4 col-xs-4 col-sm-4"></div>*@
+                        <div style="text-align: center; padding: 5px 15px">
+                            <input type="submit" value="Đăng nhập" id="but">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 col-xs-4 col-sm-4"></div>*@
 
         </div>
         <div style="z-index: 19; position: fixed;width: 100%;">
             <ul class="nav row" style="background-color: #5f5d5d">
                 @*rgb(20, 2, 119)*@
-                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu" style="width: 10%">
+                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg" style="width: 10%">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-th-list"></span>
 
@@ -167,11 +168,37 @@
                         <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
                     </ul>
                 </li>
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 45%"><a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">Tìm Kiếm</a></li>
+                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 0}]" style="width: 20%;background-color: rgb(47, 46, 46)">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
+                </li>
+                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 20%">
+                    <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
+                </li>
+                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 4}]" style="width: 20%">
+                    <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
+                </li>
+                @*<li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-xs " style="width: 20%" ng-class="[{active:tab_index == 4}]">
+                    <a class="dropdown-toggle" data-toggle="dropdown" ng-click="change_tab(4)">
+                        <span class="glyphicon glyphicon-search"></span> Giới Thiệu
 
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]" style="width: 45%"><a href="#/TheoDoi/{{ taikhoan.username }}" ng-click="change_tab(2)" style="white-space: nowrap;">Đã Theo Dõi</a></li>
-                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 45%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
-                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2" style="width: 45%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 133%">
+
+                        <li><a href="#/PostBai">Cho Thuê</a></li>
+                        <li><a href="#/TimKiem">Cần Bán</a></li>
+                    </ul>
+                </li>*@
+                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]" style="width: 20%">
+                    <a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(2)" style="white-space: nowrap;"><span class="glyphicon glyphicon-heart"></span> Quan Tâm</a>
+                </li>
+                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 3}]" style="width: 20%">
+                    <a href="#/TaiKhoan/" ng-click="change_tab(3)" style="white-space: nowrap;"><span class="glyphicon glyphicon-user"></span> Tài Khoản</a>
+                </li>
+                
+
+
+                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 20%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
+                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2" style="width: 20%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>
 
             </ul>
         </div>
