@@ -6,21 +6,61 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
     $rootScope.show_dn = 0;
     $rootScope.show_form_contact = 0;
     $rootScope.app = host;
-    $rootScope.MaKH = 'KH10001';
+    //$rootScope.MaKH = 'KH10001';
     $rootScope.change_money = function (money) {
         money = money.replace(/,/g, ".");
         return money;
     };
+    $rootScope.change_html = function (string) {
+        var html = string.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        return html;
+    };
+    $rootScope.change_text_from_html = function (html) {
+        var text = html.replace(/<br\s*[\/]?>/g, "\n");
+        return text;
+    };
+  
+     $rootScope.format_date = function (date) {
+        var today = new Date(date);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var format = dd + '/' + mm + '/' + yyyy;
+       // console.log(format);
+        return format;
+     };
+     $rootScope.format_date_picker = function (date) {
+         var today = new Date(date);
+         var dd = today.getDate();
+         var mm = today.getMonth() + 1;
+         var yyyy = today.getFullYear();
+         if (dd < '10') {
+             dd = '0' + dd;
+         }
+         if (mm < '10') {
+             mm = '0' + mm;
+         }
+         var format = yyyy + '-' + mm + '-' + dd;
+         
+         // console.log(format);
+         return format;
+     };
     // $rootScope.app = "";
     $scope.img1 = "Content/Images/view.jpg";
     $scope.img2 = "Content/Images/banner_ser_vpa.png";
     $rootScope.dangnhap = function () {
         $rootScope.show_dn = 1;
     };
-
-    var email = 'ngocvudut1995@gmail.com';
-    $rootScope.send_gmail = function () {
+    
+    //var email = 'ngocvudut1995@gmail.com';
+    $rootScope.send_gmail = function (email) {
         window.open('https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to='+email, '', 'width=400,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+    }
+    $rootScope.share_gmail = function (id) {
+        window.open('https://plus.google.com/share?url={'+host+'/#/ChiTiet/'+id+'}', '', 'width=400,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+    }
+    $rootScope.share_face = function (id) {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + host + '/#/ChiTiet/' + id, '', 'width=400,height=400,menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
     }
     $rootScope.close_contact = function () {
         $rootScope.show_form_contact = 0;
@@ -60,28 +100,34 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $scope.username = "";
     $scope.password = "";
     $scope.body_width = window.innerWidth;
-    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" ,makh:""};
-    var expireDate = new Date();
-    expireDate.setMonth(11);
-    expireDate.setDate(expireDate.getDate() + 1);
+    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" ,makh:"",admin:false};
+    //var expireDate = new Date();
+    //expireDate.setMonth(11);
+    //expireDate.setDate(expireDate.getDate() + 1);
+    $rootScope.open_dangbai = function () {
+        $location.path('/TaiKhoan/dangbai/');
+    };
     //$cookies.put('technology', 'Web', { 'expires': expireDate });
     // Kiem tra co cookies luu tai khoan hay khong
-    var str = $cookies.get('user');
-    console.log(str);
-    if (str != null) {
-        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
-            var data = res.data;
-            if (data == null) {
-                $rootScope.taikhoan.test = 0;
+    //var str = $cookies.get('user');
+    //console.log(str);
+    //if (str != null) {
+    //    $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
+    //        var data = res.data;
+    //        if (data == null) {
+    //            $rootScope.taikhoan.test = 0;
 
-            } else {
-                $rootScope.taikhoan.test = 1;
-                $rootScope.taikhoan.username = data._User;
-                $rootScope.taikhoan.tenkh = data._TenKH;
-            }
+    //        } else {
+    //            $rootScope.taikhoan.test = 1;
+    //            $rootScope.taikhoan.username = data._User;
+    //            $rootScope.taikhoan.tenkh = data._TenKH;
+    //            $rootScope.taikhoan.makh = data._MaKH;
+    //            $rootScope.taikhoan.admin = data._Admin;
+    //        }
 
-        });
-    }
+    //    });
+    //    console.log($rootScope.taikhoan);
+    //}
     $rootScope.dangky = function () {
         $location.path('/DangKy');
     };
@@ -90,17 +136,16 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
  
         var url = host + "/api/DangNhap/KT_DangNhap/?user=" + $scope.username + "&pass=" + $scope.password;
         $http.get(url).then(function (response) {
-            var test = response.data;
-            if (test != null) {
+            var data = response.data;
+            if (data != null) {
                 
-                $cookies.put('user', test);
-                $http.get(host + "/api/DangNhap/ThongTinKH/?makh="+test).then(function (res) {
-                    var data = res.data;
-                    $rootScope.taikhoan.test = 1;
-                    $rootScope.taikhoan.username = data._User;
-                    $rootScope.taikhoan.tenkh = data._TenKH;
-                    $rootScope.taikhoan.makh = data._MaKH;
-                });
+                $cookies.put('user', data._MaKH);
+                //var data = res.data;
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+                $rootScope.taikhoan.makh = data._MaKH;
+                $rootScope.taikhoan.admin = data._Admin;
                 swal("Thông báo", "Đăng nhập thành công", "success");
                 //$window.alert("Login success!");
                 $rootScope.show_dn = 0;
@@ -117,9 +162,72 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     };
     $rootScope.dang_xuat = function () {
         //$rootScope.taikhoan.test = 0;
-        $rootScope.taikhoan = { test: 0, makh: '', username: '' };
+        $rootScope.taikhoan = { test: 0, tenkh: "", username: "", makh: "", admin: false };
         $cookies.remove('user');
         $location.path('/TimKiem');
+    };
+    $rootScope.add_office_follow = function (mavp) {
+       
+        var data = JSON.stringify({ "_mavp": mavp, "_makh": $rootScope.taikhoan.makh });
+        $http.put(host + "/api/TimKiem/add_office_follow/", data).then(function (response) {
+            swal({
+                title: "Thông Báo",
+                text: "Bạn Đã Thêm BDS Vào Danh Sách Quan Tâm",
+                type: 'success',
+                //showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                //cancelButtonColor: '#d33',
+                confirmButtonText: 'OK!',
+                //cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                //cancelButtonClass: 'btn btn-danger',
+                //buttonsStyling: false
+            }).then(function () {
+                // window.open(host + '/#/TimKiem', '_self', '');
+            }
+                 );
+        }, function (res) {
+            swal("Thông báo", "Server unavailable", "error");
+        });
+    };
+    $rootScope.test_follow = function (makh, mavp) {
+        var test = false;
+        var url = host + "/api/TimKiem/test_follow/?makh=" + makh + "&mavp=" + mavp;
+        $http.get(url).then(function(response) {
+            var data = response.data;
+            test = data;
+            
+            console.log(test);
+            //return test;
+        });
+        return test;
+        //console.log(test);
+        //return test;
+
+    };
+    $rootScope.remove_office_follow = function (mavp) {
+      
+        var data = JSON.stringify({ "_mavp": mavp, "_makh": $rootScope.taikhoan.makh });
+        $http.put(host + "/api/TimKiem/remove_office_follow/", data).then(function (response) {
+            swal({
+                title: "Thông Báo",
+                text: "Bạn Đã Xóa BDS Khỏi Danh Sách Quan Tâm",
+                type: 'success',
+                //showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                //cancelButtonColor: '#d33',
+                confirmButtonText: 'OK!',
+                //cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                //cancelButtonClass: 'btn btn-danger',
+                //buttonsStyling: false
+            }).then(function () {
+                // window.open(host + '/#/TimKiem', '_self', '');
+            }
+                 );
+        }, function (res) {
+            swal("Thông báo", "Server unavailable", "error");
+        });
     };
   
 }]);
@@ -127,43 +235,97 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', '$cookies', '$http', function ($location, $rootScope, $cookies, $http) {
-    
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-        $rootScope.title = current.$$route.title;
-    });
-    console.log($location.path());
-
-    var str = $cookies.get('user');
-    console.log(str);
-    if (str != null) {
-        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
-            var data = res.data;
-            if (data == null) {
-                $rootScope.taikhoan.test = 0;
-
-            } else {
-                $rootScope.taikhoan.test = 1;
-                $rootScope.taikhoan.username = data._User;
-                $rootScope.taikhoan.tenkh = data._TenKH;
-                $rootScope.taikhoan.makh = data._MaKH;
-            }
-
-        });
-    }
-    var routespermision = ['/TaiKhoan'];
+app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($location, $rootScope, $cookies, $http, $window) {
+     var routespermision = ['/TaiKhoan', '/TaiKhoan/dangbai'];
+    var routespermision3 = ['/TaiKhoan/ql_tracuu', '/TaiKhoan/ql_khachhang', '/TaiKhoan/ql_baidang'];
     var routespermision2 = ['/TheoDoi/'];
-    $rootScope.$on('$routeChangeStart', function () {
+
+    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
        
-        //console.log(routespermision.indexOf($location.path()));
-        if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
-            $location.path('/');
+        $rootScope.title = current.$$route.title;
+        $rootScope.scrolltotop();
+    });
+    //console.log($location.path());
+
+    //var str = $cookies.get('user');
+    //console.log(str);
+    
+   
+    $rootScope.$on('$routeChangeStart', function () {
+        
+        var str = $cookies.get('user');
+        console.log(str);
+        if (str != null) {
+            $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
+                var data = res.data;
+                if (data == null) {
+                    $rootScope.taikhoan.test = 0;
+                    $rootScope.taikhoan.admin = false;
+                } else {
+                    $rootScope.taikhoan.test = 1;
+                    $rootScope.taikhoan.username = data._User;
+                    $rootScope.taikhoan.tenkh = data._TenKH;
+                    $rootScope.taikhoan.makh = data._MaKH;
+                    $rootScope.taikhoan.admin = data._Admin;
+                }
+                console.log($rootScope.taikhoan);
+                if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                    swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                    $window.history.back();
+
+                    //$location.path();
+                }
+                if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin == false) {
+                    swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
+                    // $window.history.back();
+
+                    $location.path('#/TimKiem');
+                }
+                if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                    swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                    // $window.history.back();
+
+                    $location.path();
+                }
+            });
+            //console.log($rootScope.taikhoan);
+        } else {
+            if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                $window.history.back();
+
+                //$location.path();
+            }
+            if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin == false) {
+                swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
+                // $window.history.back();
+
+                $location.path('#/TimKiem');
+            }
+            if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                // $window.history.back();
+
+                $location.path();
+            }
         }
-        if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-            swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
-            $location.path('/');
-        }
+       // console.log($rootScope.taikhoan);
+        //console.log($location.path());
+       
+       
     });
     
 }]);
+app.directive('ngFiles', ['$parse', function ($parse) {
+
+    function fn_link(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, { $files: event.target.files });
+        });
+    };
+
+    return {
+        link: fn_link
+    }
+} ])

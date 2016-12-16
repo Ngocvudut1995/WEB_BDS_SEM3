@@ -1,18 +1,18 @@
 ﻿<div ng-controller="timkiemCtrl">
-<!--<p>{{ht}}</p>-->
-<div class="row" style="margin-bottom: 20px">
-    <div class="col-md-3"></div>
-    <div class="col-md-6" style="background-color: #eeeeee;text-align: left;border-radius: 6px">
-       
+    <!--<p>{{ht}}</p>-->
+    <div class="row" style="margin-bottom: 20px">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" style="background-color: #eeeeee;text-align: left;border-radius: 6px">
+
             <!--<label style="width: 100%;margin-top: 30px">Từ Khóa</label>-->
             <input type="text" placeholder="Từ Khóa" style="width: 88%;height: 44px;border-radius: 4px;margin: 10px" ng-model="query">
             <button style="font-size: 18pt;"><span class="glyphicon glyphicon-search" ng-click="search_query()"></span></button>
+        </div>
+        <div class="col-md-3"></div>
     </div>
-    <div class="col-md-3"></div>
-</div>
-    
+
     <div class="row" style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
-       
+
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
             <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
@@ -38,7 +38,7 @@
                 <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
             </select>
         </div>
-        
+
         <div class="col-md-3 col-xs-6 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
             <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
@@ -74,92 +74,14 @@
                 <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
             </select>
         </div>
-        <!--<div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Từ Khóa</label>
-            <input type="text" placeholder="Tất cả" style="width: 100%; height: 30px" ng-model="query">
-
-        </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Thành Phố</label>
-            <select style="width: 100%; height: 30px">
-                <option>Tất cả</option>
-                <option>Đà Nẵng</option>
-
-            </select>
-        </div>
-
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
-            <select style="width: 100%; height: 30px" ng-model="select_Quan">
-                <option value="0">Tất Cả</option>
-                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
-
-            </select>
-        </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Hình Thức</label>
-            <select style="width: 100%; height: 30px" ng-model="select_HT">
-                <option value="0" selected="selected">Tất cả</option>
-                <option ng-repeat="item in list_HT" value="{{ item.IDType }}">{{ item.TypeName }}</option>
-            </select>
-        </div>
-
-
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Danh Mục</label>
-            <select style="width: 100%; height: 30px" ng-model="select_DanhMuc">
-                <option value="0" selected="selected">Tất cả</option>
-                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
-
-            </select>
-        </div>
-
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Giá (Min)</label>
-            <select style="width: 100%; height: 30px">
-                <option>0 tr</option>
-                <option>5 tr</option>
-                <option>10 tr</option>
-                <option>15 tr</option>
-                <option>20 tr</option>
-
-            </select>
-        </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Giá (Max)</label>
-            <select style="width: 100%; height: 30px">
-                <option>50 tr</option>
-                <option>100 tr</option>
-                <option>150 tr</option>
-                <option>200 tr</option>
-                <option>500 tr</option>
-            </select>
-        </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Diện Tích (Min)</label>
-            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
-                <input type="text" placeholder="Giá trị Min" style="width: 100%; height: 30px" ng-model="S_min">
-            </div>
-            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
-                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
-            </div>
-
-
-        </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Diện Tích (Max)</label>
-            <div class="col-md-10 col-xs-8" style="padding-left: 0px; padding-right: 0px;">
-                <input type="text" placeholder="Giá Trị Max" style="width: 100%; height: 30px" ng-model="S_max">
-            </div>
-            <div class="col-md-2 col-xs-4" style="padding-left: 3px">
-                <label>m<span style="font-size: 8pt; position: absolute;">2</span></label>
-            </div>
-
-        </div>-->
         <div class="col-md-3 col-xs-6 col-sm-4" style="float: left">
 
-            <input type="button" value="Tìm Kiếm" style="width: 60%; margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
-            <input type="button" value="Reset" style="width: 34%; margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
+            <button style="margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
+                <span class="glyphicon glyphicon-search"></span> <span class="hidden-xs">Tìm Kiếm</span>
+            </button>
+            <button style="margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
+                <span class="glyphicon glyphicon-repeat"></span>
+            </button>
 
         </div>
 
@@ -168,17 +90,17 @@
 
 
     <div class="row" style="">
-        <div class="col-md-9" style="position: relative;padding-bottom: 40px;">
+        <div class="col-md-9 row" style="position: relative;padding-bottom: 40px;">
             <div class="" style="float: right; margin: 10px">
                 <label>Sort By:</label>
                 <select style="width: 100%; height: 32px; border-radius: 4px" ng-model="select_sort" ng-change="change_sort()">
-                    <option value="0">Default Order</option>
-                    <option value="1">Date New to Old</option>
-                    <option value="2">Date Old to New</option>
-                    <option value="3">Acreage High to Low</option>
-                    <option value="4">Acreage Low to High</option>
-                    <option value="5">Price High to Low</option>
-                    <option value="6">Price Low to High</option>
+                    <option value="0">Mặc Định</option>
+                    <option value="1">Thời Gian Mới Nhất</option>
+                    <option value="2">Thời Gian Cũ Nhất</option>
+                    <option value="3">Diện Tích Lớn Nhất</option>
+                    <option value="4">Diện Tích Bé Nhất</option>
+                    <option value="5">Giá Cao Nhất</option>
+                    <option value="6">Giá Thấp Nhất</option>
 
                 </select>
             </div>
@@ -186,90 +108,79 @@
                 <div class="col-md-12 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%" ng-repeat="item in pagedItems[currentPage]">
 
                     <div class="col-md-12 col-sm-12 col-xs-12" style="border: #999393 solid 2px; background-color: white; padding: 0px 0px">
-                        <div>
-                            <div class="col-md-4 col-sm-6 col-xs-12" style="height: 70%; padding-left: 0px; padding-right: 0px; position: relative">
-                                <img src="{{ app }}/{{ item._Anh }}" style="width: 100%; height: 100%">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-12" style="height: 70%; padding-left: 0px; padding-right: 0px; position: relative;height: 178px">
+                                <a href="#/ChiTiet/{{ item._MaVP }}"><img src="{{ app }}/{{ item._Anh }}" style="width: 100%;height: 100%"></a>
                                 <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == true">Cần Bán</div>
                                 <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == false">Cho Thuê</div>
                             </div>
-                            <div class="col-md-8 col-sm-6 col-xs-12" style="height: 70%; padding: 1px 0px 0px 10px;">
+                            <div class="col-md-8 col-sm-8 col-xs-12" style="padding: 1px 0px 0px 10px;">
                                 <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: #0b3dab">
-                                    <p style="font-size: 18pt; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%; overflow: hidden; text-overflow: ellipsis;" class="hidden-sm hidden-xs">{{ item._TenVp }}</p>
+                                    <p style="font-size: 18pt; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%; overflow: hidden; text-overflow: ellipsis;line-height: 24px;">{{ item._TenVp }}</p>
                                 </a>
-                                <h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>
-                                <p style="margin-bottom: 0px; margin-top: -4px;">
+                                <!--<h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>-->
+                                <p style="margin-bottom: -10px; margin-top: -15px;white-space: nowrap;max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
                                     <b>Cập Nhật:</b> {{ format_date(item._ModifyDate) }}
                                 </p>
-                                <p style="margin-bottom: 0px; margin-top: -4px;">
+                                <p style="margin-bottom: -10px; margin-top: -4px;white-space: nowrap;max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
                                     <b>Diện Tích:</b> {{ item._Dientich }}
                                 </p>
-                                <p style="margin-bottom: 0px; margin-top: -4px;">
+                                <p style="margin-bottom: -10px; margin-top: -4px;white-space: nowrap;max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
                                     <b>Giá:</b> {{ item._Gia }} triệu/tháng
                                 </p>
-                                <p style="margin-bottom: 0px; margin-top: -4px; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
+                                <p style="margin-bottom: -10px; margin-top: -4px; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
                                     <b>Địc Chỉ:</b> {{ item._SoNha }} {{ item._Duong }}, Quận {{ item._TenQuan }}, Phường {{ item._Phuong }}, TP Đà Nẵng
                                 </p>
-
+                                <p style="line-height: 23px;margin-bottom: 0px; margin-top: 4px;
+  display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;">
+                                    <b>Mô Tả:</b> Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng. Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng.
+                                </p>
 
                                 <!--<a href="#/ChiTiet/{{ item._MaVP }}" style="float: right" ng-click="scrolltotop()">Tìm Hiểu Thêm</a>-->
                             </div>
                         </div>
-                        <div style="float: right; margin: 5px; overflow: hidden; -webkit-line-clamp: 2;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   -webkit-box-orient: vertical;">
-                            <p>
-                                <b>Mô Tả:</b> Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng. Cuối tháng 9 vừa qua, dự án Gemek Tower của chủ đầu tư tập đoàn Geleximco và Mekongland đã đi vào quá trình bàn giao căn hộ cho khách hàng.
-                            </p>
-                        </div>
 
-                        <div style="background-color: rgba(115, 115, 116, 0.26); border-top: #999393 solid 2px; color: white; width: 100%; height: 15%; text-align: center; padding: 10px auto; float: right;">
 
-                            <!--<label style="float: left; margin-top: 5px">Quan Tâm</label>-->
-                            <a style="float: left; margin: 10px; color: black; font-size: 15pt;"><i class="fa fa-heart"></i> Quan Tâm</a>
-                            <a href="#/ChiTiet/{{ item._MaVP }}" style="float: right; margin: 10px; color: black; font-size: 15pt;"><i class="fa fa-eye"></i> Chi Tiết</a>
-                        </div>
+                        <!--<div style="background-color: rgba(115, 115, 116, 0.26); border-top: #999393 solid 2px; color: white; width: 100%; height: 15%; text-align: center; padding: 10px auto; float: right;">
+
+                            
+                            <a style="float: left; margin: 10px; margin-top: 5px; color: black; font-size: 12pt;"ng-show="1"><i class="fa fa-heart" style="color: red"></i> Đã Quan Tâm</a>
+                            <a style="float: left; margin: 10px; margin-top: 5px;color: black; font-size: 12pt;"ng-hide ="1"><i class="fa fa-heart" ></i> Quan Tâm</a>
+                            <a href="#/ChiTiet/{{ item._MaVP }}" style="float: right; margin: 10px; margin-top: 5px; color: black; font-size: 12pt;"><i class="fa fa-eye"></i> Chi Tiết</a>
+                        </div>-->
                     </div>
-                    
+
                 </div>
-               
+
             </div>
-            
-            <div style="text-align: center; position: absolute;bottom: -35px;right: 38%;">
-                <ul class="pagination">
-                    <li ng-class="{disabled: currentPage == 0}" ng-hide="currentPage == 0">
-                        <a href ng-click="prevPage()">« Prev</a>
-                    </li>
-                    <li ng-repeat="n in range(currentPage-2,currentPage+3) "
-                        ng-class="{active: n == currentPage}"
-                        ng-click="setPage()">
-                        <a href ng-bind="n+1">1</a>
-                    </li>
-                    <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="currentPage == pagedItems.length - 1">
-                        <a href ng-click="nextPage()">Next »</a>
-                    </li>
-                </ul>
-            </div>
+
+         
             <div ng-if="filteredItems.length == 0">
                 <h3>No result</h3>
             </div>
-          
-            
-        </div>
-        <div class="col-md-3" style="padding: 0px">
 
-            <img style="margin-top: 120px;width: 100%;" src="../../Content/Images/quangcao2.png"/>
+
+        </div>
+        <div class="col-md-3 hidden-sm hidden-xs" style="padding: 0px">
+
+            <img style="margin-top: 120px;width: 100%;" src="{{ app }}/Content/Images/quangcao2.png" />
             <div style="background-color: #C1C1C1;">
-                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; 
-float: none; padding: 9px 20px 10px;">Các Dự Án Nhiều Giao Dịch</h3>
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
+float: none; padding: 9px 20px 10px;">
+                    Các Dự Án Nhiều Giao Dịch
+                </h3>
             </div>
             <div style="font-size: 13pt">
                 <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                    <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_top_land">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'cars'">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Bán căn hộ chung cư The Văn Phú Victoria </a>
                     <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    
+                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+
                     <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
                 </div>
             </div>
@@ -281,13 +192,13 @@ float: none; padding: 9px 20px 10px;">
             </div>
             <div style="font-size: 13pt">
                 <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                    <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_top_land">Đại Học Bách Khoa Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'cars'">Đại Học Bách Khoa Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Đại Học Bách Khoa Đà Nẵng  </a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Đại Học Bách Khoa Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Đại Học Bách Khoa Đà Nẵng </a>
                     <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
-                  
+                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng  </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+
                     <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
                 </div>
             </div>
@@ -316,16 +227,30 @@ float: none; padding: 9px 20px 10px;">
             <div class="col-md-1 col-sm-1 hidden-xs">
             </div>
         </div>-->
-     
+
 
 
 
     </div>
 
-    
+    <div style="text-align: center;bottom: -35px;right: 38%;">
+        <ul class="pagination">
+            <li ng-class="{disabled: currentPage == 0}" ng-hide="currentPage == 0">
+                <a href ng-click="prevPage()">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(currentPage-2,currentPage+3) "
+                ng-class="{active: n == currentPage}"
+                ng-click="setPage()">
+                <a href ng-bind="n+1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="currentPage == pagedItems.length - 1">
+                <a href ng-click="nextPage()">Next »</a>
+            </li>
+        </ul>
+    </div>
 
 
-    
+
 
 
 </div>

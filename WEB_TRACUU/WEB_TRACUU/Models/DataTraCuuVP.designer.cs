@@ -39,9 +39,6 @@ namespace WEB_TRACUU.Models
     partial void InsertAddress(Address instance);
     partial void UpdateAddress(Address instance);
     partial void DeleteAddress(Address instance);
-    partial void InsertCustomer(Customer instance);
-    partial void UpdateCustomer(Customer instance);
-    partial void DeleteCustomer(Customer instance);
     partial void InsertLand(Land instance);
     partial void UpdateLand(Land instance);
     partial void DeleteLand(Land instance);
@@ -51,12 +48,21 @@ namespace WEB_TRACUU.Models
     partial void InsertStreet(Street instance);
     partial void UpdateStreet(Street instance);
     partial void DeleteStreet(Street instance);
-    partial void InsertTrouser(Trouser instance);
-    partial void UpdateTrouser(Trouser instance);
-    partial void DeleteTrouser(Trouser instance);
     partial void InsertType_Land(Type_Land instance);
     partial void UpdateType_Land(Type_Land instance);
     partial void DeleteType_Land(Type_Land instance);
+    partial void InsertTrouser(Trouser instance);
+    partial void UpdateTrouser(Trouser instance);
+    partial void DeleteTrouser(Trouser instance);
+    partial void InsertFollow(Follow instance);
+    partial void UpdateFollow(Follow instance);
+    partial void DeleteFollow(Follow instance);
+    partial void InsertCustomer(Customer instance);
+    partial void UpdateCustomer(Customer instance);
+    partial void DeleteCustomer(Customer instance);
+    partial void InsertImage_Detail(Image_Detail instance);
+    partial void UpdateImage_Detail(Image_Detail instance);
+    partial void DeleteImage_Detail(Image_Detail instance);
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
@@ -113,30 +119,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Customer> Customers
-		{
-			get
-			{
-				return this.GetTable<Customer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Follow> Follows
-		{
-			get
-			{
-				return this.GetTable<Follow>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Image_Detail> Image_Details
-		{
-			get
-			{
-				return this.GetTable<Image_Detail>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Land> Lands
 		{
 			get
@@ -158,6 +140,14 @@ namespace WEB_TRACUU.Models
 			get
 			{
 				return this.GetTable<Street>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Type_Land> Type_Lands
+		{
+			get
+			{
+				return this.GetTable<Type_Land>();
 			}
 		}
 		
@@ -185,11 +175,27 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Type_Land> Type_Lands
+		public System.Data.Linq.Table<Follow> Follows
 		{
 			get
 			{
-				return this.GetTable<Type_Land>();
+				return this.GetTable<Follow>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Image_Detail> Image_Details
+		{
+			get
+			{
+				return this.GetTable<Image_Detail>();
 			}
 		}
 	}
@@ -666,416 +672,6 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
-	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _IDCustomer;
-		
-		private string _CustomerName;
-		
-		private string _Organization;
-		
-		private string _Address;
-		
-		private string _PhoneNumber;
-		
-		private string _Email;
-		
-		private string _CMND;
-		
-		private string _Username;
-		
-		private string _Pass;
-		
-		private System.Nullable<bool> _Flag_Active;
-		
-		private System.Nullable<bool> _Admin;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDCustomerChanging(System.Guid value);
-    partial void OnIDCustomerChanged();
-    partial void OnCustomerNameChanging(string value);
-    partial void OnCustomerNameChanged();
-    partial void OnOrganizationChanging(string value);
-    partial void OnOrganizationChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnCMNDChanging(string value);
-    partial void OnCMNDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPassChanging(string value);
-    partial void OnPassChanged();
-    partial void OnFlag_ActiveChanging(System.Nullable<bool> value);
-    partial void OnFlag_ActiveChanged();
-    partial void OnAdminChanging(System.Nullable<bool> value);
-    partial void OnAdminChanged();
-    #endregion
-		
-		public Customer()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid IDCustomer
-		{
-			get
-			{
-				return this._IDCustomer;
-			}
-			set
-			{
-				if ((this._IDCustomer != value))
-				{
-					this.OnIDCustomerChanging(value);
-					this.SendPropertyChanging();
-					this._IDCustomer = value;
-					this.SendPropertyChanged("IDCustomer");
-					this.OnIDCustomerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30)")]
-		public string CustomerName
-		{
-			get
-			{
-				return this._CustomerName;
-			}
-			set
-			{
-				if ((this._CustomerName != value))
-				{
-					this.OnCustomerNameChanging(value);
-					this.SendPropertyChanging();
-					this._CustomerName = value;
-					this.SendPropertyChanged("CustomerName");
-					this.OnCustomerNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Organization", DbType="NVarChar(30)")]
-		public string Organization
-		{
-			get
-			{
-				return this._Organization;
-			}
-			set
-			{
-				if ((this._Organization != value))
-				{
-					this.OnOrganizationChanging(value);
-					this.SendPropertyChanging();
-					this._Organization = value;
-					this.SendPropertyChanged("Organization");
-					this.OnOrganizationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15)")]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CMND", DbType="VarChar(15)")]
-		public string CMND
-		{
-			get
-			{
-				return this._CMND;
-			}
-			set
-			{
-				if ((this._CMND != value))
-				{
-					this.OnCMNDChanging(value);
-					this.SendPropertyChanging();
-					this._CMND = value;
-					this.SendPropertyChanged("CMND");
-					this.OnCMNDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50)")]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pass", DbType="VarChar(50)")]
-		public string Pass
-		{
-			get
-			{
-				return this._Pass;
-			}
-			set
-			{
-				if ((this._Pass != value))
-				{
-					this.OnPassChanging(value);
-					this.SendPropertyChanging();
-					this._Pass = value;
-					this.SendPropertyChanged("Pass");
-					this.OnPassChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Active", DbType="Bit")]
-		public System.Nullable<bool> Flag_Active
-		{
-			get
-			{
-				return this._Flag_Active;
-			}
-			set
-			{
-				if ((this._Flag_Active != value))
-				{
-					this.OnFlag_ActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Flag_Active = value;
-					this.SendPropertyChanged("Flag_Active");
-					this.OnFlag_ActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Admin", DbType="Bit")]
-		public System.Nullable<bool> Admin
-		{
-			get
-			{
-				return this._Admin;
-			}
-			set
-			{
-				if ((this._Admin != value))
-				{
-					this.OnAdminChanging(value);
-					this.SendPropertyChanging();
-					this._Admin = value;
-					this.SendPropertyChanged("Admin");
-					this.OnAdminChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Follow")]
-	public partial class Follow
-	{
-		
-		private System.Guid _IDLand;
-		
-		private System.Guid _IDCustomer;
-		
-		public Follow()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid IDLand
-		{
-			get
-			{
-				return this._IDLand;
-			}
-			set
-			{
-				if ((this._IDLand != value))
-				{
-					this._IDLand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid IDCustomer
-		{
-			get
-			{
-				return this._IDCustomer;
-			}
-			set
-			{
-				if ((this._IDCustomer != value))
-				{
-					this._IDCustomer = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Image_Detail")]
-	public partial class Image_Detail
-	{
-		
-		private System.Nullable<System.Guid> _IDLand;
-		
-		private string _Image_detail1;
-		
-		private string _Title;
-		
-		public Image_Detail()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> IDLand
-		{
-			get
-			{
-				return this._IDLand;
-			}
-			set
-			{
-				if ((this._IDLand != value))
-				{
-					this._IDLand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Image_detail", Storage="_Image_detail1", DbType="VarChar(MAX)")]
-		public string Image_detail1
-		{
-			get
-			{
-				return this._Image_detail1;
-			}
-			set
-			{
-				if ((this._Image_detail1 != value))
-				{
-					this._Image_detail1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(100)")]
-		public string Title
-		{
-			get
-			{
-				return this._Title;
-			}
-			set
-			{
-				if ((this._Title != value))
-				{
-					this._Title = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Land")]
 	public partial class Land : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1111,6 +707,14 @@ namespace WEB_TRACUU.Models
 		private System.Nullable<bool> _Sell;
 		
 		private System.Nullable<System.DateTime> _ExpiredDate;
+		
+		private System.Nullable<decimal> _Price_detail;
+		
+		private int _IDPost;
+		
+		private EntitySet<Follow> _Follows;
+		
+		private EntitySet<Image_Detail> _Image_Details;
 		
 		private EntityRef<Acreage> _Acreage;
 		
@@ -1154,10 +758,16 @@ namespace WEB_TRACUU.Models
     partial void OnSellChanged();
     partial void OnExpiredDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExpiredDateChanged();
+    partial void OnPrice_detailChanging(System.Nullable<decimal> value);
+    partial void OnPrice_detailChanged();
+    partial void OnIDPostChanging(int value);
+    partial void OnIDPostChanged();
     #endregion
 		
 		public Land()
 		{
+			this._Follows = new EntitySet<Follow>(new Action<Follow>(this.attach_Follows), new Action<Follow>(this.detach_Follows));
+			this._Image_Details = new EntitySet<Image_Detail>(new Action<Image_Detail>(this.attach_Image_Details), new Action<Image_Detail>(this.detach_Image_Details));
 			this._Acreage = default(EntityRef<Acreage>);
 			this._Address = default(EntityRef<Address>);
 			this._Price = default(EntityRef<Price>);
@@ -1481,6 +1091,72 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price_detail", DbType="Money")]
+		public System.Nullable<decimal> Price_detail
+		{
+			get
+			{
+				return this._Price_detail;
+			}
+			set
+			{
+				if ((this._Price_detail != value))
+				{
+					this.OnPrice_detailChanging(value);
+					this.SendPropertyChanging();
+					this._Price_detail = value;
+					this.SendPropertyChanged("Price_detail");
+					this.OnPrice_detailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPost", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int IDPost
+		{
+			get
+			{
+				return this._IDPost;
+			}
+			set
+			{
+				if ((this._IDPost != value))
+				{
+					this.OnIDPostChanging(value);
+					this.SendPropertyChanging();
+					this._IDPost = value;
+					this.SendPropertyChanged("IDPost");
+					this.OnIDPostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Follow", Storage="_Follows", ThisKey="IDLand", OtherKey="IDLand")]
+		public EntitySet<Follow> Follows
+		{
+			get
+			{
+				return this._Follows;
+			}
+			set
+			{
+				this._Follows.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Image_Detail", Storage="_Image_Details", ThisKey="IDLand", OtherKey="IDLand")]
+		public EntitySet<Image_Detail> Image_Details
+		{
+			get
+			{
+				return this._Image_Details;
+			}
+			set
+			{
+				this._Image_Details.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Acreage_Land", Storage="_Acreage", ThisKey="IDAcreage", OtherKey="IDAcreage", IsForeignKey=true)]
 		public Acreage Acreage
 		{
@@ -1635,6 +1311,30 @@ namespace WEB_TRACUU.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Follows(Follow entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = this;
+		}
+		
+		private void detach_Follows(Follow entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = null;
+		}
+		
+		private void attach_Image_Details(Image_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = this;
+		}
+		
+		private void detach_Image_Details(Image_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = null;
 		}
 	}
 	
@@ -1952,6 +1652,144 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Street = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Type_Land")]
+	public partial class Type_Land : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDType;
+		
+		private string _TypeName;
+		
+		private System.Nullable<bool> _Sell;
+		
+		private EntitySet<Land> _Lands;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDTypeChanging(int value);
+    partial void OnIDTypeChanged();
+    partial void OnTypeNameChanging(string value);
+    partial void OnTypeNameChanged();
+    partial void OnSellChanging(System.Nullable<bool> value);
+    partial void OnSellChanged();
+    #endregion
+		
+		public Type_Land()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDType
+		{
+			get
+			{
+				return this._IDType;
+			}
+			set
+			{
+				if ((this._IDType != value))
+				{
+					this.OnIDTypeChanging(value);
+					this.SendPropertyChanging();
+					this._IDType = value;
+					this.SendPropertyChanged("IDType");
+					this.OnIDTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TypeName
+		{
+			get
+			{
+				return this._TypeName;
+			}
+			set
+			{
+				if ((this._TypeName != value))
+				{
+					this.OnTypeNameChanging(value);
+					this.SendPropertyChanging();
+					this._TypeName = value;
+					this.SendPropertyChanged("TypeName");
+					this.OnTypeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this.OnSellChanging(value);
+					this.SendPropertyChanging();
+					this._Sell = value;
+					this.SendPropertyChanged("Sell");
+					this.OnSellChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Lands", ThisKey="IDType", OtherKey="IDType")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Type_Land = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Type_Land = null;
 		}
 	}
 	
@@ -2282,13 +2120,13 @@ namespace WEB_TRACUU.Models
 		
 		private string _Decrition;
 		
-		private System.Guid _Expr1;
-		
 		private System.Nullable<System.DateTime> _ExpiredDate;
 		
 		private System.Nullable<bool> _Sell;
 		
 		private string _Price;
+		
+		private System.Nullable<decimal> _Price_detail;
 		
 		public Overview_Land()
 		{
@@ -2598,22 +2436,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Expr1", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid Expr1
-		{
-			get
-			{
-				return this._Expr1;
-			}
-			set
-			{
-				if ((this._Expr1 != value))
-				{
-					this._Expr1 = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiredDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> ExpiredDate
 		{
@@ -2661,110 +2483,534 @@ namespace WEB_TRACUU.Models
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price_detail", DbType="Money")]
+		public System.Nullable<decimal> Price_detail
+		{
+			get
+			{
+				return this._Price_detail;
+			}
+			set
+			{
+				if ((this._Price_detail != value))
+				{
+					this._Price_detail = value;
+				}
+			}
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Type_Land")]
-	public partial class Type_Land : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Follow")]
+	public partial class Follow : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _IDType;
+		private System.Guid _IDLand;
 		
-		private string _TypeName;
+		private System.Guid _IDCustomer;
 		
-		private System.Nullable<bool> _Sell;
+		private EntityRef<Land> _Land;
 		
-		private EntitySet<Land> _Lands;
+		private EntityRef<Customer> _Customer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDTypeChanging(int value);
-    partial void OnIDTypeChanged();
-    partial void OnTypeNameChanging(string value);
-    partial void OnTypeNameChanged();
-    partial void OnSellChanging(System.Nullable<bool> value);
-    partial void OnSellChanged();
+    partial void OnIDLandChanging(System.Guid value);
+    partial void OnIDLandChanged();
+    partial void OnIDCustomerChanging(System.Guid value);
+    partial void OnIDCustomerChanged();
     #endregion
 		
-		public Type_Land()
+		public Follow()
 		{
-			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			this._Land = default(EntityRef<Land>);
+			this._Customer = default(EntityRef<Customer>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDLand
 		{
 			get
 			{
-				return this._IDType;
+				return this._IDLand;
 			}
 			set
 			{
-				if ((this._IDType != value))
+				if ((this._IDLand != value))
 				{
-					this.OnIDTypeChanging(value);
+					if (this._Land.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDLandChanging(value);
 					this.SendPropertyChanging();
-					this._IDType = value;
-					this.SendPropertyChanged("IDType");
-					this.OnIDTypeChanged();
+					this._IDLand = value;
+					this.SendPropertyChanged("IDLand");
+					this.OnIDLandChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TypeName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDCustomer
 		{
 			get
 			{
-				return this._TypeName;
+				return this._IDCustomer;
 			}
 			set
 			{
-				if ((this._TypeName != value))
+				if ((this._IDCustomer != value))
 				{
-					this.OnTypeNameChanging(value);
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDCustomerChanging(value);
 					this.SendPropertyChanging();
-					this._TypeName = value;
-					this.SendPropertyChanged("TypeName");
-					this.OnTypeNameChanged();
+					this._IDCustomer = value;
+					this.SendPropertyChanged("IDCustomer");
+					this.OnIDCustomerChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
-		public System.Nullable<bool> Sell
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Follow", Storage="_Land", ThisKey="IDLand", OtherKey="IDLand", IsForeignKey=true)]
+		public Land Land
 		{
 			get
 			{
-				return this._Sell;
+				return this._Land.Entity;
 			}
 			set
 			{
-				if ((this._Sell != value))
+				Land previousValue = this._Land.Entity;
+				if (((previousValue != value) 
+							|| (this._Land.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnSellChanging(value);
 					this.SendPropertyChanging();
-					this._Sell = value;
-					this.SendPropertyChanged("Sell");
-					this.OnSellChanged();
+					if ((previousValue != null))
+					{
+						this._Land.Entity = null;
+						previousValue.Follows.Remove(this);
+					}
+					this._Land.Entity = value;
+					if ((value != null))
+					{
+						value.Follows.Add(this);
+						this._IDLand = value.IDLand;
+					}
+					else
+					{
+						this._IDLand = default(System.Guid);
+					}
+					this.SendPropertyChanged("Land");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Lands", ThisKey="IDType", OtherKey="IDType")]
-		public EntitySet<Land> Lands
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Follow", Storage="_Customer", ThisKey="IDCustomer", OtherKey="IDCustomer", IsForeignKey=true)]
+		public Customer Customer
 		{
 			get
 			{
-				return this._Lands;
+				return this._Customer.Entity;
 			}
 			set
 			{
-				this._Lands.Assign(value);
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Follows.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Follows.Add(this);
+						this._IDCustomer = value.IDCustomer;
+					}
+					else
+					{
+						this._IDCustomer = default(System.Guid);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customer")]
+	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IDCustomer;
+		
+		private string _CustomerName;
+		
+		private string _Organization;
+		
+		private string _Address;
+		
+		private string _PhoneNumber;
+		
+		private string _Email;
+		
+		private string _CMND;
+		
+		private string _Username;
+		
+		private string _Pass;
+		
+		private System.Nullable<bool> _Flag_Active;
+		
+		private System.Nullable<bool> _Admin;
+		
+		private System.Nullable<System.DateTime> _Birthday;
+		
+		private System.Nullable<bool> _Gender;
+		
+		private EntitySet<Follow> _Follows;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDCustomerChanging(System.Guid value);
+    partial void OnIDCustomerChanged();
+    partial void OnCustomerNameChanging(string value);
+    partial void OnCustomerNameChanged();
+    partial void OnOrganizationChanging(string value);
+    partial void OnOrganizationChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnCMNDChanging(string value);
+    partial void OnCMNDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPassChanging(string value);
+    partial void OnPassChanged();
+    partial void OnFlag_ActiveChanging(System.Nullable<bool> value);
+    partial void OnFlag_ActiveChanged();
+    partial void OnAdminChanging(System.Nullable<bool> value);
+    partial void OnAdminChanged();
+    partial void OnBirthdayChanging(System.Nullable<System.DateTime> value);
+    partial void OnBirthdayChanged();
+    partial void OnGenderChanging(System.Nullable<bool> value);
+    partial void OnGenderChanged();
+    #endregion
+		
+		public Customer()
+		{
+			this._Follows = new EntitySet<Follow>(new Action<Follow>(this.attach_Follows), new Action<Follow>(this.detach_Follows));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDCustomer
+		{
+			get
+			{
+				return this._IDCustomer;
+			}
+			set
+			{
+				if ((this._IDCustomer != value))
+				{
+					this.OnIDCustomerChanging(value);
+					this.SendPropertyChanging();
+					this._IDCustomer = value;
+					this.SendPropertyChanged("IDCustomer");
+					this.OnIDCustomerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this.OnCustomerNameChanging(value);
+					this.SendPropertyChanging();
+					this._CustomerName = value;
+					this.SendPropertyChanged("CustomerName");
+					this.OnCustomerNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Organization", DbType="NVarChar(30)")]
+		public string Organization
+		{
+			get
+			{
+				return this._Organization;
+			}
+			set
+			{
+				if ((this._Organization != value))
+				{
+					this.OnOrganizationChanging(value);
+					this.SendPropertyChanging();
+					this._Organization = value;
+					this.SendPropertyChanged("Organization");
+					this.OnOrganizationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CMND", DbType="VarChar(15)")]
+		public string CMND
+		{
+			get
+			{
+				return this._CMND;
+			}
+			set
+			{
+				if ((this._CMND != value))
+				{
+					this.OnCMNDChanging(value);
+					this.SendPropertyChanging();
+					this._CMND = value;
+					this.SendPropertyChanged("CMND");
+					this.OnCMNDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pass", DbType="VarChar(50)")]
+		public string Pass
+		{
+			get
+			{
+				return this._Pass;
+			}
+			set
+			{
+				if ((this._Pass != value))
+				{
+					this.OnPassChanging(value);
+					this.SendPropertyChanging();
+					this._Pass = value;
+					this.SendPropertyChanged("Pass");
+					this.OnPassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Active", DbType="Bit")]
+		public System.Nullable<bool> Flag_Active
+		{
+			get
+			{
+				return this._Flag_Active;
+			}
+			set
+			{
+				if ((this._Flag_Active != value))
+				{
+					this.OnFlag_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Flag_Active = value;
+					this.SendPropertyChanged("Flag_Active");
+					this.OnFlag_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Admin", DbType="Bit")]
+		public System.Nullable<bool> Admin
+		{
+			get
+			{
+				return this._Admin;
+			}
+			set
+			{
+				if ((this._Admin != value))
+				{
+					this.OnAdminChanging(value);
+					this.SendPropertyChanging();
+					this._Admin = value;
+					this.SendPropertyChanged("Admin");
+					this.OnAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Birthday", DbType="Date")]
+		public System.Nullable<System.DateTime> Birthday
+		{
+			get
+			{
+				return this._Birthday;
+			}
+			set
+			{
+				if ((this._Birthday != value))
+				{
+					this.OnBirthdayChanging(value);
+					this.SendPropertyChanging();
+					this._Birthday = value;
+					this.SendPropertyChanged("Birthday");
+					this.OnBirthdayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="Bit")]
+		public System.Nullable<bool> Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this.OnGenderChanging(value);
+					this.SendPropertyChanging();
+					this._Gender = value;
+					this.SendPropertyChanged("Gender");
+					this.OnGenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Follow", Storage="_Follows", ThisKey="IDCustomer", OtherKey="IDCustomer")]
+		public EntitySet<Follow> Follows
+		{
+			get
+			{
+				return this._Follows;
+			}
+			set
+			{
+				this._Follows.Assign(value);
 			}
 		}
 		
@@ -2788,16 +3034,191 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		private void attach_Lands(Land entity)
+		private void attach_Follows(Follow entity)
 		{
 			this.SendPropertyChanging();
-			entity.Type_Land = this;
+			entity.Customer = this;
 		}
 		
-		private void detach_Lands(Land entity)
+		private void detach_Follows(Follow entity)
 		{
 			this.SendPropertyChanging();
-			entity.Type_Land = null;
+			entity.Customer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Image_Detail")]
+	public partial class Image_Detail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDImage_Detail;
+		
+		private System.Guid _IDLand;
+		
+		private string _Image_detail1;
+		
+		private string _Title;
+		
+		private EntityRef<Land> _Land;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDImage_DetailChanging(int value);
+    partial void OnIDImage_DetailChanged();
+    partial void OnIDLandChanging(System.Guid value);
+    partial void OnIDLandChanged();
+    partial void OnImage_detail1Changing(string value);
+    partial void OnImage_detail1Changed();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    #endregion
+		
+		public Image_Detail()
+		{
+			this._Land = default(EntityRef<Land>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDImage_Detail", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDImage_Detail
+		{
+			get
+			{
+				return this._IDImage_Detail;
+			}
+			set
+			{
+				if ((this._IDImage_Detail != value))
+				{
+					this.OnIDImage_DetailChanging(value);
+					this.SendPropertyChanging();
+					this._IDImage_Detail = value;
+					this.SendPropertyChanged("IDImage_Detail");
+					this.OnIDImage_DetailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid IDLand
+		{
+			get
+			{
+				return this._IDLand;
+			}
+			set
+			{
+				if ((this._IDLand != value))
+				{
+					if (this._Land.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDLandChanging(value);
+					this.SendPropertyChanging();
+					this._IDLand = value;
+					this.SendPropertyChanged("IDLand");
+					this.OnIDLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Image_detail", Storage="_Image_detail1", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Image_detail1
+		{
+			get
+			{
+				return this._Image_detail1;
+			}
+			set
+			{
+				if ((this._Image_detail1 != value))
+				{
+					this.OnImage_detail1Changing(value);
+					this.SendPropertyChanging();
+					this._Image_detail1 = value;
+					this.SendPropertyChanged("Image_detail1");
+					this.OnImage_detail1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(100)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Image_Detail", Storage="_Land", ThisKey="IDLand", OtherKey="IDLand", IsForeignKey=true)]
+		public Land Land
+		{
+			get
+			{
+				return this._Land.Entity;
+			}
+			set
+			{
+				Land previousValue = this._Land.Entity;
+				if (((previousValue != value) 
+							|| (this._Land.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Land.Entity = null;
+						previousValue.Image_Details.Remove(this);
+					}
+					this._Land.Entity = value;
+					if ((value != null))
+					{
+						value.Image_Details.Add(this);
+						this._IDLand = value.IDLand;
+					}
+					else
+					{
+						this._IDLand = default(System.Guid);
+					}
+					this.SendPropertyChanged("Land");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

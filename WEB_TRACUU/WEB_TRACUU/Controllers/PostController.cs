@@ -1,23 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Microsoft.SqlServer.Server;
 using Newtonsoft.Json.Linq;
 using WEB_TRACUU.Models;
 
 namespace WEB_TRACUU.Controllers
 {
+
     public class PostController : ApiController
     {
-        BDS_Detail bds = new BDS_Detail();
+        private BDS_Detail bds = new BDS_Detail();
         private DataTraCuuVPDataContext db;
+
         [HttpPost]
-        public IHttpActionResult Creat_BDS(JObject data)
+        public Guid? Creat_BDS(JObject data)
         {
             dynamic json = data;
-           // CultureInfo enUs = new CultureInfo("en-US");
+            int i = 0;
+            var id = Guid.NewGuid();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -25,18 +33,42 @@ namespace WEB_TRACUU.Controllers
                     db.Connection.Open();
 
                     Land lands = new Land();
-                    lands.IDLand = Guid.NewGuid();
+                    lands.IDLand = id;
                     lands.Name = json._tieuDe;
                     lands.IDAcreage = Convert.ToInt32(json._dienTich);
-                    lands.IDPrice = Convert.ToInt32(json._gia);
-                    //lands.IDType = Convert.ToInt32(json._kieuBDS);
-                    //lands.Sell = json.Sell;
+                    lands.IDPrice = Convert.ToInt32(json._IDgia);
+                    lands.Price_detail = Convert.ToDecimal(json._GiaChiTiet);
+                    lands.IDType = Convert.ToInt32(json._kieuBDS);
+                    lands.Sell = false;
                     lands.Decrition = json._moTa;
                     DateTime date = DateTime.Now;
                     lands.CreateDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
                     lands.ModifyDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
-                    //lands.ExpiredDate = json._ExpiredDate;
-                    //lands.IDCustomer = json._IDCustomer;
+
+                    i = Convert.ToInt32(json._thoiHang);
+                    if (i == 1)
+                    {
+                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(1);
+                    }
+                    else if (i == 2)
+                    {
+                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(2);
+                    }
+                    else if (i == 3)
+                    {
+                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(3);
+                    }
+                    else if (i == 6)
+                    {
+                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(6);
+                    }
+                    else if (i == 12)
+                    {
+                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddYears(1);
+                    }
+
+
+                    lands.IDCustomer = json._idCustomer;
                     lands.Flag_Approval = false;
                     //lands.Image = json._Image();
                     // Lay ID cao nhat hien tai
@@ -50,22 +82,128 @@ namespace WEB_TRACUU.Controllers
                     db.SubmitChanges();
                     var idAddressCurrent = (from a in db.Addresses
                                             select new { a.IDAddress })
-                                             .OrderByDescending(k => k.IDAddress)
-                                             .Take(1).SingleOrDefault();
+                        .OrderByDescending(k => k.IDAddress)
+                        .Take(1).SingleOrDefault();
                     if (idAddressCurrent != null) lands.IDAddress = idAddressCurrent.IDAddress;
                     db.Lands.InsertOnSubmit(lands);
                     db.SubmitChanges();
 
                     db.Connection.Close();
-                    return Ok(json);
+                    return id;
                 }
 
             }
             catch (Exception)
             {
-                return NotFound();
+                return null;
             }
         }
+        [HttpPost]
+        public string UploadAvatar(Guid id)
+        {
+            int iUploadedCnt = 0;
 
+            // DEFINE THE PATH WHERE WE WANT TO SAVE THE FILES.
+            //string sPath = "";
+            //string sPath = "C:\\inetpub\\wwwroot\\Content\\Images\\Image_VP\\";
+            //string sPath = "D:\\";
+           string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/");
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var kh = (from a in db.Lands
+                          where a.IDLand == id
+                          select a).SingleOrDefault();
+
+                for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+                {
+                    //System.Web.HttpPostedFile hpf = hfc[iCnt];
+                    HttpPostedFile hpf = hfc[iCnt];
+                    if (hpf.ContentLength > 0)
+                    {
+                        string fileName = "avarta_" + kh.IDPost + ".jpg";
+                        string saveAsPath = Path.Combine(sPath, fileName);
+                        hpf.SaveAs(saveAsPath);
+                        kh.Image = "Content/Images/" + fileName;
+                        iUploadedCnt = iUploadedCnt + 1;
+                        
+                    }
+                    
+                }
+                
+                db.SubmitChanges();
+                if (iUploadedCnt > 0)
+                {
+                    return iUploadedCnt + " Files Uploaded Successfully";
+                }
+                else
+                {
+                    return "Upload Failed";
+                }
+            }
+            
+           
+
+        }
+        [HttpPost]
+        public string UploadImageDetail(Guid id)
+        {
+            int iUploadedCnt = 0;
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            using (db = new DataTraCuuVPDataContext())
+            {   
+                Image_Detail imageDetail = new Image_Detail();
+                imageDetail.IDLand = id;
+
+                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Slider/" +id.ToString()+"/");
+                if (!System.IO.Directory.Exists(sPath))
+                    System.IO.Directory.CreateDirectory(sPath);
+                for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+                {
+                    //System.Web.HttpPostedFile hpf = hfc[iCnt];
+                    HttpPostedFile hpf = hfc[iCnt];
+                    if (hpf.ContentLength > 0)
+                    {
+                        // CHECK IF THE SELECTED FILE(S) ALREADY EXISTS IN FOLDER. (AVOID DUPLICATE)
+                        if (!File.Exists(sPath + Path.GetFileName(hpf.FileName)))
+                        {
+                            // SAVE THE FILES IN THE FOLDER.
+                            // hpf.SaveAs(sPath + Path.GetFileName(hpf.FileName));
+                            string fileName = Path.GetFileName(hpf.FileName);
+                            string saveAsPath = Path.Combine(sPath, fileName);
+                            hpf.SaveAs(saveAsPath);
+                            imageDetail.Image_detail1 = "Content/Images/Slider/" + id.ToString() + "/" + hpf.FileName;
+                            iUploadedCnt = iUploadedCnt + 1;
+
+                        }
+                        else
+                        {
+                            hpf.SaveAs(sPath + Path.GetFileName("(t)" + hpf.FileName));
+                            imageDetail.Image_detail1 = "Content/Images/Slider/" + id.ToString() + "/" + "(t)" + hpf.FileName;
+                            iUploadedCnt = iUploadedCnt + 1;
+
+                        }
+                    }
+
+                }
+                db.Image_Details.InsertOnSubmit(imageDetail);
+                db.SubmitChanges();
+                if (iUploadedCnt > 0)
+                {
+                    return iUploadedCnt + " Files Uploaded Successfully";
+                }
+                else
+                {
+                    return "Upload Failed";
+                }
+            }
+
+
+
+        }
     }
+
 }
+
+

@@ -20,7 +20,7 @@
 
 <body style="background-color: rgba(189, 191, 193, 0.5);">
 <script>
-    var host = 'http://localhost:61482'
+    var host = "http://" + document.location.hostname + ":" + window.location.port;
     var active = angular.module('ActiveApp', []);
     active.controller("activeCtr", [
         '$scope', '$http', '$location', function ($scope, $http, $location) {
@@ -62,7 +62,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div ng-controller="activeCtr" class="col-md-6" style="text-align: center">
-                <button class="btn btn-success btn-lg" ng-click="active_taikhoan()">Active {{ Ten }}</button>
+                <button class="btn btn-success btn-lg" ng-click="active_taikhoan()">Active</button>
             </div>
             <div class="col-md-3"></div>
         </div>

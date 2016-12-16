@@ -12,13 +12,23 @@ namespace WEB_TRACUU.Controllers
     {
         private DataTraCuuVPDataContext db;
         [HttpGet]
-        public Guid? KT_DangNhap(string user, string pass)
+        public ThongTinKH KT_DangNhap(string user, string pass)
         {
             using (db = new DataTraCuuVPDataContext())
-            {   db.Connection.Open();
-                var kh = (from a in db.Customers where a.Username == user && a.Pass == pass select a).SingleOrDefault();
-                if (kh != null) return kh.IDCustomer;
-                db.Connection.Close();
+            {   
+                var kh = (from a in db.Customers where a.Username == user && a.Pass == pass && a.Flag_Active == true select a).SingleOrDefault();
+                if (kh != null) return new ThongTinKH
+                {
+                    _MaKH = kh.IDCustomer,
+                    _TenKH = kh.CustomerName,
+                    _CMND = kh.CMND,
+                    _CoQuan = kh.Organization,
+                    _DiaChi = kh.Address,
+                    _Email = kh.Email,
+                    _SoDT = kh.PhoneNumber,
+                    _User = kh.Username,
+                    _Admin = kh.Admin
+                };
                 return null;
                 
             }
@@ -39,7 +49,12 @@ namespace WEB_TRACUU.Controllers
                     _DiaChi = kh.Address,
                     _Email = kh.Email,
                     _SoDT = kh.PhoneNumber,
-                    _User = kh.Username
+                    _User = kh.Username,
+                    _Admin = kh.Admin,
+                    _Phone = kh.PhoneNumber,
+                    _Birthday = kh.Birthday,
+                    _Address = kh.Address,
+                    _Gender = kh.Gender
                 };
                 return null;
             }

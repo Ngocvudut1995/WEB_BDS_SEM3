@@ -27,93 +27,44 @@
 
 </head>
 <script>
-   // var host = "http://" + document.location.hostname + ":" + window.location.port;
-    var host = "http://" + document.location.hostname + "/VanPhong" ;
-    console.log(host);
+    var host = "http://" + document.location.hostname + ":" + window.location.port;
+    //var host = "http://" + document.location.hostname + "/TraCuuBDS" ;
+    //console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.5);">
-    <div class="contact col-md-7 col-xs-12 col-lg-7 col-sm-10" style="padding-left: 0px;padding-right: 0px" ng-show="show_form_contact">
+    <div class="rotate" style="height: 37px; width: 184px; position: fixed; left: -145px; top: 233px;z-index: 14">
+        <input ng-click="open_dangbai()" class="btn" type="button" style="background-color: rgb(9, 30, 116);z-index: 22; width: 100%; height: 100%; /*background-color: #3fd783;*/color: white; /*border-radius: 10px*/" value="Đăng Bài">
+    </div>
 
-        <div class="form_contact">
-            <div class="row" style="position: relative">
-                <a style="position: absolute; top: 0px; right: 0px; font-size: 30px; z-index: 21" ng-click="close_contact()"><span class="glyphicon glyphicon-remove-circle"></span></a>
-                <div class="col-md-7 col-xs-12 col-sm-6 col-lg-6" style="height: 100%; background-color: white; padding: 0px">
-                    <p class="" style="font-size: 20pt; margin: 15px">Nguyễn Phúc Minh</p>
-                    <div class="col-md-6 col-xs-12 hidden-xs" style="height: 100%; background-color: white">
+<div ng-controller="index" style="position: absolute">
 
-                        <img class="img-thumbnail" src="https://pbs.twimg.com/profile_images/710169276980858880/eosxkWG0_200x200.jpg" style="height: 50%; width: 80%; margin-left: 15px; margin-top: 10px">
+    <div class="khung_den" ng-show="show_dn == 1">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 col-xs-12 dangnhap">
+            <div class="col-md-12" style="margin: auto">
+                <h3 style="font-family: Arial; font-size: 40px; color: blue; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label>User:</label>
+                        <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username">
                     </div>
-                    <div class="col-md-6 col-xs-12" style="height: 100%; background-color: white; padding-top: 15px; padding-left: 0px; padding-right: 0px">
-                        <div style="height: 20%; width: 100%; background-color: white; border-bottom: 2px solid silver">
-                            <p style="color: black; margin-bottom: 5px; white-space: nowrap; font-weight: bold; text-align: center">
-                                <span class="glyphicon glyphicon-phone-alt">
-                                </span>&nbsp;&nbsp;Office : 098-414-2380
-                            </p>
-                        </div>
-                        <div style="height: 10%; width: 100%; background-color: white; border-bottom: 2px solid silver">
-                            <p style="color: black; margin-bottom: 5px; margin-top: 20px; white-space: nowrap; font-weight: bold; text-align: center">
-                                <span class="glyphicon glyphicon-earphone">
-                                </span>&nbsp;&nbsp;Mobile : 09-3223-7988
-                            </p>
-                        </div>
-                        <div class="hidden-xs" style="height: 70%; width: 100%; background: white">
-                            <p style="color: silver">
-                                Thông tin về giá, diện tích trống và dịch vụ đi kèm có thể thay đổi tại từng thời điểm…
-                            </p>
-                            <button style="margin-bottom: 30px; background-color: orange; height: 40px; width: 100px; white-space: nowrap; margin-top: 15px; margin-left: 0px; color: white">
-                                Know More
-                            </button>
-                        </div>
-
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
                     </div>
-                </div>
-                <div class="col-md-5 col-xs-12 col-sm-6 col-lg-6" style="height: 100%; background-color: white">
-                    <p style="text-align: center; font-size: 20pt; margin: 15px; margin-bottom: 4px;"> Contact </p>
-                    <input type="text" placeholder="Name" style="width: 90%; margin: 15px">
-                    <input type="text" placeholder="Email" style="width: 90%; margin: 15px">
-                    <input type="text" placeholder="Phone" style="width: 90%; margin: 15px">
-                    <textarea class="hidden-xs" rows="4" placeholder="Message" style="height: 50%; width: 90%; margin: 15px"></textarea>
-                    <textarea class="hidden-md hidden-lg hidden-sm" rows="1" placeholder="Message" style="height: 50%; width: 90%; margin: 15px"></textarea>
-                    <button style="height: 44px; white-space: nowrap; width: 105px; margin: 15px; background-color: orange; color: white; margin-top: 0px">
-                        Send Message
-                    </button>
-                    <button ng-click="send_gmail()" style="height: 44px; white-space: nowrap; width: 105px; background-color: orange; color: white; margin-top: 0px">
-                        <i class="fa fa-google fa-lg"></i> GMail
-                    </button>
-                </div>
+
+                    <div style="text-align: center">
+                        <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
+                        <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
+                    </div>
+
+                </form>
+                <br><br>
             </div>
         </div>
 
-    </div>
-    <div ng-controller="index" style="position: absolute">
-
-        <div class="khung_den" ng-show="show_dn == 1">
-            <div class="col-lg-4"></div>
-            <div class="col-lg-4 col-xs-12 dangnhap">
-                <div class="col-md-12" style="margin: auto">
-                    <h3 style="font-family: Arial;font-size: 40px; color:blue;margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
-                    <form class="form-horizontal" role="form">
-
-                        <div class="form-group">
-                            <label>User:</label>
-                            <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username">
-                        </div>
-                        <div class="form-group">
-                            <label>Password:</label>
-                            <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
-                        </div>
-
-                        <div style="text-align: center">
-                            <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
-                            <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
-                        </div>
-
-                    </form>
-                    <br><br>
-                </div>
-            </div>
-
-            @*<div class="col-md-4 col-xs-4 col-sm-4"></div>
+        @*<div class="col-md-4 col-xs-4 col-sm-4"></div>
                 <div class="col-md-4 col-xs-4 col-sm-4 dangnhap" id="all">
 
                     <form class="form-horizontal" ng-app="myApp" ng-controller="dangkiCtr" name="myForm" novalidate>
@@ -148,36 +99,39 @@
                 </div>
                 <div class="col-md-4 col-xs-4 col-sm-4"></div>*@
 
-        </div>
-        <div style="z-index: 19; position: fixed;width: 100%;">
-            <ul class="nav row" style="background-color: #5f5d5d">
-                @*rgb(20, 2, 119)*@
-                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg" style="width: 10%">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-th-list"></span>
+    </div>
+    <div style="z-index: 19; position: fixed; width: 100%;">
+        <ul class="nav row" style="background-color: #5f5d5d">
+            @*rgb(20, 2, 119)*@
+            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg hidden-sm">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-th-list"></span>
 
-                    </a>
-                    <ul class="dropdown-menu my_drop_menu" style="width: 133%">
+                </a>
+                <ul class="dropdown-menu my_drop_menu" style="width: 133%">
 
-                        <li><a href="#/PostBai">Home</a></li>
-                        <li><a href="#/TimKiem">Tìm Kiếm</a></li>
-                        <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
-                        <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
-                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Nhập</a></li>
-                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
-                        <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
-                    </ul>
-                </li>
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 0}]" style="width: 20%;background-color: rgb(47, 46, 46)">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
-                </li>
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 20%">
-                    <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
-                </li>
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 4}]" style="width: 20%">
-                    <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
-                </li>
-                @*<li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-xs " style="width: 20%" ng-class="[{active:tab_index == 4}]">
+                    <li><a href="#/PostBai">Home</a></li>
+                    <li><a href="#/TimKiem">Tìm Kiếm</a></li>
+                    <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
+                    <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
+                    <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Nhập</a></li>
+                    <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
+                    <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
+                </ul>
+            </li>
+            <li class="col-xs-10 navtab hidden-lg hidden-md hidden-sm" ng-class="[{active:tab_index == 0}]" style="background-color: rgb(47, 46, 46)">
+                <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
+            </li>
+            <li class="col-md-5 col-lg-5 col-sm-5 col-xs-10 navtab hidden-xs" ng-class="[{active:tab_index == 0}]" style="width: 20%; background-color: rgb(47, 46, 46)">
+                <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
+            </li>
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 20%">
+                <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
+            </li>
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 4}]" style="width: 20%">
+                <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
+            </li>
+            @*<li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-xs " style="width: 20%" ng-class="[{active:tab_index == 4}]">
                     <a class="dropdown-toggle" data-toggle="dropdown" ng-click="change_tab(4)">
                         <span class="glyphicon glyphicon-search"></span> Giới Thiệu
 
@@ -188,73 +142,82 @@
                         <li><a href="#/TimKiem">Cần Bán</a></li>
                     </ul>
                 </li>*@
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]" style="width: 20%">
-                    <a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(2)" style="white-space: nowrap;"><span class="glyphicon glyphicon-heart"></span> Quan Tâm</a>
-                </li>
-                <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 3}]" style="width: 20%">
-                    <a href="#/TaiKhoan/" ng-click="change_tab(3)" style="white-space: nowrap;"><span class="glyphicon glyphicon-user"></span> Tài Khoản</a>
-                </li>
-                
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]" style="width: 20%">
+                <a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(2)" style="white-space: nowrap;"><span class="glyphicon glyphicon-heart"></span> Quan Tâm</a>
+            </li>
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 3}]" style="width: 20%">
+                <a href="#/TaiKhoan/" ng-click="change_tab(3)" style="white-space: nowrap;"><span class="glyphicon glyphicon-user"></span> Tài Khoản</a>
+            </li>
 
 
-                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 20%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
-                <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2" style="width: 20%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>
 
-            </ul>
-        </div>
+            @*<li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 20%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
+            <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2" style="width: 20%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>*@
+
+        </ul>
     </div>
+</div>
 
-    <div class="container-fluid">
-        <div ng-controller="main" style="margin-top: 56px;">
+<div class="container-fluid">
+    <div ng-controller="main" style="margin-top: 56px;">
 
-            <div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
-                <div style="position: absolute; width: 100%; height: 60%; z-index: 11; background-image: url('{{ app }}/{{ img1 }}'); background-size: cover;">
-                    <p ng-if="taikhoan.test == 1" style="float: right; margin-right: 20px; margin-top: 10px; font-size: 20px; font-weight: bold; color: rgb(20, 2, 119)">
-                        Xin Chào Khách Hàng <a href="#/TaiKhoan" style="color: green">{{ taikhoan.username }}</a>|<a style="color: green" ng-click="dang_xuat()">Đăng Xuất</a>
-                    </p>
+        <div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
+            <div style="position: absolute; width: 100%; height: 60%; z-index: 11; background-image: url('{{ app }}/{{ img1 }}'); background-size: cover;">
+                <p ng-if="taikhoan.test == 1" style="float: right; margin-right: 20px; margin-top: 10px; font-size: 20px; font-weight: bold; color: rgb(20, 2, 119)">
+                    Xin Chào Khách Hàng <a href="#/TaiKhoan" style="color: green">{{ taikhoan.username }}</a>|<a style="color: green" ng-click="dang_xuat()">Đăng Xuất</a>
+                </p>
+            </div>
+            <div class="row" style="position: absolute; width: 100%; height: 60%; z-index: 12; top: 35%">
+                <div class="col-md-1"></div>
+                <div class="col-md-6" style="height: 100%">
+                    <img class="img-thumbnail" alt="Cinque Terre" ng-src="{{ app }}/{{ img2 }}" style="width: 100%; height: 100%"/>
                 </div>
-                <div class="row" style="position: absolute; width: 100%; height: 60%; z-index: 12; top: 35%">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6" style="height: 100%">
-                        <img class="img-thumbnail" alt="Cinque Terre" src="{{ app }}/{{ img2 }}" style="width: 100%; height: 100%" />
-                    </div>
-                    <div class="col-md-5" style="padding-left: 0px;">
-                        <div style="background-color: rgba(0, 0, 0, 0.5); padding: 15px;">
-                            <h2 style="float: left; font-weight: bold; width: 100%; text-align: center; color: white">{{ name }} Đã tìm là thấy</h2>
-                            <p style="font-weight: bold; text-align: justify; color: white">Tra Cứu BDS chính thức có mặt trên thị truờng bất động sản Việt Nam. Trải qua nhiều năm hình thành và phát triển, Tra Cứu BDS luôn vững vàng với mục tiêu mang lại cho khách hàng những sản phẩm và dịch vụ tốt nhất, với tôn chỉ hoạt động Chung sức vì sự an cư của cộng đồng </p>
-                            <div class="row" ng-if="taikhoan.test == 0">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4" style="text-align: center">
-                                    <button class="btn btn-info btn-lg" ng-click="dangnhap()">Đăng Nhập</button>
-                                </div>
-                                <div class="col-md-4" style="text-align: center">
-                                    <button class="btn btn-info btn-lg" ng-click="dangky()">Đăng Ký</button>
-                                </div>
-
-                                <div class="col-md-2"></div>
-
+                <div class="col-md-5" style="padding-left: 0px;">
+                    <div style="background-color: rgba(0, 0, 0, 0.5); padding: 15px;">
+                        <h2 style="float: left; font-weight: bold; width: 100%; text-align: center; color: white">{{ name }} Đã tìm là thấy</h2>
+                        <p style="font-weight: bold; text-align: justify; color: white">Tra Cứu BDS chính thức có mặt trên thị truờng bất động sản Việt Nam. Trải qua nhiều năm hình thành và phát triển, Tra Cứu BDS luôn vững vàng với mục tiêu mang lại cho khách hàng những sản phẩm và dịch vụ tốt nhất, với tôn chỉ hoạt động Chung sức vì sự an cư của cộng đồng </p>
+                        <div class="row" ng-if="taikhoan.test == 0">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4" style="text-align: center">
+                                <button class="btn btn-info btn-lg" ng-click="dangnhap()">Đăng Nhập</button>
                             </div>
+                            <div class="col-md-4" style="text-align: center">
+                                <button class="btn btn-info btn-lg" ng-click="dangky()">Đăng Ký</button>
+                            </div>
+
+                            <div class="col-md-2"></div>
+
                         </div>
-
-
-
                     </div>
+
+
+
                 </div>
             </div>
-
-
-
         </div>
-        <hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin" />
-        <div class="container" ng-controller="route_view" ng-view>
 
-        </div>
-        <div class="body-content">
-            <hr width="100%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin" />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
+
+
     </div>
+    <hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>
+    <div class="container" ng-controller="route_view" ng-view>
+
+    </div>
+    <div class="body-content">
+        <hr width="100%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>
+        <footer>
+            <div style="text-align: center; background-color: #5f5d5d;color: white" >
+                <hr>
+                Copyright © 2011 - 2015 tracuuBDS.com <span class="khonghien_mobile">® Ghi rõ nguồn "123batdongsan.vn" khi phát hành lại thông tin từ website này.</span><br>
+                <span><b>Công ty Cổ phần Vũ Tiến Minh Tú </b><br></span>
+                <span>Giấy chứng nhận ĐKKD số 000000001 do Sở Kế hoạch &amp; Đầu tư TP. Đà Nẵng cấp<br></span>
+                <span>Địa chỉ: 54 , Nguyễn Lương Bằng,phường HÒa Khánh Bắc , quận Liên Chiễu, Tp Đà Nẵng.<br></span>
+                <span>Thời gian làm việc: 8h đến 17h ngày Thứ 2 đến thứ 6 ,Thứ 7 từ 8h đến 12h.<br></span>
+                Hotline: 0123456789 | Email: tracuuBatDongSan@gmail.com<br>
+                Tel : 05113.686.666 | Fax : 05113.686.555<br>
+            </div>
+        </footer>
+    </div>
+</div>
 </body>
 </html>

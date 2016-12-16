@@ -1,25 +1,28 @@
-﻿<div class="row" style="" ng-controller="taikhoanCtrl">
+﻿
+    
+
+<div class="row" style="" ng-controller="taikhoanCtrl">
     <div class="col-md-4" style="">
         <div style="background-color: #C1C1C1; height: 40px">
             <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Tài Khoản</h3>
         </div>
         <div style="padding: 20px; font-size: 13pt">
             <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'dogs'">Tên Tài Khoản </a>
-                <a class="list-group-item col-md-12 col-xs-12" href="#/PostBai">Đăng Tin</a>
-                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Các Tin Đã Đăng </a>
-                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Các Tin Hết Hạn </a>
-                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Các Tin Chưa Duyệt </a>
-                <a class="list-group-item col-md-12 col-xs-12">Thay Đổi Mật Khẩu </a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/thongtinkh">Tên Tài Khoản: {{taikhoan.username}} <span ng-if="taikhoan.admin == true" style="float: right">Admin</span></a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/dangbai">Đăng Tin</a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdangdang">Các Tin Đang Đăng <span style="float: right">{{ bd_dangdang.length }}</span></a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Các Tin Hết Hạn <span style="float: right">{{ bd_hethan.length }}</span></a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Các Tin Chưa Duyệt <span style="float: right">{{ bd_chuaduyet.length }}</span></a>
+                <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/thayDoiMatKhau">Thay Đổi Mật Khẩu </a>
                 <div class="list-group-item col-md-12 col-xs-12 dropdown" style="padding: 0px;">
                     <button class="list-group-item btn btn-lg" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            style="text-align: left; width: 100%" value="Quản Trị Hệ Thống" ng-disabled="(1==0)">
+                            style="text-align: left; width: 100%" value="Quản Trị Hệ Thống" ng-if="(taikhoan.admin == true)">
                         Quản Trị Hệ Thống<span class="glyphicon glyphicon-list" style="float: right"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
 
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_khachhang">Quản Lý Khách Hàng</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_dangbai">Quản Lý Bài Đăng</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_baidang">Quản Lý Bài Đăng</a></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_tracuu">Quản Lý Hệ Thống Tra Cứu</a></li>
 
 
@@ -34,23 +37,499 @@
     <div class="col-md-8" style="height: 100%;">
 
         <div ng-switch="selectedValue">
+        <div ng-switch-when="dangbai" ng-controller="postCtrl">
+            <!--<div ng-include="'post.html'"></div>-->
+            <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      float: none; padding: 9px 20px 10px; line-height: 30px">
+                    Đăng Tin
+                </h3>
+            </div>
+            <div class="panel panel-default" style="">
 
-            <div ng-switch-when="ql_tracuu" class="list-group">
-                <div style="background-color: #C1C1C1;margin-bottom: 20px; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h3>
-                </div>
-                <div class="panel panel-default" style="">
-                    <div class="panel-heading">DS Các Quận</div>
-                    <div class="panel-body">
-                        <div class="list-group-item row">
-                            <div class="col-md-9">
-                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                <div class="panel-body">
+                    <div class="row" style="padding-bottom: 40px; border: black solid 1px;">
+                       
+                        <form name="myForm">
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
+                                <input class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" name="txtName" ng-model="txtName" required>
+                                <span style="color: red" ng-show="myForm.txtName.$touched && myForm.txtName.$invalid">
+                                        <span ng-show="myForm.txtName.$error.required">Tên không được để trống.</span>
+                                    </span>
+
+
+                            </div>
+
+
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                                <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
                                     <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
                                     <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
                                 </select>
-                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
-                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                                <!--<span ng-switch="select_Huyen">
+                                        <span ng-switch-when="0" style="color: red">Chọn quận/huyện</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Phường xã</label>
+                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
+                                    <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                                    <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+                                </select>
+                                <!--<span ng-switch="select_Phuong">
+                                        <span ng-switch-when="0" style="color: red">Chọn xã/phường</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Đường</label>
+                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="load_dientich()">
+                                    <option value="0" selected="selected">--- Chọn Đường ---</option>
+                                    <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
+
+                                </select>
+                                <!--<span ng-switch="select_Duong">
+                                        <span ng-switch-when="0" style="color: red">Chọn đường</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Số Nhà</label>
+                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="SoNha"/>
+                                <!--<span style="color: red" ng-show="myForm.SoNha.$touched && myForm.SoNha.$invalid">
+                                        <span ng-show="myForm.SoNha.$error.required">Tên không được để trống.</span>
+                                    </span>-->
+                            </div>
+
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Diện tích</label>
+                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_DienTich" ng-change="load_Gia()">
+                                    <option value="0" selected="selected">--- Chọn Diện tích ---</option>
+
+                                    <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+
+                                </select>
+                                <!--<span ng-switch="select_DienTich">
+                                        <span ng-switch-when="0" style="color: red">Chọn Diện tích</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Hình thức</label>
+                                <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_sell" ng-change="change_sell()">
+                                    <option value="0">Tất Cả</option>
+                                    <option value="false">Cho Thuê</option>
+                                    <option value="true">Cần Bán</option>
+
+                                </select>
+
+                                <!--<span ng-switch="select_HinhThuc">
+                                        <span ng-switch-when="0" style="color: red">Chọn hình thức</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Kiểu Dự Án</label>
+                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Kieu" ng-change="load_KieuBDS()">
+                                    <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                                    <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+                                </select>
+                                <!--<span ng-switch="select_Kieu">
+                                        <span ng-switch-when="0" style="color: red">Chọn Kiểu dự án</span>
+                                    </span>-->
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                                <label style="width: 100%; margin-top: 30px">Giá </label>
+                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Gia" ng-change="load_HinhThuc()">
+                                    <option value="0" selected="selected">---Chọn mức giá---</option>
+                                    <option ng-repeat="item in listgia" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
+
+                                </select>
+
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Giá chi tiết</label>
+                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="GiaChiTiet"/>
+
+                            </div>
+
+                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                <label style="width: 100%; margin-top: 30px">Thời hạng</label>
+                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Hang">
+                                    <option value="0" selected="selected">--- Chọn thời hạng ---</option>
+                                    <option value="1" selected="selected">1 tháng</option>
+                                    <option value="2" selected="selected">2 tháng</option>
+                                    <option value="3" selected="selected">3 tháng</option>
+                                    <option value="6" selected="selected">6 tháng</option>
+                                    <option value="12" selected="selected">12 tháng</option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
+                                <img ng-src="{{image_source}}" style="height: 100px; width: 100px; margin-top: 10px">
+
+                                <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange=" angular.element(this).scope().setFile(this) " style="margin-top: 10px" accept="image/*">
+
+                            </div>
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group" >
+                                <label style="width: 100%; margin-top: 30px">Hình ảnh Chi Tiết</label>
+                                <div ng-bind-html="divHtmlVar">
+
+                                </div>
+                                <input type="file" id="trigger1" ng-files="getImage_detail($files)" onchange=" angular.element(this).scope().setFile2(this) " style="margin-top: 10px" accept="image/*">
+                                <button ng-click="upload_detail()">Upload</button>
+
+                            </div>
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                <label style="width: 100%; margin-top: 30px">Mô Tả</label>
+                                <!--<h1>Editor <small>{{version}}</small></h1>-->
+                                <!--<button ng-click="disabled = !disabled" unselectable>Disable text-angular Toggle</button>-->
+                                <div text-angular="text-angular" name="Mota" ng-model="Mota" ta-disabled='disabled'></div>
+                                <!--<h1>Raw HTML in a text area</h1>
+                                <textarea ng-model="Mota" style="width: 100%"></textarea>-->
+                            </div>
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <input type="submit" value="Đăng tin" ng-disabled="(myForm.txtName.$invalid)  "
+                                           style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="postBai()"/>
+
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <input type="button" value="Hủy bỏ" style="width: 20%; margin-top: 30px; text-align: center" ng-click="huy()"/>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <div ng-switch-when="ct_baidang" ng-controller="ct_baidang_ctrl">
+                <!--<div ng-include="'post.html'"></div>-->
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;float: none; padding: 9px 20px 10px; line-height: 30px">
+                        Chỉnh Sửa Bài Đăng
+                    </h3>
+                </div>
+                <div class="panel panel-default" style="">
+                    <div class="panel-heading">
+                        <b>Bài Đăng Số {{land.idbaidang}}</b></div>
+                    <div class="panel-body">
+                        <div class="row" style="padding-bottom: 40px; border: black solid 1px;">
+                            <form name="myForm">
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
+                                    <input class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" name="txtName" ng-model="land.txtName" required>
+                                    <span style="color: red" ng-show="myForm.txtName.$touched && myForm.txtName.$invalid">
+                                        <span ng-show="myForm.txtName.$error.required">Tên không được để trống.</span>
+                                    </span>
+
+
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Tài Khoản Đăng</label>
+                                    <input readonly class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" ng-model="tenkh" required>
+                                    
+
+
+                                </div>
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+                                  
+                                    <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Huyen" ng-change="load_phuong(land.select_Huyen.IDTrousers)"
+                                            ng-options="x as x.Trousers for x in listQuan track by x.IDTrousers">
+
+                                        <option value="">--- Chọn Quận Huyện ---</option>
+                                        <!-- <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>-->
+                                    </select>
+                                    <!--<span ng-switch="select_Huyen">
+                                <span ng-switch-when="0" style="color: red">Chọn quận/huyện</span>
+                            </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Phường xã</label>
+                                    <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Phuong" ng-change="load_duong(land.select_Phuong.IDWard)"
+                                            ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
+
+                                        <option value="">--- Chọn Phường xã ---</option>
+                                        <!--<option ng-repeat="item in listPhuong track by $index" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
+
+                                    </select>
+                                    <!--<span ng-switch="select_Phuong">
+                                <span ng-switch-when="0" style="color: red">Chọn xã/phường</span>
+                            </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Số Nhà</label>
+                                    <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.SoNha" />
+                                    <!--<span style="color: red" ng-show="myForm.SoNha.$touched && myForm.SoNha.$invalid">
+            <span ng-show="myForm.SoNha.$error.required">Tên không được để trống.</span>
+        </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Đường</label>
+                                    
+                                    <select  class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" style="width: 100%; height: 32px; border-radius: 4px;" ng-model="land.select_Duong"
+                                            ng-options="x as x.Street1 for x in listDuong track by x.IDStreet">
+
+                                        <option value="">--- Chọn Đường ---</option>
+                                        <!--<option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>-->
+                                    </select>
+                                    <!--<span ng-switch="select_Duong">
+                                <span ng-switch-when="0" style="color: red">Chọn đường</span>
+                            </span>-->
+                                </div>
+                                
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Diện tích</label>
+                                    
+                                    
+                                    <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_DienTich"
+                                            ng-options="x as x.Acreage1 for x in listdientich track by x.IDAcreage">
+                                        <option value="">--- Chọn Diện Tích ---</option>
+
+                                    </select>
+                                    <!--<span ng-switch="select_DienTich">
+                                <span ng-switch-when="0" style="color: red">Chọn Diện tích</span>
+                            </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hình thức</label>
+                                    <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                                    <select style="width: 100%; height: 32px; border-radius: 4px;margin-top: 10px;" ng-model="land.select_sell" ng-change="change_sell(land.select_sell)">
+
+                                        <option value="false">Cho Thuê</option>
+                                        <option value="true">Cần Bán</option>
+
+                                    </select>
+
+                                    <!--<span ng-switch="select_HinhThuc">
+                                <span ng-switch-when="0" style="color: red">Chọn hình thức</span>
+                            </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Kiểu Dự Án</label>
+                                    
+                                    <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Kieu"
+                                            ng-options="x as x.TypeName for x in list_DM track by x.IDType">
+                                        <option value="">--- Chọn Loại Dự Án ---</option>
+
+                                    </select>
+                                    <!--<span ng-switch="select_Kieu">
+                                <span ng-switch-when="0" style="color: red">Chọn Kiểu dự án</span>
+                            </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Giá </label>
+                                   
+                                    <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Gia"
+                                            ng-options="x as x.Price1 for x in list_Price track by x.IDPrice">
+                                        <option value="">--- Chọn Mức Giá ---</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Giá chi tiết</label>
+                                    <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.GiaChiTiet" />
+
+                                </div>
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hết Hạn</label>
+                                    <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" type="date"
+                                            ng-value="format_date_picker(land.expired_date)" ng-model ="expired_date" ng-change="change_expiredDate()" name="expired_date" class="form-control" placeholder="Enter expired date" required>
+                                    <span style="color: red" ng-show="myForm.expired_date.$touched && myForm.expired_date.$invalid">
+                                        <span ng-show="myForm.expired_date.$error.required">Expired Date is required.</span>
+                                    </span>
+                                    <!--<p>{{land.expired_date}}</p>-->
+                                </div>
+
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
+                                    <img ng-src="{{land.image_source}}" style="height: 100px; width: 100px; margin-top: 10px">
+                                    
+                                    <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange="angular.element(this).scope().setFile(this)" style="margin-top: 10px" accept="image/*">
+                                    <!--<input type="button" ng-click="uploadFiles(land.mavp)" value="Upload" />-->
+
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Mô Tả</label>
+                                    <div text-angular="text-angular" name="Mota" ng-model="land.Mota" ta-disabled='disabled'></div>
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                        <input type="submit" value="Lưu" ng-disabled="(myForm.txtName.$invalid)"
+                                               style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="update_land(land)" />
+
+                                    </div>
+                                    
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-when="thongtinkh" ng-controller="ql_khachhang">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng</h3>
+                </div>
+                <div class="panel panel-default" style="">
+                    <div class="panel-heading">Thông Tin Tài Khoản</div>
+                    <div class="panel-body">
+                        <div class="row" style="padding: 0px">
+
+                            <div class="col-md-12 col-xs-12 col-sm-12" id="all">
+
+                                <form class="form-horizontal" role="form" name="myForm" novalidate ng-submit="update_customer(Customer)">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Tên đầy đủ<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.fullname" name="fullname" class="form-control" placeholder="Enter full name" required>
+                                            <span style="color: red" ng-show="myForm.fullname.$touched && myForm.fullname.$invalid">
+                                                <span ng-show="myForm.fullname.$error.required">Tên đầy đủ is required.</span>
+                                            </span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Email<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="email" ng-model="Customer.email" name="email" class="form-control" placeholder="Enter email" required>
+                                            <span style="color: red" ng-show="myForm.email.$touched && myForm.email.$invalid">
+                                                <span ng-show="myForm.email.$error.required">Email is required.</span>
+                                                <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Tên đăng ký<span style="color: red; white-space: nowrap">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" readonly ng-model="Customer.username" name="username" ng-minlength="8" class="form-control" placeholder="Enter register name" required>
+                                            <span style="color: red" ng-show="myForm.username.$touched && myForm.username.$invalid">
+                                                <span ng-show="myForm.username.$error.required">Tên đăng ký is required.</span>
+                                                <span ng-show="myForm.username.$error.minlength">
+                                                    Tên đăng ký must be at least 8 characters
+                                                </span>
+                                            </span>
+                                            <span style="color: red" ng-show="test_tk==1">
+                                                Tên Đăng Kí đã tồn tại.
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Ngày sinh<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="date" ng-value="format_date_picker(Customer.birthdate)" ng-model="birthdate" ng-change="change_birthday()" name="birthdate" class="form-control" placeholder="Enter your birthday" required>
+                                            <span style="color: red" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid">
+                                                <span ng-show="myForm.birthdate.$error.required">Birthday is required.</span>
+                                            </span>
+                                            <!--<p>{{Customer.birthdate}}</p>-->
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" for="pwd">Giới Tính:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <label><input type="radio" ng-model="Customer.gender" name="gender" value="true" checked>&nbsp;Nam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <label><input type="radio" ng-model="Customer.gender" name="gender" value="false">&nbsp;Nữ</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Địa chỉ:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <textarea class="form-control" placeholder="Your address" style="height: 100px" ng-model="Customer.address" name="address" required></textarea>
+                                            <span style="color: red" ng-show="myForm.address.$touched && myForm.address.$invalid">
+                                                <span ng-show="myForm.address.$error.required">ID is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">CMND<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.cmnd" name="cmnd" class="form-control" placeholder="Enter ID" required>
+                                            <span style="color: red" ng-show="myForm.cmnd.$touched && myForm.cmnd.$invalid">
+                                                <span ng-show="myForm.cmnd.$error.required">ID is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Cơ Quan:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.coquan" name="coquan" class="form-control" placeholder="Enter ID" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">ĐT<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.phone" name="phone" class="form-control" placeholder="Enter your phone" required>
+                                            <span style="color: red" ng-show="myForm.phone.$touched && myForm.phone.$invalid">
+                                                <span ng-show="myForm.phone.$error.required">Phone is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="col-md-12" style="text-align: center">
+                                        <input type="submit" class="btn btn-info" value="Submit" ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
+                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                        || myForm.cmnd.$invalid">
+                                        <button type="reset" class="btn btn-info" ng-click="reload_kh()">Cancel</button>
+                                    </div>
+                                    <!--ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
+                                    myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                                    || myForm.cmnd.$invalid || myForm.birthdate.$invalid"-->
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-switch-when="ql_tracuu" ng-controller="quanlytracuuCtrl" class="list-group">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h3>
+                </div>
+                <div class="panel panel-default" style="">
+                    <div class="panel-heading">DS Các Quận</div>
+
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9" ng-init="show_edit_quan=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong(select_Huyen.IDTrousers)"
+                                        ng-options="x as x.Trousers for x in listQuan track by x.IDTrousers">
+
+                                    <option value="">--- Chọn Quận Huyện ---</option>
+                                    <!-- <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>-->
+                                </select>
+
+                                <input ng-disabled="(show_edit_quan==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Huyen.Trousers" />
+                                <button ng-click="SaveEditTrouser(IsInsert,select_Huyen.Trousers,select_Huyen.IDTrousers);show_edit_quan=0" ng-disabled="(show_edit_quan==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
                             </div>
                             <div class="col-md-3 dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -58,11 +537,11 @@
                                 </button>
                                 <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
 
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_quan=1;IsInsert=1;select_Huyen.Trousers=''">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_quan=1;IsInsert=0">Sửa Đổi</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-disabled ="(1)">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteTrouser(select_Huyen.IDTrousers)">Xóa Mục Đang Chọn</a></li>
 
                                 </ul>
                                 <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
@@ -77,14 +556,16 @@
                     <div class="panel-heading">DS Các Phường</div>
                     <div class="panel-body">
                         <div class="list-group-item row">
-                            <div class="col-md-9">
-                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Phuong" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Phường ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+                            <div class="col-md-9" ng-init="show_edit_phuong=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Phuong" ng-change="load_duong(select_Phuong.IDWard)"
+                                        ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
+
+                                    <option value="">--- Chọn Phường xã ---</option>
+                                    <!--<option ng-repeat="item in listPhuong track by $index" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
 
                                 </select>
-                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
-                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                                <input ng-disabled="(show_edit_phuong==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Phuong.Ward1"/>
+                                <button ng-click="SaveEditWard(IsInsert,select_Phuong.Ward1,select_Phuong.IDWard,select_Huyen.IDTrousers);show_edit_phuong=0" ng-disabled="(show_edit_phuong==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
                             </div>
                             <div class="col-md-3 dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -92,32 +573,36 @@
                                 </button>
                                 <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
 
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_phuong=1;IsInsert=1;select_Phuong.Ward1=''">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_phuong=1;IsInsert=0">Sửa Đổi</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-disabled ="(1)">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteWard(select_Phuong.IDWard)">Xóa Mục Đang Chọn</a></li>
 
                                 </ul>
                                 <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
-                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+        <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
 
                             </div>
                         </div>
+                       
                     </div>
                 </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading">DS Các Đường Trong Phường</div>
                     <div class="panel-body">
                         <div class="list-group-item row">
-                            <div class="col-md-9">
-                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Duong" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Đường ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
-
+                            <div class="col-md-9" ng-init="show_edit_duong=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Duong"
+                                        ng-options="x as x.Street1 for x in listDuong track by x.IDStreet">
+                                 
+                                    <option value="">--- Chọn Đường ---</option>
+                                    <!--<option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>-->
                                 </select>
-                                <input type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" />
-                                <button ng-disabled="(1)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+
+                                <input ng-disabled="(show_edit_duong==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Duong.Street1" />
+                                <button ng-click="SaveEditStreet(IsInsert,select_Duong.Street1,select_Duong.IDStreet,select_Phuong.IDWard);show_edit_duong=0" ng-disabled="(show_edit_duong==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
                             </div>
                             <div class="col-md-3 dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -125,11 +610,11 @@
                                 </button>
                                 <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
 
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thêm Mới</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sửa Đổi</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_duong=1;IsInsert=1;select_Duong.Street1=''">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="show_edit_duong=1;IsInsert=0">Sửa Đổi</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Toàn Bộ</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Xóa Mục Đang Chọn</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-disabled ="(1)">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteStreet(select_Duong.IDStreet)">Xóa Mục Đang Chọn</a></li>
 
                                 </ul>
                                 <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
@@ -139,60 +624,165 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">DS Các Mức Giá Và Loại Dự Án</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9" ng-init="show_edit_type=0;show_edit_price=0;IsInsert=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_sell" ng-change="change_sell(select_sell)">
 
+                                    <option value="false">Cho Thuê</option>
+                                    <option value="true">Cần Bán</option>
+
+                                </select>
+                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 20px" ng-model="select_Gia"
+                                        ng-options="x as x.Price1 for x in list_Price track by x.IDPrice">
+                                    <option value="">--- Chọn Mức Giá ---</option>
+
+                                </select>
+                                <input ng-disabled="(show_edit_price==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Gia.Price1" />
+                                <button ng-click="SaveEditPrice(IsInsert,select_Gia.Price1,select_Gia.IDPrice,select_sell);show_edit_price=0" ng-disabled="(show_edit_price==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 20px" ng-model="select_Kieu"
+                                        ng-options="x as x.TypeName for x in list_DM track by x.IDType">
+                                    <option value="">--- Chọn Loại Dự Án ---</option>
+
+                                </select>
+                                <input ng-disabled="(show_edit_type==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Kieu.TypeName" />
+                                <button ng-click="SaveEditType(IsInsert,select_Kieu.TypeName,select_Kieu.IDType,select_sell);show_edit_type=0" ng-disabled="(show_edit_type==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_price=1) && (IsInsert=1) && (select_Gia.Price1='')">Thêm Mới Mức Giá</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_type=1) && (IsInsert=1) && (select_Kieu.TypeName='')">Thêm Mới Loại Dự Án</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_price=1) && (IsInsert=0)">Sửa Đổi Mức Giá</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_type=1) && (IsInsert=0)">Sửa Đổi Loại Dự Án</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeletePrice(select_Gia.IDPrice)">Xóa Mức Giá Đang Chọn</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteType(select_Kieu.IDType)">Xóa Loại Dự Án Đang Chọn</a></li>
+
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">DS Các Mức Diện Tích</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9" ng-init="show_edit_dt=0;IsInsert=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_DienTich"
+                                        ng-options="x as x.Acreage1 for x in listdientich track by x.IDAcreage">
+                                    <option value="">--- Chọn Diện Tích ---</option>
+
+                                </select>
+                                <input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_DienTich.Acreage1" />
+                                <button ng-click="SaveEditArea(IsInsert,select_DienTich.Acreage1,select_DienTich.IDAcreage);show_edit_dt=0" ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 1) && (select_DienTich.Acreage1='')">Thêm Mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 0)">Sửa Đổi</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1"ng-disabled="(1)">Xóa Toàn Bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteArea(select_DienTich.IDAcreage)">Xóa Mục Đang Chọn</a></li>
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div ng-switch-when="ql_khachhang" style="margin: 20px" class="list-group">
-                <div style="background-color: #C1C1C1;margin-bottom: 20px; height: 40px">
+        <div ng-switch-when="ql_khachhang" style="margin: 20px" class="list-group" ng-controller="ql_khachhang">
+            <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Danh Sách Khách Hàng</div>
+                <div class="panel-body scrollmenu">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Email</th>
+                            <th>Địa Chỉ</th>
+                            <th>Phone</th>
+                            <th>Cơ Quan</th>
+                            <th>CMND</th>
+                            <th>Admin</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in list_Customer track by $index">
+                            <td>{{$index + 1}}</td>
+                            <td><a href="#/TaiKhoan/khachhang/{{item.IDCustomer}}">{{item.CustomerName}}</a></td>
+                            <td>{{item.Email}}</td>
+                            <td>{{item.Address}}</td>
+                            <td>{{item.PhoneNumber}}</td>
+                            <td>{{item.Organization}}</td>
+                            <td>{{item.CMND}}</td>
+                            <td><input ng-disabled="(1==1)" type="checkbox" ng-checked="{{item.Admin}}"/></td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+            <div ng-switch-when="ql_baidang" style="margin: 20px" class="list-group">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
                     <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Danh Sách Khách Hàng</div>
+                    <div class="panel-heading">Danh Sách Bài Đăng</div>
                     <div class="panel-body scrollmenu">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên</th>
-                                    <th>Email</th>
+                                    <th>Tên BDS</th>
+                                    <th>Loại BDS</th>
                                     <th>Địa Chỉ</th>
-                                    <th>Phone</th>
-                                    <th>Cơ Quan</th>
-                                    <th>CMND</th>
-                                    <th>Admin</th>
+                                    <th>Giá</th>
+                                    <th>Diện Tích</th>
+                                    <th>Ngày Tạo</th>
+                                    <th>Ngày Cập Nhật</th>
+                                    <th>Ngày Hết Hạn</th>
+                                    <th>Đã Hết Hạn</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                    <td>1sdsdasfasf</td>
-                                    <td>Doeàasfsdas</td>
-                                    <td>john@example.com</td>
-                                    <td>john@example.com</td>
-                                    <td><input type="checkbox" /></td>
+                                <tr ng-repeat="item in list_Land track by $index">
+                                    <td>{{$index + 1}}</td>
+                                    <td><a href="#/TaiKhoan/ct_baidang/{{item._MaVP}}">{{item._TenVp}}</a></td>
+                                    <td>{{item._TenLoai}}</td>
+                                    <td>{{item._DiaCHi}}</td>
+                                    <td>{{item._Gia}}</td>
+                                    <td>{{item._DienTich}}</td>
+                                    <td>{{format_date(item._CreateDate)}}</td>
+                                    <td>{{format_date(item._ModifyDate)}}</td>
+                                    <td>{{format_date(item._ExpireDate)}}</td>
+                                    <td><input ng-disabled="(1==1)" type="checkbox" ng-checked="(item.HetHan==true)" /></td>
                                 </tr>
 
-                                <tr>
-                                    <td>2</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                    <td>1sdsdasfasf</td>
-                                    <td>Doeàasfsdas</td>
-                                    <td>john@example.com</td>
-                                    <td>john@example.com</td>
-                                    <td><input type="checkbox" /></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                    <td>1sdsdasfasf</td>
-                                    <td>Doeàasfsdas</td>
-                                    <td>john@example.com</td>
-                                    <td>john@example.com</td>
-                                    <td><input type="checkbox" /></td>
-                                </tr>
 
                             </tbody>
                         </table>
@@ -200,59 +790,204 @@
                 </div>
 
             </div>
-            <div ng-switch-when="ql_baidangchuaduyet">
+            <div ng-switch-when="khachhang" style="margin: 20px" class="list-group" ng-controller="ql_ct_khachhang">
+                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                   
+                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng {{Customer.fullname}}</h3>
+                </div>
+                <div class="panel panel-default" style="">
+                    <div class="panel-heading" style="position: relative">Thông Tin Tài Khoản
+                        <!--<button type="reset" class="btn btn-danger" ng-click="">Banned</button>-->
+                        <div style="position: absolute; height: 100%; top: 0px; right: 0px" class="dropdown">
+                            <button class="btn btn-danger btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="banned(Customer.ID)">Banned</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="setAdmin(Customer.ID)">Set Admin</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="unsetAdmin(Customer.ID)">Unset Admin</a></li>
+                            
+
+
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="row" style="padding: 0px">
+
+                            <div class="col-md-12 col-xs-12 col-sm-12" id="all">
+
+                                <form class="form-horizontal" role="form" name="myForm" novalidate ng-submit="update_customer(Customer)">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Tên đầy đủ<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.fullname" name="fullname" class="form-control" placeholder="Enter full name" required>
+                                            <span style="color: red" ng-show="myForm.fullname.$touched && myForm.fullname.$invalid">
+                                                <span ng-show="myForm.fullname.$error.required">Tên đầy đủ is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Email<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="email" ng-model="Customer.email" name="email" class="form-control" placeholder="Enter email" required>
+                                            <span style="color: red" ng-show="myForm.email.$touched && myForm.email.$invalid">
+                                                <span ng-show="myForm.email.$error.required">Email is required.</span>
+                                                <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Tên đăng ký<span style="color: red; white-space: nowrap">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" readonly ng-model="Customer.username" name="username" ng-minlength="8" class="form-control" placeholder="Enter register name" required>
+                                            <span style="color: red" ng-show="myForm.username.$touched && myForm.username.$invalid">
+                                                <span ng-show="myForm.username.$error.required">Tên đăng ký is required.</span>
+                                                <span ng-show="myForm.username.$error.minlength">
+                                                    Tên đăng ký must be at least 8 characters
+                                                </span>
+                                            </span>
+                                            <span style="color: red" ng-show="test_tk==1">
+                                                Tên Đăng Kí đã tồn tại.
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Ngày sinh<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="date" ng-value="format_date_picker(Customer.birthdate)" ng-model="birthdate" ng-change="change_birthday()" name="birthdate" class="form-control" placeholder="Enter your birthday" required>
+                                            <span style="color: red" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid">
+                                                <span ng-show="myForm.birthdate.$error.required">Birthday is required.</span>
+                                            </span>
+                                            <!--<p>{{Customer.birthdate}}</p>-->
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" for="pwd">Giới Tính:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <label><input type="radio" ng-model="Customer.gender" name="gender" value="true" checked>&nbsp;Nam&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                            <label><input type="radio" ng-model="Customer.gender" name="gender" value="false">&nbsp;Nữ</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Địa chỉ:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <textarea class="form-control" placeholder="Your address" style="height: 100px" ng-model="Customer.address" name="address" required></textarea>
+                                            <span style="color: red" ng-show="myForm.address.$touched && myForm.address.$invalid">
+                                                <span ng-show="myForm.address.$error.required">ID is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">CMND<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.cmnd" name="cmnd" class="form-control" placeholder="Enter ID" required>
+                                            <span style="color: red" ng-show="myForm.cmnd.$touched && myForm.cmnd.$invalid">
+                                                <span ng-show="myForm.cmnd.$error.required">ID is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">Cơ Quan:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.coquan" name="coquan" class="form-control" placeholder="Enter ID" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label col-md-5 col-xs-12" style="white-space: nowrap;">ĐT<span style="color: red">(*)</span>:</label>
+                                        <div class="col-md-7 col-xs-12">
+                                            <input type="text" ng-model="Customer.phone" name="phone" class="form-control" placeholder="Enter your phone" required>
+                                            <span style="color: red" ng-show="myForm.phone.$touched && myForm.phone.$invalid">
+                                                <span ng-show="myForm.phone.$error.required">Phone is required.</span>
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="col-md-12" style="text-align: center">
+                                        <input type="submit" class="btn btn-info" value="Submit" ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
+                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                        || myForm.cmnd.$invalid">
+                                        
+                                    </div>
+                                    <!--ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
+                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                        || myForm.cmnd.$invalid || myForm.birthdate.$invalid"-->
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="ql_baidangchuaduyet" ng-controller="baidangchuaduyetCtrl">
                 <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
                     <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h3>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Bài Đăng Số Mã Số 1</div>
-                    <div class="panel-body">
+                <div class="panel panel-default" ng-repeat="item in bd_chuaduyet">
+                    <div class="panel-heading" style="position: relative" ng-init="show = 0">
+                        {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
+                        <button  class="btn btn-info" style="height: 100%;top: 0px;position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                        <button class="btn btn-info" style="height: 100%;top: 0px;position: absolute; right: 0px" ng-click="show=0" ng-show="show==1"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                    </div>
+                    <div class="panel-body" ng-show="show==1">
                         <ul class="clearfix" style="display: block; list-style-type: square;">
-                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
-                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
-                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: </li>
-                            <li class="col-md-6 col-xs-12">Diện Tích: </li>
-                            <li class="col-md-6 col-xs-12">Giá: </li>
-                            <li class="col-md-6 col-xs-12">Vị Trí: </li>
-                            <li class="col-md-6 col-xs-12">Loại Dự Án: </li>
+                            <li class="col-md-6 col-xs-12"><b>Tài Khoản Đăng Tin:</b> <a>{{item.Name_Customer}}</a></li>
+                            <li class="col-md-6 col-xs-12"><b>Ngày Đăng Tin:</b>{{format_date(item.bds._ModifyDate)}} </li>
+                            <!-- <li class="col-md-6 col-xs-12">Ngày Hết Hạn: <input type="date" value="{{format_date_picker(item.bds._ExpireDate)}}"/> </li>-->
+
+
+                            <li class="col-md-6 col-xs-12">
+                                <b>Ngày Hết Hạn:</b> {{format_date(item.bds._ExpireDate)}}
+                            </li>
+                            <li class="col-md-6 col-xs-12"><b>Diện Tích:</b> {{item.bds._Acreage}}</li>
+                            <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                            <li class="col-md-6 col-xs-12">
+                                <b>Vị Trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
+                            </li>
+                            <li class="col-md-6 col-xs-12">
+                                <b>Loại Dự Án:</b> {{item.bds._TypeName}}
+                            </li>
                             <li class="col-md-12 col-xs-12">
-                                Mô tả:
-                                <p>
-                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
-                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
+                                <b>Mô tả:</b>
+                                <p ng-bind-html="item.bds._Decription">
+
                                 </p>
                             </li>
                             <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Bìa:</p>
+                                <p>
+                                    <b>Hình ảnh Bìa</b>:
+                                </p>
                                 <div class="col-md-3">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                    <img style="width: 100%" ng-src="{{ app }}/{{ item.bds._Image }}" />
                                 </div>
                             </li>
                             <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Chi Tiết:</p>
+                                <p>
+                                    <b>Hình ảnh Chi Tiết:</b>
+                                </p>
 
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
+                                    <img style="width: 100%" src="{{app}}/{{item.Anh}}" />
                                 </div>
                             </li>
                         </ul>
-                        <button style="float: right; margin-left: 10px">Duyệt</button>
-                        <button style="float: right">Hủy</button>
+                        <button style="float: right; margin-left: 10px" ng-click="duyet_bai(item._IDPost)" ng-hide="(taikhoan.admin == false)">Duyệt</button>
+                        <button style="float: right; margin-left: 10px"  ng-click="huy_bai(item._IDPost)">Hủy</button>
+
                     </div>
                 </div>
             </div>
@@ -260,137 +995,178 @@
                 <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
                     <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h3>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Bài Đăng Số Mã Số 1</div>
-                    <div class="panel-body">
+                <div class="panel panel-default" ng-repeat="item in bd_hethan">
+                    <div class="panel-heading" style="position: relative" ng-init="show = 0">
+                        {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
+                        <button class="btn btn-info" style="height: 100%;top: 0px;position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                        <button class="btn btn-info" style="height: 100%;top: 0px;position: absolute; right: 0px" ng-click="show=0" ng-show="show==1"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                    </div>
+                    <div class="panel-body" ng-show="show==1">
                         <ul class="clearfix" style="display: block; list-style-type: square;">
-                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
-                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
-                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: </li>
-                            <li class="col-md-6 col-xs-12">Diện Tích: </li>
-                            <li class="col-md-6 col-xs-12">Giá: </li>
-                            <li class="col-md-6 col-xs-12">Vị Trí: </li>
-                            <li class="col-md-6 col-xs-12">Loại Dự Án: </li>
+                            <li class="col-md-6 col-xs-12"><b>Tài Khoản Đăng Tin:</b> <a>{{item.Name_Customer}}</a></li>
+                            <li class="col-md-6 col-xs-12"><b>"Ngày Đăng Tin: {</b> {{format_date(item.bds._ModifyDate)}} </li>
+                            <!-- <li class="col-md-6 col-xs-12">Ngày Hết Hạn: <input type="date" value="{{format_date_picker(item.bds._ExpireDate)}}"/> </li>-->
+
+                            <li class="col-md-6 col-xs-12">
+                                <b>Ngày Hết Hạn:</b> {{format_date(item.bds._ExpireDate)
+                                }}
+                            </li>
+                            <li class="col-md-6 col-xs-12"><b>Diện Tích:</b> {{item.bds._Acreage}}</li>
+                            <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                            <li class="col-md-6 col-xs-12">
+                                <b>Vị Trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
+                            </li>
+                            <li class="col-md-6 col-xs-12">
+                                <b>Loại Dự Án:</b> {{item.bds._TypeName}}
+                            </li>
                             <li class="col-md-12 col-xs-12">
-                                Mô tả:
-                                <p>
-                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
-                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
+                                <b>Mô tả:</b>
+                                <p ng-bind-html="item.bds._Decription">
+
                                 </p>
                             </li>
                             <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Bìa:</p>
+                                <p>
+                                    <b>Hình ảnh Bìa</b>:
+                                </p>
                                 <div class="col-md-3">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                    <img style="width: 100%" ng-src="{{ app }}/{{ item.bds._Image }}" />
                                 </div>
                             </li>
                             <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Chi Tiết:</p>
+                                <p>
+                                    <b>Hình ảnh Chi Tiết:</b>
+                                </p>
 
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
+                                <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
+                                    <img style="width: 100%" src="{{app}}/{{item.Anh}}" />
                                 </div>
                             </li>
                         </ul>
-                        <button style="float: right; margin-left: 10px">Lưu</button>
-                        <button style="float: right">Reset</button>
+                        <button style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh Sửa</button>
+
                     </div>
                 </div>
             </div>
-            <div ng-switch-when="ql_baidangdadang">
-                <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                    <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đã Đăng</h3>
+        <div ng-switch-when="ql_baidangdangdang">
+            <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
+                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h3>
+            </div>
+
+            <div class="panel panel-default" ng-repeat="item in bd_dangdang">
+                <div class="panel-heading" style="position: relative" ng-init="show = 0">
+                    {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
+                    <button class="btn btn-info" style="height: 100%; top: 0px; position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                    <button class="btn btn-info" style="height: 100%; top: 0px; position: absolute; right: 0px" ng-click="show=0" ng-show="show==1"><span class="glyphicon glyphicon-chevron-up"></span></button>
                 </div>
-                <label>Search</label>
-                <input type="text"/>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Bất Động Sản Tòa Nhà A - Bài Đăng Số 1000</div>
-                    <div class="panel-body">
-                        <ul class="clearfix" style="display: block; list-style-type: square;">
-                            <li class="col-md-6 col-xs-12">Tài Khoản Đăng Tin: <a>Đặng Ngọc Vũ</a></li>
-                            <li class="col-md-6 col-xs-12">Ngày Đăng Tin: </li>
-                            <li class="col-md-6 col-xs-12">Ngày Hết Hạn: <input type="date" /> </li>
-                            <li class="col-md-6 col-xs-12">
-                              
-                                <span style="width: 40%">Diện Tích:</span> <select style="float: right;width: 60%; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+                <div class="panel-body" ng-show="show==1">
+                    <ul class="clearfix" style="display: block; list-style-type: square;">
+                        <li class="col-md-6 col-xs-12"><b>Tài Khoản Đăng Tin:</b> <a>{{item.Name_Customer}}</a></li>
+                        <li class="col-md-6 col-xs-12"><b>Ngày Đăng Tin:</b> {{format_date(item.bds._ModifyDate)}} </li>
+                        <!-- <li class="col-md-6 col-xs-12">Ngày Hết Hạn: <input type="date" value="{{format_date_picker(item.bds._ExpireDate)}}"/> </li>-->
 
-                                </select>
-                            </li>
-                            <li class="col-md-6 col-xs-12">
-                                <span style="width: 40%">Giá:</span> <select style="float: right;width: 60%;border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+                        <li class="col-md-6 col-xs-12">
+                            <b>Ngày Hết Hạn:</b> {{format_date(item.bds._ExpireDate)}}
+                        </li>
 
-                                </select>
-                            </li>
-                            <li class="col-md-6 col-xs-12">
-                                Vị Trí: 
-                            </li>
-                            <li class="col-md-6 col-xs-12">
-                                <span style="width: 40%">Loại Dự Án:</span> <select style="float: right;width: 60%; border-radius: 4px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
-                                </select>
-                            </li>
-                            <li class="col-md-12 col-xs-12">
-                                Mô tả:
-                                <p>
-                                    Các thành viên Running Man lại khiến khán giả cười bò vì hit của TWICE và EXO bị biến tấu không thương tiếc.
-                                    khi chương trình bật bản hit đang hot "TT" của TWICE thì "chị Đại" Song Ji Hyo vốn chỉ quen nhảy "Hot Issue" của 4MINUTE hoàn toàn bị bối rối nên đành nhảy đại. Còn Jo Jung Suk đã biến "Cheer Up" thành một điệu nhảy disco thập niên 80. Và không chỉ có TWICE trở thành nạn nhân mà ngay cả "khổ chủ" D.O của EXO cũng đành phải câm nín khi nhìn đứa con cưng "Growl" bị chàng Hươu Kwang Soo, Jae Suk, Suk Jin và Haha biến thể thành một phiên bản tăng động.
-                                </p>
-                            </li>
-                            <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Bìa:</p>
-                                <div class="col-md-3">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                            </li>
-                            <li class="col-md-12 col-xs-12">
-                                <p>Hình ảnh Chi Tiết:</p>
 
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                                <div class="col-md-3" style="margin-bottom: 10px">
-                                    <img style="width: 100%" src="../../Content/Images/vanphong3.jpg" />
-                                </div>
-                            </li>
-                        </ul>
-                        <button style="float: right; margin-left: 10px">Lưu</button>
-                        <button style="float: right">Reset</button>
-                    </div>
+                        <li class="col-md-6 col-xs-12"><b>Diện Tích:</b> {{item.bds._Acreage}}</li>
+                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                        <li class="col-md-6 col-xs-12">
+                            <b>Vị Trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
+                        </li>
+                        <li class="col-md-6 col-xs-12">
+                            <b>Loại Dự Án:</b> {{item.bds._TypeName}}
+                        </li>
+                        <li class="col-md-12 col-xs-12">
+                            <b>Mô tả:</b>
+                            <p ng-bind-html="item.bds._Decription">
+
+                            </p>
+                        </li>
+                        <li class="col-md-12 col-xs-12">
+                            <p>
+                                <b>Hình ảnh Bìa</b>:
+                            </p>
+                            <div class="col-md-3">
+                                <img style="width: 100%" ng-src="{{ app }}/{{ item.bds._Image }}"/>
+                            </div>
+                        </li>
+                        <li class="col-md-12 col-xs-12">
+                            <p>
+                                <b>Hình ảnh Chi Tiết:</b>
+                            </p>
+
+                            <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
+                                <img style="width: 100%" src="{{app}}/{{item.Anh}}"/>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                    <button style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh Sửa</button>
                 </div>
             </div>
         </div>
+            <div ng-switch-when="thayDoiMatKhau" ng-controller="doiMatKhauCtrl">
+                <div class="panel panel-default" style="margin-top: 18px;">
+                    <div class="panel-heading">Thông Tin Tài Khoản</div>
+                    <div class="panel-body">
+                        <div class="row" style="padding: 0px">
+
+                            <form class="form-horizontal" role="form" name="myForm" novalidate ng-submit="update_Pass(passwordOld,passwordNew)">
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Mật khẩu cũ<span style="color: red">(*)</span>:</label>
+                                    <div class="col-md-8 col-xs-8 col-sm-8">
+                                        <input type="password" ng-model="passwordOld" name="passwordOld" class="form-control" id="pwOld" ng-minlength="6" placeholder="Enter password" required>
+                                        <span style="color: red" ng-show="myForm.passwordOld.$touched && myForm.passwordOld.$invalid">
+                                            <span ng-show="myForm.passwordOld.$error.required">Password is required.</span>
+                                            <span ng-show="passwordOld==">Password must be at least 6 characters.</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Mật khẩu mới<span style="color: red">(*)</span>:</label>
+                                    <div class="col-md-8 col-xs-8 col-sm-8">
+                                        <input type="password" ng-model="passwordNew" name="passwordNew" class="form-control" id="pwNew" ng-minlength="6" placeholder="Enter new password" required>
+                                        <span style="color: red" ng-show="myForm.passwordNew.$touched && myForm.passwordNew.$invalid">
+                                            <span ng-show="myForm.password.$error.required">Password is required.</span>
+                                            <span ng-show="myForm.password.$error.minlength">Password must be at least 6 characters.</span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Nhập lại mật khẩu <span style="color: red">(*)</span>:</label>
+                                    <div class="col-md-8 col-xs-8 col-sm-8">
+                                        <input type="password" ng-model="rePassword" name="rePassword" class="form-control" id="repwd" ng-minlength="6" placeholder="Enter password again" required>
+                                        <span style="color: red" ng-disabled="!myForm.$dirty || (myForm.$dirty && myForm.$invalid)">
+                                            <span style="color: red" ng-show="(rePassword != passwordNew) && myForm.rePassword.$touched">RePassword not valid.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="text-align: center">
+                                    <input type="submit" class="btn btn-info" ng-disabled="(rePassword != passwordNew)">
+                                    <button type="reset" class="btn btn-info" ng-click="reload_kh()">Cancel</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
     </div>
+
+
+
+
 </div>
+
+

@@ -1,111 +1,144 @@
 ﻿<div ng-controller="postCtrl">
     <div class="row" style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <label style="width: 100%;margin-top: 30px">Tiêu đề</label>
-            <input type="text" placeholder="Từ Khóa" style="width: 100%;height: 30px;border-radius: 4px;margin-top: 10px;" ng-model="txtName">
+        <form name="myForm">
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
 
-        </div>
+                <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
+                <input class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" name="txtName" ng-model="txtName" required>
+                <span style="color: red" ng-show="myForm.txtName.$touched && myForm.txtName.$invalid">
+                    <span ng-show="myForm.txtName.$error.required">Tên không được để trống.</span>
+                </span>
 
-
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Quận Huyện</label>
-            <select style="width: 100%; height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
-
-            </select>
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Phường xã</label>
-            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
-                <option value="0" selected="selected">--- Chọn Phường xã ---</option>
-                <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
-            </select>
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%; margin-top: 30px">Đường</label>
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="load_dientich()">
-                <option value="0" selected="selected">--- Chọn Đường ---</option>
-                <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
-
-            </select>
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Số Nhà</label>
-            <input style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="SoNha" />
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>
-            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Kieu" ng-change="load_KieuBDS()">
-                <option value="0" selected="selected">--- Chọn Dự Án ---</option>
-                <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
-            </select>
-        </div>
-
-
-
-
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Diện tích</label>
-            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_DienTich" ng-change="load_Gia()">
-                <option value="0" selected="selected">--- Chọn Diện tích ---</option>
-
-                <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
-
-            </select>
-        </div>
-
-        <div class="col-md-6 col-xs-6 col-sm-4">
-            <label style="width: 100%;margin-top: 30px">Giá </label>
-            <select style="width: 100%;height: 32px;border-radius: 4px;margin-top: 10px;" ng-model="select_Gia" ng-change="load_HinhThuc()">
-                <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
-                <option value="1" selected="selected">20000000</option>
-
-            </select>
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-6">
-            <label style="width: 100%; margin-top: 30px">Hình thức</label>
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_HinhThuc" ng-change="load_ThoiHang()">
-                <option value="0" selected="selected">---Chọn hình thức---</option>
-                <option value="1" selected="selected">Cho thuê</option>
-                <option value="2" selected="selected">Bán</option>
-
-            </select>
-        </div>
-        <div class="col-md-6 col-xs-6 col-sm-6">
-            <label style="width: 100%; margin-top: 30px">Thời hạng</label>
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Hang">
-                <option value="0" selected="selected">--- Chọn thời hạng ---</option>
-                <option value="1" selected="selected">1 tháng</option>
-                <option value="2" selected="selected">2 tháng</option>
-                <option value="3" selected="selected">3 tháng</option>
-                <option value="4" selected="selected">6 tháng</option>
-                <option value="5" selected="selected">12 tháng</option>
-
-            </select>
-        </div>
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
-            <img ng-src="{{image_source}}" style="height: 50px; width: 50px;margin-top: 10px">
-            <input type="file" id="trigger" onchange="angular.element(this).scope().setFile(this)" style="margin-top: 10px" accept="image/*">
-
-
-        </div>
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <label style="width: 100%;margin-top: 30px">Mô Tả</label>
-            <textarea style="width: 100%;height: 200px;border-radius: 4px;margin-top: 10px;" ng-model="Mota"></textarea>
-        </div>
-        <div class="col-md-12 col-xs-12 col-sm-12">
-            <div class="col-md-6 col-xs-6 col-sm-6">
-                <input type="submit" value="Đăng tin" style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="postBai()" />
 
             </div>
-            <div class="col-md-6 col-xs-6 col-sm-6">
-                <input type="button" value="Hủy bỏ" style="width: 20%; margin-top: 30px; text-align: center" ng-click="huy()" />
+
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Kiểu Dự Án</label>
+                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Kieu" ng-change="load_KieuBDS()">
+                    <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                    <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
+                </select>
+                <span ng-switch="select_Kieu">
+                    <span ng-switch-when="0" style="color: red">Chọn Kiểu dự án</span>
+                </span>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                </select>
+                <span ng-switch="select_Huyen">
+                    <span ng-switch-when="0" style="color: red">Chọn quận/huyện</span>
+                </span>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Phường xã</label>
+                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
+                    <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                    <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+                </select>
+                <span ng-switch="select_Phuong">
+                    <span ng-switch-when="0" style="color: red">Chọn xã/phường</span>
+                </span>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Đường</label>
+                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="load_dientich()">
+                    <option value="0" selected="selected">--- Chọn Đường ---</option>
+                    <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
+
+                </select>
+                <span ng-switch="select_Duong">
+                    <span ng-switch-when="0" style="color: red">Chọn đường</span>
+                </span>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Số Nhà</label>
+                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="SoNha" />
+                <span style="color: red" ng-show="myForm.SoNha.$touched && myForm.SoNha.$invalid">
+                    <span ng-show="myForm.SoNha.$error.required">Tên không được để trống.</span>
+                </span>
+            </div>
+
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Diện tích</label>
+                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_DienTich" ng-change="load_Gia()">
+                    <option value="0" selected="selected">--- Chọn Diện tích ---</option>
+
+                    <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+
+                </select>
+                <span ng-switch="select_DienTich">
+                    <span ng-switch-when="0" style="color: red">Chọn Diện tích</span>
+                </span>
+            </div>
+
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                <label style="width: 100%; margin-top: 30px">Giá </label>
+                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Gia" ng-change="load_HinhThuc()">
+                    <option value="0" selected="selected">---Chọn mức giá---</option>
+                    <option ng-repeat="item in listgia" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
+
+                </select>
 
             </div>
-        </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Giá chi tiết</label>
+                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="GiaChiTiet" />
 
+            </div>
+
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Thời hạng</label>
+                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Hang">
+                    <option value="0" selected="selected">--- Chọn thời hạng ---</option>
+                    <option value="1" selected="selected">1 tháng</option>
+                    <option value="2" selected="selected">2 tháng</option>
+                    <option value="3" selected="selected">3 tháng</option>
+                    <option value="6" selected="selected">6 tháng</option>
+                    <option value="12" selected="selected">12 tháng</option>
+
+                </select>
+            </div>
+            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                <label style="width: 100%; margin-top: 30px">Hình thức</label>
+                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_HinhThuc" ng-change="load_ThoiHang()">
+                    <option value="0" selected="selected">---Chọn hình thức---</option>
+                    <option value="1" selected="selected">Cho thuê</option>
+                    <option value="2" selected="selected">Bán</option>
+
+                </select>
+                <span ng-switch="select_HinhThuc">
+                    <span ng-switch-when="0" style="color: red">Chọn hình thức</span>
+                </span>
+            </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
+                <img ng-src="{{image_source}}" style="height: 50px; width: 50px; margin-top: 10px">
+                <input type="file" id="trigger" onchange=" angular.element(this).scope().setFile(this) " style="margin-top: 10px" accept="image/*">
+
+
+            </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                <label style="width: 100%; margin-top: 30px">Mô Tả</label>
+                <textarea style="width: 100%; height: 200px; border-radius: 4px; margin-top: 10px;" ng-model="Mota"></textarea>
+            </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                    <input type="submit" value="Đăng tin" ng-disabled="(myForm.txtName.$invalid)  "
+                           style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="postBai()" />
+
+                </div>
+                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                    <input type="button" value="Hủy bỏ" style="width: 20%; margin-top: 30px; text-align: center" ng-click="huy()" />
+
+                </div>
+            </div>
+        </form>
 
     </div>
 </div>

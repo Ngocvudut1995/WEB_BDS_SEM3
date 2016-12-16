@@ -15,5 +15,12 @@ namespace WEB_TRACUU.Models
         public string _Email { get; set; }
         public string  _CMND  { get; set; }
         public string _User { get; set; }
+        public bool? _Admin { get; set; }
+        public bool? _Gender { get; set; }
+        public string _Phone { get; set; }
+        public string _Address { get; set; }
+        public System.Nullable<System.DateTime> _Birthday;
+        public string _Pass { get; set; }
     }
+
 }

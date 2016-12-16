@@ -25,37 +25,54 @@ namespace WEB_TRACUU.Controllers
                 }
                 return list;
             }
-           
+
         }
         public BDS_Detail get_vp_by_id(Guid mavp)
         {
             BDS_Detail vp;
             using (db = new DataTraCuuVPDataContext())
-            {   db.Connection.Open();
+            {
+                
                 var sql = (from a in db.Overview_Lands
+                           join b in db.Lands on a.IDLand equals b.IDLand
+                           join c in db.Customers on b.IDCustomer equals c.IDCustomer
                            where a.IDLand == mavp
-                           select a).SingleOrDefault();
+                           select new
+                           {
+                               a,
+                               c.IDCustomer,
+                               c.CustomerName,
+                               c.Email,
+                               c.PhoneNumber
+                           }).SingleOrDefault();
                 vp = new BDS_Detail
                 {
-                    _IDLand = sql.IDLand,
-                    _Image = sql.Image,
-                    _Acreage = sql.Acreage,
-                    _Price = sql.Price,
-                    _Name = sql.Name,
-                    _NumberHouse = sql.NumberHouse,
-                    _Trousers = sql.Trousers,
-                    _CreateDate = sql.CreateDate,
-                    _ModifyDate = sql.ModifyDate,
-                    _Street = sql.Street,
-                    _TypeName = sql.TypeName,
-                    _Ward = sql.Ward,
-                    _Decription = sql.Decrition,
-                    _ExpireDate = sql.ExpiredDate,
-                    _IDType = sql.IDType
+                    _IDLand = sql.a.IDLand,
+                    _Image = sql.a.Image,
+                    _Acreage = sql.a.Acreage,
+                    _Price = sql.a.Price,
+                    _Name = sql.a.Name,
+                    _NumberHouse = sql.a.NumberHouse,
+                    _Trousers = sql.a.Trousers,
+                    _CreateDate = sql.a.CreateDate,
+                    _ModifyDate = sql.a.ModifyDate,
+                    _Street = sql.a.Street,
+                    _TypeName = sql.a.TypeName,
+                    _Ward = sql.a.Ward,
+                    _Decription = sql.a.Decrition,
+                    _ExpireDate = sql.a.ExpiredDate,
+                    _IDType = sql.a.IDType,
+                    _Sell = sql.a.Sell,
+                    _IDCustomer = sql.IDCustomer,
+                    _NameCustomer = sql.CustomerName,
+                    _EmailCustomer = sql.Email,
+                    _PhoneCustomer = sql.PhoneNumber
+
+
 
 
                 };
-              
+
                 var images = (from b in db.Image_Details where b.IDLand == mavp select b).ToList();
                 IList<Image_Slide_VP> list = new List<Image_Slide_VP>();
                 foreach (var item in images)
@@ -63,23 +80,23 @@ namespace WEB_TRACUU.Controllers
                     list.Add(new Image_Slide_VP(item.Image_detail1, item.Title));
                 }
                 vp._Images_detail = list;
-                db.Connection.Close();
+               
                 return vp;
-                
+
             }
-           
+
         }
-       public class BDS
-       {
-           public Guid _IDLand;
+        public class BDS
+        {
+            public Guid _IDLand;
             public string _Name;
             public string _Image;
-           public bool? _Sell;
-       }
+            public bool? _Sell;
+        }
         public IEnumerable<BDS> get_VP_by_type(int idtype)
         {
             IList<BDS> list = new List<BDS>();
-            using (db= new DataTraCuuVPDataContext())
+            using (db = new DataTraCuuVPDataContext())
             {
                 var query = (from a in db.Overview_Lands
                              where a.IDType == idtype
@@ -102,7 +119,7 @@ namespace WEB_TRACUU.Controllers
                 }
                 return list;
             }
-           
+
         }
 
     }

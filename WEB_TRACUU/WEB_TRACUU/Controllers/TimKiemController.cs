@@ -186,29 +186,79 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
-        //[HttpPut]
-        //public IHttpActionResult add_office_follow(JObject data)
-        //{
-        //    //this.contactRepository.SaveContact(contact);
+        [HttpGet]
+        public bool test_follow(Guid makh, Guid mavp)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var td = (from a in db.Follows
+                          where a.IDCustomer == makh && a.IDLand == mavp
+                          select a).SingleOrDefault();
+                if (td != null) return true;
+               ;
+                return false;
 
-        //    dynamic json = data;
-        //    if (json.id == null) return NotFound();
-        //    try
-        //    {
-        //        Follow td = new Follow();
-        //        td.IDCustomer = json._makh;
-        //        td.IDLand = json._mavp;
-        //        db.Follows.InsertOnSubmit(td);
-        //        db.SubmitChanges();
-        //        return Ok(json);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return NotFound();
-        //    }
-        // //var response = Request.CreateResponse<Contactcs>(System.Net.HttpStatusCode.Created, item);
+            }
 
-        //}
+        }
+        [HttpPut]
+        public IHttpActionResult add_office_follow(JObject data)
+        {
+            //this.contactRepository.SaveContact(contact);
+
+            dynamic json = data;
+            using (db = new DataTraCuuVPDataContext())
+            {
+               
+                try
+                {
+                    Follow td = new Follow();
+                    //Guid idkh = new Guid(json._makh.ToString());
+                    //Guid idvp = new Guid(json._mavp.ToString());
+                    td.IDCustomer = json._makh;
+                    td.IDLand = json._mavp;
+                    db.Follows.InsertOnSubmit(td);
+                    db.SubmitChanges();
+                    return Ok(json);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+            }
+          
+            //var response = Request.CreateResponse<Contactcs>(System.Net.HttpStatusCode.Created, item);
+
+        }
+        [HttpPut]
+        public IHttpActionResult remove_office_follow(JObject data)
+        {
+            //this.contactRepository.SaveContact(contact);
+
+            dynamic json = data;
+            using (db = new DataTraCuuVPDataContext())
+            {
+                
+                try
+                {   Guid idkh = json._makh;
+                    Guid idvp = json._mavp;
+                    var td = (from a in db.Follows
+                        where a.IDCustomer == idkh && a.IDLand == idvp
+                        select a).SingleOrDefault();
+                    
+                    db.Follows.DeleteOnSubmit(td);
+                    db.SubmitChanges();
+                    return Ok(json);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+            }
+           
+            //var response = Request.CreateResponse<Contactcs>(System.Net.HttpStatusCode.Created, item);
+
+        }
         [HttpPost]
         public void SendMail()
         {   MailMessage msg = new MailMessage();

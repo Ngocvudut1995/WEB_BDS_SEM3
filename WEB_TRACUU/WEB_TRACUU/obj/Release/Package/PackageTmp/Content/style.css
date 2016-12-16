@@ -44,7 +44,7 @@
     position: fixed;
     width: 100%;
     height: 1000px;
-    z-index: 13;
+    z-index: 15;
 }
 
 .dangnhap {
@@ -85,7 +85,7 @@ h3 img {
     z-index: 20;
     
     /*height: 330px;*/
-    border: solid 3px green;
+    border: solid 3px blue;
     background-color: white;
   
 }
@@ -143,7 +143,7 @@ h3 img {
 .icon_society {
    float: left;
     text-align: center;
-    width: 114px;
+    /*width: 114px;*/
     height: 40px;
     background-color: rgba(100, 99, 99, 0.52);
     color: white;

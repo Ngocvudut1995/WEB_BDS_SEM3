@@ -10,8 +10,10 @@ namespace WEB_TRACUU.Models
     {
         private DataTraCuuVPDataContext db;
         public Guid _MaVP { get; set; }
+        public Guid _MaKH { get; set; }
+        public int _MaBaiDang { get; set; }
         public string _TenVp { get; set; }
-
+        public string _TenKH { get; set; }
         public string _Dientich { get; set; }
         public int _MaDT { get; set; }
         public string _Mota { get; set; }
@@ -24,6 +26,7 @@ namespace WEB_TRACUU.Models
         public int _MaQuan { get; set; }
         public string _TenQuan { get; set; }
         public int _MaPL { get; set; }
+        public System.Nullable<decimal> _Price_detail;
         public System.Nullable<System.DateTime> _ModifyDate;
 
         public System.Nullable<System.DateTime> _CreateDate;
@@ -31,6 +34,7 @@ namespace WEB_TRACUU.Models
         public System.Nullable<int> _IDPrice;
         public string _Gia;
         public System.Nullable<bool> _Sell;
+        public System.Nullable<bool> _HetHan;
         public TKVanPhong()
         {
 
@@ -43,6 +47,7 @@ namespace WEB_TRACUU.Models
             using (db = new DataTraCuuVPDataContext())
             {
                 var vp = (from a in db.Overview_Lands
+                           where a.Flag_Approval == true && a.ExpiredDate > DateTime.Now
                           select a).ToList();
                 foreach (var item in vp)
                 {
@@ -67,9 +72,12 @@ namespace WEB_TRACUU.Models
                         _ModifyDate = item.ModifyDate,
                         _Sell = item.Sell,
                         _ExpiredDate = item.ExpiredDate,
-                        _Gia = item.Price
+                        _Gia = item.Price,
+                        _Price_detail = item.Price_detail,
+                        _HetHan = (item.ExpiredDate > DateTime.Now )? false:true
                     });
                 }
+                
                 return list;
             }
 
