@@ -5,7 +5,6 @@ app.config(function ($routeProvider) {
     var app = '';
     $routeProvider
         .when("/TimKiem", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", caseInsensitiveMatch: true, title: "Tìm Kiếm" })
-
         .when("/TimKiem/:sell/:h/:p/:d/:g/:dt/:k", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", title: "Tìm Kiếm" })
         .when("/Home", {
             templateUrl: app + "Home/GioiThieu",
@@ -20,9 +19,9 @@ app.config(function ($routeProvider) {
         .when("/ChiTiet/:id", {
             templateUrl: app + "Home/ChiTiet",
             controller: "chitietCtrl",
-            title: "Trang Chi Tiết Văn Phòng"
-
-        })
+            title: "Trang Chi Tiết Văn Phòng",
+            view: true
+})
          .when("/TheoDoi", {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
@@ -415,7 +414,7 @@ app.controller('timkiemCtrl', [
         // console.log($scope);
         $scope.img_item = "Content/Images/vanphong.jpg";
     }]);
-app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', function ($scope, $http, $routeParams, Map, $location, $rootScope) {
+app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', '$timeout', function ($scope, $http, $routeParams, Map, $location, $rootScope, $timeout) {
     $scope.id_VP = $routeParams.id;
 
     $scope.select_Duong = '0';
@@ -536,11 +535,14 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
                 $scope.list_BDS_LQ = response.data;
 
             });
-            var data1 = JSON.stringify({
+            $timeout(function () {
+              //  console.log("tang view");
+                var data1 = JSON.stringify({
 
-                "_idLand": id
-            });
-            $http.put(host + "/api/ChiTiet/addView/", data1);
+                    "_idLand": id
+                });
+                $http.put(host + "/api/ChiTiet/addView/", data1);
+            }, 30000);
             Map.init(16.063636, 108.21812499999999);
             Map.search($scope.info._NumberHouse + " " + $scope.info._Street + "," + thanhpho)
                 .then(

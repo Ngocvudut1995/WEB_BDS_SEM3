@@ -218,28 +218,28 @@ namespace WEB_TRACUU.Controllers
            // Request.GetClientIpAddress();
             //var address = Request.GetClientIpAddress();
             //var scopeId = address.ScopeId;
-            string add = System.Web.HttpContext.Current.Request.UserHostName;
+            //string add = System.Web.HttpContext.Current.Request.UserHostName;
             try
             {
-                string ip = GetLocalIPAddress();
+                //string ip = GetLocalIPAddress();
                 using (db = new DataTraCuuVPDataContext())
                 {
                     //Customer customer = new Customer();
                     Guid idLand = json._idLand;
-                    var queryBool = (from a in db.InternetProtocols
-                                     where a.ip == ip && a.idLand == idLand
-                                     select a).SingleOrDefault();
-                    if (queryBool != null)
-                    {
+                    //var queryBool = (from a in db.InternetProtocols
+                    //                 where a.ip == ip && a.idLand == idLand
+                    //                 select a).SingleOrDefault();
+                    //if (queryBool != null)
+                    //{
 
-                        return Ok(json);
-                    }
+                    //    return Ok(json);
+                    //}
 
-                    InternetProtocol interPro = new InternetProtocol();
-                    interPro.ip = ip;
-                    interPro.idLand = idLand;
-                    db.InternetProtocols.InsertOnSubmit(interPro);
-                    db.SubmitChanges();
+                    //InternetProtocol interPro = new InternetProtocol();
+                    //interPro.ip = ip;
+                    //interPro.idLand = idLand;
+                    //db.InternetProtocols.InsertOnSubmit(interPro);
+                    //db.SubmitChanges();
                     //
                     var query = (from a in db.Lands
                                  where a.IDLand == idLand

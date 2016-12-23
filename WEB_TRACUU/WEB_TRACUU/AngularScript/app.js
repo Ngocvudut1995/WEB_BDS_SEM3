@@ -237,7 +237,7 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($location, $rootScope, $cookies, $http, $window) {
+app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', function ($location, $rootScope, $cookies, $http, $window, $timeout) {
      var routespermision = ['/TaiKhoan', '/TaiKhoan/dangbai'];
     var routespermision3 = ['/TaiKhoan/ql_tracuu', '/TaiKhoan/ql_khachhang', '/TaiKhoan/ql_baidang'];
     var routespermision2 = ['/TheoDoi/'];
@@ -245,7 +245,11 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($l
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
        
         $rootScope.title = current.$$route.title;
+
         $rootScope.scrolltotop();
+        if (current.view === true) {
+           
+        }
     });
     //console.log($location.path());
 
