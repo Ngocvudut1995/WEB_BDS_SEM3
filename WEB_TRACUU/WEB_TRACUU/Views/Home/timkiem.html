@@ -183,15 +183,10 @@ float: none; padding: 9px 20px 10px;">
                 </h3>
             </div>
             <div style="font-size: 13pt">
-                <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+                <div class="clearfix list-group" style="display: block; list-style-type: square" ng-model="VPNN">
 
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+                    <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_VPNN" href="#/ChiTiet/{{ item._MaVP }}">{{item._TenVp}}</a>
+
                 </div>
             </div>
             <div style="background-color: #C1C1C1;">

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -171,6 +172,61 @@ namespace WEB_TRACUU.Controllers
                 return "Error";
             }
             
+        }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
+        }
+        [HttpPut]
+        public IHttpActionResult addView(JObject data)
+        {
+            dynamic json = data;
+
+            try
+            {
+                string ip = GetLocalIPAddress();
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    //Customer customer = new Customer();
+                    Guid idLand = json._idLand;
+                    var queryBool = (from a in db.InternetProtocols
+                                     where a.ip == ip && a.idLand == idLand
+                                     select a).SingleOrDefault();
+                    if (queryBool != null)
+                    {
+
+                        return Ok(json);
+                    }
+
+                    InternetProtocol interPro = new InternetProtocol();
+                    interPro.ip = ip;
+                    interPro.idLand = idLand;
+                    db.InternetProtocols.InsertOnSubmit(interPro);
+                    db.SubmitChanges();
+                    //
+                    var query = (from a in db.Lands
+                                 where a.IDLand == idLand
+                                 select a).SingleOrDefault();
+                    if (query != null)
+                    {
+                        query.View += 1;
+                        db.SubmitChanges();
+                    }
+                    return Ok(json);
+                }
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
 
     }

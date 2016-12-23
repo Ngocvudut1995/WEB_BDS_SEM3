@@ -87,6 +87,7 @@ namespace WEB_TRACUU.Controllers
                         .OrderByDescending(k => k.IDAddress)
                         .Take(1).SingleOrDefault();
                     if (idAddressCurrent != null) lands.IDAddress = idAddressCurrent.IDAddress;
+                    lands.View = 0;
                     db.Lands.InsertOnSubmit(lands);
                     db.SubmitChanges();
 

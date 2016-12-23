@@ -218,6 +218,10 @@ app.controller('timkiemCtrl', [
             $scope.listQuan = response.data;
 
         });
+
+        $http.get(host + "/api/BdsXemNhieuNhat/get_VP_TK_NhieuNhat/").then(function (response) {
+            $scope.list_VPNN = response.data;
+        });
         $scope.change_sell = function () {
             if ($scope.select_sell == '0') {
                 $scope.select_Kieu = '0';
@@ -532,7 +536,11 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
                 $scope.list_BDS_LQ = response.data;
 
             });
+            var data1 = JSON.stringify({
 
+                "_idLand": id
+            });
+            $http.put(host + "/api/ChiTiet/addView/", data1);
             Map.init(16.063636, 108.21812499999999);
             Map.search($scope.info._NumberHouse + " " + $scope.info._Street + "," + thanhpho)
                 .then(
@@ -549,7 +557,6 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
 
     };
-
     $scope.send_contact = function(nameown, mailto, mail, name, phone, body) {
         var data = JSON.stringify({
             _NameOwn: nameown,
