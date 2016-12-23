@@ -74,21 +74,21 @@
         <elementListCompartment Id="e774b6cf-155a-4047-9ae5-86bad8c99fd6" absoluteBounds="3.515, 2.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(13.75 : 6.25); (14.125 : 5.875); (14.125 : 2.22199625651042); (14.5 : 2.22199625651042)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.75 : 6.25); (14.125 : 5.875); (14.125 : 2.22199625651042); (14.5 : 2.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Customer/Customer_Follow" />
       <nodes>
         <classShapeMoniker Id="d71c024b-a47f-438c-9201-ecccf0c6ad50" />
         <classShapeMoniker Id="58a4fd81-7f61-4798-8f2c-4ae143b8fc1f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(13.75 : 1.86099812825521); (14.5 : 1.86099812825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.75 : 1.86099812825521); (14.5 : 1.86099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Land/Land_Follow" />
       <nodes>
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
         <classShapeMoniker Id="58a4fd81-7f61-4798-8f2c-4ae143b8fc1f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(13.75 : 4.82290771484375); (14.0416666666667 : 4.82290771484375 : JumpStart); (14.2083333333333 : 4.82290771484375 : JumpEnd); (14.5 : 4.82290771484375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(13.75 : 4.82290771484375); (14.5 : 4.82290771484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Land/Land_Image_Detail" />
       <nodes>
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
@@ -102,42 +102,42 @@
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 3.19314697265625); (11.4791666666667 : 3.19314697265625 : JumpStart); (11.6458333333333 : 3.19314697265625 : JumpEnd); (11.75 : 3.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 3.19314697265625); (11.4791666666667 : 3.19314697265625 : JumpStart); (11.6458333333333 : 3.19314697265625 : JumpEnd); (11.75 : 3.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Address/Address_Land" />
       <nodes>
         <classShapeMoniker Id="cadfc461-a6da-4646-9cdf-9ba34aeea908" />
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 7.0618490375601); (11.3785744349011 : 6.68327460265897 : JumpStart); (11.4964255650989 : 6.56542347246122 : JumpEnd); (11.5625 : 6.49934903756009); (11.5625 : 2.06532148632813); (11.75 : 2.06532148632813)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 7.0618490375601); (11.5625 : 6.49934903756009); (11.5625 : 2.06532148632813); (11.75 : 2.06532148632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Price/Price_Land" />
       <nodes>
         <classShapeMoniker Id="f21d50ab-a45e-413a-aafe-88e5cc8b1a08" />
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 3.19314697265625); (9 : 3.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 3.19314697265625); (9 : 3.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Street/Street_Address" />
       <nodes>
         <classShapeMoniker Id="86f3c3ed-ba8d-42f3-b8ed-681f37d57512" />
         <classShapeMoniker Id="cadfc461-a6da-4646-9cdf-9ba34aeea908" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11 : 9.3118490375601); (11.4375 : 8.8743490375601); (11.4375 : 4.23198120117187); (11.4791666666667 : 4.23198120117187 : JumpStart); (11.6458333333333 : 4.23198120117187 : JumpEnd); (11.75 : 4.23198120117187)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 9.3118490375601); (11.4375 : 8.8743490375601); (11.4375 : 4.23198120117187); (11.4791666666667 : 4.23198120117187 : JumpStart); (11.6458333333333 : 4.23198120117187 : JumpEnd); (11.75 : 4.23198120117187)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Type_Land/Type_Land_Land" />
       <nodes>
         <classShapeMoniker Id="3177a817-cf1f-4d06-998b-f5d0cd601eeb" />
         <classShapeMoniker Id="a025a328-7d19-4a14-8e01-6a32fa13dad1" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 3.19314697265625); (6.25 : 3.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 3.19314697265625); (6.25 : 3.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Ward/Ward_Street" />
       <nodes>
         <classShapeMoniker Id="ed02f3fc-4f55-48f2-9a46-5f75f4d32b7b" />
         <classShapeMoniker Id="86f3c3ed-ba8d-42f3-b8ed-681f37d57512" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 3.22199625651042); (3.5 : 3.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 3.22199625651042); (3.5 : 3.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataTraCuuVPDataContext/Trouser/Trouser_Ward" />
       <nodes>
         <classShapeMoniker Id="d966cec9-45c5-46b7-b852-4ba6a382a2eb" />

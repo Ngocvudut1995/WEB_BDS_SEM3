@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Messaging;
+using System.ServiceModel.Channels;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using Newtonsoft.Json.Linq;
@@ -173,6 +175,7 @@ namespace WEB_TRACUU.Controllers
             }
             
         }
+
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -185,11 +188,37 @@ namespace WEB_TRACUU.Controllers
             }
             throw new Exception("Local IP Address Not Found!");
         }
+        private string GetClientIp(HttpRequestMessage request = null)
+        {
+            request = request ?? Request;
+
+            if (request.Properties.ContainsKey("MS_HttpContext"))
+            {
+                return ((HttpContextWrapper)request.Properties["MS_HttpContext"]).Request.UserHostAddress;
+            }
+            else if (request.Properties.ContainsKey(RemoteEndpointMessageProperty.Name))
+            {
+                RemoteEndpointMessageProperty prop = (RemoteEndpointMessageProperty)request.Properties[RemoteEndpointMessageProperty.Name];
+                return prop.Address;
+            }
+            else if (HttpContext.Current != null)
+            {
+                return HttpContext.Current.Request.UserHostAddress;
+            }
+            else
+            {
+                return null;
+            }
+        }
         [HttpPut]
         public IHttpActionResult addView(JObject data)
         {
             dynamic json = data;
-
+            //string clientAddress = HttpContext.Current.Request.UserHostAddress;'
+           // Request.GetClientIpAddress();
+            //var address = Request.GetClientIpAddress();
+            //var scopeId = address.ScopeId;
+            string add = System.Web.HttpContext.Current.Request.UserHostName;
             try
             {
                 string ip = GetLocalIPAddress();

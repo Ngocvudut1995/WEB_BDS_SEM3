@@ -136,7 +136,7 @@ namespace WEB_TRACUU.Controllers
                             // Prevent using images internal thumbnail
                             image.RotateFlip(RotateFlipType.Rotate180FlipNone);
                             image.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                            Image NewImage = image.GetThumbnailImage(270, 180, null, IntPtr.Zero);
+                            Image NewImage = image.GetThumbnailImage(540, 360, null, IntPtr.Zero);
                             NewImage.Save(saveAsPath, ImageFormat.Jpeg);
                            
                         }

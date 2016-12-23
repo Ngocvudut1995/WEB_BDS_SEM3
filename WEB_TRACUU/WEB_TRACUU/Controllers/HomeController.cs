@@ -53,7 +53,12 @@ namespace WEB_TRACUU.Controllers
             ViewBag.id = id;
             return View();
         }
-        
+        public ActionResult RecoverPassWord()
+        {
+            
+            return View();
+        }
+
         public ActionResult PostBai()
         {
             var result = new FilePathResult("../Views/Home/post.html", "text/html");

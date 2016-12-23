@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('AngularApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies']);
+var app = angular.module('AngularApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies', 'textAngular']);
 var show_dn = 0;
 app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function ($scope, $window, $cookies,$rootScope) {
     $scope.name = 'Tra Cứu BDS';
@@ -46,7 +46,7 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
          return format;
      };
     // $rootScope.app = "";
-    $scope.img1 = "Content/Images/view.jpg";
+     $scope.img1 = $rootScope.app+"/Content/Images/view.jpg";
     $scope.img2 = "Content/Images/banner_ser_vpa.png";
     $rootScope.dangnhap = function () {
         $rootScope.show_dn = 1;
@@ -77,8 +77,10 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
         //$("body").animate({ scrollTop: $elm.offset().top }, "slow");
     };
     $rootScope.change_alias =function(str) {
-     
-        str = str.toLowerCase();
+        
+        
+        str = (str != null) ? str.toLowerCase() : null;
+        //console.log(str);
         str = str.replace(/a|à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,'a');
         str = str.replace(/e|è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,'e');
         str = str.replace(/i|ì|í|ị|ỉ|ĩ/g,'i');
@@ -100,7 +102,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $scope.username = "";
     $scope.password = "";
     $scope.body_width = window.innerWidth;
-    $rootScope.taikhoan = { test: 0, tenkh: "", username: "" ,makh:"",admin:false};
+    $rootScope.taikhoan = { test: 0, tenkh: null, username: null ,makh:null,admin:false};
     //var expireDate = new Date();
     //expireDate.setMonth(11);
     //expireDate.setDate(expireDate.getDate() + 1);
@@ -109,25 +111,25 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     };
     //$cookies.put('technology', 'Web', { 'expires': expireDate });
     // Kiem tra co cookies luu tai khoan hay khong
-    //var str = $cookies.get('user');
+    var str = $cookies.get('user');
     //console.log(str);
-    //if (str != null) {
-    //    $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function (res) {
-    //        var data = res.data;
-    //        if (data == null) {
-    //            $rootScope.taikhoan.test = 0;
+    if (str != null) {
+        $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
+            var data = res.data;
+            if (data == null) {
+                $rootScope.taikhoan.test = 0;
 
-    //        } else {
-    //            $rootScope.taikhoan.test = 1;
-    //            $rootScope.taikhoan.username = data._User;
-    //            $rootScope.taikhoan.tenkh = data._TenKH;
-    //            $rootScope.taikhoan.makh = data._MaKH;
-    //            $rootScope.taikhoan.admin = data._Admin;
-    //        }
+            } else {
+                $rootScope.taikhoan.test = 1;
+                $rootScope.taikhoan.username = data._User;
+                $rootScope.taikhoan.tenkh = data._TenKH;
+                $rootScope.taikhoan.makh = data._MaKH;
+                $rootScope.taikhoan.admin = data._Admin;
+            }
 
-    //    });
-    //    console.log($rootScope.taikhoan);
-    //}
+        });
+        //    console.log($rootScope.taikhoan);
+    }
     $rootScope.dangky = function () {
         $location.path('/DangKy');
     };
@@ -251,64 +253,68 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($l
     //console.log(str);
     
    
-    $rootScope.$on('$routeChangeStart', function () {
-        
-        var str = $cookies.get('user');
-        console.log(str);
-        if (str != null) {
-            $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
-                var data = res.data;
-                if (data == null) {
-                    $rootScope.taikhoan.test = 0;
-                    $rootScope.taikhoan.admin = false;
-                } else {
-                    $rootScope.taikhoan.test = 1;
-                    $rootScope.taikhoan.username = data._User;
-                    $rootScope.taikhoan.tenkh = data._TenKH;
-                    $rootScope.taikhoan.makh = data._MaKH;
-                    $rootScope.taikhoan.admin = data._Admin;
-                }
-                console.log($rootScope.taikhoan);
-                if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+    $rootScope.$on('$routeChangeStart', function (evt, to, from) {
+        //console.log(to.authorize);
+        if (to.authorize === true) {
+           
+            var str = $cookies.get('user');
+            //console.log(str);
+            if (str != null) {
+                $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
+                    var data = res.data;
+                    if (data == null) {
+                        $rootScope.taikhoan.test = 0;
+                        $rootScope.taikhoan.admin = false;
+                    } else {
+                        $rootScope.taikhoan.test = 1;
+                        $rootScope.taikhoan.username = data._User;
+                        $rootScope.taikhoan.tenkh = data._TenKH;
+                        $rootScope.taikhoan.makh = data._MaKH;
+                        $rootScope.taikhoan.admin = data._Admin;
+                    }
+                    if ($rootScope.taikhoan.test == 0) {
+                        swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                        $window.history.back();
+                    }
+                    //console.log($rootScope.taikhoan);
+                    //if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                    //    swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                    //    $window.history.back();
+
+                    //    //$location.path();
+                    //}
+                    //if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin == false) {
+                    //    swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
+                    //    // $window.history.back();
+
+                    //    $location.path('#/TimKiem');
+                    //}
+                    //if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
+                    //    swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
+                    //    // $window.history.back();
+
+                    //    $location.path();
+                    //}
+                });
+                //console.log($rootScope.taikhoan);
+               
+            } else {
+                if ($rootScope.taikhoan.test == 0) {
                     swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
                     $window.history.back();
-
-                    //$location.path();
                 }
-                if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin == false) {
-                    swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
-                    // $window.history.back();
-
-                    $location.path('#/TimKiem');
-                }
-                if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-                    swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
-                    // $window.history.back();
-
-                    $location.path();
-                }
-            });
-            //console.log($rootScope.taikhoan);
-        } else {
-            if (routespermision.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-                swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
-                $window.history.back();
-
-                //$location.path();
             }
-            if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin == false) {
+           
+        }
+        if (to.admin === true) {
+            if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin != true) {
                 swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
                 // $window.history.back();
-
-                $location.path('#/TimKiem');
-            }
-            if (routespermision2.indexOf($location.path()) != -1 && $rootScope.taikhoan.test == 0) {
-                swal("Thông báo", "Mời Bạn Đăng Nhập Tài Khoản", "warning");
-                // $window.history.back();
-
-                $location.path();
+                $window.history.back();
+                //$location.path('#/TimKiem');
             }
         }
+      
        // console.log($rootScope.taikhoan);
         //console.log($location.path());
        
@@ -316,16 +322,50 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', function ($l
     });
     
 }]);
-app.directive('ngFiles', ['$parse', function ($parse) {
+app.directive('ngFiles', [
+    '$parse', function($parse) {
 
-    function fn_link(scope, element, attrs) {
-        var onChange = $parse(attrs.ngFiles);
-        element.on('change', function (event) {
-            onChange(scope, { $files: event.target.files });
+        function fn_link(scope, element, attrs) {
+            var onChange = $parse(attrs.ngFiles);
+            element.on('change', function(event) {
+                onChange(scope, { $files: event.target.files });
+            });
+        };
+
+        return {
+            link: fn_link
+        }
+    }
+]);
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+ 
+                event.preventDefault();
+            }
         });
     };
-
-    return {
-        link: fn_link
-    }
-} ])
+});
+app.service("authService", function ($q, $timeout) {
+    var self = this;
+    this.authenticated = false;
+    this.authorize = function () {
+        return this
+                .getInfo()
+                .then(function (info) {
+                    if (info.authenticated === true)
+                        return true;
+                    // anonymous
+                    throw new AuthorizationError();
+                });
+    };
+    this.getInfo = function () {
+        return $timeout(function () {
+            return self;
+        }, 1000);
+    };
+});

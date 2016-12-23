@@ -175,6 +175,61 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
+        [HttpPost]
+        public string fogetPass(string email)
+        {
+            //dynamic jsonCustomer = DataCustomer;
+
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var forget = (from a in db.Customers
+                             where a.Email == email
+                        
+                             select new
+                             {
+                                 a.Email,
+                                 a.Pass,
+                             }).SingleOrDefault();
+
+                if (forget != null)
+                { 
+                    MailMessage msg = new MailMessage();
+
+                    msg.From = new MailAddress("ngocvupct1995@gmail.com");
+                    // string to_mail = email._email.ToString();
+                    string to_mail = email;
+                    msg.To.Add(to_mail);
+
+                    //StreamReader reader = new StreamReader(HostingEnvironment.MapPath("/Views/Home/TemplatePassWord.html"));
+                    //string readFile = reader.ReadToEnd();
+                    //string StrContent = "";
+                    //StrContent = readFile;
+                  
+                    
+                    msg.Subject = "Mật Khẩu Bạn Đã Quên.";
+                    msg.Body = string.Format("Hi,Mật Khẩu Của Bạn Là: {0}", forget.Pass);
+                    //StrContent = StrContent.Replace("[UserName]", kh.CustomerName);
+                    //StrContent = StrContent.Replace("[link_forgetPass]", url);
+                   // msg.Body = StrContent.ToString();
+
+                    msg.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("ngocvupct1995@gmail.com", "toilanumber1");
+
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    db.SubmitChanges();
+                    smtp.Send(msg);
+
+                }
+                return "suucc";
+
+            }
+
+        }
         [HttpGet]
         public IEnumerable<BDS_Detail> get_Land_by_IDCustumer(Guid makh)
         {

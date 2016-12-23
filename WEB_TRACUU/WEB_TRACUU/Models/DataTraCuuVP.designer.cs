@@ -69,7 +69,7 @@ namespace WEB_TRACUU.Models
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BatDongSanConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["BatDongSanConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

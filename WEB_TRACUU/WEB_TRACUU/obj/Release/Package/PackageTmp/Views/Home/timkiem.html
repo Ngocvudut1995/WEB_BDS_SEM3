@@ -1,21 +1,28 @@
 ﻿<div ng-controller="timkiemCtrl">
-    <!--<p>{{ht}}</p>-->
+<!--<p>{{ht}}</p>-->
+<div>
     <div class="row" style="margin-bottom: 20px">
-        <div class="col-md-3"></div>
-        <div class="col-md-6" style="background-color: #eeeeee;text-align: left;border-radius: 6px">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 col-xs-12" style="background-color: #eeeeee;text-align: left;border-radius: 6px">
 
             <!--<label style="width: 100%;margin-top: 30px">Từ Khóa</label>-->
-            <input type="text" placeholder="Từ Khóa" style="width: 88%;height: 44px;border-radius: 4px;margin: 10px" ng-model="query">
-            <button style="font-size: 18pt;"><span class="glyphicon glyphicon-search" ng-click="search_query()"></span></button>
+            <input class="col-md-9 col-xs-8 col-sm-8" type="text" placeholder="Từ Khóa" style="height: 44px;border-radius: 4px;margin: 10px" ng-model="query" ng-enter="search_query(query)">
+            <button class="btn btn-info col-md-2 col-xs-2 col-sm-2" style="font-size: 18pt;
+    border: 0px; margin: 10px;
+    border-radius: 5px; padding-bottom: 2px;
+    padding-top: 9px;" ng-click="search_query(query)"><span class="glyphicon glyphicon-search"></span></button>
         </div>
         <div class="col-md-3"></div>
     </div>
 
-    <div class="row" style="background-color: beige; padding-bottom: 40px; border: black solid 1px;">
+    <div class="row" style="background-color: white;
+    padding-bottom: 40px;
+    border: rgba(0, 0, 0, 0.37) solid 1px;
+    border-radius: 10px;">
 
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
                 <option value="0">Tất Cả</option>
                 <option value="false">Cho Thuê</option>
                 <option value="true">Cần Bán</option>
@@ -23,33 +30,33 @@
             </select>
         </div>
 
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
                 <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
                 <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
 
             </select>
         </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Phường xã</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
                 <option value="0" selected="selected">--- Chọn Phường xã ---</option>
                 <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
             </select>
         </div>
 
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
                 <option value="0" selected="selected">--- Chọn Đường ---</option>
                 <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
 
             </select>
         </div>
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Kieu">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Kieu">
                 <option value="0" selected="selected">--- Chọn Dự Án ---</option>
                 <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
             </select>
@@ -58,26 +65,26 @@
 
 
 
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_DienTich">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_DienTich">
                 <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
                 <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
 
             </select>
         </div>
 
-        <div class="col-md-3 col-xs-6 col-sm-4">
+        <div class="col-md-3 col-xs-12 col-sm-4">
             <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
-            <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Gia">
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Gia">
                 <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
                 <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
             </select>
         </div>
-        <div class="col-md-3 col-xs-6 col-sm-4" style="float: left">
+        <div class="col-md-3 col-xs-12 col-sm-4" style="float: left">
 
             <button style="margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
-                <span class="glyphicon glyphicon-search"></span> <span class="hidden-xs">Tìm Kiếm</span>
+                <span class="glyphicon glyphicon-search"></span> <span class="">Tìm Kiếm</span>
             </button>
             <button style="margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
                 <span class="glyphicon glyphicon-repeat"></span>
@@ -87,6 +94,8 @@
 
 
     </div>
+</div>
+    
 
 
     <div class="row" style="">
@@ -109,14 +118,15 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12" style="border: #999393 solid 2px; background-color: white; padding: 0px 0px">
                         <div class="row">
-                            <div class="col-md-4 col-sm-4 col-xs-12" style="height: 70%; padding-left: 0px; padding-right: 0px; position: relative;height: 178px">
-                                <a href="#/ChiTiet/{{ item._MaVP }}"><img src="{{ app }}/{{ item._Anh }}" style="width: 100%;height: 100%"></a>
+                            <div class="col-md-4 col-sm-4 col-xs-12" style="height: 70%; padding-left: 0px; padding-right: 0px; position: relative;">
+                                <a href="#/ChiTiet/{{ item._MaVP }}"><img ng-src="{{ app }}/{{ item._Anh }}" style="width: 100%;"></a>
                                 <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == true">Cần Bán</div>
                                 <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == false">Cho Thuê</div>
                             </div>
                             <div class="col-md-8 col-sm-8 col-xs-12" style="padding: 1px 0px 0px 10px;">
                                 <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: #0b3dab">
-                                    <p style="font-size: 18pt; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%; overflow: hidden; text-overflow: ellipsis;line-height: 24px;">{{ item._TenVp }}</p>
+                                    <p style="font-size: 18pt; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%; 
+overflow: hidden; text-overflow: ellipsis;line-height: 32px;">{{ item._TenVp }}</p>
                                 </a>
                                 <!--<h4 style="margin-left: 10px; height: 15%; white-space: pre-wrap;" class="hidden-md hidden-lg col-xs-12">{{ item._TenVp }}</h4>-->
                                 <p style="margin-bottom: -10px; margin-top: -15px;white-space: nowrap;max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
@@ -173,15 +183,10 @@ float: none; padding: 9px 20px 10px;">
                 </h3>
             </div>
             <div style="font-size: 13pt">
-                <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+                <div class="clearfix list-group" style="display: block; list-style-type: square" ng-model="VPNN">
 
-                    <a class="list-group-item col-md-12 col-xs-12">Bán căn hộ chung cư The Văn Phú Victoria</a>
+                    <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_VPNN" href="#/ChiTiet/{{ item._MaVP }}">{{item._TenVp}}</a>
+
                 </div>
             </div>
             <div style="background-color: #C1C1C1;">

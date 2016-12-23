@@ -36,7 +36,7 @@
 </head>
 <script>
     var host = "http://" + document.location.hostname + ":" + window.location.port;
-    //var host = "http://" + document.location.hostname + "/TraCuuBDS" ;
+    //var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.5);font-family: 'Open Sans', sans-serif;">
@@ -70,7 +70,9 @@
                         <label>Password:</label>
                         <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
                     </div>
-
+                    <div>
+                        <a href="/Home/RecoverPassWord">? Quen Mat Khau</a>
+                    </div>
                     <div style="text-align: center">
                         <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
                         <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
