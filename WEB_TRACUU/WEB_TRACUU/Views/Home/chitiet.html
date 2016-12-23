@@ -1,20 +1,21 @@
 ﻿
 <div ng-controller="chitietCtrl" ng-init="getAPIid(id_VP)">
-    <div class="rotate" style="height: 37px; width: 184px; position: fixed; right: 0px; top: 100px;z-index: 14">
+    <div class="" style="height: 37px; width: 300px; position: fixed; right: 0px; bottom: 0px;z-index: 14">
         <input ng-click="open_contact()" class="btn btn-info" type="button" style="z-index: 22; width: 100%; height: 100%; /*background-color: #3fd783;*/color: white; /*border-radius: 10px*/" value="Contact Us Now">
     </div>
 
-    <div class="contact col-md-4 col-xs-12 col-lg-4 col-sm-4" style="padding-left: 0px; padding-right: 0px;z-index: 15" ng-show="show_form_contact">
+    <div class="contact col-md-4 col-xs-12 col-lg-4 col-sm-4" style="padding: 0px;z-index: 15" ng-show="show_form_contact">
+        <a style="position: absolute; top: 0px; right: 18px; font-size: 30px; z-index: 21" ng-click="close_contact()"><span class="glyphicon glyphicon-remove-circle"></span></a>
+        <div class="form_contact scrollmenu" style="max-height: 500px; white-space: normal">
+            
+            <div class="row" style="">
 
-        <div class="form_contact">
-            <div class="row" style="position: relative;">
-                <a style="position: absolute; top: 0px; right: 0px; font-size: 30px; z-index: 21" ng-click="close_contact()"><span class="glyphicon glyphicon-remove-circle"></span></a>
                 <div class="col-md-12" style="background-color: white; padding: 0px">
                     <p class="" style="font-size: 20pt; margin: 15px; text-align: center;">{{info._NameCustomer}}</p>
                     <div class="col-md-6 hidden-sm hidden-xs" style="background-color: white">
-                        <a><img class="img-thumbnail" src="https://pbs.twimg.com/profile_images/710169276980858880/eosxkWG0_200x200.jpg" style="width: 115px;
-    height: 115px;margin-left: 15px; margin-top: 10px"></a>
-                        
+                        <a><img class="img-thumbnail" ng-src="https://pbs.twimg.com/profile_images/710169276980858880/eosxkWG0_200x200.jpg" 
+                                style=""></a>
+
                     </div>
                     <div class="col-md-6 col-sm-6" style="height: 100%; background-color: white; padding-top: 15px; padding-left: 0px; padding-right: 0px">
                         <div style="height: 20%; width: 100%; background-color: white; border-bottom: 2px solid silver">
@@ -41,17 +42,17 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="col-md-12" style="background-color: white;text-align: center">
+                <div class="col-md-12" style="background-color: white; text-align: center">
                     <p style="text-align: center; font-size: 20pt; margin: 15px; margin-bottom: 4px;"> Contact </p>
-                    <input type="text" placeholder="Name" style="width: 90%; margin: 15px">
-                    <input type="text" placeholder="Email" style="width: 90%; margin: 15px">
-                    <input type="text" placeholder="Phone" style="width: 90%; margin: 15px">
-                    <textarea class="hidden-xs" rows="4" placeholder="Message" style="height: 50%; width: 90%; margin: 15px"></textarea>
+                    <input type="text" placeholder="Name" style="width: 90%; margin: 15px" ng-model="name_kh">
+                    <input type="text" placeholder="Email" style="width: 90%; margin: 15px" ng-model="email_kh">
+                    <input type="text" placeholder="Phone" style="width: 90%; margin: 15px" ng-model="phone_kh">
+                    <textarea class="hidden-xs" rows="4" placeholder="Message" style="height: 50%; width: 90%; margin: 15px" ng-model="body"></textarea>
                     <textarea class="hidden-md hidden-lg hidden-sm" rows="1" placeholder="Message" style="height: 50%; width: 90%; margin: 15px"></textarea>
-                    <button class="btn btn-info" style="height: 44px; white-space: nowrap; width: 105px; color: white; margin-top: 0px">
+                    <button ng-click="send_contact(info._NameCustomer,info._EmailCustomer,email_kh,name_kh,phone_kh,body)" class="btn btn-info" style="height: 44px; white-space: nowrap; width: 105px; color: white; margin-top: 0px">
                         Send Message
                     </button>
-                    <button class="btn btn-info" ng-click="send_gmail(info._EmailCustomer)" style="height: 44px; white-space: nowrap; width: 105px; color: white; margin-top: 0px;margin: 15px;">
+                    <button class="btn btn-info" ng-click="send_gmail(info._EmailCustomer)" style="height: 44px; white-space: nowrap; width: 105px; color: white; margin-top: 0px; margin: 15px;">
                         <i class="fa fa-google fa-lg"></i> GMail
                     </button>
                 </div>
@@ -72,13 +73,13 @@
         <a class="icon_society" target="_blank" ng-click="share_face(id_VP)">
             <i class="fa fa-facebook-official fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Facebook</span>
         </a>
-        <div class="fb-share-button" data-href="http://localhost:61482/#/ChiTiet/69ad7cce-3d15-4282-8f8d-19c7e64a96ce" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A61482%2F%23%2FChiTiet%2F69ad7cce-3d15-4282-8f8d-19c7e64a96ce&amp;src=sdkpreparse">Share</a></div>
-        <a class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()">
+        
+        <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()" ng-disabled="(taikhoan.test == 0)">
             <i style="color: red" class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
-        </a>
-        <a class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()">
+        </button>
+        <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()" ng-disabled="(taikhoan.test == 0)">
             <i class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
-        </a>
+        </button>
     </div>
 
 
@@ -150,7 +151,7 @@
                 <div class="col-md-4 col-sm-12 col-xs-12 col-lg-4" ng-repeat="item in list_BDS_LQ">
                     <a href="/#" style="color: black">
                         <div style="position: relative; cursor: pointer">
-                            <img style="width: 100%" src="{{ app }}/{{ item._Image }}" />
+                            <img style="width: 100%" ng-src="{{ app }}/{{ item._Image }}" />
                             <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == true">Cần Bán</div>
                             <div style="text-align: center; font-weight: bold; position: absolute; right: 0px; bottom: 0px; width: 105px; height: 27px; background-color: orange" ng-if="item._Sell == false">Cho Thuê</div>
                         </div>
@@ -165,7 +166,7 @@
 
         </div>
         <div class="col-md-3 hidden-xs hidden-sm">
-            <img style="width: 100%;" src="{{ app }}/Content/Images/quangcao2.png" />
+            <img style="width: 100%;" ng-src="{{ app }}/Content/Images/quangcao2.png" />
             <div style="background-color: #C1C1C1;">
                 <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          float: none; padding: 9px 20px 10px;">

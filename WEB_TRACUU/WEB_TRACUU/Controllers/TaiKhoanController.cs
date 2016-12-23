@@ -149,7 +149,7 @@ namespace WEB_TRACUU.Controllers
                     StrContent = StrContent.Replace("[link_active]", url);
                     
                     msg.Subject = "Cảm ơn bạn đã quan tâm tới chúng tôi.";
-                    msg.Body = string.Format("Bạn Đã Tạo Tài Khoản của chúng tôi. Mời bạn Vào Link http://{0}/{1} để kích hoạt.", urlActive, kh.IDCustomer);
+                    //msg.Body = string.Format("Bạn Đã Tạo Tài Khoản của chúng tôi. Mời bạn Vào Link http://{0}/{1} để kích hoạt.", urlActive, kh.IDCustomer);
                     msg.Body = StrContent.ToString();
                     msg.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient();

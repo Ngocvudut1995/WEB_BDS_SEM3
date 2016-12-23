@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Runtime.Remoting.Messaging;
+using System.Web.Hosting;
 using System.Web.Http;
+using Newtonsoft.Json.Linq;
 using WEB_TRACUU.Models;
 
 namespace WEB_TRACUU.Controllers
@@ -120,6 +125,52 @@ namespace WEB_TRACUU.Controllers
                 return list;
             }
 
+        }
+
+        [HttpPost]
+        public string Send_Contact_To_Own(JObject data)
+        {
+            dynamic json = data;
+            try
+            {
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress("ngocvupct1995@gmail.com");
+                string to_mail = json._MailTo.ToString();
+                msg.To.Add(to_mail);
+                //msg.CC.Add("ngocvudut1995@gmail.com");
+                StreamReader reader = new StreamReader(HostingEnvironment.MapPath("/Views/Shared/sendmail_contact.html"));
+                string readFile = reader.ReadToEnd();
+                string StrContent = "";
+                StrContent = readFile;
+                StrContent = StrContent.Replace("[UserName]", json._NameOwn.ToString());
+                StrContent = StrContent.Replace("[TenKH]", json._Name.ToString());
+                StrContent = StrContent.Replace("[EmailKH]", json._Mail_Contact.ToString());
+                StrContent = StrContent.Replace("[PhoneKH]", json._Phone.ToString());
+                StrContent = StrContent.Replace("[BodyKH]", json._Body.ToString());
+
+                msg.Subject = "TraCuuBDS Thông Báo Có Khách Hàng Muốn Liên Hệ Với Bạn.";
+               
+                msg.Body = StrContent.ToString();
+                msg.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("ngocvupct1995@gmail.com", "toilanumber1");
+
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                smtp.Send(msg);
+                return "Success";
+            }
+            catch (Exception)
+            {
+
+                return "Error";
+            }
+            
         }
 
     }

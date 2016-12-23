@@ -46,7 +46,8 @@ namespace WEB_TRACUU.Controllers
                         _Sell = item.Sell,
                         _ExpiredDate = item.ExpiredDate,
                         _Gia = item.Price,
-                        _Price_detail = item.Price_detail
+                        _Price_detail = item.Price_detail,
+                        _HetHan = (item.ExpiredDate < DateTime.Now) ? true:false
                     });
                 }
                 return list;

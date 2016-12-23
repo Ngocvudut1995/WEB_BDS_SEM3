@@ -662,6 +662,7 @@ namespace WEB_TRACUU.Controllers
                         _DiaCHi = item.NumberHouse + " " + item.Street + ", " + item.Trousers + ", TP Đà Nẵng.",
                         _Gia = item.Price_detail,
                         _DienTich = item.Acreage,
+                        _IDDienTich = item.IDAcreage,
                         _CreateDate = item.CreateDate,
                         _ModifyDate = item.ModifyDate,
                         _ExpireDate = item.ExpiredDate,

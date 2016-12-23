@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -127,7 +129,16 @@ namespace WEB_TRACUU.Controllers
                         hpf.SaveAs(saveAsPath);
                         kh.Image = "Content/Images/" + fileName;
                         iUploadedCnt = iUploadedCnt + 1;
-                        
+                        //var img = Image.FromFile(saveAsPath);
+                        using (Image image = Image.FromFile(saveAsPath))
+                        {
+                            // Prevent using images internal thumbnail
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            Image NewImage = image.GetThumbnailImage(270, 180, null, IntPtr.Zero);
+                            NewImage.Save(saveAsPath, ImageFormat.Jpeg);
+                           
+                        }
                     }
                     
                 }
@@ -175,6 +186,15 @@ namespace WEB_TRACUU.Controllers
                             hpf.SaveAs(saveAsPath);
                             imageDetail.Image_detail1 = "Content/Images/Slider/" + id.ToString() + "/" + hpf.FileName;
                             iUploadedCnt = iUploadedCnt + 1;
+                            using (Image image = Image.FromFile(saveAsPath))
+                            {
+                                // Prevent using images internal thumbnail
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                Image NewImage = image.GetThumbnailImage(770, 386, null, IntPtr.Zero);
+                                NewImage.Save(saveAsPath, ImageFormat.Jpeg);
+
+                            }
 
                         }
                         else
@@ -182,9 +202,19 @@ namespace WEB_TRACUU.Controllers
                             hpf.SaveAs(sPath + Path.GetFileName("(t)" + hpf.FileName));
                             imageDetail.Image_detail1 = "Content/Images/Slider/" + id.ToString() + "/" + "(t)" + hpf.FileName;
                             iUploadedCnt = iUploadedCnt + 1;
+                            using (Image image = Image.FromFile(sPath + Path.GetFileName("(t)" + hpf.FileName)))
+                            {
+                                // Prevent using images internal thumbnail
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                Image NewImage = image.GetThumbnailImage(770, 386, null, IntPtr.Zero);
+                                NewImage.Save(sPath + Path.GetFileName("(t)" + hpf.FileName), ImageFormat.Jpeg);
+
+                            }
 
                         }
                     }
+
 
                 }
                 db.Image_Details.InsertOnSubmit(imageDetail);

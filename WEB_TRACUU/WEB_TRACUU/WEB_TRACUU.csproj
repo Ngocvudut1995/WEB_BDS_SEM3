@@ -390,6 +390,7 @@
     <Content Include="Views\Home\timkiem.html" />
     <Content Include="Views\Home\trangchinh.html" />
     <Content Include="Views\Shared\SendEmail.html" />
+    <Content Include="Views\Shared\sendmail_contact.html" />
     <Content Include="Views\Shared\slider.html" />
     <Content Include="Views\trangchinh.html" />
     <Content Include="Web.config" />

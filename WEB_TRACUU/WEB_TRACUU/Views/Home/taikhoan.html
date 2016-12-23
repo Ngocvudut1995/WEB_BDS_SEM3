@@ -719,17 +719,17 @@
                         <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tên</th>
-                            <th>Email</th>
-                            <th>Địa Chỉ</th>
-                            <th>Phone</th>
-                            <th>Cơ Quan</th>
-                            <th>CMND</th>
-                            <th>Admin</th>
+                            <th>Tên <a ng-click="sort_by('CustomerName')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Email <a ng-click="sort_by('Email')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Địa Chỉ <a ng-click="sort_by('Address')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Phone <a ng-click="sort_by('PhoneNumber')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Cơ Quan <a ng-click="sort_by('Organization')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>CMND <a ng-click="sort_by('CMND')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Admin <a ng-click="sort_by('Admin')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in list_Customer track by $index">
+                        <tr ng-repeat="item in list_Customer | orderBy:sortingOrder:reverse">
                             <td>{{$index + 1}}</td>
                             <td><a href="#/TaiKhoan/khachhang/{{item.IDCustomer}}">{{item.CustomerName}}</a></td>
                             <td>{{item.Email}}</td>
@@ -747,7 +747,7 @@
             </div>
 
         </div>
-            <div ng-switch-when="ql_baidang" style="margin: 20px" class="list-group">
+            <div ng-switch-when="ql_baidang" style="margin: 20px" class="list-group" ng-controller="ql_baidang">
                 <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
                     <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
                 </div>
@@ -758,19 +758,19 @@
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Tên BDS</th>
-                                    <th>Loại BDS</th>
-                                    <th>Địa Chỉ</th>
-                                    <th>Giá</th>
-                                    <th>Diện Tích</th>
-                                    <th>Ngày Tạo</th>
-                                    <th>Ngày Cập Nhật</th>
-                                    <th>Ngày Hết Hạn</th>
-                                    <th>Đã Hết Hạn</th>
+                                    <th>Tên BDS <a ng-click="sort_by('_TenVp')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Loại BDS <a ng-click="sort_by('_TenLoai')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Địa Chỉ <a ng-click="sort_by('_DiaCHi')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Giá <a ng-click="sort_by('_Gia')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Diện Tích <a ng-click="sort_by('_IDDienTich')"><i class="fa fa-sort" aria-hidden="true"></i></a>></th>
+                                    <th>Ngày Tạo <a ng-click="sort_by('_CreateDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Ngày Cập Nhật <a ng-click="sort_by('_ModifyDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Ngày Hết Hạn <a ng-click="sort_by('_ExpireDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Đã Hết Hạn <a ng-click="sort_by('HetHan')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in list_Land track by $index">
+                                <tr ng-repeat="item in list_Land | orderBy:sortingOrder:reverse">
                                     <td>{{$index + 1}}</td>
                                     <td><a href="#/TaiKhoan/ct_baidang/{{item._MaVP}}">{{item._TenVp}}</a></td>
                                     <td>{{item._TenLoai}}</td>
@@ -981,11 +981,11 @@
                                 </p>
 
                                 <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
-                                    <img style="width: 100%" src="{{app}}/{{item.Anh}}" />
+                                    <img style="width: 100%" ng-src="{{app}}/{{item.Anh}}" />
                                 </div>
                             </li>
                         </ul>
-                        <button style="float: right; margin-left: 10px" ng-click="duyet_bai(item._IDPost)" ng-hide="(taikhoan.admin == false)">Duyệt</button>
+                        <button style="float: right; margin-left: 10px" ng-click="duyet_bai(item._IDPost)" ng-hide="(taikhoan.admin != true)">Duyệt</button>
                         <button style="float: right; margin-left: 10px"  ng-click="huy_bai(item._IDPost)">Hủy</button>
 
                     </div>
@@ -1039,7 +1039,7 @@
                                 </p>
 
                                 <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
-                                    <img style="width: 100%" src="{{app}}/{{item.Anh}}" />
+                                    <img style="width: 100%" ng-src="{{app}}/{{item.Anh}}" />
                                 </div>
                             </li>
                         </ul>
@@ -1099,7 +1099,7 @@
                             </p>
 
                             <div class="col-md-3" style="margin-bottom: 10px" ng-repeat="item in list_Images">
-                                <img style="width: 100%" src="{{app}}/{{item.Anh}}"/>
+                                <img style="width: 100%" ng-src="{{app}}/{{item.Anh}}"/>
                             </div>
                             
                         </li>
@@ -1122,7 +1122,7 @@
                                         <input type="password" ng-model="passwordOld" name="passwordOld" class="form-control" id="pwOld" ng-minlength="6" placeholder="Enter password" required>
                                         <span style="color: red" ng-show="myForm.passwordOld.$touched && myForm.passwordOld.$invalid">
                                             <span ng-show="myForm.passwordOld.$error.required">Password is required.</span>
-                                            <span ng-show="passwordOld==">Password must be at least 6 characters.</span>
+                                            <span ng-show="myForm.passwordOld.$error.minlength">Password must be at least 6 characters.</span>
                                         </span>
                                     </div>
                                 </div>

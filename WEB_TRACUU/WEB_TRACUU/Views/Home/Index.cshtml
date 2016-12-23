@@ -29,7 +29,8 @@
     <script src="~/AngularScript/TextEditor/textAngularSetup.js"></script>
     <link href="~/AngularScript/TextEditor/textAngular.css" rel="stylesheet" />
 
-    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>*@
 
 </head>
@@ -38,7 +39,7 @@
     //var host = "http://" + document.location.hostname + "/TraCuuBDS" ;
     //console.log(host);
 </script>
-<body style="background-color: rgba(189, 191, 193, 0.5);">
+<body style="background-color: rgba(189, 191, 193, 0.5);font-family: 'Open Sans', sans-serif;">
     <div id="fb-root"></div>
     <script>
 (function(d, s, id) {
@@ -80,46 +81,12 @@
             </div>
         </div>
 
-        @*<div class="col-md-4 col-xs-4 col-sm-4"></div>
-                <div class="col-md-4 col-xs-4 col-sm-4 dangnhap" id="all">
-
-                    <form class="form-horizontal" ng-app="myApp" ng-controller="dangkiCtr" name="myForm" novalidate>
-                        <div style="font-family: Arial;font-size: 40px; align: center; color:blue;margin: 20px 10px 20px 10px;" align="center"><b>Đăng nhập</b></div>
-
-                        <div class="form-group">
-                            <!--<label class="control-label col-sm-2" for="pwd">Register Name<span style="color: red">(*)</span>:</label>-->
-                            <div class="col-md-12 col-xs-12 col-sm-12">
-                                <input type="text" ng-model="reName" name="reName" class="form-control" placeholder="Nhập tên đăng kí" required>
-                                <span style="color:red" ng-show="myForm.reName.$touched && myForm.reName.$invalid">
-                                    <span ng-show="myForm.reName.$error.required">Register name is required.</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <!--<label class="control-label col-sm-2" for="pwd">Password<span style="color: red">(*)</span>:</label>-->
-                            <div class="col-md-12 col-xs-12 col-sm-12">
-                                <input type="password" ng-model="password" name="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" required>
-                                <span style="color:red" ng-show="myForm.password.$touched && myForm.password.$invalid">
-                                    <span ng-show="myForm.password.$error.required">Password is required.</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox">Nhớ tài khoản</label>
-                        </div>
-
-                        <div style="text-align: center; padding: 5px 15px">
-                            <input type="submit" value="Đăng nhập" id="but">
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-4 col-xs-4 col-sm-4"></div>*@
 
     </div>
-    <div style="z-index: 19; position: fixed; width: 100%;">
-        <ul class="nav row" style="background-color: #5f5d5d">
+    <div style="z-index: 19; position: fixed; width: 100%;background-color: #5f5d5d;">
+        <ul class="nav row" style="background-color: #5f5d5d; width: 80%; text-align: center; margin-left: 10%">
             @*rgb(20, 2, 119)*@
-            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg hidden-sm">
+            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-th-list"></span>
 
@@ -135,16 +102,16 @@
                     <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
                 </ul>
             </li>
-            <li class="col-xs-10 navtab hidden-lg hidden-md hidden-sm" ng-class="[{active:tab_index == 0}]" style="background-color: rgb(47, 46, 46)">
+            <li class="col-xs-10 navtab hidden-lg hidden-md" ng-class="[{active:tab_index == 0}]" style="">
                 <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
             </li>
-            <li class="col-md-5 col-lg-5 col-sm-5 col-xs-10 navtab hidden-xs" ng-class="[{active:tab_index == 0}]" style="width: 20%; background-color: rgb(47, 46, 46)">
+            <li class="col-md-5 col-lg-5 col-sm-5 col-xs-10 navtab hidden-xs hidden-sm" ng-class="[{active:tab_index == 0}]" style="width: 20%;">
                 <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
             </li>
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 1}]" style="width: 20%">
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 1}]" style="width: 20%">
                 <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
             </li>
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 4}]" style="width: 20%">
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 4}]" style="width: 20%">
                 <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
             </li>
             @*<li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-xs " style="width: 20%" ng-class="[{active:tab_index == 4}]">
@@ -158,10 +125,10 @@
                         <li><a href="#/TimKiem">Cần Bán</a></li>
                     </ul>
                 </li>*@
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 2}]" style="width: 20%">
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 2}]" style="width: 20%">
                 <a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(2)" style="white-space: nowrap;"><span class="glyphicon glyphicon-heart"></span> Quan Tâm</a>
             </li>
-            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs navtab" ng-class="[{active:tab_index == 3}]" style="width: 20%">
+            <li class="col-md-5 col-lg-5 col-sm-5 hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 3}]" style="width: 20%">
                 <a href="#/TaiKhoan/" ng-click="change_tab(3)" style="white-space: nowrap;"><span class="glyphicon glyphicon-user"></span> Tài Khoản</a>
             </li>
 
@@ -174,11 +141,11 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding: 0px;">
     <div ng-controller="main" style="margin-top: 56px;">
 
         <div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
-            <div style="position: absolute; width: 100%; height: 60%; z-index: 11; background-image: url('{{ app }}/{{ img1 }}'); background-size: cover;">
+            <div style="position: absolute; width: 100%; height: 60%; z-index: 11;background-size: cover;" ng-style="{'background-image': 'url({{img1}})'}">
                 <p ng-if="taikhoan.test == 1" style="float: right; margin-right: 20px; margin-top: 10px; font-size: 20px; font-weight: bold; color: rgb(20, 2, 119)">
                     Xin Chào Khách Hàng <a href="#/TaiKhoan" style="color: green">{{ taikhoan.username }}</a>|<a style="color: green" ng-click="dang_xuat()">Đăng Xuất</a>
                 </p>
@@ -186,12 +153,16 @@
             <div class="row" style="position: absolute; width: 100%; height: 60%; z-index: 12; top: 35%">
                 <div class="col-md-1"></div>
                 <div class="col-md-6" style="height: 100%">
-                    <img class="img-thumbnail" alt="Cinque Terre" ng-src="{{ app }}/{{ img2 }}" style="width: 100%; height: 100%"/>
+                    <img class="img-thumbnail" alt="Cinque Terre" ng-src="{{ app }}/Content/Images/banner_ser_vpa.png" style="width: 100%; height: 100%"/>
                 </div>
                 <div class="col-md-5" style="padding-left: 0px;">
-                    <div style="background-color: rgba(0, 0, 0, 0.5); padding: 15px;">
-                        <h2 style="float: left; font-weight: bold; width: 100%; text-align: center; color: white">{{ name }} Đã tìm là thấy</h2>
-                        <p style="font-weight: bold; text-align: justify; color: white">Tra Cứu BDS chính thức có mặt trên thị truờng bất động sản Việt Nam. Trải qua nhiều năm hình thành và phát triển, Tra Cứu BDS luôn vững vàng với mục tiêu mang lại cho khách hàng những sản phẩm và dịch vụ tốt nhất, với tôn chỉ hoạt động Chung sức vì sự an cư của cộng đồng </p>
+                    <div style="background-color: rgba(0, 0, 0, 0.5); padding: 15px;height: 200px">
+                        <h2 style="float: left; font-weight: bold; width: 100%; text-align: center; color: white;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;margin-top: 0px;">{{ name }} Đã tìm là thấy</h2>
+                        <p style="float: left;font-weight: bold; text-align: justify; color: white; display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;">Tra Cứu BDS chính thức có mặt trên thị truờng bất động sản Việt Nam. Trải qua nhiều năm hình thành và phát triển, Tra Cứu BDS luôn vững vàng với mục tiêu mang lại cho khách hàng những sản phẩm và dịch vụ tốt nhất, với tôn chỉ hoạt động Chung sức vì sự an cư của cộng đồng </p>
                         <div class="row" ng-if="taikhoan.test == 0">
                             <div class="col-md-2"></div>
                             <div class="col-md-4" style="text-align: center">
@@ -216,7 +187,7 @@
 
     </div>
     <hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>
-    <div class="container" ng-controller="route_view" ng-view>
+    <div class="container" ng-controller="route_view" ng-view style="padding: 0px;">
 
     </div>
     <div class="body-content">
