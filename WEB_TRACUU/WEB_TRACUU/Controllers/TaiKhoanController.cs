@@ -39,6 +39,26 @@ namespace WEB_TRACUU.Controllers
            
           
         }
+        [HttpGet]
+        public int KT_Email_TonTai(string email)
+        {
+            try
+            {
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var kh = (from a in db.Customers where a.Email == email select a).SingleOrDefault();
+                    if (kh != null) return 1;
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
         //[HttpPost]
         //public IHttpActionResult TaoTK(JObject data)
         //{

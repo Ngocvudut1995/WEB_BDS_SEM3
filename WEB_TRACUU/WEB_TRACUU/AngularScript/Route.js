@@ -208,10 +208,12 @@ app.controller('timkiemCtrl', [
         $rootScope.tab_index = 1;
 
         var list_all = [];
+        $rootScope.loading = 1;
         $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
             $scope.listVP = response.data;
             list_all = response.data;
             $scope.search();
+            $rootScope.loading = 0;
         });
         $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
             $scope.listQuan = response.data;
@@ -615,11 +617,18 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
     $scope.rePassword = '';
     $scope.birthdate = "";
     $scope.test_tk = 0;
+    $scope.test_email = 0; 
     $scope._check = 0;
     $scope.kt_taikhoan_tontai = function () {
         var url = host + "/api/TaiKhoan/KT_TaiKhoan_TonTai/?user=" + $scope.username;
         $http.get(url).then(function (response) {
             $scope.test_tk = response.data;
+        });
+    };
+    $scope.kt_email = function () {
+        var url = host + "/api/TaiKhoan/KT_Email_TonTai/?email=" + $scope.email;
+        $http.get(url).then(function (response) {
+            $scope.test_email = response.data;
         });
     };
     $scope.register = function () {
@@ -630,6 +639,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
         //date.setHours(00);
         // console.log(date);
         // $scope.land.expired_date = date;
+        $rootScope.loading = 1;
         var data = JSON.stringify({
             "_tenkh": $scope.fullname, "_user": $scope.username, "_pass": $scope.password,
             "_email": $scope.email, "_coquan": $scope.coquan, "_sodt": $scope.phone,
@@ -638,6 +648,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
         });
 
         $http.post(host + "/api/TaiKhoan/TaoTK/", data).then(function (response) {
+            $rootScope.loading = 0;
             swal({
                 title: 'Mời Bạn Kích Hoạt Tài Khoản',
                 text: "Chúng tôi Đã Gửi Mail",
@@ -655,6 +666,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
             }
                  );
         }, function (res) {
+            $rootScope.loading = 0;
             swal("Thông báo", "Server unavailable", "error");
         });
     };

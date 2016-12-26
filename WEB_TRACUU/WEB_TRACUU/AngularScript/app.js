@@ -4,6 +4,7 @@ var show_dn = 0;
 app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function ($scope, $window, $cookies,$rootScope) {
     $scope.name = 'Tra Cứu BDS';
     $rootScope.show_dn = 0;
+    $rootScope.loading = 0;
     $rootScope.show_form_contact = 0;
     $rootScope.app = host;
     //$rootScope.MaKH = 'KH10001';
@@ -371,5 +372,24 @@ app.service("authService", function ($q, $timeout) {
         return $timeout(function () {
             return self;
         }, 1000);
+    };
+});
+app.directive("scroll", function ($window) {
+    
+    return function (scope, element, attrs) {
+        scope.pageYOffsetCurrent = 0;
+        angular.element($window).bind("scroll", function () {
+            
+            if (this.pageYOffset - scope.pageYOffsetCurrent >= 1 && this.pageYOffset > 300) {
+                scope.boolChange = 0;
+                scope.pageYOffsetCurrent = this.pageYOffset;
+             
+            } else {
+                scope.boolChange = 1;
+                scope.pageYOffsetCurrent = this.pageYOffset;
+              
+            }
+            scope.$apply();
+        });
     };
 });

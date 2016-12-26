@@ -133,17 +133,20 @@
                 <div class="form-group">
                     <label class="control-label col-md-4 col col-xs-4 col-sm-4">Email<span style="color: red">(*)</span>:</label>
                     <div class="col-md-8 col-xs-8 col-sm-8">
-                        <input type="email" ng-model="email" name="email" class="form-control" placeholder="Enter email" required>
-                        <span style="color:red" ng-show="myForm.email.$touched && myForm.email.$invalid">
+                        <input type="email" ng-model="email" name="email" class="form-control" placeholder="Enter email" required ng-blur ="kt_email()">
+                        <span style="color: red" ng-show="myForm.email.$touched && myForm.email.$invalid">
                             <span ng-show="myForm.email.$error.required">Email is required.</span>
                             <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                        </span>
+                        <span style="color: red" ng-show="test_email==1">
+                            Email đã được sử dụng.
                         </span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-4 col col-xs-4 col-sm-4" for="pwd">Tên đăng ký<span style="color: red;white-space: nowrap">(*)</span>:</label>
                     <div class="col-md-8 col-xs-8 col-sm-8">
-                        <input type="text" ng-model="username"  name="username" ng-minlength="8" class="form-control" placeholder="Enter register name" required ng-change="kt_taikhoan_tontai()">
+                        <input type="text" ng-model="username"  name="username" ng-minlength="8" class="form-control" placeholder="Enter register name" required ng-blur="kt_taikhoan_tontai()">
                         <span style="color: red" ng-show="myForm.username.$touched && myForm.username.$invalid">
                             <span ng-show="myForm.username.$error.required">Tên đăng ký is required.</span>
                             <span ng-show="myForm.username.$error.minlength">

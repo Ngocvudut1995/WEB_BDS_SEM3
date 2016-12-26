@@ -54,9 +54,16 @@
 </div>
 
 <div ng-controller="index" style="position: absolute">
-
+    <div style="text-align: center;position: fixed;
+    width: 100%;
+    top: 50%;
+    z-index: 14;" ng-show="loading == 1">
+        <img ng-src="{{ app }}/Content/Images/default.gif" />
+    </div>
     <div class="khung_den" ng-show="show_dn == 1">
-        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+           
+        </div>
         <div class="col-lg-4 col-xs-12 dangnhap">
             <div class="col-md-12" style="margin: auto">
                 <h3 style="font-family: Arial; font-size: 40px; color: blue; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
@@ -85,8 +92,8 @@
 
 
     </div>
-    <div style="z-index: 19; position: fixed; width: 100%;background-color: #5f5d5d;">
-        <ul class="nav row" style="background-color: #5f5d5d; width: 80%; text-align: center; margin-left: 10%">
+    <div style="z-index: 19; position: fixed; width: 100%;background-color: rgba(95, 93, 93, 0.6);" scroll ng-style="{'opacity':boolChange}">
+        <ul class="nav row" style="background-color: rgba(95, 93, 93, 0); width: 80%; text-align: center; margin-left: 10%">
             @*rgb(20, 2, 119)*@
             <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg">
                 <a class="dropdown-toggle" data-toggle="dropdown">
