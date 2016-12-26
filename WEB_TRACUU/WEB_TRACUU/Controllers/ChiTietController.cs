@@ -107,7 +107,7 @@ namespace WEB_TRACUU.Controllers
             using (db = new DataTraCuuVPDataContext())
             {
                 var query = (from a in db.Overview_Lands
-                             where a.IDType == idtype
+                             where a.IDType == idtype 
                              select new
                              {
                                  a.IDLand,

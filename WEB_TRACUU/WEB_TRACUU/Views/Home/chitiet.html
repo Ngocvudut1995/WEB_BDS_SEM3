@@ -44,11 +44,11 @@
                 <hr/>
                 <div class="col-md-12" style="background-color: white; text-align: center">
                     <p style="text-align: center; font-size: 20pt; margin: 15px; margin-bottom: 4px;"> Contact </p>
-                    <input type="text" placeholder="Name" style="width: 90%; margin: 15px" ng-model="name_kh">
-                    <input type="text" placeholder="Email" style="width: 90%; margin: 15px" ng-model="email_kh">
-                    <input type="text" placeholder="Phone" style="width: 90%; margin: 15px" ng-model="phone_kh">
-                    <textarea class="hidden-xs" rows="4" placeholder="Message" style="height: 50%; width: 90%; margin: 15px" ng-model="body"></textarea>
-                    <textarea class="hidden-md hidden-lg hidden-sm" rows="1" placeholder="Message" style="height: 50%; width: 90%; margin: 15px"></textarea>
+                    <input type="text" placeholder="Name" style="width: 90%; margin: 15px" ng-model="name_kh" required>
+                    <input type="text" placeholder="Email" style="width: 90%; margin: 15px" ng-model="email_kh" required>
+                    <input type="text" placeholder="Phone" style="width: 90%; margin: 15px" ng-model="phone_kh" required>
+                    <textarea class="hidden-xs" rows="4" placeholder="Message" style="height: 50%; width: 90%; margin: 15px" ng-model="body" required></textarea>
+                    <textarea class="hidden-md hidden-lg hidden-sm" rows="1" placeholder="Message" style="height: 50%; width: 90%; margin: 15px" required></textarea>
                     <button ng-click="send_contact(info._NameCustomer,info._EmailCustomer,email_kh,name_kh,phone_kh,body)" class="btn btn-info" style="height: 44px; white-space: nowrap; width: 105px; color: white; margin-top: 0px">
                         Send Message
                     </button>
@@ -110,7 +110,7 @@
                     <li class="col-md-6 col-xs-12">Ngày Hết Hạn: {{ format_date(info._ExpireDate) }}</li>
                     <li class="col-md-6 col-xs-12">Diện Tích: {{ info._Acreage }}</li>
                     <li class="col-md-6 col-xs-12">Giá: {{info._Price}}</li>
-                    <li class="col-md-6 col-xs-12">Vị Trí: {{ info._NumberHouse }} {{ info._Street }}, Quận {{ info._Trousers }}, Phường {{ info._Ward }}, TP Đà Nẵng</li>
+                    <li class="col-md-6 col-xs-12" style="padding-right: 17px;">Vị Trí: {{ info._NumberHouse }} {{ info._Street }}, Quận {{ info._Trousers }}, Phường {{ info._Ward }}, TP Đà Nẵng</li>
                     <li class="col-md-6 col-xs-12">Loại Dự Án: {{info._TypeName}}</li>
                 </ul>
             </div>
@@ -247,20 +247,20 @@
                 </div>
                 <div style="background-color: #C1C1C1;">
                     <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #ccc;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               float: none; padding: 9px 20px 10px;">
+float: none; padding: 9px 20px 10px;">
                         Cho thuê văn phòng trọ gần trường đại học
                     </h3>
                 </div>
                 <div style="font-size: 13pt">
                     <div class="clearfix list-group" style="display: block; list-style-type: square;">
-                        <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_top_land">Đại Học Bách Khoa Đà Nẵng </a>
-                        <a class="list-group-item col-md-12 col-xs-12" ng-click="selectedValue = 'cars'">Đại Học Bách Khoa Đà Nẵng </a>
-                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangdadang">Đại Học Bách Khoa Đà Nẵng </a>
-                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidanghethan">Đại Học Bách Khoa Đà Nẵng </a>
-                        <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/ql_baidangchuaduyet">Đại Học Bách Khoa Đà Nẵng </a>
                         <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Sư Phạm Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Kinh Tế Đà Nẵng  </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Kiến Trúc Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Ngoại Ngữ Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Kỹ Thuật Y Dược Đà Nẵng </a>
 
-                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                        <a class="list-group-item col-md-12 col-xs-12">Đại Học Cao Đẳng Khác </a>
                     </div>
                 </div>
             </div>

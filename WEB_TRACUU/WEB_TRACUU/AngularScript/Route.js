@@ -418,7 +418,7 @@ app.controller('timkiemCtrl', [
     }]);
 app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', '$timeout', function ($scope, $http, $routeParams, Map, $location, $rootScope, $timeout) {
     $scope.id_VP = $routeParams.id;
-
+    $rootScope.loading = 1;
     $scope.select_Duong = '0';
     $scope.select_Gia = '0';
     $scope.select_Huyen = '0';
@@ -522,6 +522,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
         $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
             $scope.images = response.data;
             $scope.show_slide = 1;
+            $rootScope.loading = 0;
         });
 
     });
@@ -533,6 +534,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     $scope.getAPIid = function (id) {
         $http.get(host + "/api/ChiTiet/get_vp_by_id/?mavp=" + id).then(function (response) {
             $scope.info = response.data;
+            // load 
             $http.get(host + "/api/ChiTiet/get_VP_by_type/?idtype=" + $scope.info._IDType).then(function (response) {
                 $scope.list_BDS_LQ = response.data;
 
