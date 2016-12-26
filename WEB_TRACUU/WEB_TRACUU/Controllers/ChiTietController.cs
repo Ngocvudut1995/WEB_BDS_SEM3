@@ -188,6 +188,11 @@ namespace WEB_TRACUU.Controllers
             }
             throw new Exception("Local IP Address Not Found!");
         }
+        public string GetIp()
+        {
+            return GetClientIp();
+        }
+
         private string GetClientIp(HttpRequestMessage request = null)
         {
             request = request ?? Request;
@@ -214,6 +219,7 @@ namespace WEB_TRACUU.Controllers
         public IHttpActionResult addView(JObject data)
         {
             dynamic json = data;
+            string ip = GetIp();
             //string clientAddress = HttpContext.Current.Request.UserHostAddress;'
            // Request.GetClientIpAddress();
             //var address = Request.GetClientIpAddress();
@@ -226,20 +232,20 @@ namespace WEB_TRACUU.Controllers
                 {
                     //Customer customer = new Customer();
                     Guid idLand = json._idLand;
-                    //var queryBool = (from a in db.InternetProtocols
-                    //                 where a.ip == ip && a.idLand == idLand
-                    //                 select a).SingleOrDefault();
-                    //if (queryBool != null)
-                    //{
+                    var queryBool = (from a in db.InternetProtocols
+                                     where a.ip == ip && a.idLand == idLand
+                                     select a).SingleOrDefault();
+                    if (queryBool != null)
+                    {
 
-                    //    return Ok(json);
-                    //}
+                        return Ok(json);
+                    }
 
-                    //InternetProtocol interPro = new InternetProtocol();
-                    //interPro.ip = ip;
-                    //interPro.idLand = idLand;
-                    //db.InternetProtocols.InsertOnSubmit(interPro);
-                    //db.SubmitChanges();
+                    InternetProtocol interPro = new InternetProtocol();
+                    interPro.ip = ip;
+                    interPro.idLand = idLand;
+                    db.InternetProtocols.InsertOnSubmit(interPro);
+                    db.SubmitChanges();
                     //
                     var query = (from a in db.Lands
                                  where a.IDLand == idLand

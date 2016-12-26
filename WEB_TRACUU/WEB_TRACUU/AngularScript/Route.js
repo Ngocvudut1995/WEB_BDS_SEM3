@@ -537,6 +537,11 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
                 $scope.list_BDS_LQ = response.data;
 
             });
+            var data1 = JSON.stringify({
+
+                "_idLand": id
+            });
+            $http.put(host + "/api/ChiTiet/addView/", data1);
             $timeout(function () {
               //  console.log("tang view");
                 var data1 = JSON.stringify({
