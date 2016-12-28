@@ -39,7 +39,7 @@
     //var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
-<body style="background-color: rgba(189, 191, 193, 0.5);font-family: 'Open Sans', sans-serif;">
+<body style="background-color: rgba(189, 191, 193, 0.5);font-family: 'Open Sans', sans-serif;font-size: 14px">
     <div id="fb-root"></div>
     <script>
 (function(d, s, id) {
@@ -94,7 +94,8 @@
 
     </div>
 
-    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll ng-style="{'opacity':boolChange}">
+    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll 
+         ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} || (hien_nav_mini == 1) && {'position':'relative'})">
         <div style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
             <ul class="nav nav-pills" style="float: left; margin-left: 30px">
                 <li><a href="#" style="color: white;font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -104,8 +105,8 @@
                 <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
             </ul>
             <ul class="nav nav-pills" style="float: right; margin-right: 30px">
-                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-file-text" aria-hidden="true"></i> Đăng tin</a></li>
-                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a></li>
+                <li><a href="#/TaiKhoan/dangbai" style="color: white; font-size: 12px;"><i class="fa fa-file-text" aria-hidden="true"></i> Đăng tin</a></li>
+                <li><a href="#/DangKy" style="color: white; font-size: 12px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a></li>
                 <li ng-if="taikhoan.test == 0"><a ng-click="dangnhap()" style="color: white; font-size: 12px;"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
                 <li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu hidden-xs " style="">
                     <a class="dropdown-toggle" data-toggle="dropdown" style="color: white; font-size: 12px;">
@@ -121,7 +122,7 @@
                 </li>
             </ul>
         </div>
-        <div style="height: 65px;position: relative;">
+        <div style="height: 65px;position: relative;" ng-show="boolChange == 1">
             <ul class="nav nav-pills" style="text-align: center; float: left; margin-left: 6%;">
                 <li class="navtab hidden-xs hidden-sm" style="">
                     <a ng-click="change_tab(1)" id="nav1" href="#/" style="white-space: nowrap;padding: 8px;">
@@ -281,7 +282,7 @@
 
     </div>
     @*<hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>*@
-    <div class="" ng-controller="route_view" ng-view style="padding: 0px;">
+    <div class="" ng-controller="route_view" ng-view style="padding: 0px; margin-top: 20px">
 
     </div>
     <div class="body-content">

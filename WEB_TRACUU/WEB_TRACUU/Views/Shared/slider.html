@@ -8,7 +8,7 @@
     </div>
     <div class="row" style="">
         <div class="col-md-10 col-sm-10 col-xs-12" style="padding-left: 0px;padding-right: 0px;">
-            <div class="slider" ng-style="((body_width > 700) && {'height': '406px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400) )|| ((body_width < 400) && {'height': '125px'})">
+            <div class="slider" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400) )|| ((body_width < 400) && {'height': '125px'})">
                 <div class="slide" ng-repeat="image in images" ng-show="image.visible">
                     <img ng-src="{{ host }}/{{image.Anh}}"/>
                     
@@ -27,7 +27,8 @@
 
             </div>
         </div>
-        <div class="col-md-2 col-sm-2 hidden-xs" style="height: 488px; position: relative">
+        <div class="col-md-2 col-sm-2 hidden-xs" style="position: relative; background-color: black;    padding-top: 14px;
+    padding-bottom: 16px;" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400))">
 
             <!--<label style="background-color: red; width: 100%; color: white; height: 40px; padding: 10px 20px 10px 20px;white-space: nowrap;">{{change_money(info._Price| currency:'':0)}} vnđ/tháng</label>-->
             <div class="slide_mini" style="width: 100%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
@@ -43,9 +44,9 @@
                 <a ng-click="show($index)"><img src="/Content/Images/miniImage/min5.jpg"/></a>
             </div>-->
 
-            <div style="text-align: center;margin-bottom: 21px; position: absolute; bottom: 0px; right: 36%;">
-                <a style="font-size: 25px; color: black;cursor: pointer" ng-click="up()"><span class="glyphicon glyphicon-chevron-up"></span></a>
-                <a style="font-size: 25px; color: black;cursor: pointer" ng-click="down()"><span class="glyphicon glyphicon-chevron-down"></span></a>
+            <div style="text-align: center;margin-bottom: 3px; position: absolute; bottom: 0px; right: 31%;">
+                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="up()"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="down()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
             </div>
         </div>
         
@@ -55,9 +56,9 @@
         <div class="col-md-10 col-xs-12">
             <p style="padding-left: 12px; color: white; font-style: italic; font-weight: bold; font-size: 15pt">Địa chỉ: {{info._NumberHouse}} {{info._Street}},TP Đà Nẵng</p>
         </div>
-        <div class="col-md-2 col-xs-12" style="background-color: orange; margin-top: -10px; padding: 11px; height: 49px;">
-            <p style="padding-left: 28px; color: white; font-style: italic; font-weight: bold; font-size: 15pt" ng-if ="info._Sell==true">Cần Bán</p>
-            <p style="padding-left: 28px; color: white; font-style: italic; font-weight: bold; font-size: 15pt" ng-if ="info._Sell==false">Cho Thuê</p>
+        <div class="col-md-2 col-xs-12" style="background-color: orange; text-align: center; margin-top: -10px; padding: 11px; height: 49px;">
+            <p style="color: white; font-style: italic; font-weight: bold; font-size: 15pt" ng-if ="info._Sell==true">Cần Bán</p>
+            <p style="color: white; font-style: italic; font-weight: bold; font-size: 15pt" ng-if ="info._Sell==false">Cho Thuê</p>
         </div>
 
     </div>

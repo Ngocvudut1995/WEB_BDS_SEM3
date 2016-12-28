@@ -1,91 +1,80 @@
-﻿<div ng-controller="timkiemCtrl" class="container-fluid" style="margin-top: 30px; padding: 0px">
-    <div class="row" style="position: relative; bottom: 0px; height: 40px; z-index: 14; background-color: rgb(165, 164, 164); padding: 5px" scroll ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'})">
-       
-        <div class="col-md-2" style="padding-top: -10px;margin-left: 20px;background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_loai = 0">
+﻿<div ng-controller="timkiemCtrl" class="container-fluid" style="padding: 0px">
+<div class="row" style="position: relative; bottom: 0px; height: 40px; z-index: 14; background-color: rgb(165, 164, 164); padding: 5px" scroll 
+     ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} ||((hien_nav_mini == 1) && {'position':'relative'}))">
 
-            <a ng-click="show_loai=(!show_loai)" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           top: 4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           left: 12px;">
+    <div class="col-md-2"
+         style="padding-top: -10px; margin-left: 20px; background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);padding: 0px;" 
+         ng-init="show_loai = 0" ng-mouseleave="show_loai = 0">
+
+            <a ng-click="show_loai=(!show_loai)" ng-mouseover="show_loai = 1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;top: 4px;left: 12px;">
                 <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Loại bất động sản <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 35px" ng-show="show_loai == 1">
+            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_loai == 1">
                 <div class="list-group my_list_group2"style="padding: 5px;">
                     <input class="list-group-item" placeholder="Tìm kiếm loại"
                            style="width: 100%" />
-                    <a ng-click="tab_loaibds = 1" class="list-group-item my_list_item">First item <i ng-show="tab_loaibds == 1" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
-                    <a ng-click="tab_loaibds = 2" class="list-group-item my_list_item">
-                        Second item <i ng-show="tab_loaibds == 2" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                    </a>
-                    <a ng-click="tab_loaibds = 3" class="list-group-item my_list_item">
-                        Third item <i ng-show="tab_loaibds == 3" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                    <a ng-repeat="item in list_DM" ng-click="change_tab_loai(item.IDType)" class="list-group-item my_list_item">
+                        {{item.TypeName}} <i ng-if="select_Kieu == item.IDType" style="float: right" class="fa fa-check" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_gia = 0">
+        <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia=0">
 
-            <a ng-click="show_gia=(!show_gia)" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+            <a ng-click="show_gia=(!show_gia)" ng-mouseover="show_gia=1"style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        left: 12px;">
                 <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Khoảng giá <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <div class="scrollmenu" style="max-height: 200px; background-color: white; margin-top: 35px" ng-show="show_gia == 1">
+            <div class="scrollmenu" style="max-height: 200px; background-color: white; margin-top: 30px" ng-show="show_gia == 1">
                 <div class="list-group my_list_group2 "style="padding: 5px;">
                     <input class="list-group-item" placeholder="Tìm kiếm loại"
                            style="width: 100%" />
-                    <a ng-click="tab_loaibds = 1" class="list-group-item my_list_item">First item<i ng-show="tab_loaibds == 1" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
-                    <a ng-click="tab_loaibds = 2" class="list-group-item my_list_item">
-                        Second item <i ng-show="tab_loaibds == 2" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                    </a>
-                    <a ng-click="tab_loaibds = 3" class="list-group-item my_list_item">
-                        Third item <i ng-show="tab_loaibds == 3" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                    <a ng-repeat="item in list_Price" ng-click="change_tab_gia(item.IDPrice)" class="list-group-item my_list_item">
+                        {{item.Price1}} <i ng-if="select_Gia == item.IDPrice" style="float: right" class="fa fa-check" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_dientich = 0">
+        <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave ="show_dientich = 0">
 
-            <a ng-click="show_dientich=(!show_dientich)" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+            <a ng-click="show_dientich=(!show_dientich)" ng-mouseover="show_dientich=1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       left: 12px;">
                 <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Diện tích <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 35px" ng-show="show_dientich == 1">
+            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_dientich == 0">
                 <div class="list-group my_list_group2" style="padding: 5px;">
                     <input class="list-group-item" placeholder="Tìm kiếm loại"
                            style="width: 100%" />
-                    <a ng-click="tab_loaibds = 1" class="list-group-item my_list_item">First item<i ng-show="tab_loaibds == 1" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
-                    <a ng-click="tab_loaibds = 2" class="list-group-item my_list_item">
-                        Second item <i ng-show="tab_loaibds == 2" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                    </a>
-                    <a ng-click="tab_loaibds = 3" class="list-group-item my_list_item">
-                        Third item <i ng-show="tab_loaibds == 3" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                    <a ng-repeat="item in listdientich" ng-click="change_tab_dientich(item.IDAcreage)" class="list-group-item my_list_item">
+                        {{item.Acreage1}} <i ng-if="select_DienTich == item.IDAcreage" style="float: right" class="fa fa-check" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-1" style="background-color: white; width: 10%; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_ht = 0">
+        <div class="col-md-1" style="background-color: white; width: 10%; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_ht = 0" ng-mouseleave="show_ht=0">
 
-            <a ng-click="show_ht=(!show_ht)" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+            <a ng-click="show_ht=(!show_ht)" ng-mouseover="show_ht=1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             left: 12px;">
-                <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> MUA <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+                <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> {{tab_sell}} <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <div style="max-height: 200px; background-color: white; margin-top: 35px" ng-show="show_ht == 1">
+            <div style="max-height: 200px; background-color: white; margin-top: 30px" ng-show="show_ht == 1">
                 <div class="list-group my_list_group2"style="padding: 5px;">
 
-                    <a ng-click="tab_ht = 1" class="list-group-item my_list_item">MUA<i ng-show="tab_ht == 1" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
-                    <a ng-click="tab_ht = 2" class="list-group-item my_list_item">
-                        THUÊ <i ng-show="tab_ht == 2" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                    <a ng-click="change_sell('true')" class="list-group-item my_list_item">MUA<i ng-show="select_sell == 'true'" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
+                    <a ng-click="change_sell('false')" class="list-group-item my_list_item">
+                        THUÊ <i ng-show="select_sell == 'false'" style="float: right" class="fa fa-check" aria-hidden="true"></i>
                     </a>
 
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <form style="height: 100%;" ng-submit="search()">
+            <form style="height: 100%;" ng-submit="search_vp()">
                 <div class="input-group" style="height: 100%">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
+                    <input type="text"ng-model ="query" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
                            style="height: 100%; border: #eb5255 1.7px solid; border-radius: 0px;">
                     <div class="input-group-btn" style="height: 100%">
                         <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px;">
@@ -98,7 +87,7 @@
             </form>
         </div>
         <div class="" style="height: 100%">
-            <a style="color: black;font-size: 21px" >
+            <a style="color: black;font-size: 21px" ng-click="reload_seach()" >
                 <i class="fa fa-refresh" aria-hidden="true"></i>
 
             </a>
@@ -212,7 +201,7 @@
     </div>-->
 
 
-    <div class="container" style="margin-top: 30px">
+    <div class="container" style="margin-top: 0px">
         <div class="row" style="">
             <div class="col-md-9 row" style="position: relative; padding-bottom: 40px;">
                 <h1 style="color: rgb(54, 172, 226); text-align: left">Tìm kiếm bất động sản</h1>
@@ -239,7 +228,7 @@
 
                         <div class="col-md-3 col-xs-12 col-sm-4">
 
-                            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
+                            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong" ng-change="search_vp()">
                                 <option value="0" selected="selected">--- Chọn Đường ---</option>
                                 <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
 

@@ -388,13 +388,14 @@ app.directive("scroll", function ($window) {
     return function (scope, element, attrs) {
         scope.pageYOffsetCurrent = 0;
         scope.hien_nav_mini = 1;
+        scope.boolChange = 1;
         angular.element($window).bind("scroll", function () {
-            if (this.pageYOffset < 300) {
+            if (this.pageYOffset < 100) {
                 scope.hien_nav_mini = 1;
             } else {
                 scope.hien_nav_mini = 0;
             }
-            if (this.pageYOffset - scope.pageYOffsetCurrent >= 1 && this.pageYOffset > 300) {
+            if (this.pageYOffset - scope.pageYOffsetCurrent >= 1) {
                 scope.boolChange = 0;
                 scope.pageYOffsetCurrent = this.pageYOffset;
              

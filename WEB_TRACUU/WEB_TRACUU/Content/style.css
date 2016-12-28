@@ -84,10 +84,16 @@
     background-color: rgba(255, 255, 255, 0.66);
 }
 .my_list_group2 > a {
-    color: black
+    color: black;
+            height: 31px;
+                padding: 4px 12px;
 }
 .my_list_group > .my_list_item {
  background-color: rgba(0, 0, 0, 0); color: white; border-width: 0px; border-bottom: 1px solid;
+}
+.my_list_group > a {
+      height: 31px;
+                padding: 4px 12px;
 }
 .my_list_group > .active {
      background-color: blue;
@@ -207,6 +213,7 @@ h3 img {
     /*width: 114px;*/
     height: 40px;
     background-color: rgba(100, 99, 99, 0.52);
+    background-color: rgb(235, 82, 85);
     color: white;
     font-weight: bold;
     padding: 9px;
