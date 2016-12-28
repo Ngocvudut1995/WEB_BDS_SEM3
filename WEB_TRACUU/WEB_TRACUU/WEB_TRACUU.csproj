@@ -289,10 +289,16 @@
     <Content Include="Content\Images\14874831_636705686503903_75934659_n.jpg" />
     <Content Include="Content\Images\bando.png" />
     <Content Include="Content\Images\banner_ser_vpa.png" />
+    <Content Include="Content\Images\broker.jpg" />
+    <Content Include="Content\Images\Can-ho.png" />
+    <Content Include="Content\Images\Dat.png" />
     <Content Include="Content\Images\default.gif" />
+    <Content Include="Content\Images\Khac.png" />
     <Content Include="Content\Images\khu-can-ho-Masteri-Thao-Dien.jpg" />
     <Content Include="Content\Images\left-arrow.png" />
+    <Content Include="Content\Images\logo-homedy-xmas.png" />
     <Content Include="Content\Images\maxresdefault.jpg" />
+    <Content Include="Content\Images\Nha.png" />
     <Content Include="Content\Images\quangcao2.png" />
     <Content Include="Content\Images\right-arrow.png" />
     <Content Include="Content\Images\Slider\slide1.jpg" />
@@ -300,6 +306,7 @@
     <Content Include="Content\Images\Slider\slide3.jpg" />
     <Content Include="Content\Images\Slider\slide4.jpg" />
     <Content Include="Content\Images\Slider\slide5.jpg" />
+    <Content Include="Content\Images\Van-phong.png" />
     <Content Include="Content\Images\vanphong.jpg" />
     <Content Include="Content\Images\vanphong2.jpg" />
     <Content Include="Content\Images\vanphong3.jpg" />

@@ -4,12 +4,17 @@ app.config(function ($routeProvider) {
     //var app = '/TraCuuBDS/';
     var app = '';
     $routeProvider
+        .when("/TrangChu", {
+            templateUrl: app + "Home/TrangChu",
+            controller: "trangchuCtrl",
+            title: "Giới thiệu"
+        })
         .when("/TimKiem", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", caseInsensitiveMatch: true, title: "Tìm Kiếm" })
         .when("/TimKiem/:sell/:h/:p/:d/:g/:dt/:k", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", title: "Tìm Kiếm" })
-        .when("/Home", {
+        .when("/GioiThieu", {
             templateUrl: app + "Home/GioiThieu",
-            controller: "homeCtrl",
-            title: "Trang Chủ"
+            controller: "gioithieuCtrl",
+            title: "Giới thiệu"
         })
         .when("/PostBai", {
             templateUrl: app + "Home/PostBai",
@@ -63,20 +68,30 @@ app.config(function ($routeProvider) {
             title: "Trang Đăng Kí"
         })
 
-    .otherwise({ redirectTo: "/TimKiem" });
+    .otherwise({ redirectTo: "/TrangChu" });
 });
 
 
-//app.run(['$location', '$rootScope', function ($location, $rootScope) {
-//    $rootScope.$on('$routeChangeSuccess', function (event, current) {
-//        $rootScope.title = current.$$route.title;
-//    });
-//}]);
+
+app.controller('trangchuCtrl', ['$scope', '$rootScope','$location', function ($scope, $rootScope, $location) {
+    $rootScope.tab_index = 0;
+    $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
+    $scope.tab_loaibds = 1;
+    $scope.search = function () {
+        //var url = '/TimKiem/' + $scope.select_sell + '/' + $scope.select_Huyen + '/'
+               + $scope.select_Phuong + '/' + $scope.select_Duong
+               + '/' + $scope.select_Gia + '/' + $scope.select_DienTich + '/' + $scope.select_Kieu;
+        var url = '/TimKiem/';
+        $location.url(url);
+       
+    };
+
+}]);
 app.controller('timkiemCtrl', [
     '$scope', '$http', '$window', '$filter', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $filter, $rootScope, $routeParams, $location) {
         var _MAX = 1000000000;
         // 
-
+        
         // Function reset
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
@@ -207,14 +222,8 @@ app.controller('timkiemCtrl', [
 
         $rootScope.tab_index = 1;
 
-        var list_all = [];
-        $rootScope.loading = 1;
-        $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
-            $scope.listVP = response.data;
-            list_all = response.data;
-            $scope.search();
-            $rootScope.loading = 0;
-        });
+      
+       
         $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
             $scope.listQuan = response.data;
 
@@ -587,7 +596,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
     //console.log($scope);
 }]);
-app.controller('homeCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('gioithieuCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $rootScope.tab_index = 4;
 }]);
 app.controller('theodoiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', '$location', function ($scope, $http, $rootScope, $routeParams, $location) {

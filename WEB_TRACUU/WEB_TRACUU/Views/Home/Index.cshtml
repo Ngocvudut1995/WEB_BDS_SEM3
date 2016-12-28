@@ -36,7 +36,7 @@
 </head>
 <script>
    var host = "http://" + document.location.hostname + ":" + window.location.port;
-   // var host = "http://" + document.location.hostname ;
+    //var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.5);font-family: 'Open Sans', sans-serif;">
@@ -49,11 +49,12 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1144710058915986";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="rotate" style="height: 37px; width: 184px; position: fixed; left: -145px; top: 233px; z-index: 14">
+@*<div class="rotate" style="height: 37px; width: 184px; position: fixed; left: -145px; top: 233px; z-index: 14">
     <input ng-click="open_dangbai()" class="btn" type="button" style="background-color: rgb(9, 30, 116); z-index: 22; width: 100%; height: 100%; /*background-color: #3fd783;*/color: white; /*border-radius: 10px*/" value="Đăng Bài">
-</div>
+</div>*@
 
-<div ng-controller="index" style="position: absolute">
+<div ng-controller="index" style="">
+    
     <div style="text-align: center;position: fixed;
     width: 100%;
     top: 50%;
@@ -62,7 +63,7 @@
     </div>
     <div class="khung_den" ng-show="show_dn == 1">
         <div class="col-lg-4">
-           
+
         </div>
         <div class="col-lg-4 col-xs-12 dangnhap">
             <div class="col-md-12" style="margin: auto">
@@ -78,7 +79,7 @@
                         <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
                     </div>
                     <div>
-                        <a href="/Home/RecoverPassWord">? Quen Mat Khau</a>
+                        <a href="/Home/RecoverPassWord">? Quên mật khẩu</a>
                     </div>
                     <div style="text-align: center">
                         <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
@@ -92,48 +93,79 @@
 
 
     </div>
-    <div style="z-index: 19; position: fixed; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll ng-style="{'opacity':boolChange}">
-        <div>
-            <ul class="nav nav-pills" style="text-align: center; float: left; margin-left: 6%;">
-                <li class="navtab hidden-xs hidden-sm" ng-class="[{active:tab_index == 0}]" style="">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
+
+    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll ng-style="{'opacity':boolChange}">
+        <div style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
+            <ul class="nav nav-pills" style="float: left; margin-left: 30px">
+                <li><a href="#" style="color: white;font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+            </ul>
+            <ul class="nav nav-pills" style="float: right; margin-right: 30px">
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-file-text" aria-hidden="true"></i> Đăng tin</a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a></li>
+                <li ng-if="taikhoan.test == 0"><a ng-click="dangnhap()" style="color: white; font-size: 12px;"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
+                <li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu hidden-xs " style="">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="color: white; font-size: 12px;">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> Xin chào {{ taikhoan.username }} <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
+
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 100%">
+
+                        <li><a href="#/PostBai" style="color: white; font-size: 12px;" ng-click="">Thông tin cá nhân</a></li>
+                        <li><a href="#/TimKiem" style="color: white; font-size: 12px;" ng-click="">Đăng xuât</a></li>
+
+                    </ul>
                 </li>
             </ul>
-
         </div>
-        <ul class="nav nav-pills" style="text-align: center; float: right; margin-right: 6%;">
-            @*rgb(20, 2, 119)*@
-            <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-th-list"></span>
+        <div style="height: 65px;position: relative;">
+            <ul class="nav nav-pills" style="text-align: center; float: left; margin-left: 6%;">
+                <li class="navtab hidden-xs hidden-sm" style="">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="white-space: nowrap;padding: 8px;">
+                        <img src="~/Content/Images/logo-homedy-xmas.png" /></a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills" style="text-align: center; float: right; margin-right: 6%;    position: absolute;
+    right: 0px;
+    bottom: 0px;">
+                @*rgb(20, 2, 119)*@
+                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-th-list"></span>
 
-                </a>
-                <ul class="dropdown-menu my_drop_menu" style="width: 133%">
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 133%">
 
-                    <li><a href="#/PostBai">Home</a></li>
-                    <li><a href="#/TimKiem">Tìm Kiếm</a></li>
-                    <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
-                    <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
-                    <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Nhập</a></li>
-                    <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
-                    <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
-                </ul>
-            </li>
-            @*<li class="navtab hidden-lg hidden-md" ng-class="[{active:tab_index == 0}]" style="">
+                        <li><a href="#/PostBai">Home</a></li>
+                        <li><a href="#/TimKiem">Tìm Kiếm</a></li>
+                        <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
+                        <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
+                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Nhập</a></li>
+                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
+                        <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
+                    </ul>
+                </li>
+                @*<li class="navtab hidden-lg hidden-md" ng-class="[{active:tab_index == 0}]" style="">
                 <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
             </li>
             <li class="navtab hidden-xs hidden-sm" ng-class="[{active:tab_index == 0}]" style="">
                 <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
             </li>*@
-            @*<li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 1}]" style="">
+                @*<li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 1}]" style="">
                 <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span>Dự Án</a>
             </li>
             <li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 4}]" style="">
                 <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
             </li>*@
-            <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                <li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 4}]" style="">
+                    <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> GIỚI THIỆU</a>
+                </li>
+                @*<li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-home"></span> DỰ ÁN <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
+                    <span class="glyphicon glyphicon-home"></span> GIỚI THIỆU <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
                 </a>
                 <ul class="dropdown-menu my_drop_menu" style="width: 100%">
@@ -143,49 +175,49 @@
                     <li><a href="#/TimKiem" ng-click="change_tab(4)">Dự án sắp mở</a></li>
                     <li><a href="#/TimKiem" ng-click="change_tab(4)">Dự án đang giao dịch</a></li>
                 </ul>
-            </li>
-            <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-usd"></span> MUA BÁN <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
+            </li>*@
+                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-usd"></span> MUA BÁN <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
-                </a>
-                <ul class="dropdown-menu my_drop_menu" style="width: 100%">
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 100%">
 
-                    <li><a href="#/PostBai" ng-click="change_tab(4)">Căn hộ</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Nhà</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Văn phòng</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Đất</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Khác</a></li>
+                        <li><a href="#/PostBai" ng-click="change_tab(4)">Căn hộ</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Nhà</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Văn phòng</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Đất</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Khác</a></li>
 
-                </ul>
-            </li>
-            <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-tasks"></span> CHO THUÊ <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
+                    </ul>
+                </li>
+                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-tasks"></span> CHO THUÊ <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
-                </a>
-                <ul class="dropdown-menu my_drop_menu" style="width: 100%">
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 100%">
 
-                    <li><a href="#/PostBai" ng-click="change_tab(4)">Căn hộ</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Nhà</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Văn phòng</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Đất</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Khác</a></li>
-                </ul>
-            </li>
-            <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <span class="glyphicon glyphicon-user"></span> Tài Khoản <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
+                        <li><a href="#/PostBai" ng-click="change_tab(4)">Căn hộ</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Nhà</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Văn phòng</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Đất</a></li>
+                        <li><a href="#/TimKiem" ng-click="change_tab(4)">Khác</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span> Tài Khoản <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
-                </a>
-                <ul class="dropdown-menu my_drop_menu" style="width: 100%">
+                    </a>
+                    <ul class="dropdown-menu my_drop_menu" style="width: 100%">
 
-                    <li><a href="#/PostBai" ng-click="change_tab(4)">Đã theo dõi</a></li>
-                    <li><a href="#/PostBai" ng-click="change_tab(4)">Đăng bài</a></li>
-                    <li><a href="#/TimKiem" ng-click="change_tab(4)">Cá nhân</a></li>
-                </ul>
-            </li>
-            @*<li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 2}]" style="">
+                        <li><a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(4)">Đã theo dõi</a></li>
+                        <li><a href="#/TaiKhoan/dangbai" ng-click="change_tab(4)">Đăng bài</a></li>
+                        <li><a href="#/TaiKhoan/" ng-click="change_tab(4)">Cá nhân</a></li>
+                    </ul>
+                </li>
+                @*<li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 2}]" style="">
                 <a href="#/TheoDoi/{{ taikhoan.makh }}" ng-click="change_tab(2)" style="white-space: nowrap;"><span class="glyphicon glyphicon-heart"></span> Quan Tâm</a>
             </li>
             <li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 3}]" style="">
@@ -194,17 +226,19 @@
 
 
 
-            @*<li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 20%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
+                @*<li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 1" style="width: 20%"><a href="#/TimKiem" style="white-space: nowrap;">Tim Kiem</a></li>
             <li class="hidden-lg hidden-md hidden-sm col-xs-10 navtab active" ng-if="tab_index == 2" style="width: 20%"><a href="#/TheoDoi" style="white-space: nowrap;">Da Theo Doi</a></li>*@
 
-        </ul>
+            </ul>
+        </div>
+      
     </div>
 </div>
 
 <div class="container-fluid" style="padding: 0px;">
-    <div ng-controller="main" style="margin-top: 56px;">
+    <div ng-controller="main" style="margin-top: 0px;">
 
-        <div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
+        @*<div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
             <div style="position: absolute; width: 100%; height: 60%; z-index: 11;background-size: cover;" ng-style="{'background-image': 'url({{img1}})'}">
                 <p ng-if="taikhoan.test == 1" style="float: right; margin-right: 20px; margin-top: 10px; font-size: 20px; font-weight: bold; color: rgb(20, 2, 119)">
                     Xin Chào Khách Hàng <a href="#/TaiKhoan" style="color: green">{{ taikhoan.username }}</a>|<a style="color: green" ng-click="dang_xuat()">Đăng Xuất</a>
@@ -241,13 +275,13 @@
 
                 </div>
             </div>
-        </div>
+        </div>*@
 
 
 
     </div>
-    <hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>
-    <div class="container" ng-controller="route_view" ng-view style="padding: 0px;">
+    @*<hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>*@
+    <div class="" ng-controller="route_view" ng-view style="padding: 0px;">
 
     </div>
     <div class="body-content">

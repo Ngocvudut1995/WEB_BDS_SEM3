@@ -3,7 +3,7 @@
     this.init = function (latitude, longitude) {
         var options = {
             center: new google.maps.LatLng(latitude,longitude),
-            zoom: 15,
+            zoom: 18,
             zoomControl: true,
             zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL },
             disableDefaultUI: true

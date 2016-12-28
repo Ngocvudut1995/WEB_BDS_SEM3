@@ -1,4 +1,4 @@
-﻿
+﻿var list_all = [];
 var app = angular.module('AngularApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies', 'textAngular']);
 var show_dn = 0;
 app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function ($scope, $window, $cookies,$rootScope) {
@@ -8,6 +8,8 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
     $rootScope.show_form_contact = 0;
     $rootScope.app = host;
     //$rootScope.MaKH = 'KH10001';
+    $rootScope.loading = 1;
+   
     $rootScope.change_money = function (money) {
         money = money.replace(/,/g, ".");
         return money;
@@ -47,7 +49,7 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
          return format;
      };
     // $rootScope.app = "";
-     $scope.img1 = $rootScope.app+"/Content/Images/view.jpg";
+     $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
     $scope.img2 = "Content/Images/banner_ser_vpa.png";
     $rootScope.dangnhap = function () {
         $rootScope.show_dn = 1;
@@ -102,7 +104,8 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $cookies, $rootScope, $http,$location) {
     $scope.username = "";
     $scope.password = "";
-    $scope.body_width = window.innerWidth;
+    $rootScope.body_width = window.innerWidth;
+    $rootScope.body_height = window.innerHeight;
     $rootScope.taikhoan = { test: 0, tenkh: null, username: null ,makh:null,admin:false};
     //var expireDate = new Date();
     //expireDate.setMonth(11);
@@ -110,6 +113,12 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $rootScope.open_dangbai = function () {
         $location.path('/TaiKhoan/dangbai/');
     };
+    $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
+        //$scope.listVP = response.data;
+        list_all = response.data;
+
+        $rootScope.loading = 0;
+    });
     //$cookies.put('technology', 'Web', { 'expires': expireDate });
     // Kiem tra co cookies luu tai khoan hay khong
     var str = $cookies.get('user');
@@ -378,8 +387,13 @@ app.directive("scroll", function ($window) {
     
     return function (scope, element, attrs) {
         scope.pageYOffsetCurrent = 0;
+        scope.hien_nav_mini = 1;
         angular.element($window).bind("scroll", function () {
-            
+            if (this.pageYOffset < 300) {
+                scope.hien_nav_mini = 1;
+            } else {
+                scope.hien_nav_mini = 0;
+            }
             if (this.pageYOffset - scope.pageYOffsetCurrent >= 1 && this.pageYOffset > 300) {
                 scope.boolChange = 0;
                 scope.pageYOffsetCurrent = this.pageYOffset;

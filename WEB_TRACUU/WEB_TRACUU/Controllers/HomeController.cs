@@ -13,6 +13,11 @@ namespace WEB_TRACUU.Controllers
             ViewBag.Title = "Home Page";
             return View();
         }
+        public ActionResult TrangChu()
+        {
+            var result = new FilePathResult("../Views/Home/trangchinh.html", "text/html");
+            return result;
+        }
         public ActionResult TimKiem()
         {
             var result = new FilePathResult("../Views/Home/timkiem.html", "text/html");

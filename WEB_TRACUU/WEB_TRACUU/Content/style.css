@@ -25,12 +25,73 @@
         /*background-color: rgb(9, 30, 116);*/
         
     }
+.navtab2 {
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: center;
+     margin-left: -3px;
+}
 
+    .navtab2 > a {
+        color: white;
+        font-size: 16px;
+       
+    }
+
+        .navtab2 > a:hover {
+            background-color: #36ace2;
+        }
+
+    .navtab2.active {
+        background-color: #36ace2;
+        color: white;
+    }
+     .navtab2.active > a:hover {
+        background-color: #36ace2;
+        
+    }
+     .my_nav_tab_2 {
+         background-color: #eb5255;
+         
+     }
+     .my_nav_tab_2 > li{
+        display: inline-block;
+     }
+     .my_nav_tab_2 > .active {
+          background-color: #36ace2;
+     }
 .my_drop_menu {
     background-color: #5f5d5d;
     font-size: 16px;
 }
-
+.my_nav_search > .active {
+    background-color: rgba(0, 0, 0, 0.56);
+    border-width: 0px;
+    /*box-shadow: 0px 0px 5px #888888;*/
+    border-top: 3px #eb5255 solid;
+    
+}
+.my_nav_search > .active > a {
+    color: white;
+    
+}
+.my_nav_search > li > a {
+    color: black;
+    font-weight: 600;
+    font-size: 16px
+}
+.my_nav_search > li {
+    background-color: rgba(255, 255, 255, 0.66);
+}
+.my_list_group2 > a {
+    color: black
+}
+.my_list_group > .my_list_item {
+ background-color: rgba(0, 0, 0, 0); color: white; border-width: 0px; border-bottom: 1px solid;
+}
+.my_list_group > .active {
+     background-color: blue;
+}
 .tab_menu {
     /*background-color:#1b1b1b;*/
 }
@@ -136,8 +197,8 @@ h3 img {
         }
 
 .rotate {
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(-90deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
     transform-origin: bottom right;
 }
 .icon_society {
@@ -162,5 +223,31 @@ div.scrollmenu {
         max-height: 400px;
     }
 .select_tracuu {
-    background-color: rgba(91, 100, 109, 0.14)
+    background-color: rgba(91, 100, 109, 0.14);
+
 }
+
+ .container1 {
+        min-width: 560px;
+    }
+    .wrapper {
+        white-space: nowrap;
+        overflow-x: scroll;
+    }
+
+    .scroll-wrapper {
+        width: 2010px;
+    }
+
+    .item {
+        width: 320px;
+        margin-right: 10px;
+        /*background-color: tomato;*/
+        color: white;
+        padding: 10px;
+        float: left;
+    }
+
+    .item:last-of-type {
+        margin-right: 0;
+    }
