@@ -674,7 +674,7 @@ namespace WEB_TRACUU.Controllers
                     var lands = (from a in db.Lands where a.IDLand == mavp select a).SingleOrDefault();
                     Guid idcustomer = new Guid();
                     idcustomer = (Guid) lands.IDCustomer;
-                    if (test_user(idcustomer) != true || test_quyenadmin() != true) return NotFound(); 
+                    if (test_user(idcustomer) != true && test_quyenadmin() != true) return NotFound(); 
                     lands.Name = json._tieuDe;
                     lands.IDAcreage = Convert.ToInt32(json._dienTich);
                     lands.IDPrice = Convert.ToInt32(json._IDgia);
@@ -753,7 +753,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     //Customer customer = new Customer();
                     Guid maKH = json._makh;
-                    if (test_user(maKH) != true || test_quyenadmin() != true) return NotFound();
+                    if (test_user(maKH) != true && test_quyenadmin() != true) return NotFound();
                     var query = (from a in db.Customers
                                  where a.IDCustomer == maKH
                                  select a).SingleOrDefault();
