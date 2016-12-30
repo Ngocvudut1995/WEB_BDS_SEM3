@@ -38,7 +38,7 @@ app.config(function ($routeProvider) {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
              title: "Trang Theo Dõi",
-             authorize: true
+            authorize: true
             
          })
         .when("/TaiKhoan", {
@@ -46,17 +46,25 @@ app.config(function ($routeProvider) {
             controller: "taikhoanCtrl",
             title: "Tài Khoản",
             authorize: true,
+            replace:true
            
         })
         .when("/TaiKhoan/:select", {
             templateUrl: app + "Home/TaiKhoan",
             controller: "taikhoanCtrl",
             title: "Tài Khoản",
-            authorize: true,
-            admin: true
+            authorize: true
+           
         })
+         .when("/TaiKhoan/:select/baidang/:id", {
+             templateUrl: app + "Home/QuanTriTaiKhoan",
+             controller: "taikhoanCtrl",
+             title: "Tài Khoản",
+             authorize: true,
+             
+         })
          .when("/TaiKhoan/:select/:id", {
-             templateUrl: app + "Home/TaiKhoan",
+             templateUrl: app + "Home/QuanTriTaiKhoan",
              controller: "taikhoanCtrl",
              title: "Tài Khoản",
              authorize: true,
@@ -124,7 +132,13 @@ app.controller('timkiemCtrl', [
     '$scope', '$http', '$window', '$filter', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $filter, $rootScope, $routeParams, $location) {
         var _MAX = 1000000000;
         // 
-        
+        $rootScope.loading = 1;
+        $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
+            //$scope.listVP = response.data;
+            list_all = response.data;
+
+            $rootScope.loading = 0;
+        });
         // Function reset
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
@@ -580,8 +594,9 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     $scope.getAPIid = function (id) {
         $http.get(host + "/api/ChiTiet/get_vp_by_id/?mavp=" + id).then(function (response) {
             $scope.info = response.data;
+            console.log($scope.info);
             // load 
-            $http.get(host + "/api/ChiTiet/get_VP_by_type/?idtype=" + $scope.info._IDType).then(function (response) {
+            $http.get(host + "/api/ChiTiet/get_VP_Tuong_Tu/?id=" + id).then(function (response) {
                 $scope.list_BDS_LQ = response.data;
 
             });
@@ -748,7 +763,7 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
             $scope.bd_dangdang = response.data;
         });
         $scope.edit_land = function (mavp) {
-            $location.path('/TaiKhoan/ct_baidang/' + mavp);
+            $location.path('/TaiKhoan/ct_baidang/baidang/' + mavp);
         };
         switch ($scope.selectedValue) {
             case 'ql_baidangchuaduyet':

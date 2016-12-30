@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WEB_TRACUU.Areas.Administrator.Models;
 
 namespace WEB_TRACUU.Controllers
 {
+ 
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -28,6 +30,7 @@ namespace WEB_TRACUU.Controllers
             var result = new FilePathResult("../Views/Home/gioithieu.html", "text/html");
             return result;
         }
+        //[AuthorizeController]
         public ActionResult TheoDoi()
         {
             var result = new FilePathResult("../Views/Home/theodoi.html", "text/html");
@@ -43,7 +46,17 @@ namespace WEB_TRACUU.Controllers
             var result = new FilePathResult("../Views/Home/chitiet.html", "text/html");
             return result;
         }
+       
         public ActionResult TaiKhoan()
+        {
+           
+                var result = new FilePathResult("../Views/Home/taikhoan.html", "text/html");
+                return result;
+               
+           
+        }
+     
+        public ActionResult QuanTriTaiKhoan()
         {
             var result = new FilePathResult("../Views/Home/taikhoan.html", "text/html");
             return result;

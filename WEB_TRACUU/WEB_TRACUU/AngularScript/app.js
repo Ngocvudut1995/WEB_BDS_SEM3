@@ -100,8 +100,8 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
     }
     //console.log($scope);
 }]);
-app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http', '$location', function ($scope, $window,
-    $cookies, $rootScope, $http,$location) {
+app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http', '$location','$route', function ($scope, $window,
+    $cookies, $rootScope, $http, $location, $route) {
     $scope.username = "";
     $scope.password = "";
     $rootScope.body_width = window.innerWidth;
@@ -160,7 +160,9 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
                 $rootScope.taikhoan.admin = data._Admin;
                 swal("Thông báo", "Đăng nhập thành công", "success");
                 //$window.alert("Login success!");
+               
                 $rootScope.show_dn = 0;
+                $route.reload();
             } else {
                 swal("Thông báo", "Tài Khoản Hoặc Mật Khẩu Không Hợp Lệ", "error");
             }
@@ -247,7 +249,8 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', function ($location, $rootScope, $cookies, $http, $window, $timeout) {
+app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', '$route',
+    function ($location, $rootScope, $cookies, $http, $window, $timeout, $route) {
      var routespermision = ['/TaiKhoan', '/TaiKhoan/dangbai'];
     var routespermision3 = ['/TaiKhoan/ql_tracuu', '/TaiKhoan/ql_khachhang', '/TaiKhoan/ql_baidang'];
     var routespermision2 = ['/TheoDoi/'];
@@ -255,10 +258,10 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
        
         $rootScope.title = current.$$route.title;
-
+       
         $rootScope.scrolltotop();
-        if (current.view === true) {
-           
+        if (current.replace === true) {
+            
         }
     });
     //console.log($location.path());
@@ -269,10 +272,12 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
    
     $rootScope.$on('$routeChangeStart', function (evt, to, from) {
         //console.log(to.authorize);
+      
         if (to.authorize === true) {
            
             var str = $cookies.get('user');
             //console.log(str);
+            
             if (str != null) {
                 $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
                     var data = res.data;
@@ -321,7 +326,7 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
            
         }
         if (to.admin === true) {
-            if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin != true) {
+            if ($rootScope.taikhoan.admin != true) {
                 swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
                 // $window.history.back();
                 $window.history.back();

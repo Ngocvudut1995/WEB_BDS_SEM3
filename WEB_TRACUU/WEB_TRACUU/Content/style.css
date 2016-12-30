@@ -136,7 +136,7 @@ h3 img {
 }
 
 .contact {
-    background-color: rgba(0, 0, 0, 0.77);
+    /*background-color: rgba(0, 0, 0, 0.77);*/
     position: fixed;
     
     /*min-height: 1000px;
@@ -152,7 +152,7 @@ h3 img {
     z-index: 20;
     
     /*height: 330px;*/
-    border: solid 3px blue;
+    box-shadow: 0px 0px 20px rgb(235, 82, 85);
     background-color: white;
   
 }
@@ -211,13 +211,13 @@ h3 img {
    float: left;
     text-align: center;
     /*width: 114px;*/
-    height: 40px;
+    height: 30px;
     background-color: rgba(100, 99, 99, 0.52);
     background-color: rgb(235, 82, 85);
     color: white;
     font-weight: bold;
-    padding: 9px;
-    font-size: 15px;
+  border-radius: 5px;
+    font-size: 13px;
     border: solid 1px white;
 }
 .edit_quantri > li > a {
@@ -257,4 +257,23 @@ div.scrollmenu {
 
     .item:last-of-type {
         margin-right: 0;
+    }
+    .button_loai > span {
+        font-weight: 700; border: 1px solid #eb5256; color: #eb5256; line-height: 1; padding-left: 4px; margin-right: 5px;
+    }
+    .button_loai > span > i {
+        background: #eb5256; color: #fff; padding: 3px 5px; display: inline-block; margin-left: 3px; font-style: normal
+    }
+    .button_loai:hover > span {
+        color: #36ace2;
+        border: 1px solid #36ace2;
+    }
+    .button_loai:hover > span  > i {
+        background: #36ace2;
+    }
+    .button_diachi {
+        color: #36ace2;
+    }
+    .button_diachi:hover {
+        color: #eb5256;
     }

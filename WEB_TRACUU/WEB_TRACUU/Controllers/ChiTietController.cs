@@ -94,6 +94,7 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
+      
         public class BDS
         {
             public Guid _IDLand;
@@ -101,13 +102,13 @@ namespace WEB_TRACUU.Controllers
             public string _Image;
             public bool? _Sell;
         }
-        public IEnumerable<BDS> get_VP_by_type(int idtype)
+        public IEnumerable<BDS> get_VP_Tuong_Tu(int id)
         {
             IList<BDS> list = new List<BDS>();
             using (db = new DataTraCuuVPDataContext())
             {
                 var query = (from a in db.Overview_Lands
-                             where a.IDType == idtype 
+                             where a.IDType == id 
                              select new
                              {
                                  a.IDLand,

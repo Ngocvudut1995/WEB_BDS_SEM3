@@ -209,6 +209,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Models\AuthorizeController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
     <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
@@ -382,6 +384,7 @@
       <LastGenOutput>DataTraCuuVP.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Administrator\Views\web.config" />
     <None Include="Properties\PublishProfiles\findoffice - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\TraCuu.pubxml" />
     <None Include="Properties\PublishProfiles\TraCuuBDS.pubxml" />
@@ -424,6 +427,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administrator\Controllers\" />
+    <Folder Include="Areas\Administrator\Views\Shared\" />
     <Folder Include="Content\font-aw\" />
     <Folder Include="Content\Images\miniImage\" />
   </ItemGroup>

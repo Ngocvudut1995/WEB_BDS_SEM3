@@ -1,58 +1,78 @@
 ﻿<div>
-    <div class="title row" style="">
+    <!--<div class="title row" style="">
         <p style="padding-left: 12px; color: white; font-style: italic; font-weight: bold; font-size: 18pt;float: left">{{info._Name}}</p>
         <p style="float: right; color: white; font-style: italic; font-weight: bold; font-size: 18pt; position: relative;
                                                                                                                                                                                                                                                      margin-right: 10px;">
             Diện Tích: {{info._Acreage}}
         </p>
-    </div>
+    </div>-->
     <div class="row" style="">
-        <div class="col-md-10 col-sm-10 col-xs-12" style="padding-left: 0px;padding-right: 0px;">
-            <div class="slider" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400) )|| ((body_width < 400) && {'height': '125px'})">
-                <div class="slide" ng-repeat="image in images" ng-show="image.visible">
-                    <img ng-src="{{ host }}/{{image.Anh}}"/>
-                    
+        <div class="col-md-12 col-sm-10 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
+            <div class="slider" style="position: relative">
+                <div class="slide" ng-repeat="image in images" ng-show="image.visible" style="position: relative">
+                    <img ng-src="{{ host }}/{{image.Anh}}" />
+
                 </div>
-                <div class="arrows_left" style="position: relative" ng-style="(body_width < 700) && {'top': '60px'}">
+                <div style="width: 100%; position: absolute; bottom: 10px" class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3" style="height: 100%">
+                        <p class="slide_infor" style="">
+                            <i style="" class="fa fa-money" aria-hidden="true"></i>
+                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1,24</span> <span>tỷ</span>
+                        </p>
+
+                    </div>
+                    <div class="col-md-3" style="height: 100%">
+                        <p class="slide_infor" style="">
+                            <i style="" class="fa fa-area-chart" aria-hidden="true"></i>
+                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">300</span>
+                            <span>m2</span>
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-5" style="height: 100%">
+                        <p class="slide_infor" style="">
+                            <i style="" class="fa fa-balance-scale" aria-hidden="true"></i>
+                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1</span> <span>tỷ/m2</span>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="arrows_left">
                     <a ng-click="prev()">
                         <img ng-src="{{ host }}/Content/Images/left-arrow.png" />
                     </a>
                 </div>
-                <div class="arrows_right" ng-style="(body_width < 700) && {'top': '55px'}">
+                <div class="arrows_right">
                     <a ng-click="next()">
-                        <img ng-src="{{ host }}/Content/Images/right-arrow.png"/>
+                        <img ng-src="{{ host }}/Content/Images/right-arrow.png" />
                     </a>
                 </div>
 
 
             </div>
         </div>
-        <div class="col-md-2 col-sm-2 hidden-xs" style="position: relative; background-color: black;    padding-top: 14px;
-    padding-bottom: 16px;" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400))">
+        <!--<label style="background-color: red; width: 100%; color: white; height: 40px; padding: 10px 20px 10px 20px;white-space: nowrap;">{{change_money(info._Price| currency:'':0)}} vnđ/tháng</label>-->
+        <!--<div class="col-md-12 col-sm-2 hidden-xs" style="position: relative; background-color: black;    padding-top: 14px;
+        padding-bottom: 16px;" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400))">
 
-            <!--<label style="background-color: red; width: 100%; color: white; height: 40px; padding: 10px 20px 10px 20px;white-space: nowrap;">{{change_money(info._Price| currency:'':0)}} vnđ/tháng</label>-->
-            <div class="slide_mini" style="width: 100%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
-                <div class="mini_image" style="width: 100%;">
-                    <a ng-click="show($index)"><img style="width: 100%; height: 90px" ng-src="{{host}}/{{item.Anh}}"/></a>
+
+                <div class="slide_mini" style="width: 20%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
+                    <div class="mini_image" style="width: 100%;">
+                        <a ng-click="show($index)"><img style="width: 100%; height: 90px" ng-src="{{host}}/{{item.Anh}}"/></a>
+                    </div>
                 </div>
-            </div>
-
-            <!--<div class="mini_image" style="width: 100%; ">
-                <a ng-click="next($index)"><img src="/Content/Images/miniImage/min5.jpg"/></a>
-            </div>
-            <div class="mini_image" style="width: 100%;">
-                <a ng-click="show($index)"><img src="/Content/Images/miniImage/min5.jpg"/></a>
+                <div style="text-align: center;margin-bottom: 3px; position: absolute; bottom: 0px; right: 31%;">
+                    <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="up()"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+                    <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="down()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
+                </div>
             </div>-->
 
-            <div style="text-align: center;margin-bottom: 3px; position: absolute; bottom: 0px; right: 31%;">
-                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="up()"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
-                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="down()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
-            </div>
-        </div>
-        
     </div>
-    <div class="row title" style="">
-        
+   
+    <!--<div class="row title" style="">
+
         <div class="col-md-10 col-xs-12">
             <p style="padding-left: 12px; color: white; font-style: italic; font-weight: bold; font-size: 15pt">Địa chỉ: {{info._NumberHouse}} {{info._Street}},TP Đà Nẵng</p>
         </div>
@@ -61,6 +81,6 @@
             <p style="color: white; font-style: italic; font-weight: bold; font-size: 15pt" ng-if ="info._Sell==false">Cho Thuê</p>
         </div>
 
-    </div>
+    </div>-->
 </div>
 

@@ -1,37 +1,130 @@
 ﻿
+<!--<div class="row" style="position: relative; bottom: 0px; height: 40px; z-index: 14; background-color: rgb(165, 164, 164); padding: 5px" scroll
+    ng-show="hien_nav_mini == 0" ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} ||((hien_nav_mini == 1) && {'position':'relative'}))">
 
+    <div class="col-md-2"
+         style="padding-top: -10px; margin-left: 20px; background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);padding: 0px;"
+         ng-init="show_loai = 0" ng-mouseleave="show_loai = 0">
+
+        <a ng-click="show_loai=(!show_loai)" ng-mouseover="show_loai = 1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;top: 4px;left: 12px;">
+            <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Loại bất động sản <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_loai == 1">
+            <div class="list-group my_list_group2" style="padding: 5px;">
+                <input class="list-group-item" placeholder="Tìm kiếm loại"
+                       style="width: 100%" />
+                <a ng-repeat="item in list_DM" ng-click="change_tab_loai(item.IDType)" class="list-group-item my_list_item">
+                    {{item.TypeName}} <i ng-if="select_Kieu == item.IDType" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia=0">
+
+        <a ng-click="show_gia=(!show_gia)" ng-mouseover="show_gia=1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       top: 4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       left: 12px;">
+            <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Khoảng giá <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <div class="scrollmenu" style="max-height: 200px; background-color: white; margin-top: 30px" ng-show="show_gia == 1">
+            <div class="list-group my_list_group2 " style="padding: 5px;">
+                <input class="list-group-item" placeholder="Tìm kiếm loại"
+                       style="width: 100%" />
+                <a ng-repeat="item in list_Price" ng-click="change_tab_gia(item.IDPrice)" class="list-group-item my_list_item">
+                    {{item.Price1}} <i ng-if="select_Gia == item.IDPrice" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2" style="background-color: white;height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave="show_dientich = 0">
+
+        <a ng-click="show_dientich=(!show_dientich)" ng-mouseover="show_dientich=1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      top: 4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      left: 12px;">
+            <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Diện tích <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_dientich == 1">
+            <div class="list-group my_list_group2" style="padding: 5px;">
+                <input class="list-group-item" placeholder="Tìm kiếm loại"
+                       style="width: 100%" />
+                <a ng-repeat="item in listdientich" ng-click="change_tab_dientich(item.IDAcreage)" class="list-group-item my_list_item">
+                    {{item.Acreage1}} <i ng-if="select_DienTich == item.IDAcreage" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1" style="background-color: white; width: 10%; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_ht = 0" ng-mouseleave="show_ht=0">
+
+        <a ng-click="show_ht=(!show_ht)" ng-mouseover="show_ht=1" style="margin-top: -4px;color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            top: 4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            left: 12px;">
+            <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> {{tab_sell}} <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <div style="max-height: 200px; background-color: white; margin-top: 30px" ng-show="show_ht == 1">
+            <div class="list-group my_list_group2" style="padding: 5px;">
+
+                <a ng-click="change_sell('true')" class="list-group-item my_list_item">MUA<i ng-show="select_sell == 'true'" style="float: right" class="fa fa-check" aria-hidden="true"></i></a>
+                <a ng-click="change_sell('false')" class="list-group-item my_list_item">
+                    THUÊ <i ng-show="select_sell == 'false'" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <form style="height: 100%;" ng-submit="search_vp()">
+            <div class="input-group" style="height: 100%">
+                <input ng-enter="search_vp()" type="text" ng-model="query" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
+                       style="height: 100%; border: #eb5255 1.7px solid; border-radius: 0px;">
+                <div class="input-group-btn" style="height: 100%">
+                    <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px;">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="" style="height: 100%">
+        <a style="color: black;font-size: 21px" ng-click="reload_seach()">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+
+        </a>
+    </div>
+</div>-->
 <div ng-controller="chitietCtrl" ng-init="getAPIid(id_VP)" class="container" style="margin-top: 20px">
     <div class="" style="height: 37px; width: 300px; position: fixed; right: 0px; bottom: 0px;z-index: 14">
         <input ng-click="open_contact()" class="btn btn-info" type="button" style="z-index: 22; width: 100%; height: 100%; /*background-color: #3fd783;*/color: white; /*border-radius: 10px*/" value="Contact Us Now">
     </div>
-
+  
     <div class="contact col-md-4 col-xs-12 col-lg-4 col-sm-4" style="padding: 0px;z-index: 15" ng-show="show_form_contact">
         <a style="position: absolute; top: 0px; right: 18px; font-size: 30px; z-index: 21" ng-click="close_contact()"><span class="glyphicon glyphicon-remove-circle"></span></a>
-        <div class="form_contact scrollmenu" style="max-height: 500px; white-space: normal">
+        <div class="form_contact scrollmenu" style="max-height: 500px; white-space: normal;border-radius: 7px;">
             
             <div class="row" style="">
 
-                <div class="col-md-12" style="background-color: white; padding: 0px">
+                <div class="col-md-12" style="padding: 0px">
                     <p class="" style="font-size: 20pt; margin: 15px; text-align: center;">{{info._NameCustomer}}</p>
-                    <div class="col-md-6 hidden-sm hidden-xs" style="background-color: white">
+                    <div class="col-md-6 hidden-sm hidden-xs" style="">
                         <a><img class="img-thumbnail" ng-src="https://pbs.twimg.com/profile_images/710169276980858880/eosxkWG0_200x200.jpg" 
                                 style=""></a>
 
                     </div>
-                    <div class="col-md-6 col-sm-6" style="height: 100%; background-color: white; padding-top: 15px; padding-left: 0px; padding-right: 0px">
+                    <div class="col-md-6 col-sm-6" style="height: 100%; padding-top: 15px; padding-left: 0px; padding-right: 0px">
                         <div style="height: 20%; width: 100%; background-color: white; border-bottom: 2px solid silver">
                             <p style="color: black; margin-bottom: 5px; white-space: nowrap; font-weight: bold; text-align: center">
                                 <span class="glyphicon glyphicon-phone-alt">
                                 </span>&nbsp;&nbsp;Office : {{info._PhoneCustomer}}
                             </p>
                         </div>
-                        <div style="height: 10%; width: 100%; background-color: white; border-bottom: 2px solid silver">
+                        <div style="height: 10%; width: 100%; border-bottom: 2px solid silver">
                             <p style="color: black; margin-bottom: 5px; margin-top: 20px; white-space: nowrap; font-weight: bold; text-align: center">
                                 <span class="glyphicon glyphicon-earphone">
                                 </span>&nbsp;&nbsp;Mobile : {{info._PhoneCustomer}}
                             </p>
                         </div>
-                        <div class="hidden-xs" style="height: 70%; width: 100%; background: white">
+                        <div class="hidden-xs" style="height: 70%; width: 100%;">
                             <p style="color: silver">
                                 Thông tin về giá, diện tích trống và dịch vụ đi kèm có thể thay đổi tại từng thời điểm…
                             </p>
@@ -43,7 +136,7 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="col-md-12" style="background-color: white; text-align: center">
+                <div class="col-md-12" style="text-align: center">
                     <p style="text-align: center; font-size: 20pt; margin: 15px; margin-bottom: 4px;"> Contact </p>
                     <input type="text" placeholder="Name" style="width: 90%; margin: 15px" ng-model="name_kh" required>
                     <input type="text" placeholder="Email" style="width: 90%; margin: 15px" ng-model="email_kh" required>
@@ -68,7 +161,27 @@
 <div class="row">
     <div style="background-color: #eee;padding: 0px" class="col-md-9 col-xs-12">
         <slider images="images" miniimages="miniImage" info="info" host="hosts" ng-if="show_slide == 1"/>
-        <div style="height: 35px; margin-bottom: 20px;">
+        <div class="row" style="color: #36ace2;margin-top: 10px;">
+            <p style="padding-left: 12px; font-style: normal; font-weight: bold; font-size: 18pt; float: left">{{info._Name}}</p>
+
+        </div>
+        <div class="row" style="color: #36ace2;font-weight: normal;
+    font-size: 20px;">
+            <a class="button_loai" style="text-decoration: none; float: left">
+                <span style="">
+                    <font>Cho thuê</font><i style="">Đất</i>
+                </span>
+            </a>
+            <span style="float: left">&nbsp;-&nbsp;</span>
+            <a class="button_diachi" style="float: left; text-decoration: none">33/1 Hoàng Diệu, </a>
+            <span style="float: left">&nbsp;</span>
+            <a class="button_diachi" style="float: left; text-decoration: none"> phường Hải Châu 2, </a>
+            <span style="float: left">&nbsp;</span>
+            <a class="button_diachi" style="float: left; text-decoration: none"> quận Hải Châu,</a>
+            <span style="float: left">&nbsp;</span>
+            <span style="float: left"> TP Đà Nẵng.</span>
+        </div>
+        <div style="height: 35px; margin-bottom: 20px;margin-top: 20px">
             <!--<p style="float: left; text-align: center; width: 100px; height: 39px; background-color: #646363; color: white; font-weight: bold; padding: 9px; font-size: 15px;">Share:</p>
             <a class="icon_society" target="_blank" ng-click="send_gmail(info._EmailCustomer)">
                 <i class="fa fa-google fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">GMail</span>
@@ -81,17 +194,22 @@
                 <i class="fa fa-facebook-official fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Facebook</span>
             </a>-->
 
-            <button class="icon_society" style="float: left; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()" ng-disabled="(taikhoan.test == 0)">
+            <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
                 <i style="color: red" class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
             </button>
-            <button class="icon_society" style="float: left; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()" ng-disabled="(taikhoan.test == 0)">
+            <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
                 <i class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
             </button>
+            <div  style="float: left;margin-right: 10px "class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+            <div style="float: left"class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large" data-mobile-iframe="true">
+                <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
+            </div>
+
         </div>
         <div style="background-color: #36ace2; height: 40px">
-            <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px">Giới thiệu</h3>
+            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px;text-transform: uppercase">Giới thiệu</h4>
         </div>
-        <div style="background-color: white; padding: 20px; font-size: 13pt">
+        <div style="background-color: white; padding: 20px;">
             <p ng-bind-html="info._Decription"></p>
             <!--<p>Văn Phòng quận Cầu Giấy tòa nhà Hoàng Ngọc phố Trần Thái Tông. Diện tích cho thuê từ 70m đến 530m, giá thuê 11$/m2/tháng đã bao gồm VAT và phí dịch vụ.</p>
             <p>Hoàng Ngọc Tower tọa lạc tại lô C2C ngõ 72 Trần Thái tông với mặt tiền rộng 30m thuộc tuyến 2 phố Duy Tân, cắt giữa phố Trần Thái Tông và đường Phạm Hùng, tuyến đường huyết mạch của cửa ngõ phía Tây Hà Nội, Tòa nhà Hoàng Ngọc sở hữu một góc nhìn cảnh quan tuyệt đẹp hướng ra hai mặt đường.</p>
@@ -105,9 +223,9 @@
             <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
         </div>
         <div style="background-color: #36ace2; height: 40px">
-            <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px">Thông Tin Bổ Sung</h3>
+            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px;text-transform: uppercase">Thông Tin Bổ Sung</h4>
         </div>
-        <div style="background-color: white; padding: 20px; font-size: 13pt">
+        <div style="background-color: white; padding: 20px;">
             <ul class="clearfix" style="display: block; list-style-type: square;">
                 <li class="col-md-6 col-xs-12">Ngày Đăng Tin: {{ format_date(info._ModifyDate) }}</li>
                 <li class="col-md-6 col-xs-12">Ngày Hết Hạn: {{ format_date(info._ExpireDate) }}</li>
@@ -118,9 +236,9 @@
             </ul>
         </div>
         <div style="background-color: #36ace2; height: 40px">
-            <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px">Các thiết bị có sẵn</h3>
+            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; float: none; padding: 5px 20px 10px; line-height: 30px;text-transform: uppercase">Các thiết bị có sẵn</h4>
         </div>
-        <div style="background-color: white; padding: 20px; font-size: 14pt">
+        <div style="background-color: white; padding: 20px;">
             <ul class="clearfix" style="display: block; list-style-type: square;">
                 <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/bao-ve/">Bảo Vệ 24/24h</a></li>
                 <li class="col-md-6"><a href="http://sanvanphong.com/property-feature/cho-de-oto/">Chỗ Để Ôtô</a></li>
@@ -146,12 +264,12 @@
     <div class="col-md-3 hidden-xs hidden-sm">
         <img style="width: 100%;" ng-src="{{ app }}/Content/Images/quangcao2.png"/>
         <div style="background-color: #36ace2;">
-            <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; text-transform: uppercase;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        float: none; padding: 9px 20px 10px;">
                 TÌM KIẾM NHÀ ĐẤT
-            </h3>
+            </h4>
         </div>
-        <div style="font-size: 13pt">
+        <div style="">
             <div class="clearfix list-group" style="display: block; list-style-type: square; background-color: white;">
                 <div class="col-md-12 col-xs-6 col-sm-4">
                     <div class="col-md-12 col-xs-6 col-sm-4">
@@ -224,12 +342,12 @@
                 </div>
             </div>
             <div style="background-color: #36ace2;">
-                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+                <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           float: none; padding: 9px 20px 10px;">
                     PHÒNG TRỌ
-                </h3>
+                </h4>
             </div>
-            <div style="font-size: 13pt">
+            <div style="">
                 <div class="clearfix list-group" style="display: block; list-style-type: square;">
                     <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
                     <a class="list-group-item col-md-12 col-xs-12">Đại Học Sư Phạm Đà Nẵng </a>
@@ -250,16 +368,16 @@
 
 <div>
     <div style="background-color: #36ace2; height: 40px">
-        <h3 style="font-weight: bold; border-bottom: 1px solid #dedede;float: none; padding: 5px 20px 10px; line-height: 30px">Bản đồ</h3>
+        <h4 style="font-weight: bold; border-bottom: 1px solid #dedede;float: none; padding: 5px 20px 10px; line-height: 30px;text-transform: uppercase">Bản đồ</h4>
     </div>
     <div style="height: 400px; background-color: white">
         <div id="map" style="width: 100%; height: 100%"></div>
 
     </div>
     <div style="background-color: #36ace2;">
-        <h3 style="font-weight: bold; border-bottom: 1px solid #dedede;float: none; padding: 5px 20px 10px; line-height: 30px">Các Bất Động Sản Tương Tự</h3>
+        <h4 style="font-weight: bold; border-bottom: 1px solid #dedede;float: none; padding: 5px 20px 10px; line-height: 30px;text-transform: uppercase">Các Bất Động Sản Tương Tự</h4>
     </div>
-    <div style="background-color: white; padding: 20px; font-size: 13pt;" class="row">
+    <div style="background-color: white; padding: 20px;" class="row">
         <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="">
 
             <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">

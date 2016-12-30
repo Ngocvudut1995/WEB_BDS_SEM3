@@ -4,19 +4,78 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using WEB_TRACUU.Areas.Administrator.Models;
 using WEB_TRACUU.Models;
 
 namespace WEB_TRACUU.Controllers
-{
+{   
     public class QuanTriController : ApiController
     {
         private DataTraCuuVPDataContext db;
-        [HttpPost]
+
+        private bool test_quyenadmin()
+        {
+            string username = null;
+            try
+            {
+                username = HttpContext.Current.Request.Cookies["user"].Value;
+            }
+            catch (Exception)
+            {
+
+
+            }
+            if (username != null)
+            {   Guid id = new Guid(username);
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var sql = (from a in db.Customers
+                               where a.IDCustomer == id
+                               select a).SingleOrDefault();
+                    if (sql != null)
+                    {
+                        if (sql.Admin == true)
+                        {
+                            return true;
+                        }
+
+                    }
+                    
+                }
+            }
+            return false;
+        }
+
+        private bool test_user(Guid idcustomer)
+        {
+            string username = null;
+            try
+            {
+                username = HttpContext.Current.Request.Cookies["user"].Value;
+            }
+            catch (Exception)
+            {
+
+
+            }
+            if (username != null)
+            {
+                Guid id = new Guid(username);
+                if (id == idcustomer) return true;
+               
+            }
+            return false;
+        }
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Trousers(JObject data)
         {
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
+
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -48,10 +107,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Trousers(int id_quan)
         {
-           
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -77,9 +136,10 @@ namespace WEB_TRACUU.Controllers
         }
 
         
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Wards(JObject data)
         {
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -114,10 +174,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Wards(int id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -144,10 +204,10 @@ namespace WEB_TRACUU.Controllers
         
 
 
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Streets(JObject data)
         {
-          
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -181,10 +241,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Streets(int id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -204,10 +264,10 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Price(JObject data)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -241,10 +301,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Price(int id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -265,10 +325,10 @@ namespace WEB_TRACUU.Controllers
         }
 
 
-        [HttpPost]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Type(JObject data)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -302,10 +362,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Type(int id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -325,10 +385,10 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
-
+        [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Area(JObject data)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -361,10 +421,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Area(int id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -384,9 +444,10 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult Banned_Customer(Guid id)
         {
+            if (test_quyenadmin() == false) return NotFound();
 
             try
             {
@@ -423,10 +484,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpDelete]
+        [System.Web.Http.HttpDelete]
         public IHttpActionResult UnSetAdmin(Guid id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -446,10 +507,11 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpPost]
+        [System.Web.Http.HttpPost]
+        [ValidateAntiForgeryToken]
         public IHttpActionResult SetAdmin(Guid id)
         {
-
+            if (test_quyenadmin() == false) return NotFound();
             try
             {
                 using (db = new DataTraCuuVPDataContext())
@@ -469,9 +531,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public IHttpActionResult Update_TK(JObject data)
         {
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -500,9 +563,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public IHttpActionResult DuyetBai(JObject data)
         {
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -522,9 +586,10 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public IHttpActionResult HuyBai(JObject data)
         {
+            if (test_quyenadmin() == false) return NotFound();
             dynamic json = data;
             try
             {
@@ -595,7 +660,7 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public IHttpActionResult Update_BDS(JObject data)
         {
             dynamic json = data;
@@ -607,6 +672,9 @@ namespace WEB_TRACUU.Controllers
                     Guid mavp = new Guid();
                     mavp = json._idLand;
                     var lands = (from a in db.Lands where a.IDLand == mavp select a).SingleOrDefault();
+                    Guid idcustomer = new Guid();
+                    idcustomer = (Guid) lands.IDCustomer;
+                    if (test_user(idcustomer) != true || test_quyenadmin() != true) return NotFound(); 
                     lands.Name = json._tieuDe;
                     lands.IDAcreage = Convert.ToInt32(json._dienTich);
                     lands.IDPrice = Convert.ToInt32(json._IDgia);
@@ -675,7 +743,7 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
-        [HttpPut]
+        [System.Web.Http.HttpPut]
         public IHttpActionResult ChangePass(JObject data)
         {
             dynamic json = data;
@@ -685,7 +753,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     //Customer customer = new Customer();
                     Guid maKH = json._makh;
-
+                    if (test_user(maKH) != true || test_quyenadmin() != true) return NotFound();
                     var query = (from a in db.Customers
                                  where a.IDCustomer == maKH
                                  select a).SingleOrDefault();
