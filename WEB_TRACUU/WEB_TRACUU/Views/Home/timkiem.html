@@ -43,7 +43,7 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       left: 12px;">
                 <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> Diện tích <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_dientich == 0">
+            <div class="scrollmenu" style="max-height: 200px; background-color:white; margin-top: 30px" ng-show="show_dientich == 1">
                 <div class="list-group my_list_group2" style="padding: 5px;">
                     <input class="list-group-item" placeholder="Tìm kiếm loại"
                            style="width: 100%" />
@@ -74,7 +74,7 @@
         <div class="col-md-4">
             <form style="height: 100%;" ng-submit="search_vp()">
                 <div class="input-group" style="height: 100%">
-                    <input type="text"ng-model ="query" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
+                    <input ng-enter="search_vp()" type="text" ng-model ="query" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
                            style="height: 100%; border: #eb5255 1.7px solid; border-radius: 0px;">
                     <div class="input-group-btn" style="height: 100%">
                         <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px;">
@@ -99,10 +99,11 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 col-xs-12" style="background-color: rgba(0, 0, 0, 0.56);text-align: left;border-radius: 6px">
 
-      
+
             <form style="height: 70%; padding-top: 2%; padding-left: 4%; padding-right: 4%; padding-bottom: 2%" ng-submit="search()">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận " style="border: #eb5255 1.7px solid; border-radius: 0px; height: 38px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận " 
+    style="border: #eb5255 1.7px solid; border-radius: 0px; height: 38px;">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px; height: 38px;">
                             <i class="glyphicon glyphicon-search"></i>
@@ -262,8 +263,8 @@
                                 </div>
                                 <div class="col-md-8 col-sm-8 col-xs-12" style="padding: 1px 0px 0px 10px;">
                                     <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: #eb5255">
-                                        <p style="font-size: 16px; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            overflow: hidden; text-overflow: ellipsis; line-height: 35px;">{{ item._TenVp }}</p>
+                                        <p style="text-transform: uppercase;font-size: 16px; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%;
+overflow: hidden; text-overflow: ellipsis; line-height: 35px;">{{ item._TenVp }}</p>
                                     </a>
 
                                     <p style="line-height: 35px; margin-bottom: -10px; margin-top: -15px; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
@@ -313,7 +314,7 @@ float: none; padding: 9px 20px 10px;">
                     </h3>
                 </div>
                 <div style="font-size: 13pt">
-                    <div class="clearfix list-group" style="display: block; list-style-type: square" ng-model="VPNN">
+                    <div class="clearfix list-group" style="text-transform: uppercase;display: block; list-style-type: square" ng-model="VPNN">
 
                         <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_VPNN" href="#/ChiTiet/{{ item._MaVP }}">{{item._TenVp}}</a>
 
@@ -326,7 +327,7 @@ float: none; padding: 9px 20px 10px;">
                     </h3>
                 </div>
                 <div style="font-size: 13pt">
-                    <div class="clearfix list-group" style="display: block; list-style-type: square" ng-model="VPNN">
+                    <div class="clearfix list-group" style="text-transform: uppercase;display: block; list-style-type: square" ng-model="VPNN">
 
                         <a class="list-group-item col-md-12 col-xs-12" ng-repeat="item in list_VPNN" href="#/ChiTiet/{{ item._MaVP }}">{{item._TenVp}}</a>
 
