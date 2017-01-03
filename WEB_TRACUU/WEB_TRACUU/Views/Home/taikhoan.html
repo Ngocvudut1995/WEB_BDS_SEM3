@@ -4,9 +4,9 @@
     <div class="row" style="" ng-controller="taikhoanCtrl">
         <div class="col-md-4" style="">
             <div style="background-color: #C1C1C1; height: 40px">
-                <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Tài Khoản</h3>
+                <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px;text-transform: uppercase">Thông Tin Tài Khoản</h4>
             </div>
-            <div style="padding: 20px; font-size: 13pt">
+            <div style="padding: 20px; text-transform: uppercase">
                 <div class="clearfix list-group" style="display: block; list-style-type: square;">
                     <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/thongtinkh">Tên Tài Khoản: {{taikhoan.username}} <span ng-if="taikhoan.admin == true" style="float: right">Admin</span></a>
                     <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/dangbai">Đăng Tin</a>
@@ -16,7 +16,7 @@
                     <a class="list-group-item col-md-12 col-xs-12" href="#/TaiKhoan/thayDoiMatKhau">Thay Đổi Mật Khẩu </a>
                     <div class="list-group-item col-md-12 col-xs-12 dropdown" style="padding: 0px;">
                         <button class="list-group-item btn btn-lg" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                style="text-align: left; width: 100%" value="Quản Trị Hệ Thống" ng-if="(taikhoan.admin == true)">
+                                style="font-size: 14px; text-transform: uppercase;text-align: left; width: 100%" value="Quản Trị Hệ Thống" ng-if="(taikhoan.admin == true)">
                             Quản Trị Hệ Thống<span class="glyphicon glyphicon-list" style="float: right"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
@@ -40,10 +40,10 @@
                 <div ng-switch-when="dangbai" ng-controller="postCtrl">
                     <!--<div ng-include="'post.html'"></div>-->
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       float: none; padding: 9px 20px 10px; line-height: 30px">
                             Đăng Tin
-                        </h3>
+                        </h4>
                     </div>
                     <div class="panel panel-default" style="">
 
@@ -214,9 +214,9 @@
                 <div ng-switch-when="ct_baidang" ng-controller="ct_baidang_ctrl">
                     <!--<div ng-include="'post.html'"></div>-->
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;float: none; padding: 9px 20px 10px; line-height: 30px">
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;float: none; padding: 9px 20px 10px; line-height: 30px">
                             Chỉnh Sửa Bài Đăng
-                        </h3>
+                        </h4>
                     </div>
                     <div class="panel panel-default" style="">
                         <div class="panel-heading" style="text-transform: uppercase;">
@@ -388,7 +388,7 @@
                 </div>
                 <div ng-switch-when="thongtinkh" ng-controller="ql_khachhang">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng</h4>
                     </div>
                     <div class="panel panel-default" style="">
                         <div class="panel-heading" style="text-transform: uppercase;">Thông Tin Tài Khoản</div>
@@ -514,7 +514,7 @@
                 </div>
                 <div ng-switch-when="ql_tracuu" ng-controller="quanlytracuuCtrl" class="list-group">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h4>
                     </div>
                     <div class="panel panel-default" style="">
                         <div class="panel-heading" style="text-transform: uppercase;">DS Các Quận</div>
@@ -709,9 +709,9 @@
                         </div>
                     </div>
                 </div>
-                <div ng-switch-when="ql_khachhang" style="margin: 20px" class="list-group" ng-controller="ql_khachhang">
+                <div ng-switch-when="ql_khachhang" class="list-group" ng-controller="ql_khachhang">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-transform: uppercase;">Danh Sách Khách Hàng</div>
@@ -748,9 +748,9 @@
                     </div>
 
                 </div>
-                <div ng-switch-when="ql_baidang" style="margin: 20px" class="list-group" ng-controller="ql_baidang">
+                <div ng-switch-when="ql_baidang" class="list-group" ng-controller="ql_baidang">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading" style="text-transform: uppercase;">Danh Sách Bài Đăng</div>
@@ -791,10 +791,10 @@
                     </div>
 
                 </div>
-                <div ng-switch-when="khachhang" style="margin: 20px" class="list-group" ng-controller="ql_ct_khachhang">
+                <div ng-switch-when="khachhang" class="list-group" ng-controller="ql_ct_khachhang">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
 
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng {{Customer.fullname}}</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng {{Customer.fullname}}</h4>
                     </div>
                     <div class="panel panel-default" style="">
                         <div class="panel-heading" style="text-transform: uppercase;position: relative">
@@ -937,7 +937,7 @@
                 </div>
                 <div ng-switch-when="ql_baidangchuaduyet" ng-controller="baidangchuaduyetCtrl">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h4>
                     </div>
                     <div class="panel panel-default" ng-repeat="item in bd_chuaduyet">
                         <div class="panel-heading" style="text-transform: uppercase;position: relative" ng-init="show = 0">
@@ -995,7 +995,7 @@
                 </div>
                 <div ng-switch-when="ql_baidanghethan">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h4>
                     </div>
                     <div class="panel panel-default" ng-repeat="item in bd_hethan">
                         <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
@@ -1053,7 +1053,7 @@ format_date(item.bds._ExpireDate)
                 </div>
                 <div ng-switch-when="ql_baidangdangdang">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h3>
+                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h4>
                     </div>
 
                     <div class="panel panel-default" ng-repeat="item in bd_dangdang">
@@ -1113,10 +1113,10 @@ format_date(item.bds._ExpireDate)
                 </div>
                 <div ng-switch-when="thayDoiMatKhau" ng-controller="doiMatKhauCtrl">
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h3 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+                        <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       float: none; padding: 9px 20px 10px; line-height: 30px">
                             THAY ĐỔI MẬT KHẨU
-                        </h3>
+                        </h4>
                     </div>
                     <div class="panel panel-default" style="margin-top: 18px;">
                         <div class="panel-heading">NHẬP THÔNG TIN</div>

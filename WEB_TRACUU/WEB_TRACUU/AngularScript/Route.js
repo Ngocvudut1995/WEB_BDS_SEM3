@@ -248,7 +248,7 @@ app.controller('timkiemCtrl', [
             //var url = '/TimKiem/1/1/1/1/1/0/1';
             $location.url(url);
             if ($scope.query != '') {
-                $location.search('q', query);
+                $location.search('q', $scope.query);
             }
             //var param = {
             //    ht: $scope.select_ht || '',
@@ -677,7 +677,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
     $scope.nick_name = '';
     $scope.coquan = '';
     $scope.phone = '';
-    $scope.address = '';
+    $scope.address = "";
     $scope.cmnd = '';
     $scope.email = "";
     $scope.username = "";

@@ -1,145 +1,184 @@
 ﻿
 
 <div ng-controller="trangchuCtrl" style="margin-top: -20px">
-    <div class="container-fluid" style="padding: 0px;"
+    <div class="container-fluid" style="padding: 0px;position: relative"
          ng-style="((body_width > 700) && {'height': '650px'} || (body_width < 700) && {'height': '400px'} && (body_width >= 400) )|| ((body_width < 400) && {'height': '125px'})">
         <div style="width: 100%; position: absolute; height: 100%; background-position: center; background-size: cover;" ng-style="{'background-image': 'url({{img1}})'}">
-            <h1 style="    text-align: center;
+
+
+        </div>
+        <h1 style="text-align: center; position: relative; top: 0%;
     margin: 93px;
     margin-bottom: 0px;
     color: white;
     font-size: 21px;
-    text-shadow: 0 3px 3px #000;">Thêm lựa chọn, thêm không gian sống...
-Tìm kiếm thông tin trên 2.690 dự án và hơn 117.660 bất động sản tại Homedy.com</h1>
-             <div class="row" style="position: relative; top: 13%; z-index: 14; height: 156px;">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <div style="height: 100%">
-                        <div style="height: 45px">
-                            <ul class="nav nav-justified my_nav_search" style="width: 40%;">
-                                <li ng-class="[{active:select_sell == true}]"><a ng-click ="change_sell(true)">MUA BÁN</a></li>
-                                <li ng-class="[{active:select_sell == false}]"><a ng-click ="change_sell(false)">CHO THUÊ</a></li>
+    text-shadow: 0 3px 3px #000;">
+            Thêm lựa chọn, thêm không gian sống...
+            Tìm kiếm thông tin trên 2.690 dự án và hơn 117.660 bất động sản tại Homedy.com
+        </h1>
+        <div class="row" style="position: relative; top: 13%; z-index: 14; height: 156px;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div style="height: 100%">
+                    <div style="height: 45px">
+                        <ul class="nav nav-justified my_nav_search" style="width: 40%;">
+                            <li ng-class="[{active:select_sell == true}]"><a ng-click="change_sell(true)">MUA BÁN</a></li>
+                            <li ng-class="[{active:select_sell == false}]"><a ng-click="change_sell(false)">CHO THUÊ</a></li>
 
-                            </ul>
-                        </div>
-                        <div style="height: 112px; background-color: rgba(0, 0, 0, 0.56); position: absolute">
-                            <form style="height: 70%; padding-top: 3%; padding-left: 4%; padding-right: 4%; padding-bottom: 1%" ng-submit ="search()">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" ng-model="query" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận " style="border: #eb5255 1.7px solid; border-radius: 0px; height: 38px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px; height: 38px;">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </button>
-                                    </div>
+                        </ul>
+                    </div>
+                    <div style="height: 112px; background-color: rgba(0, 0, 0, 0.56); position: absolute">
+                        <form style="height: 70%; padding-top: 3%; padding-left: 4%; padding-right: 4%; padding-bottom: 1%" ng-submit="search()">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="query" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận " style="border: #eb5255 1.7px solid; border-radius: 0px; height: 38px;">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px; height: 38px;">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
                                 </div>
-                            </form>
-                            <div class="row" style="position: relative; bottom: 0px; height: 30%">
-                                <div class="col-md-3" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_loai = 0" ng-mouseleave="show_loai = 0">
+                            </div>
+                        </form>
+                        <div class="row" style="position: relative; bottom: 0px; height: 30%">
+                            <div class="col-md-3" ng-style="show_loai==1 && {'background-color':'rgba(0, 0, 0, 0.56'}" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_loai = 0" ng-mouseleave="show_loai = 0">
 
-                                    <a ng-click="show_loai=(!show_loai)" ng-mouseover="show_loai = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                <a ng-click="show_loai=(!show_loai)" ng-mouseover="show_loai = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            left: 12px;">
-                                        <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Loại bất động sản <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_loai == 1">
-                                        <div class="list-group my_list_group" style="padding: 5px;">
-                                            <input class="list-group-item" placeholder="Tìm kiếm loại"
-                                                   style="width: 100%"/>
-                                            <a ng-repeat="item in list_DM" ng-click="change_tab_loai(item.IDType)" class="list-group-item my_list_item">
-                                                {{item.TypeName}} <i ng-if="tab_loaibds == item.IDType" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                                            </a>
-                                           
-                                        </div>
+                                    <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Loại bất động sản <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_loai == 1">
+                                    <div class="list-group my_list_group" style="padding: 5px;">
+                                        <input class="list-group-item" placeholder="Tìm kiếm loại"
+                                               style="width: 100%;height: 30px;" />
+                                        <a ng-repeat="item in list_DM" ng-click="change_tab_loai(item.IDType)" class="list-group-item my_list_item">
+                                            {{item.TypeName}} <i ng-if="tab_loaibds == item.IDType" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
+
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia =0">
+                            </div>
+                            <div class="col-md-3" ng-style="show_gia==1 && {'background-color':'rgba(0, 0, 0, 0.56'}" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia =0">
 
-                                    <a ng-click="show_gia=(!show_gia)" ng-mouseover="show_gia = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                <a ng-click="show_gia=(!show_gia)" ng-mouseover="show_gia = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        left: 12px;">
-                                        <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Khoảng giá <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_gia == 1">
-                                        <div class="list-group my_list_group" style="padding: 5px;">
-                                            <input class="list-group-item" placeholder="Tìm kiếm loại"
-                                                   style="width: 100%" />
-                                            <a ng-repeat="item in list_Price" ng-click="change_tab_gia(item.IDPrice)" class="list-group-item my_list_item">
-                                                {{item.Price1}} <i ng-if="tab_gia == item.IDPrice" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                                            </a>
+                                    <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Khoảng giá <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_gia == 1">
+                                    <div class="list-group my_list_group" style="padding: 5px;">
+                                        <input class="list-group-item" placeholder="Tìm kiếm loại"
+                                               style="width: 100%;height: 30px;" />
+                                        <a ng-repeat="item in list_Price" ng-click="change_tab_gia(item.IDPrice)" class="list-group-item my_list_item">
+                                            {{item.Price1}} <i ng-if="tab_gia == item.IDPrice" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
 
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave="show_dientich=0">
+                            </div>
+                            <div class="col-md-3" ng-style="show_dientich==1 && {'background-color':'rgba(0, 0, 0, 0.56'}" style="height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83);; padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave="show_dientich=0">
 
-                                    <a ng-click="show_dientich=(!show_dientich)" ng-mouseover="show_dientich = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                <a ng-click="show_dientich=(!show_dientich)" ng-mouseover="show_dientich = 1" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       left: 12px;">
-                                        <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Diện tích <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_dientich == 1">
-                                        <div class="list-group my_list_group" style="padding: 5px;">
-                                            <input class="list-group-item" placeholder="Tìm kiếm loại"
-                                                   style="width: 100%" />
-                                            <a ng-repeat="item in listdientich" ng-click="change_tab_dientich(item.IDAcreage)" class="list-group-item my_list_item">
-                                                {{item.Acreage1}} <i ng-if="select_DienTich == item.IDAcreage" style="float: right" class="fa fa-check" aria-hidden="true"></i>
-                                            </a>
+                                    <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Diện tích <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
+                                </a>
+                                <div class="scrollmenu" style="max-height: 200px; background-color: rgba(0, 0, 0, 0.59); margin-top: 35px" ng-show="show_dientich == 1">
+                                    <div class="list-group my_list_group" style="padding: 5px;">
+                                        <input class="list-group-item" placeholder="Tìm kiếm loại"
+                                               style="width: 100%;height: 30px;" />
+                                        <a ng-repeat="item in listdientich" ng-click="change_tab_dientich(item.IDAcreage)" class="list-group-item my_list_item">
+                                            {{item.Acreage1}} <i ng-if="select_DienTich == item.IDAcreage" style="float: right" class="fa fa-check" aria-hidden="true"></i>
+                                        </a>
 
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3" style="height: 100%; padding: 0px;">
+                            </div>
+                            <div class="col-md-3" ng-style="show_dd==1 && {'background-color':'rgba(0, 0, 0, 0.56'}" style="height: 100%; padding: 0px;" ng-init="show_dd=0">
 
-                                    <a ng-click="" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
+                                <a ng-mouseover="show_dd = 1" ng-mouseleave="show_dd=0" ng-click="" style="color: white; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           top: 4px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           left: 12px;">
-                                        <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Địa điểm
-                                    </a>
+                                    <span class="fa fa-home" aria-hidden="true" style="color: white; font-size: 25px"></span> Địa điểm
+                                </a>
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+        <div class="row" style="background-color: rgba(0, 0, 0, 0.3); height: 50px; position: absolute; width: 100%; bottom: 0px">
+            <div class="col-md-3 col-sm-3 nav_title_index" style="padding: 10px; height: 100%">
+                <a style="text-decoration: none">
+                    <img src="../../Content/Images/vanphong2.jpg" style="height: 100%; float: left" />
+                    <p style="margin: -4px; margin-left: 51px;">Top 5 khu biệt thự nghỉ dưỡng có vị trí đẹp nhất tại Việt Nam</p>
+                </a>
+               
 
+            </div>
+            <div class="col-md-3 col-sm-3 nav_title_index" style="padding: 10px; height: 100%">
+                <a style="text-decoration: none">
+                    <img src="../../Content/Images/vanphong2.jpg" style="height: 100%; float: left" />
+                    <p style="margin: -4px; margin-left: 51px;">Top 5 khu biệt thự nghỉ dưỡng có vị trí đẹp nhất tại Việt Nam</p>
+                </a>
+
+
+            </div>
+            <div class="col-md-3 col-sm-3 nav_title_index" style="padding: 10px; height: 100%">
+                <a style="text-decoration: none">
+                    <img src="../../Content/Images/vanphong2.jpg" style="height: 100%; float: left"/>
+                    <p style="margin: -4px; margin-left: 51px;">Top 5 khu biệt thự nghỉ dưỡng có vị trí đẹp nhất tại Việt Nam</p>
+                </a>
+
+
+            </div>
+            <div class="col-md-3 col-sm-3 nav_title_index" style="padding: 10px; height: 100%">
+                <a style="text-decoration: none">
+                    <img src="../../Content/Images/vanphong2.jpg" style="height: 100%; float: left" />
+                    <p style="margin: -4px; margin-left: 51px;">Top 5 khu biệt thự nghỉ dưỡng có vị trí đẹp nhất tại Việt Nam</p>
+                </a>
+
+
+            </div>
+        </div>
     </div>
     <div style="margin-top: 30px">
-        <h2 style="color: #36ace2; text-align: center">BẠN MUỐN MUA NHÀ?</h2>
-        <div class="row">
+        <h2 style="color: #36ace2; text-align: center;font-weight: bold">BẠN MUỐN MUA NHÀ?</h2>
+        <div class="row" style="border-bottom: 1px solid #36ace2">
             <div class="col-md-3"></div>
-            <div class="col-md-6" ng-init="tab_muanha_active = 1">
-                <div style="width: 100%">
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Can-ho.png"
-                         ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})"/>
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Nha.png"
-                         ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )"/>
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Dat.png"
-                         ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )"/>
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Van-phong.png"
-                         ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )"/>
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Khac.png"
-                         ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )"/>
-                </div>
+            <div class="col-md-6 col-xs-12" ng-init="tab_muanha_active = 1">
+               
                 <ul class="nav my_nav_tab_2" style="width: 100%; text-align: center">
-                    <li ng-class="[{active:tab_muanha_active == 1}]" ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-
-
-                        <a ng-click="tab_muanha_active =1">Home</a>
+                    <li ng-class="[{active:tab_muanha_active == 1}]" class="navtab2" 
+                         style="text-align: center;">
+                         
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Can-ho.png"
+                             ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})" />
+                        <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1">CĂN HỘ</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 2}]" ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =2">Menu 1</a>
+                    <li ng-class="[{active:tab_muanha_active == 2}]" class="navtab2" 
+                        style="text-align: center;">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Nha.png"
+                             ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )" />
+                        <a  ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2">NHÀ</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 3}]" ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =3">Menu 2</a>
+                    <li ng-class="[{active:tab_muanha_active == 3}]"  class="navtab2"
+                         style="text-align: center;">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Dat.png"
+                             ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3">ĐẤT</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 4}]" ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center">
-                        <a ng-click="tab_muanha_active =4">Menu 3</a>
+                    <li ng-class="[{active:tab_muanha_active == 4}]" class="navtab2" 
+                        style="text-align: center">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Van-phong.png"
+                             ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4">VĂN PHÒNG</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 5}]" ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =5">Menu 3</a>
+                    <li ng-class="[{active:tab_muanha_active == 5}]" class="navtab2" 
+                        style="text-align: center;">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Khac.png"
+                             ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =5">NHÀ ĐẤT KHÁC</a>
                     </li>
                 </ul>
             </div>
@@ -261,159 +300,250 @@ Tìm kiếm thông tin trên 2.690 dự án và hơn 117.660 bất động sản
             <a style="float: right; border-top: 2px red solid;font-size: 22px">Xem Thêm </a>
         </div>
     </div>
+<div style="margin-top: 100px;">
+    <h2 style="color: #36ace2; text-align: center; font-weight: bold">BẠN MUỐN THUÊ NHÀ?</h2>
+    <div class="row" style="border-bottom: 1px solid #36ace2">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 col-xs-12" ng-init="tab_muanha_active = 1">
+            <div style="width: 100%">
+            </div>
+            <ul class="nav my_nav_tab_2" style="width: 100%; text-align: center">
+                <li ng-class="[{active:tab_muanha_active == 1}]" class="navtab2"
+                    style="text-align: center;">
+
+                    <img class="navtab2" style="opacity: 0" src="../../Content/Images/Can-ho.png"
+                         ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})"/>
+                    <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1">CĂN HỘ</a>
+                </li>
+                <li ng-class="[{active:tab_muanha_active == 2}]" class="navtab2"
+                    style="text-align: center;">
+                    <img class="navtab2" style="opacity: 0" src="../../Content/Images/Nha.png"
+                         ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )"/>
+                    <a ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2">NHÀ</a>
+                </li>
+                <li ng-class="[{active:tab_muanha_active == 3}]" class="navtab2"
+                    style="text-align: center;">
+                    <img class="navtab2" style="opacity: 0" src="../../Content/Images/Dat.png"
+                         ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )"/>
+                    <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3">ĐẤT</a>
+                </li>
+                <li ng-class="[{active:tab_muanha_active == 4}]" class="navtab2"
+                    style="text-align: center">
+                    <img class="navtab2" style="opacity: 0" src="../../Content/Images/Van-phong.png"
+                         ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )"/>
+                    <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4">VĂN PHÒNG</a>
+                </li>
+                <li ng-class="[{active:tab_muanha_active == 5}]" class="navtab2"
+                    style="text-align: center;">
+                    <img class="navtab2" style="opacity: 0" src="../../Content/Images/Khac.png"
+                         ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )"/>
+                    <a ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =5">NHÀ ĐẤT KHÁC</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-12 row" style="padding-right: 5%; padding-left: 5%;">
+
+            <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+
+                <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
+
+                    <div class="" style="position: relative; overflow: hidden;">
+
+                        <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
+                        <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
+                        <span class="rotate"style="text-align: center; font-weight: bold; position: absolute; right: 0px; top: 18px; padding: 14px 12px 10px 12px; width: 85px; height: 43px; background-color: #f03939; color: white" ng-if="1">NEW</span>
+                    </div>
+                    <div style="padding: 10px">
+                        <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                        </p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                        </p>
+                    </div>
+                    <div style="border-top: 1px solid #C1C1C1; padding: 10px">
+                        <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
+                        <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+
+                <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
+
+                    <div class="" style="position: relative">
+
+                        <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
+                        <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
+                    </div>
+                    <div style="padding: 10px">
+                        <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                        </p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                        </p>
+                    </div>
+                    <div style="border-top: 1px solid #C1C1C1; padding: 10px">
+                        <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
+                        <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+
+                <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
+
+                    <div class="" style="position: relative">
+
+                        <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
+                        <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
+                    </div>
+                    <div style="padding: 10px">
+                        <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                        </p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                        </p>
+                    </div>
+                    <div style="border-top: 1px solid #C1C1C1; padding: 10px">
+                        <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
+                        <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+
+                <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
+
+                    <div class="" style="position: relative">
+
+                        <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
+                        <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
+                    </div>
+                    <div style="padding: 10px">
+                        <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                        </p>
+                        <p>
+                            <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                        </p>
+                    </div>
+                    <div style="border-top: 1px solid #C1C1C1; padding: 10px">
+                        <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
+                        <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div style="padding-right: 7%; margin-top: 20px">
+        <a style="float: right; border-top: 2px red solid; font-size: 22px">Xem Thêm </a>
+    </div>
+</div>
     <div style="margin-top: 100px;">
-        <h2 style="color: #36ace2; text-align: center">BẠN MUỐN THUÊ NHÀ?</h2>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6" ng-init="tab_muanha_active = 1">
+        <h2 style="color: #36ace2; text-align: center;font-weight: bold">CẨM NANG NHÀ ĐẸP?</h2>
+        <div class="row" style="border-bottom: 1px solid #36ace2">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 col-xs-12" ng-init="tab_muanha_active = 1">
                 <div style="width: 100%">
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Can-ho.png"
-                         ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})" />
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Nha.png"
-                         ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )" />
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Dat.png"
-                         ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )" />
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Van-phong.png"
-                         ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )" />
-                    <img class="navtab2" style="width: 20%; opacity: 0" src="../../Content/Images/Khac.png"
-                         ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )" />
                 </div>
                 <ul class="nav my_nav_tab_2" style="width: 100%; text-align: center">
-                    <li ng-class="[{active:tab_muanha_active == 1}]" ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
+                    <li ng-class="[{active:tab_muanha_active == 1}]" class="navtab2"
+                        style="text-align: center;">
 
-
-                        <a ng-click="tab_muanha_active =1">Home</a>
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Kien-truc.png"
+                             ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})" />
+                        <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1">THỊ TRƯỜNG BẤT ĐỘNG SẢN</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 2}]" ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =2">Menu 1</a>
+                    <li ng-class="[{active:tab_muanha_active == 2}]" class="navtab2"
+                        style="text-align: center;">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Ngoai-that.png"
+                             ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2">NHÀ ĐẸP</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 3}]" ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =3">Menu 2</a>
+                    <li ng-class="[{active:tab_muanha_active == 3}]" class="navtab2"
+                        style="text-align: center;">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Noi-that.png"
+                             ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3">KIẾN THỨC</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 4}]" ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center">
-                        <a ng-click="tab_muanha_active =4">Menu 3</a>
+                    <li ng-class="[{active:tab_muanha_active == 4}]" class="navtab2"
+                        style="text-align: center">
+                        <img class="navtab2" style="opacity: 0" src="../../Content/Images/Xay-dung.png"
+                             ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4">NHÀ HAY</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 5}]" ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" class="navtab2" style="width: 20%; text-align: center;">
-                        <a ng-click="tab_muanha_active =5">Menu 3</a>
-                    </li>
+                   
                 </ul>
             </div>
 
         </div>
         <div class="row">
 
-            <div class="col-md-12 row" style="padding-right: 5%; padding-left: 5%;">
-               
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative;overflow: hidden;">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                            <span class="rotate"style="text-align: center; font-weight: bold;     position: absolute;
-    right: 0px;
-    top: 18px;
-    padding: 14px 12px 10px 20px;
-    width: 85px;
-    height: 43px; background-color: #36ace2" ng-if="1">1,7 tỷ</span>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
-                    </div>
-
+            <div class="col-md-7" style="padding-left: 5%;position: relative">
+                <img src="../../Content/Images/anh-bia(3).jpg_710x432.jpg"/>
+                <div style="position: absolute; top: 0px; right: 0px; height: 100%; width: 35%; background-color: rgba(0, 0, 0, 0.55); padding: 10px; margin: 0px">
+                    <a class="button_diachi" style="text-decoration: none">
+                        <h3>Thiết kế ngôi nhà 2 tầng diện tích 40 m2 đẹp lung linh với hơn 600 triệu</h3>
+                    </a>
+                    <p style="color: white">
+                        Với mảnh đất diện tích khiêm tốn, khi thiết kế cần phân chia và đưa ra giải pháp hợp lý để mỗi không gian đều thông thoáng. Bạn nên sử dụng giếng trời để giúp lưu thông không khí bên trong và tận dụng hiệu quả ánh sáng tự nhiên.
+                    </p>
+                    <a class="button_diachi" style="text-decoration: none;position: absolute; padding: 20px; bottom: 10px; right: 10px">
+                        Chi tiết
+                    </a>
                 </div>
-                
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
+            </div>
+            <div class="col-md-5" style="padding-right: 5%;">
+                <div class="row" style="background-color: white; margin-bottom: 15px">
+                    <div class="col-md-6">
+                        <img src="../../Content/Images/anh-bia(1).jpg_223x126.jpg"/>
                     </div>
-
+                    <div class="col-md-6" style="height: 100%">
+                        <a class="button_diachi" style="text-decoration: none;">
+                            <h4>Hút tài lộc vào nhà nhờ những mẹo phong thủy đơn giản</h4>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
+                <div class="row" style="background-color: white; margin-bottom: 15px">
+                    <div class="col-md-6">
+                        <img src="../../Content/Images/anh-bia(2).jpg_223x126.jpg"/>
                     </div>
-
+                    <div class="col-md-6" style="height: 100%">
+                        <a class="button_diachi"style="text-decoration: none;">
+                            <h4>Phương án xây nhà 56 m2 đẹp lung linh với 3 tầng hiện đại</h4>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg"/>
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg"/>
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
+                <div class="row" style="background-color: white;">
+                    <div class="col-md-6">
+                        <img src="../../Content/Images/anh-bia.jpg_223x126.jpg" />
                     </div>
-
+                    <div class="col-md-6" style="height: 100%">
+                        <a class="button_diachi" style="text-decoration: none;">
+                            <h4>Bí quyết chống tường sàn nhà ẩm mốc trong mùa mưa bão</h4>
+                        </a>
+                    </div>
                 </div>
             </div>
 
