@@ -704,5 +704,55 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
+        [HttpGet]
+        public string send_email_Land_Expired(string id)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query = (from a in db.Lands
+                    join b in db.Customers
+                        on a.IDCustomer equals b.IDCustomer
+                    where a.ExpiredDate < DateTime.Now
+                    select new
+                    {
+                        a.IDLand,
+                        a.Name,
+                        b.Email
+                    }).ToList();
+                foreach (var item in query)
+                {
+                    MailMessage msg = new MailMessage();
+                    msg.From = new MailAddress("ngocvupct1995@gmail.com");
+                    string to_mail = item.Email.ToString();
+                    msg.To.Add(to_mail);
+                    //StreamReader reader = new StreamReader(HostingEnvironment.MapPath("/Views/Shared/SendEmail.html"));
+                    //string readFile = reader.ReadToEnd();
+                    //string StrContent = "";
+                    //StrContent = readFile;
+                    ////string url = string.Format("http://{0}/{1}", urlActive, kh.IDCustomer);
+                    //StrContent = StrContent.Replace("[UserName]", kh.CustomerName);
+                    //StrContent = StrContent.Replace("[link_active]", url);
+
+                    msg.Subject = "Cảm ơn bạn đã quan tâm tới chúng tôi.";
+                    //msg.Body = string.Format("Bạn Đã Tạo Tài Khoản của chúng tôi. Mời bạn Vào Link http://{0}/{1} để kích hoạt.", urlActive, kh.IDCustomer);
+                    //msg.Body = StrContent.ToString();
+                    msg.Body = "Bài đăng " + item.Name + " của bạn đã hết hạn!";
+                    msg.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+                    NetworkCredential NetworkCred = new NetworkCredential("ngocvupct1995@gmail.com", "toilanumber1");
+
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                    smtp.Send(msg);
+                }
+            }
+         
+            return "Success";
+        }
     }
 }
