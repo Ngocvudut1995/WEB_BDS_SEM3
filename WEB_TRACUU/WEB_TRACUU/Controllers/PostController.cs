@@ -40,7 +40,7 @@ namespace WEB_TRACUU.Controllers
                     lands.IDAcreage = Convert.ToInt32(json._dienTich);
                     lands.IDPrice = Convert.ToInt32(json._IDgia);
                     lands.Price_detail = Convert.ToDecimal(json._GiaChiTiet);
-                    lands.IDType = Convert.ToInt32(json._kieuBDS);
+                    lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
                     lands.Sell = false;
                     lands.Decrition = json._moTa;
                     DateTime date = DateTime.Now;

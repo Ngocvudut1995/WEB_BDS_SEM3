@@ -25,8 +25,8 @@ app.config(function ($routeProvider) {
             templateUrl: app + "Home/ChiTiet",
             controller: "chitietCtrl",
             title: "Trang Chi Tiết Văn Phòng",
-            view: true
-})
+            
+        })
          .when("/TheoDoi", {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
@@ -38,30 +38,30 @@ app.config(function ($routeProvider) {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
              title: "Trang Theo Dõi",
-            authorize: true
-            
+             authorize: true
+
          })
         .when("/TaiKhoan", {
             templateUrl: app + "Home/TaiKhoan",
             controller: "taikhoanCtrl",
             title: "Tài Khoản",
             authorize: true,
-            replace:true
-           
+            replace: true
+
         })
         .when("/TaiKhoan/:select", {
             templateUrl: app + "Home/TaiKhoan",
             controller: "taikhoanCtrl",
             title: "Tài Khoản",
             authorize: true
-           
+
         })
          .when("/TaiKhoan/:select/baidang/:id", {
              templateUrl: app + "Home/QuanTriTaiKhoan",
              controller: "taikhoanCtrl",
              title: "Tài Khoản",
              authorize: true,
-             
+
          })
          .when("/TaiKhoan/:select/:id", {
              templateUrl: app + "Home/QuanTriTaiKhoan",
@@ -81,35 +81,38 @@ app.config(function ($routeProvider) {
 
 
 
-app.controller('trangchuCtrl', ['$scope', '$rootScope','$location','$http', function ($scope, $rootScope, $location,$http) {
+app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
     $rootScope.tab_index = 0;
     $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
     $scope.tab_loaibds = 0;
     $scope.tab_gia = 0;
     $scope.select_sell = true;
+    $scope.$on('dragging', function (evt, params) {
+        console.log("move");
+    });
     $scope.search = function () {
         var url = '/TimKiem/' + $scope.select_sell + '/0/0/0'
-         + '/' + $scope.tab_gia + '/' + $scope.select_DienTich + '/' + $scope.tab_loaibds+'/?q='+$scope.query;
+         + '/' + $scope.tab_gia + '/' + $scope.select_DienTich + '/' + $scope.tab_loaibds + '/?q=' + $scope.query;
         // var url = '/TimKiem/';
-       
+
         $location.url(url);
-       
+
     };
     $scope.query = '';
-    
-   
+
+
     $scope.change_sell = function (sell) {
         $scope.select_sell = sell;
-         $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-                $scope.list_DM = response.data;
+        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
+            $scope.list_DM = response.data;
 
-            });
-            $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-                $scope.list_Price = response.data;
-            });
-       
+        });
+        $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
+            $scope.list_Price = response.data;
+        });
+
     };
-    $scope.change_tab_loai = function(id) {
+    $scope.change_tab_loai = function (id) {
         $scope.tab_loaibds = id;
         //console.log($scope.tab_loaibds);
     };
@@ -122,10 +125,49 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope','$location','$http', func
     $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
         $scope.listdientich = response.data;
     });
-    $scope.change_tab_dientich = function(id) {
+    $scope.change_tab_dientich = function (id) {
         $scope.select_DienTich = id;
     };
-
+    $scope.list_top_land_sell = [];
+    $scope.list_top_land_rent = [];
+    $http.get(host + "/api/TrangChu/get_top_new_land_canho/?sl=4").then(function (response) {
+        $scope.list_top_land_sell = response.data;
+        console.log($scope.list_top_land_sell);
+    });
+    $scope.change_tab_land_sell = function (id) {
+        switch (id) {
+            case 2:
+                $http.get(host + "/api/TrangChu/get_top_new_land_nha/?sl=4").then(function (response) {
+                    $scope.list_top_land_sell = response.data;
+                });
+                break;
+            case 3:
+                $http.get(host + "/api/TrangChu/get_top_new_land_dat/?sl=4").then(function (response) {
+                    $scope.list_top_land_sell = response.data;
+                });
+                break;
+            case 4:
+                $http.get(host + "/api/TrangChu/get_top_new_land_vanphong/?sl=4").then(function (response) {
+                    $scope.list_top_land_sell = response.data;
+                });
+                break;
+            case 5:
+                $http.get(host + "/api/TrangChu/get_top_new_land_khac/?sl=4").then(function (response) {
+                    $scope.list_top_land_sell = response.data;
+                });
+                break;
+            default:
+                $http.get(host + "/api/TrangChu/get_top_new_land_canho/?sl=4").then(function (response) {
+                    $scope.list_top_land_sell = response.data;
+                });
+                break;
+        }
+    };
+   
+    $scope.change_tab_land_rent = function (id) {
+        $scope.tab_gia = id;
+        //console.log($scope.tab_loaibds);
+    };
 
 }]);
 app.controller('timkiemCtrl', [
@@ -169,25 +211,25 @@ app.controller('timkiemCtrl', [
         } else {
             $scope.select_sell = $routeParams.sell;
             $scope.tab_sell = $scope.select_sell == 'true' ? 'MUA' : 'THUÊ';
-                $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_DM = response.data;
-                    if ($routeParams.k != null) {
-                        $scope.select_Kieu = $routeParams.k;
-                    } else {
-                        $scope.select_Kieu = 0;
-                    }
-                });
-                $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_Price = response.data;
-                    if ($routeParams.g != null) {
-                        $scope.select_Gia = $routeParams.g;
-                    } else {
-                        $scope.select_Gia = 0;
-                    }
-                });
-            }
+            $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
+                $scope.list_DM = response.data;
+                if ($routeParams.k != null) {
+                    $scope.select_Kieu = $routeParams.k;
+                } else {
+                    $scope.select_Kieu = 0;
+                }
+            });
+            $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
+                $scope.list_Price = response.data;
+                if ($routeParams.g != null) {
+                    $scope.select_Gia = $routeParams.g;
+                } else {
+                    $scope.select_Gia = 0;
+                }
+            });
+        }
 
-        
+
 
 
         if ($routeParams.h != null) {
@@ -229,8 +271,8 @@ app.controller('timkiemCtrl', [
             $scope.search();
         });
 
-      
-        
+
+
         // Click nut search goi ham truyen len url
         $scope.search_query = function (query) {
 
@@ -238,13 +280,13 @@ app.controller('timkiemCtrl', [
             //console.log(query);
             $location.search('q', query);
         };
-       
+
         $scope.search_vp = function () {
 
             var url = '/TimKiem/' + $scope.select_sell + '/' + $scope.select_Huyen + '/'
                 + $scope.select_Phuong + '/' + $scope.select_Duong
                 + '/' + $scope.select_Gia + '/' + $scope.select_DienTich + '/' + $scope.select_Kieu;
-            
+
             //var url = '/TimKiem/1/1/1/1/1/0/1';
             $location.url(url);
             if ($scope.query != '') {
@@ -266,8 +308,8 @@ app.controller('timkiemCtrl', [
 
         $rootScope.tab_index = 1;
 
-      
-       
+
+
         $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
             $scope.listQuan = response.data;
 
@@ -276,21 +318,21 @@ app.controller('timkiemCtrl', [
         $http.get(host + "/api/BdsXemNhieuNhat/get_VP_TK_NhieuNhat/").then(function (response) {
             $scope.list_VPNN = response.data;
         });
-       
+
         $scope.change_sell = function (sell) {
-                
+
             $scope.select_sell = sell;
             $scope.tab_sell = ($scope.select_sell == 'true') ? 'MUA' : 'THUÊ';
-                $scope.select_Kieu = 0;
-                $scope.select_Gia = 0;
-                $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_DM = response.data;
+            $scope.select_Kieu = 0;
+            $scope.select_Gia = 0;
+            $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
+                $scope.list_DM = response.data;
 
-                });
-                $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_Price = response.data;
-                });
-            
+            });
+            $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
+                $scope.list_Price = response.data;
+            });
+
 
         };
 
@@ -320,14 +362,14 @@ app.controller('timkiemCtrl', [
                 $scope.listdientich = response.data;
             });
         };
-    $scope.change_tab_loai = function(id) {
-        $scope.select_Kieu = id;
-    };
-    $scope.change_tab_gia = function (id) {
-        $scope.select_Gia = id;
-    }; $scope.change_tab_dientich = function (id) {
-        $scope.select_DienTich = id;
-    };
+        $scope.change_tab_loai = function (id) {
+            $scope.select_Kieu = id;
+        };
+        $scope.change_tab_gia = function (id) {
+            $scope.select_Gia = id;
+        }; $scope.change_tab_dientich = function (id) {
+            $scope.select_DienTich = id;
+        };
 
         var sortingOrder = '_MaDT';
         $scope.sortingOrder = sortingOrder;
@@ -343,7 +385,7 @@ app.controller('timkiemCtrl', [
             if (!needle) {
                 return true;
             }
-           // console.log($rootScope.change_alias(haystack));
+            // console.log($rootScope.change_alias(haystack));
             //console.log($rootScope.change_alias(needle));
             //console.log($rootScope.change_alias(haystack).indexOf($rootScope.change_alias(needle)) !== -1);
             return $rootScope.change_alias(haystack).indexOf($rootScope.change_alias(needle)) !== -1;
@@ -366,7 +408,7 @@ app.controller('timkiemCtrl', [
                     && ($scope.select_Gia == 0 || $scope.select_Gia == item._IDPrice)
                     && ($scope.select_sell == item._Sell.toString() || $scope.select_sell == '0')) {
                     if ((searchMatch(item._TenVp, $scope.query)
-                        || searchMatch(item._SoNha + ' ' + item._Duong + ',Quận ' + item._TenQuan + ', Phường' + item._Phuong + ', TP Đà Nẵng', $scope.query)))  {
+                        || searchMatch(item._SoNha + ' ' + item._Duong + ',Quận ' + item._TenQuan + ', Phường' + item._Phuong + ', TP Đà Nẵng', $scope.query))) {
                         return true;
                     }
                 }
@@ -561,9 +603,9 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
         $http.get(url).then(function (response) {
             var data = response.data;
             $scope.follow = data;
-    });
+        });
     }
-  
+
     //$scope.follow = $rootScope.test_follow($rootScope.taikhoan.makh, $routeParams.id);
     console.log($scope.follow);
     $scope.change_follow = function () {
@@ -606,7 +648,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
             });
             $http.put(host + "/api/ChiTiet/addView/", data1);
             $timeout(function () {
-              //  console.log("tang view");
+                //  console.log("tang view");
                 var data1 = JSON.stringify({
 
                     "_idLand": id
@@ -629,7 +671,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
 
     };
-    $scope.send_contact = function(nameown, mailto, mail, name, phone, body) {
+    $scope.send_contact = function (nameown, mailto, mail, name, phone, body) {
         var data = JSON.stringify({
             _NameOwn: nameown,
             _MailTo: mailto,
@@ -638,10 +680,10 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
             _Body: $rootScope.change_html(body),
             _Name: name
         });
-        $http.post(host + "/api/ChiTiet/Send_Contact_To_Own/", data).then(function(response) {
+        $http.post(host + "/api/ChiTiet/Send_Contact_To_Own/", data).then(function (response) {
             swal("Thông báo", "Send Mail Success", "success");
 
-        }, function(res) {
+        }, function (res) {
             swal("Thông báo", "Server unavailable", "error");
         });
     };
@@ -668,7 +710,7 @@ app.controller('theodoiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 
             $location.path('/ChiTiet/' + mavp);
         };
     }
-   
+
 
 }]);
 app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', function ($scope, $http, $rootScope, $routeParams) {
@@ -685,7 +727,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
     $scope.rePassword = '';
     $scope.birthdate = "";
     $scope.test_tk = 0;
-    $scope.test_email = 0; 
+    $scope.test_email = 0;
     $scope._check = 0;
     $scope.kt_taikhoan_tontai = function () {
         var url = host + "/api/TaiKhoan/KT_TaiKhoan_TonTai/?user=" + $scope.username;
@@ -740,7 +782,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
     };
 }]);
 app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
-   
+
     if ($rootScope.taikhoan.makh !== null) {
         $rootScope.tab_index = 3;
         if ($routeParams.select != null) {
@@ -934,9 +976,9 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
                 break;
         }
     }
-   
 
-   
+
+
     //console.log($scope);
 }]);
 app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'textAngularManager', function ($scope, $http, $rootScope, $routeParams, textAngularManager) {
@@ -1117,7 +1159,7 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
         $scope.listgia = response.data;
     });
 
-    
+
     $scope.setFile = function (element) {
         $scope.currentFile = element.files[0];
         var reader = new FileReader();

@@ -336,20 +336,20 @@ namespace WEB_TRACUU.Controllers
                 {
                     if (json.Is_Insert == 1)
                     {
-                        Type_Land type = new Type_Land();
-                        type.TypeName = json.Name;
+                        TypeDetail type = new TypeDetail();
+                        type.TypeNameDetail = json.Name;
                         type.Sell = Convert.ToBoolean(json.Sell);
-                        db.Type_Lands.InsertOnSubmit(type);
+                        db.TypeDetails.InsertOnSubmit(type);
                         db.SubmitChanges();
                         return Ok(json);
                     }
                     else
                     {
                         int idtype = json.ID;
-                        var query = (from a in db.Type_Lands
+                        var query = (from a in db.TypeDetails
                                      where a.IDType == idtype
                                      select a).SingleOrDefault();
-                        query.TypeName = json.Name;
+                        query.TypeNameDetail = json.Name;
                         db.SubmitChanges();
                         return Ok(json);
                     }
@@ -370,10 +370,10 @@ namespace WEB_TRACUU.Controllers
             {
                 using (db = new DataTraCuuVPDataContext())
                 {
-                    var type = (from a in db.Type_Lands
-                                 where a.IDType == id
+                    var type = (from a in db.TypeDetails
+                                where a.IDType == id
                                  select a).SingleOrDefault();
-                    db.Type_Lands.DeleteOnSubmit(type);
+                    db.TypeDetails.DeleteOnSubmit(type);
                     db.SubmitChanges();
                     return Ok();
                 }
@@ -636,7 +636,7 @@ namespace WEB_TRACUU.Controllers
                     _CreateDate = sql.a.CreateDate,
                     _ModifyDate = sql.a.ModifyDate,
                     _MaDuong = sql.a.IDStreet,
-                    _MaPL = sql.a.IDType,
+                    _MaLoaiCT = sql.a.IDTypeDetail,
                     _MaPhuong = sql.a.IDWard,
                     _Mota = sql.a.Decrition,
                     _ExpiredDate= sql.a.ExpiredDate,
@@ -679,7 +679,7 @@ namespace WEB_TRACUU.Controllers
                     lands.IDAcreage = Convert.ToInt32(json._dienTich);
                     lands.IDPrice = Convert.ToInt32(json._IDgia);
                     lands.Price_detail = Convert.ToDecimal(json._GiaChiTiet);
-                    lands.IDType = Convert.ToInt32(json._kieuBDS);
+                    lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
                     bool sell =  Convert.ToBoolean(json._hinhThuc);
                     lands.Sell = sell;
                     lands.Decrition = json._moTa;
@@ -726,7 +726,7 @@ namespace WEB_TRACUU.Controllers
                     {
                         _MaVP = item.IDLand,
                         _TenVp = item.Name,
-                        _TenLoai = item.TypeName,
+                        _TenLoai = item.TypeNameDetail,
                         _DiaCHi = item.NumberHouse + " " + item.Street + ", " + item.Trousers + ", TP Đà Nẵng.",
                         _Gia = item.Price_detail,
                         _DienTich = item.Acreage,

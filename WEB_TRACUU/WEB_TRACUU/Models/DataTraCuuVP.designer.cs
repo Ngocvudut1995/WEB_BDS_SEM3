@@ -30,18 +30,36 @@ namespace WEB_TRACUU.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertWard(Ward instance);
+    partial void UpdateWard(Ward instance);
+    partial void DeleteWard(Ward instance);
     partial void InsertAcreage(Acreage instance);
     partial void UpdateAcreage(Acreage instance);
     partial void DeleteAcreage(Acreage instance);
     partial void InsertAddress(Address instance);
     partial void UpdateAddress(Address instance);
     partial void DeleteAddress(Address instance);
+    partial void InsertConvenient(Convenient instance);
+    partial void UpdateConvenient(Convenient instance);
+    partial void DeleteConvenient(Convenient instance);
+    partial void InsertConvenient_Detail(Convenient_Detail instance);
+    partial void UpdateConvenient_Detail(Convenient_Detail instance);
+    partial void DeleteConvenient_Detail(Convenient_Detail instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
+    partial void InsertDirection(Direction instance);
+    partial void UpdateDirection(Direction instance);
+    partial void DeleteDirection(Direction instance);
     partial void InsertFollow(Follow instance);
     partial void UpdateFollow(Follow instance);
     partial void DeleteFollow(Follow instance);
+    partial void InsertFuriture(Furiture instance);
+    partial void UpdateFuriture(Furiture instance);
+    partial void DeleteFuriture(Furiture instance);
+    partial void InsertFuriture_detail(Furiture_detail instance);
+    partial void UpdateFuriture_detail(Furiture_detail instance);
+    partial void DeleteFuriture_detail(Furiture_detail instance);
     partial void InsertImage_Detail(Image_Detail instance);
     partial void UpdateImage_Detail(Image_Detail instance);
     partial void DeleteImage_Detail(Image_Detail instance);
@@ -57,15 +75,15 @@ namespace WEB_TRACUU.Models
     partial void InsertStreet(Street instance);
     partial void UpdateStreet(Street instance);
     partial void DeleteStreet(Street instance);
+    partial void InsertTypeDetail(TypeDetail instance);
+    partial void UpdateTypeDetail(TypeDetail instance);
+    partial void DeleteTypeDetail(TypeDetail instance);
+    partial void InsertTypeLand(TypeLand instance);
+    partial void UpdateTypeLand(TypeLand instance);
+    partial void DeleteTypeLand(TypeLand instance);
     partial void InsertTrouser(Trouser instance);
     partial void UpdateTrouser(Trouser instance);
     partial void DeleteTrouser(Trouser instance);
-    partial void InsertType_Land(Type_Land instance);
-    partial void UpdateType_Land(Type_Land instance);
-    partial void DeleteType_Land(Type_Land instance);
-    partial void InsertWard(Ward instance);
-    partial void UpdateWard(Ward instance);
-    partial void DeleteWard(Ward instance);
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
@@ -98,6 +116,14 @@ namespace WEB_TRACUU.Models
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Ward> Wards
+		{
+			get
+			{
+				return this.GetTable<Ward>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Acreage> Acreages
 		{
 			get
@@ -114,6 +140,22 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<Convenient> Convenients
+		{
+			get
+			{
+				return this.GetTable<Convenient>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Convenient_Detail> Convenient_Details
+		{
+			get
+			{
+				return this.GetTable<Convenient_Detail>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Customer> Customers
 		{
 			get
@@ -122,11 +164,35 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<Direction> Directions
+		{
+			get
+			{
+				return this.GetTable<Direction>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Follow> Follows
 		{
 			get
 			{
 				return this.GetTable<Follow>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Furiture> Furitures
+		{
+			get
+			{
+				return this.GetTable<Furiture>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Furiture_detail> Furiture_details
+		{
+			get
+			{
+				return this.GetTable<Furiture_detail>();
 			}
 		}
 		
@@ -170,27 +236,27 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<TypeDetail> TypeDetails
+		{
+			get
+			{
+				return this.GetTable<TypeDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TypeLand> TypeLands
+		{
+			get
+			{
+				return this.GetTable<TypeLand>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Trouser> Trousers
 		{
 			get
 			{
 				return this.GetTable<Trouser>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Type_Land> Type_Lands
-		{
-			get
-			{
-				return this.GetTable<Type_Land>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Ward> Wards
-		{
-			get
-			{
-				return this.GetTable<Ward>();
 			}
 		}
 		
@@ -208,6 +274,185 @@ namespace WEB_TRACUU.Models
 			{
 				return this.GetTable<Overview_Land>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Ward")]
+	public partial class Ward : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDWard;
+		
+		private string _Ward1;
+		
+		private int _IDTrousers;
+		
+		private EntitySet<Street> _Streets;
+		
+		private EntityRef<Trouser> _Trouser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDWardChanging(int value);
+    partial void OnIDWardChanged();
+    partial void OnWard1Changing(string value);
+    partial void OnWard1Changed();
+    partial void OnIDTrousersChanging(int value);
+    partial void OnIDTrousersChanged();
+    #endregion
+		
+		public Ward()
+		{
+			this._Streets = new EntitySet<Street>(new Action<Street>(this.attach_Streets), new Action<Street>(this.detach_Streets));
+			this._Trouser = default(EntityRef<Trouser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDWard
+		{
+			get
+			{
+				return this._IDWard;
+			}
+			set
+			{
+				if ((this._IDWard != value))
+				{
+					this.OnIDWardChanging(value);
+					this.SendPropertyChanging();
+					this._IDWard = value;
+					this.SendPropertyChanged("IDWard");
+					this.OnIDWardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Ward", Storage="_Ward1", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Ward1
+		{
+			get
+			{
+				return this._Ward1;
+			}
+			set
+			{
+				if ((this._Ward1 != value))
+				{
+					this.OnWard1Changing(value);
+					this.SendPropertyChanging();
+					this._Ward1 = value;
+					this.SendPropertyChanged("Ward1");
+					this.OnWard1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int NOT NULL")]
+		public int IDTrousers
+		{
+			get
+			{
+				return this._IDTrousers;
+			}
+			set
+			{
+				if ((this._IDTrousers != value))
+				{
+					if (this._Trouser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDTrousersChanging(value);
+					this.SendPropertyChanging();
+					this._IDTrousers = value;
+					this.SendPropertyChanged("IDTrousers");
+					this.OnIDTrousersChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Street", Storage="_Streets", ThisKey="IDWard", OtherKey="IDWard")]
+		public EntitySet<Street> Streets
+		{
+			get
+			{
+				return this._Streets;
+			}
+			set
+			{
+				this._Streets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trouser_Ward", Storage="_Trouser", ThisKey="IDTrousers", OtherKey="IDTrousers", IsForeignKey=true)]
+		public Trouser Trouser
+		{
+			get
+			{
+				return this._Trouser.Entity;
+			}
+			set
+			{
+				Trouser previousValue = this._Trouser.Entity;
+				if (((previousValue != value) 
+							|| (this._Trouser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Trouser.Entity = null;
+						previousValue.Wards.Remove(this);
+					}
+					this._Trouser.Entity = value;
+					if ((value != null))
+					{
+						value.Wards.Add(this);
+						this._IDTrousers = value.IDTrousers;
+					}
+					else
+					{
+						this._IDTrousers = default(int);
+					}
+					this.SendPropertyChanged("Trouser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Streets(Street entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ward = this;
+		}
+		
+		private void detach_Streets(Street entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ward = null;
 		}
 	}
 	
@@ -501,6 +746,288 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Address = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Convenient")]
+	public partial class Convenient : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDConvenient;
+		
+		private string _Convenient_Name;
+		
+		private EntitySet<Convenient_Detail> _Convenient_Details;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDConvenientChanging(int value);
+    partial void OnIDConvenientChanged();
+    partial void OnConvenient_NameChanging(string value);
+    partial void OnConvenient_NameChanged();
+    #endregion
+		
+		public Convenient()
+		{
+			this._Convenient_Details = new EntitySet<Convenient_Detail>(new Action<Convenient_Detail>(this.attach_Convenient_Details), new Action<Convenient_Detail>(this.detach_Convenient_Details));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDConvenient", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDConvenient
+		{
+			get
+			{
+				return this._IDConvenient;
+			}
+			set
+			{
+				if ((this._IDConvenient != value))
+				{
+					this.OnIDConvenientChanging(value);
+					this.SendPropertyChanging();
+					this._IDConvenient = value;
+					this.SendPropertyChanged("IDConvenient");
+					this.OnIDConvenientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Convenient_Name", DbType="NVarChar(50)")]
+		public string Convenient_Name
+		{
+			get
+			{
+				return this._Convenient_Name;
+			}
+			set
+			{
+				if ((this._Convenient_Name != value))
+				{
+					this.OnConvenient_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Convenient_Name = value;
+					this.SendPropertyChanged("Convenient_Name");
+					this.OnConvenient_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convenient_Convenient_Detail", Storage="_Convenient_Details", ThisKey="IDConvenient", OtherKey="IDConvenient")]
+		public EntitySet<Convenient_Detail> Convenient_Details
+		{
+			get
+			{
+				return this._Convenient_Details;
+			}
+			set
+			{
+				this._Convenient_Details.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Convenient_Details(Convenient_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convenient = this;
+		}
+		
+		private void detach_Convenient_Details(Convenient_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Convenient = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Convenient_Detail")]
+	public partial class Convenient_Detail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IDLand;
+		
+		private int _IDConvenient;
+		
+		private EntityRef<Convenient> _Convenient;
+		
+		private EntityRef<Land> _Land;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDLandChanging(System.Guid value);
+    partial void OnIDLandChanged();
+    partial void OnIDConvenientChanging(int value);
+    partial void OnIDConvenientChanged();
+    #endregion
+		
+		public Convenient_Detail()
+		{
+			this._Convenient = default(EntityRef<Convenient>);
+			this._Land = default(EntityRef<Land>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDLand
+		{
+			get
+			{
+				return this._IDLand;
+			}
+			set
+			{
+				if ((this._IDLand != value))
+				{
+					if (this._Land.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDLandChanging(value);
+					this.SendPropertyChanging();
+					this._IDLand = value;
+					this.SendPropertyChanged("IDLand");
+					this.OnIDLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDConvenient", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IDConvenient
+		{
+			get
+			{
+				return this._IDConvenient;
+			}
+			set
+			{
+				if ((this._IDConvenient != value))
+				{
+					if (this._Convenient.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDConvenientChanging(value);
+					this.SendPropertyChanging();
+					this._IDConvenient = value;
+					this.SendPropertyChanged("IDConvenient");
+					this.OnIDConvenientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Convenient_Convenient_Detail", Storage="_Convenient", ThisKey="IDConvenient", OtherKey="IDConvenient", IsForeignKey=true)]
+		public Convenient Convenient
+		{
+			get
+			{
+				return this._Convenient.Entity;
+			}
+			set
+			{
+				Convenient previousValue = this._Convenient.Entity;
+				if (((previousValue != value) 
+							|| (this._Convenient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Convenient.Entity = null;
+						previousValue.Convenient_Details.Remove(this);
+					}
+					this._Convenient.Entity = value;
+					if ((value != null))
+					{
+						value.Convenient_Details.Add(this);
+						this._IDConvenient = value.IDConvenient;
+					}
+					else
+					{
+						this._IDConvenient = default(int);
+					}
+					this.SendPropertyChanged("Convenient");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Convenient_Detail", Storage="_Land", ThisKey="IDLand", OtherKey="IDLand", IsForeignKey=true)]
+		public Land Land
+		{
+			get
+			{
+				return this._Land.Entity;
+			}
+			set
+			{
+				Land previousValue = this._Land.Entity;
+				if (((previousValue != value) 
+							|| (this._Land.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Land.Entity = null;
+						previousValue.Convenient_Details.Remove(this);
+					}
+					this._Land.Entity = value;
+					if ((value != null))
+					{
+						value.Convenient_Details.Add(this);
+						this._IDLand = value.IDLand;
+					}
+					else
+					{
+						this._IDLand = default(System.Guid);
+					}
+					this.SendPropertyChanged("Land");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -882,6 +1409,120 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Direction")]
+	public partial class Direction : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDDirection;
+		
+		private string _Direction1;
+		
+		private EntitySet<Land> _Lands;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDDirectionChanging(int value);
+    partial void OnIDDirectionChanged();
+    partial void OnDirection1Changing(string value);
+    partial void OnDirection1Changed();
+    #endregion
+		
+		public Direction()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDDirection
+		{
+			get
+			{
+				return this._IDDirection;
+			}
+			set
+			{
+				if ((this._IDDirection != value))
+				{
+					this.OnIDDirectionChanging(value);
+					this.SendPropertyChanging();
+					this._IDDirection = value;
+					this.SendPropertyChanged("IDDirection");
+					this.OnIDDirectionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Direction", Storage="_Direction1", DbType="NVarChar(50)")]
+		public string Direction1
+		{
+			get
+			{
+				return this._Direction1;
+			}
+			set
+			{
+				if ((this._Direction1 != value))
+				{
+					this.OnDirection1Changing(value);
+					this.SendPropertyChanging();
+					this._Direction1 = value;
+					this.SendPropertyChanged("Direction1");
+					this.OnDirection1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Direction_Land", Storage="_Lands", ThisKey="IDDirection", OtherKey="IDDirection")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Direction = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Direction = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Follow")]
 	public partial class Follow : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1018,6 +1659,288 @@ namespace WEB_TRACUU.Models
 					if ((value != null))
 					{
 						value.Follows.Add(this);
+						this._IDLand = value.IDLand;
+					}
+					else
+					{
+						this._IDLand = default(System.Guid);
+					}
+					this.SendPropertyChanged("Land");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Furiture")]
+	public partial class Furiture : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDFuriture;
+		
+		private string _Furiture_Name;
+		
+		private EntitySet<Furiture_detail> _Furiture_details;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDFuritureChanging(int value);
+    partial void OnIDFuritureChanged();
+    partial void OnFuriture_NameChanging(string value);
+    partial void OnFuriture_NameChanged();
+    #endregion
+		
+		public Furiture()
+		{
+			this._Furiture_details = new EntitySet<Furiture_detail>(new Action<Furiture_detail>(this.attach_Furiture_details), new Action<Furiture_detail>(this.detach_Furiture_details));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDFuriture", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDFuriture
+		{
+			get
+			{
+				return this._IDFuriture;
+			}
+			set
+			{
+				if ((this._IDFuriture != value))
+				{
+					this.OnIDFuritureChanging(value);
+					this.SendPropertyChanging();
+					this._IDFuriture = value;
+					this.SendPropertyChanged("IDFuriture");
+					this.OnIDFuritureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Furiture_Name", DbType="NVarChar(50)")]
+		public string Furiture_Name
+		{
+			get
+			{
+				return this._Furiture_Name;
+			}
+			set
+			{
+				if ((this._Furiture_Name != value))
+				{
+					this.OnFuriture_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Furiture_Name = value;
+					this.SendPropertyChanged("Furiture_Name");
+					this.OnFuriture_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Furiture_Furiture_detail", Storage="_Furiture_details", ThisKey="IDFuriture", OtherKey="IDFuriture")]
+		public EntitySet<Furiture_detail> Furiture_details
+		{
+			get
+			{
+				return this._Furiture_details;
+			}
+			set
+			{
+				this._Furiture_details.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Furiture_details(Furiture_detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Furiture = this;
+		}
+		
+		private void detach_Furiture_details(Furiture_detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Furiture = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Furiture_detail")]
+	public partial class Furiture_detail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IDLand;
+		
+		private int _IDFuriture;
+		
+		private EntityRef<Furiture> _Furiture;
+		
+		private EntityRef<Land> _Land;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDLandChanging(System.Guid value);
+    partial void OnIDLandChanged();
+    partial void OnIDFuritureChanging(int value);
+    partial void OnIDFuritureChanged();
+    #endregion
+		
+		public Furiture_detail()
+		{
+			this._Furiture = default(EntityRef<Furiture>);
+			this._Land = default(EntityRef<Land>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDLand
+		{
+			get
+			{
+				return this._IDLand;
+			}
+			set
+			{
+				if ((this._IDLand != value))
+				{
+					if (this._Land.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDLandChanging(value);
+					this.SendPropertyChanging();
+					this._IDLand = value;
+					this.SendPropertyChanged("IDLand");
+					this.OnIDLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDFuriture", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IDFuriture
+		{
+			get
+			{
+				return this._IDFuriture;
+			}
+			set
+			{
+				if ((this._IDFuriture != value))
+				{
+					if (this._Furiture.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDFuritureChanging(value);
+					this.SendPropertyChanging();
+					this._IDFuriture = value;
+					this.SendPropertyChanged("IDFuriture");
+					this.OnIDFuritureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Furiture_Furiture_detail", Storage="_Furiture", ThisKey="IDFuriture", OtherKey="IDFuriture", IsForeignKey=true)]
+		public Furiture Furiture
+		{
+			get
+			{
+				return this._Furiture.Entity;
+			}
+			set
+			{
+				Furiture previousValue = this._Furiture.Entity;
+				if (((previousValue != value) 
+							|| (this._Furiture.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Furiture.Entity = null;
+						previousValue.Furiture_details.Remove(this);
+					}
+					this._Furiture.Entity = value;
+					if ((value != null))
+					{
+						value.Furiture_details.Add(this);
+						this._IDFuriture = value.IDFuriture;
+					}
+					else
+					{
+						this._IDFuriture = default(int);
+					}
+					this.SendPropertyChanged("Furiture");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Furiture_detail", Storage="_Land", ThisKey="IDLand", OtherKey="IDLand", IsForeignKey=true)]
+		public Land Land
+		{
+			get
+			{
+				return this._Land.Entity;
+			}
+			set
+			{
+				Land previousValue = this._Land.Entity;
+				if (((previousValue != value) 
+							|| (this._Land.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Land.Entity = null;
+						previousValue.Furiture_details.Remove(this);
+					}
+					this._Land.Entity = value;
+					if ((value != null))
+					{
+						value.Furiture_details.Add(this);
 						this._IDLand = value.IDLand;
 					}
 					else
@@ -1294,7 +2217,7 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="NChar(15)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(50)")]
 		public string ip
 		{
 			get
@@ -1351,7 +2274,7 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<System.Guid> _IDCustomer;
 		
-		private System.Nullable<int> _IDType;
+		private System.Nullable<int> _IDTypeDetail;
 		
 		private System.Nullable<int> _IDAddress;
 		
@@ -1377,7 +2300,15 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<int> _View;
 		
+		private System.Nullable<int> _Area_detail;
+		
+		private System.Nullable<int> _IDDirection;
+		
+		private EntitySet<Convenient_Detail> _Convenient_Details;
+		
 		private EntitySet<Follow> _Follows;
+		
+		private EntitySet<Furiture_detail> _Furiture_details;
 		
 		private EntitySet<Image_Detail> _Image_Details;
 		
@@ -1385,9 +2316,13 @@ namespace WEB_TRACUU.Models
 		
 		private EntityRef<Address> _Address;
 		
+		private EntityRef<Direction> _Direction;
+		
 		private EntityRef<Price> _Price;
 		
-		private EntityRef<Type_Land> _Type_Land;
+		private EntityRef<TypeDetail> _TypeDetail;
+		
+		private EntityRef<TypeDetail> _TypeDetail1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1403,8 +2338,8 @@ namespace WEB_TRACUU.Models
     partial void OnIDAcreageChanged();
     partial void OnIDCustomerChanging(System.Nullable<System.Guid> value);
     partial void OnIDCustomerChanged();
-    partial void OnIDTypeChanging(System.Nullable<int> value);
-    partial void OnIDTypeChanged();
+    partial void OnIDTypeDetailChanging(System.Nullable<int> value);
+    partial void OnIDTypeDetailChanged();
     partial void OnIDAddressChanging(System.Nullable<int> value);
     partial void OnIDAddressChanged();
     partial void OnImageChanging(string value);
@@ -1429,16 +2364,24 @@ namespace WEB_TRACUU.Models
     partial void OnIDPostChanged();
     partial void OnViewChanging(System.Nullable<int> value);
     partial void OnViewChanged();
+    partial void OnArea_detailChanging(System.Nullable<int> value);
+    partial void OnArea_detailChanged();
+    partial void OnIDDirectionChanging(System.Nullable<int> value);
+    partial void OnIDDirectionChanged();
     #endregion
 		
 		public Land()
 		{
+			this._Convenient_Details = new EntitySet<Convenient_Detail>(new Action<Convenient_Detail>(this.attach_Convenient_Details), new Action<Convenient_Detail>(this.detach_Convenient_Details));
 			this._Follows = new EntitySet<Follow>(new Action<Follow>(this.attach_Follows), new Action<Follow>(this.detach_Follows));
+			this._Furiture_details = new EntitySet<Furiture_detail>(new Action<Furiture_detail>(this.attach_Furiture_details), new Action<Furiture_detail>(this.detach_Furiture_details));
 			this._Image_Details = new EntitySet<Image_Detail>(new Action<Image_Detail>(this.attach_Image_Details), new Action<Image_Detail>(this.detach_Image_Details));
 			this._Acreage = default(EntityRef<Acreage>);
 			this._Address = default(EntityRef<Address>);
+			this._Direction = default(EntityRef<Direction>);
 			this._Price = default(EntityRef<Price>);
-			this._Type_Land = default(EntityRef<Type_Land>);
+			this._TypeDetail = default(EntityRef<TypeDetail>);
+			this._TypeDetail1 = default(EntityRef<TypeDetail>);
 			OnCreated();
 		}
 		
@@ -1546,26 +2489,26 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int")]
-		public System.Nullable<int> IDType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTypeDetail", DbType="Int")]
+		public System.Nullable<int> IDTypeDetail
 		{
 			get
 			{
-				return this._IDType;
+				return this._IDTypeDetail;
 			}
 			set
 			{
-				if ((this._IDType != value))
+				if ((this._IDTypeDetail != value))
 				{
-					if (this._Type_Land.HasLoadedOrAssignedValue)
+					if ((this._TypeDetail.HasLoadedOrAssignedValue || this._TypeDetail1.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnIDTypeChanging(value);
+					this.OnIDTypeDetailChanging(value);
 					this.SendPropertyChanging();
-					this._IDType = value;
-					this.SendPropertyChanged("IDType");
-					this.OnIDTypeChanged();
+					this._IDTypeDetail = value;
+					this.SendPropertyChanged("IDTypeDetail");
+					this.OnIDTypeDetailChanged();
 				}
 			}
 		}
@@ -1818,6 +2761,63 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area_detail", DbType="Int")]
+		public System.Nullable<int> Area_detail
+		{
+			get
+			{
+				return this._Area_detail;
+			}
+			set
+			{
+				if ((this._Area_detail != value))
+				{
+					this.OnArea_detailChanging(value);
+					this.SendPropertyChanging();
+					this._Area_detail = value;
+					this.SendPropertyChanged("Area_detail");
+					this.OnArea_detailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int")]
+		public System.Nullable<int> IDDirection
+		{
+			get
+			{
+				return this._IDDirection;
+			}
+			set
+			{
+				if ((this._IDDirection != value))
+				{
+					if (this._Direction.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDDirectionChanging(value);
+					this.SendPropertyChanging();
+					this._IDDirection = value;
+					this.SendPropertyChanged("IDDirection");
+					this.OnIDDirectionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Convenient_Detail", Storage="_Convenient_Details", ThisKey="IDLand", OtherKey="IDLand")]
+		public EntitySet<Convenient_Detail> Convenient_Details
+		{
+			get
+			{
+				return this._Convenient_Details;
+			}
+			set
+			{
+				this._Convenient_Details.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Follow", Storage="_Follows", ThisKey="IDLand", OtherKey="IDLand")]
 		public EntitySet<Follow> Follows
 		{
@@ -1828,6 +2828,19 @@ namespace WEB_TRACUU.Models
 			set
 			{
 				this._Follows.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Furiture_detail", Storage="_Furiture_details", ThisKey="IDLand", OtherKey="IDLand")]
+		public EntitySet<Furiture_detail> Furiture_details
+		{
+			get
+			{
+				return this._Furiture_details;
+			}
+			set
+			{
+				this._Furiture_details.Assign(value);
 			}
 		}
 		
@@ -1912,6 +2925,40 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Direction_Land", Storage="_Direction", ThisKey="IDDirection", OtherKey="IDDirection", IsForeignKey=true)]
+		public Direction Direction
+		{
+			get
+			{
+				return this._Direction.Entity;
+			}
+			set
+			{
+				Direction previousValue = this._Direction.Entity;
+				if (((previousValue != value) 
+							|| (this._Direction.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Direction.Entity = null;
+						previousValue.Lands.Remove(this);
+					}
+					this._Direction.Entity = value;
+					if ((value != null))
+					{
+						value.Lands.Add(this);
+						this._IDDirection = value.IDDirection;
+					}
+					else
+					{
+						this._IDDirection = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Direction");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Price_Land", Storage="_Price", ThisKey="IDPrice", OtherKey="IDPrice", IsForeignKey=true)]
 		public Price Price
 		{
@@ -1946,36 +2993,70 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Type_Land", ThisKey="IDType", OtherKey="IDType", IsForeignKey=true)]
-		public Type_Land Type_Land
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeDetail_Land", Storage="_TypeDetail", ThisKey="IDTypeDetail", OtherKey="IDTypeDetail", IsForeignKey=true)]
+		public TypeDetail TypeDetail
 		{
 			get
 			{
-				return this._Type_Land.Entity;
+				return this._TypeDetail.Entity;
 			}
 			set
 			{
-				Type_Land previousValue = this._Type_Land.Entity;
+				TypeDetail previousValue = this._TypeDetail.Entity;
 				if (((previousValue != value) 
-							|| (this._Type_Land.HasLoadedOrAssignedValue == false)))
+							|| (this._TypeDetail.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Type_Land.Entity = null;
+						this._TypeDetail.Entity = null;
 						previousValue.Lands.Remove(this);
 					}
-					this._Type_Land.Entity = value;
+					this._TypeDetail.Entity = value;
 					if ((value != null))
 					{
 						value.Lands.Add(this);
-						this._IDType = value.IDType;
+						this._IDTypeDetail = value.IDTypeDetail;
 					}
 					else
 					{
-						this._IDType = default(Nullable<int>);
+						this._IDTypeDetail = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Type_Land");
+					this.SendPropertyChanged("TypeDetail");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeDetail_Land1", Storage="_TypeDetail1", ThisKey="IDTypeDetail", OtherKey="IDTypeDetail", IsForeignKey=true)]
+		public TypeDetail TypeDetail1
+		{
+			get
+			{
+				return this._TypeDetail1.Entity;
+			}
+			set
+			{
+				TypeDetail previousValue = this._TypeDetail1.Entity;
+				if (((previousValue != value) 
+							|| (this._TypeDetail1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TypeDetail1.Entity = null;
+						previousValue.Lands1.Remove(this);
+					}
+					this._TypeDetail1.Entity = value;
+					if ((value != null))
+					{
+						value.Lands1.Add(this);
+						this._IDTypeDetail = value.IDTypeDetail;
+					}
+					else
+					{
+						this._IDTypeDetail = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TypeDetail1");
 				}
 			}
 		}
@@ -2000,6 +3081,18 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		private void attach_Convenient_Details(Convenient_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = this;
+		}
+		
+		private void detach_Convenient_Details(Convenient_Detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = null;
+		}
+		
 		private void attach_Follows(Follow entity)
 		{
 			this.SendPropertyChanging();
@@ -2007,6 +3100,18 @@ namespace WEB_TRACUU.Models
 		}
 		
 		private void detach_Follows(Follow entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = null;
+		}
+		
+		private void attach_Furiture_details(Furiture_detail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Land = this;
+		}
+		
+		private void detach_Furiture_details(Furiture_detail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Land = null;
@@ -2342,6 +3447,351 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TypeDetail")]
+	public partial class TypeDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDTypeDetail;
+		
+		private string _TypeNameDetail;
+		
+		private System.Nullable<bool> _Sell;
+		
+		private System.Nullable<int> _IDType;
+		
+		private EntitySet<Land> _Lands;
+		
+		private EntitySet<Land> _Lands1;
+		
+		private EntityRef<TypeLand> _TypeLand;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDTypeDetailChanging(int value);
+    partial void OnIDTypeDetailChanged();
+    partial void OnTypeNameDetailChanging(string value);
+    partial void OnTypeNameDetailChanged();
+    partial void OnSellChanging(System.Nullable<bool> value);
+    partial void OnSellChanged();
+    partial void OnIDTypeChanging(System.Nullable<int> value);
+    partial void OnIDTypeChanged();
+    #endregion
+		
+		public TypeDetail()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			this._Lands1 = new EntitySet<Land>(new Action<Land>(this.attach_Lands1), new Action<Land>(this.detach_Lands1));
+			this._TypeLand = default(EntityRef<TypeLand>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTypeDetail", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDTypeDetail
+		{
+			get
+			{
+				return this._IDTypeDetail;
+			}
+			set
+			{
+				if ((this._IDTypeDetail != value))
+				{
+					this.OnIDTypeDetailChanging(value);
+					this.SendPropertyChanging();
+					this._IDTypeDetail = value;
+					this.SendPropertyChanged("IDTypeDetail");
+					this.OnIDTypeDetailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeNameDetail", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TypeNameDetail
+		{
+			get
+			{
+				return this._TypeNameDetail;
+			}
+			set
+			{
+				if ((this._TypeNameDetail != value))
+				{
+					this.OnTypeNameDetailChanging(value);
+					this.SendPropertyChanging();
+					this._TypeNameDetail = value;
+					this.SendPropertyChanged("TypeNameDetail");
+					this.OnTypeNameDetailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
+		public System.Nullable<bool> Sell
+		{
+			get
+			{
+				return this._Sell;
+			}
+			set
+			{
+				if ((this._Sell != value))
+				{
+					this.OnSellChanging(value);
+					this.SendPropertyChanging();
+					this._Sell = value;
+					this.SendPropertyChanged("Sell");
+					this.OnSellChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int")]
+		public System.Nullable<int> IDType
+		{
+			get
+			{
+				return this._IDType;
+			}
+			set
+			{
+				if ((this._IDType != value))
+				{
+					if (this._TypeLand.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDTypeChanging(value);
+					this.SendPropertyChanging();
+					this._IDType = value;
+					this.SendPropertyChanged("IDType");
+					this.OnIDTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeDetail_Land", Storage="_Lands", ThisKey="IDTypeDetail", OtherKey="IDTypeDetail")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeDetail_Land1", Storage="_Lands1", ThisKey="IDTypeDetail", OtherKey="IDTypeDetail")]
+		public EntitySet<Land> Lands1
+		{
+			get
+			{
+				return this._Lands1;
+			}
+			set
+			{
+				this._Lands1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeLand_TypeDetail", Storage="_TypeLand", ThisKey="IDType", OtherKey="IDType", IsForeignKey=true)]
+		public TypeLand TypeLand
+		{
+			get
+			{
+				return this._TypeLand.Entity;
+			}
+			set
+			{
+				TypeLand previousValue = this._TypeLand.Entity;
+				if (((previousValue != value) 
+							|| (this._TypeLand.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TypeLand.Entity = null;
+						previousValue.TypeDetails.Remove(this);
+					}
+					this._TypeLand.Entity = value;
+					if ((value != null))
+					{
+						value.TypeDetails.Add(this);
+						this._IDType = value.IDType;
+					}
+					else
+					{
+						this._IDType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("TypeLand");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeDetail = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeDetail = null;
+		}
+		
+		private void attach_Lands1(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeDetail1 = this;
+		}
+		
+		private void detach_Lands1(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeDetail1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TypeLand")]
+	public partial class TypeLand : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDType;
+		
+		private string _Type_Name;
+		
+		private EntitySet<TypeDetail> _TypeDetails;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDTypeChanging(int value);
+    partial void OnIDTypeChanged();
+    partial void OnType_NameChanging(string value);
+    partial void OnType_NameChanged();
+    #endregion
+		
+		public TypeLand()
+		{
+			this._TypeDetails = new EntitySet<TypeDetail>(new Action<TypeDetail>(this.attach_TypeDetails), new Action<TypeDetail>(this.detach_TypeDetails));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int IDType
+		{
+			get
+			{
+				return this._IDType;
+			}
+			set
+			{
+				if ((this._IDType != value))
+				{
+					this.OnIDTypeChanging(value);
+					this.SendPropertyChanging();
+					this._IDType = value;
+					this.SendPropertyChanged("IDType");
+					this.OnIDTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_Name", DbType="NVarChar(50)")]
+		public string Type_Name
+		{
+			get
+			{
+				return this._Type_Name;
+			}
+			set
+			{
+				if ((this._Type_Name != value))
+				{
+					this.OnType_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Type_Name = value;
+					this.SendPropertyChanged("Type_Name");
+					this.OnType_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TypeLand_TypeDetail", Storage="_TypeDetails", ThisKey="IDType", OtherKey="IDType")]
+		public EntitySet<TypeDetail> TypeDetails
+		{
+			get
+			{
+				return this._TypeDetails;
+			}
+			set
+			{
+				this._TypeDetails.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TypeDetails(TypeDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeLand = this;
+		}
+		
+		private void detach_TypeDetails(TypeDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TypeLand = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Trousers")]
 	public partial class Trouser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2453,323 +3903,6 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Trouser = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Type_Land")]
-	public partial class Type_Land : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDType;
-		
-		private string _TypeName;
-		
-		private System.Nullable<bool> _Sell;
-		
-		private EntitySet<Land> _Lands;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDTypeChanging(int value);
-    partial void OnIDTypeChanged();
-    partial void OnTypeNameChanging(string value);
-    partial void OnTypeNameChanged();
-    partial void OnSellChanging(System.Nullable<bool> value);
-    partial void OnSellChanged();
-    #endregion
-		
-		public Type_Land()
-		{
-			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDType
-		{
-			get
-			{
-				return this._IDType;
-			}
-			set
-			{
-				if ((this._IDType != value))
-				{
-					this.OnIDTypeChanging(value);
-					this.SendPropertyChanging();
-					this._IDType = value;
-					this.SendPropertyChanged("IDType");
-					this.OnIDTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TypeName
-		{
-			get
-			{
-				return this._TypeName;
-			}
-			set
-			{
-				if ((this._TypeName != value))
-				{
-					this.OnTypeNameChanging(value);
-					this.SendPropertyChanging();
-					this._TypeName = value;
-					this.SendPropertyChanged("TypeName");
-					this.OnTypeNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sell", DbType="Bit")]
-		public System.Nullable<bool> Sell
-		{
-			get
-			{
-				return this._Sell;
-			}
-			set
-			{
-				if ((this._Sell != value))
-				{
-					this.OnSellChanging(value);
-					this.SendPropertyChanging();
-					this._Sell = value;
-					this.SendPropertyChanged("Sell");
-					this.OnSellChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Type_Land_Land", Storage="_Lands", ThisKey="IDType", OtherKey="IDType")]
-		public EntitySet<Land> Lands
-		{
-			get
-			{
-				return this._Lands;
-			}
-			set
-			{
-				this._Lands.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Type_Land = this;
-		}
-		
-		private void detach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Type_Land = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Ward")]
-	public partial class Ward : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDWard;
-		
-		private string _Ward1;
-		
-		private int _IDTrousers;
-		
-		private EntitySet<Street> _Streets;
-		
-		private EntityRef<Trouser> _Trouser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDWardChanging(int value);
-    partial void OnIDWardChanged();
-    partial void OnWard1Changing(string value);
-    partial void OnWard1Changed();
-    partial void OnIDTrousersChanging(int value);
-    partial void OnIDTrousersChanged();
-    #endregion
-		
-		public Ward()
-		{
-			this._Streets = new EntitySet<Street>(new Action<Street>(this.attach_Streets), new Action<Street>(this.detach_Streets));
-			this._Trouser = default(EntityRef<Trouser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDWard
-		{
-			get
-			{
-				return this._IDWard;
-			}
-			set
-			{
-				if ((this._IDWard != value))
-				{
-					this.OnIDWardChanging(value);
-					this.SendPropertyChanging();
-					this._IDWard = value;
-					this.SendPropertyChanged("IDWard");
-					this.OnIDWardChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Ward", Storage="_Ward1", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Ward1
-		{
-			get
-			{
-				return this._Ward1;
-			}
-			set
-			{
-				if ((this._Ward1 != value))
-				{
-					this.OnWard1Changing(value);
-					this.SendPropertyChanging();
-					this._Ward1 = value;
-					this.SendPropertyChanged("Ward1");
-					this.OnWard1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int NOT NULL")]
-		public int IDTrousers
-		{
-			get
-			{
-				return this._IDTrousers;
-			}
-			set
-			{
-				if ((this._IDTrousers != value))
-				{
-					if (this._Trouser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDTrousersChanging(value);
-					this.SendPropertyChanging();
-					this._IDTrousers = value;
-					this.SendPropertyChanged("IDTrousers");
-					this.OnIDTrousersChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Street", Storage="_Streets", ThisKey="IDWard", OtherKey="IDWard")]
-		public EntitySet<Street> Streets
-		{
-			get
-			{
-				return this._Streets;
-			}
-			set
-			{
-				this._Streets.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trouser_Ward", Storage="_Trouser", ThisKey="IDTrousers", OtherKey="IDTrousers", IsForeignKey=true)]
-		public Trouser Trouser
-		{
-			get
-			{
-				return this._Trouser.Entity;
-			}
-			set
-			{
-				Trouser previousValue = this._Trouser.Entity;
-				if (((previousValue != value) 
-							|| (this._Trouser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Trouser.Entity = null;
-						previousValue.Wards.Remove(this);
-					}
-					this._Trouser.Entity = value;
-					if ((value != null))
-					{
-						value.Wards.Add(this);
-						this._IDTrousers = value.IDTrousers;
-					}
-					else
-					{
-						this._IDTrousers = default(int);
-					}
-					this.SendPropertyChanged("Trouser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Streets(Street entity)
-		{
-			this.SendPropertyChanging();
-			entity.Ward = this;
-		}
-		
-		private void detach_Streets(Street entity)
-		{
-			this.SendPropertyChanging();
-			entity.Ward = null;
 		}
 	}
 	
@@ -2950,8 +4083,6 @@ namespace WEB_TRACUU.Models
 		
 		private string _Acreage;
 		
-		private string _TypeName;
-		
 		private string _Street;
 		
 		private string _Ward;
@@ -2965,8 +4096,6 @@ namespace WEB_TRACUU.Models
 		private int _IDWard;
 		
 		private int _IDTrousers;
-		
-		private int _IDType;
 		
 		private int _IDAcreage;
 		
@@ -2996,6 +4125,14 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<int> _View;
 		
+		private System.Nullable<int> _IDTypeDetail;
+		
+		private System.Nullable<int> _IDType;
+		
+		private string _Type_Name;
+		
+		private string _TypeNameDetail;
+		
 		public Overview_Land()
 		{
 		}
@@ -3012,22 +4149,6 @@ namespace WEB_TRACUU.Models
 				if ((this._Acreage != value))
 				{
 					this._Acreage = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string TypeName
-		{
-			get
-			{
-				return this._TypeName;
-			}
-			set
-			{
-				if ((this._TypeName != value))
-				{
-					this._TypeName = value;
 				}
 			}
 		}
@@ -3140,22 +4261,6 @@ namespace WEB_TRACUU.Models
 				if ((this._IDTrousers != value))
 				{
 					this._IDTrousers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int NOT NULL")]
-		public int IDType
-		{
-			get
-			{
-				return this._IDType;
-			}
-			set
-			{
-				if ((this._IDType != value))
-				{
-					this._IDType = value;
 				}
 			}
 		}
@@ -3380,6 +4485,70 @@ namespace WEB_TRACUU.Models
 				if ((this._View != value))
 				{
 					this._View = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTypeDetail", DbType="Int")]
+		public System.Nullable<int> IDTypeDetail
+		{
+			get
+			{
+				return this._IDTypeDetail;
+			}
+			set
+			{
+				if ((this._IDTypeDetail != value))
+				{
+					this._IDTypeDetail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int")]
+		public System.Nullable<int> IDType
+		{
+			get
+			{
+				return this._IDType;
+			}
+			set
+			{
+				if ((this._IDType != value))
+				{
+					this._IDType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_Name", DbType="NVarChar(50)")]
+		public string Type_Name
+		{
+			get
+			{
+				return this._Type_Name;
+			}
+			set
+			{
+				if ((this._Type_Name != value))
+				{
+					this._Type_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TypeNameDetail", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string TypeNameDetail
+		{
+			get
+			{
+				return this._TypeNameDetail;
+			}
+			set
+			{
+				if ((this._TypeNameDetail != value))
+				{
+					this._TypeNameDetail = value;
 				}
 			}
 		}

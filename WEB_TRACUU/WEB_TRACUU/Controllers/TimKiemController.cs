@@ -145,18 +145,18 @@ namespace WEB_TRACUU.Controllers
 
         
         //Get DS Hinh Thuc
-        public IEnumerable<Type_Land> get_DanhMuc_By_Sell(bool sell)
+        public IEnumerable<TypeDetail> get_DanhMuc_By_Sell(bool sell)
         {
-            IList<Type_Land> list = new List<Type_Land>();
+            IList<TypeDetail> list = new List<TypeDetail>();
             using (db = new DataTraCuuVPDataContext())
             {
-                var sql = (from a in db.Type_Lands where a.Sell == sell select a).ToList();
+                var sql = (from a in db.TypeDetails where a.Sell == sell select a).ToList();
                 foreach (var item in sql)
                 {
-                    list.Add(new Type_Land
+                    list.Add(new TypeDetail
                     {
-                        IDType = item.IDType,
-                        TypeName = item.TypeName,
+                        IDTypeDetail = item.IDTypeDetail,
+                        TypeNameDetail = item.TypeNameDetail,
                         Sell = item.Sell
                     });
                 }

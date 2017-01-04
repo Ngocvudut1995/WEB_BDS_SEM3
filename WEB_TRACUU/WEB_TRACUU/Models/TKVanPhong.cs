@@ -25,7 +25,8 @@ namespace WEB_TRACUU.Models
         public int _MaPhuong { get; set; }
         public int _MaQuan { get; set; }
         public string _TenQuan { get; set; }
-        public int _MaPL { get; set; }
+        public int? _MaLoai { get; set; }
+        public int? _MaLoaiCT { get; set; }
         public System.Nullable<decimal> _Price_detail;
         public System.Nullable<System.DateTime> _ModifyDate;
 
@@ -63,7 +64,8 @@ namespace WEB_TRACUU.Models
                         _SoNha = item.NumberHouse,
                         _MaQuan = (int)item.IDTrousers,
                         _TenQuan = item.Trousers,
-                        _MaPL = (int)item.IDType,
+                        _MaLoai = (int)item.IDType,
+                        _MaLoaiCT = item.IDTypeDetail,
                         _Duong = item.Street,
                         _Phuong = item.Ward,
                         _MaPhuong = item.IDWard,

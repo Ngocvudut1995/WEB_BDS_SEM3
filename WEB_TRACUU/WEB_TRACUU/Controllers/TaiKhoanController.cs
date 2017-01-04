@@ -320,7 +320,7 @@ namespace WEB_TRACUU.Controllers
                             c.Trousers,
                             c.Ward,
                             c.Acreage,
-                            c.TypeName,
+                            c.TypeNameDetail,
                             
 
                         }).OrderByDescending(k=>k.a.ModifyDate);
@@ -339,8 +339,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -370,7 +370,7 @@ namespace WEB_TRACUU.Controllers
                                   c.Trousers,
                                   c.Ward,
                                   c.Acreage,
-                                  c.TypeName,
+                                  c.TypeNameDetail,
 
                               }).OrderByDescending(k => k.a.ModifyDate); ;
                     foreach (var item in sql)
@@ -388,8 +388,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -431,7 +431,7 @@ namespace WEB_TRACUU.Controllers
                                   c.Trousers,
                                   c.Ward,
                                   c.Acreage,
-                                  c.TypeName,
+                                  c.TypeNameDetail,
 
                               };
                     foreach (var item in sql)
@@ -449,8 +449,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -479,7 +479,7 @@ namespace WEB_TRACUU.Controllers
                                   c.Trousers,
                                   c.Ward,
                                   c.Acreage,
-                                  c.TypeName,
+                                  c.TypeNameDetail,
 
                               }).ToList();
                     foreach (var item in sql)
@@ -497,8 +497,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -540,7 +540,7 @@ namespace WEB_TRACUU.Controllers
                             c.Trousers,
                             c.Ward,
                             c.Acreage,
-                            c.TypeName,
+                            c.TypeNameDetail,
 
                         };
                     foreach (var item in sql)
@@ -558,8 +558,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -588,7 +588,7 @@ namespace WEB_TRACUU.Controllers
                                   c.Trousers,
                                   c.Ward,
                                   c.Acreage,
-                                  c.TypeName,
+                                  c.TypeNameDetail,
 
                               };
                     foreach (var item in sql)
@@ -606,8 +606,8 @@ namespace WEB_TRACUU.Controllers
                         b._Acreage = item.Acreage;
                         b._ExpireDate = item.a.ExpiredDate;
                         b._Image = item.a.Image;
-                        b._TypeName = item.TypeName;
-                        b._IDType = item.a.IDType;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
                         list.Add(new BDS_BY_KH
                         {
@@ -641,7 +641,7 @@ namespace WEB_TRACUU.Controllers
                     lands.IDAddress = json._Name;
                     lands.IDAcreage = json._DienTich;
                     lands.IDPrice = json._Price;
-                    lands.IDType = json._IDType;
+                    lands.IDTypeDetail = json._IDType;
                     lands.Sell = json.Sell;
                     lands.Decrition = json._Decription;
                     lands.CreateDate = new DateTime();

@@ -65,7 +65,7 @@ namespace WEB_TRACUU.Controllers
                     _CreateDate = sql.a.CreateDate,
                     _ModifyDate = sql.a.ModifyDate,
                     _Street = sql.a.Street,
-                    _TypeName = sql.a.TypeName,
+                    _TypeName = sql.a.TypeNameDetail,
                     _Ward = sql.a.Ward,
                     _Decription = sql.a.Decrition,
                     _ExpireDate = sql.a.ExpiredDate,
