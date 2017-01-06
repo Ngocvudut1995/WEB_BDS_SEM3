@@ -159,339 +159,348 @@
 
 
 <div class="row">
-    <div style="padding: 0px" class="col-md-9 col-xs-12">
-        <slider images="images" miniimages="miniImage" info="info" host="hosts" ng-if="show_slide == 1"/>
-        <div class="row" style="color: #36ace2;margin-top: 10px;">
-            <p style="padding-left: 12px; font-style: normal; font-weight: bold; font-size: 18pt; float: left">{{info._Name}}</p>
 
-        </div>
-        <div class="row" style="color: #36ace2;font-weight: normal;
-    font-size: 20px;">
-            <a class="button_loai" style="text-decoration: none; float: left">
-                <span style="">
+<p>{{windowWidths}}</p>
+<div style="padding: 0px" class="col-md-9 col-xs-12">
+<slider images="images" miniimages="miniImage" info="info" host="hosts" windowWidths="windowWidths" ng-if="show_slide == 1"/>
+<div class="row" style="color: #36ace2; margin-top: 10px;">
+    <p style="padding-left: 12px; font-style: normal; font-weight: bold; font-size: 18pt; float: left">{{info._Name}}</p>
+
+</div>
+<div class="row" style="color: #36ace2; font-weight: normal;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-size: 20px;">
+    <a class="button_loai" style="text-decoration: none; float: left">
+        <span style="">
                     <font>Cho thuê</font><i style="">Đất</i>
                 </span>
-            </a>
-            <span style="float: left">&nbsp;-&nbsp;</span>
-            <a class="button_diachi" style="float: left; text-decoration: none">33/1 Hoàng Diệu, </a>
-            <span style="float: left">&nbsp;</span>
-            <a class="button_diachi" style="float: left; text-decoration: none"> phường Hải Châu 2, </a>
-            <span style="float: left">&nbsp;</span>
-            <a class="button_diachi" style="float: left; text-decoration: none"> quận Hải Châu,</a>
-            <span style="float: left">&nbsp;</span>
-            <span style="float: left"> TP Đà Nẵng.</span>
-        </div>
-        <div style="height: 35px; margin-bottom: 20px;margin-top: 20px">
-            <!--<p style="float: left; text-align: center; width: 100px; height: 39px; background-color: #646363; color: white; font-weight: bold; padding: 9px; font-size: 15px;">Share:</p>
-            <a class="icon_society" target="_blank" ng-click="send_gmail(info._EmailCustomer)">
-                <i class="fa fa-google fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">GMail</span>
-            </a>
+    </a>
+    <span style="float: left">&nbsp;-&nbsp;</span>
+    <a class="button_diachi" style="float: left; text-decoration: none">33/1 Hoàng Diệu, </a>
+    <span style="float: left">&nbsp;</span>
+    <a class="button_diachi" style="float: left; text-decoration: none"> phường Hải Châu 2, </a>
+    <span style="float: left">&nbsp;</span>
+    <a class="button_diachi" style="float: left; text-decoration: none"> quận Hải Châu,</a>
+    <span style="float: left">&nbsp;</span>
+    <span style="float: left"> TP Đà Nẵng.</span>
+</div>
+<div style="height: 35px; margin-bottom: 20px; margin-top: 20px">
+    <!--<p style="float: left; text-align: center; width: 100px; height: 39px; background-color: #646363; color: white; font-weight: bold; padding: 9px; font-size: 15px;">Share:</p>
+    <a class="icon_society" target="_blank" ng-click="send_gmail(info._EmailCustomer)">
+        <i class="fa fa-google fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">GMail</span>
+    </a>
 
-            <a class="icon_society" target="_blank" ng-click="share_gmail(id_VP)">
-                <i class="fa fa-google-plus fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Google</span>
-            </a>
-            <a class="icon_society" target="_blank" ng-click="share_face(id_VP)">
-                <i class="fa fa-facebook-official fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Facebook</span>
-            </a>-->
+    <a class="icon_society" target="_blank" ng-click="share_gmail(id_VP)">
+        <i class="fa fa-google-plus fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Google</span>
+    </a>
+    <a class="icon_society" target="_blank" ng-click="share_face(id_VP)">
+        <i class="fa fa-facebook-official fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Facebook</span>
+    </a>-->
 
-            <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
-                <i style="color: red" class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
-            </button>
-            <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
-                <i class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
-            </button>
-            <div style="float: left; white-space: nowrap;" fb-like></div>
-            <div style="float: left; white-space: nowrap;margin-left: 20px" google-plus></div>
-            <!--<div  style="float: left;margin-right: 10px "class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
-            <div style="float: left"class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large" data-mobile-iframe="true">
-                <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
-            </div>-->
+    <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == true" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
+        <i style="color: red" class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
+    </button>
+    <button class="icon_society" style="float: right; white-space: nowrap" ng-show="follow == false" ng-click="change_follow()" ng-show="(taikhoan.test == 0)">
+        <i class="fa fa-heart fa-lg"></i> <span class="hidden-sm hidden-xs" style="width: 114px">Quan Tâm</span>
+    </button>
+    <div style="float: left; white-space: nowrap;" fb-like></div>
+    <div style="float: left; white-space: nowrap; margin-left: 20px" google-plus></div>
+    <!--<div style="float: left;margin-right: 10px "class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="false"></div>
+    <div style="float: left"class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large" data-mobile-iframe="true">
+        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
+    </div>-->
 
+</div>
+<div style="height: 35px">
+    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">Giới thiệu</h4>
+</div>
+<div style="background-color: white; padding: 20px; box-shadow: 0px 0px 10px #36ace2">
+    <p ng-bind-html="info._Decription"></p>
+    <!--<p>Văn Phòng quận Cầu Giấy tòa nhà Hoàng Ngọc phố Trần Thái Tông. Diện tích cho thuê từ 70m đến 530m, giá thuê 11$/m2/tháng đã bao gồm VAT và phí dịch vụ.</p>
+    <p>Hoàng Ngọc Tower tọa lạc tại lô C2C ngõ 72 Trần Thái tông với mặt tiền rộng 30m thuộc tuyến 2 phố Duy Tân, cắt giữa phố Trần Thái Tông và đường Phạm Hùng, tuyến đường huyết mạch của cửa ngõ phía Tây Hà Nội, Tòa nhà Hoàng Ngọc sở hữu một góc nhìn cảnh quan tuyệt đẹp hướng ra hai mặt đường.</p>
+    <p>Được xây dựng trên khu đất có diện tích 1300m2. Tòa nhà Hoàng Ngọc gồm 11 tầng với diện tích 5700m2 gộp, một tầng hầm rộng 530m2, khoảng sân rộng hơn 600m2 cùng hai mặt vỉa hè thông thoáng được bố trí làm bãi đỗ xe thuận tiện.</p>
+    <p>Hiện tại, Hoàng Ngọc Tower còn trống một số diện tích sàn cho thuê như sau:</p>
+    <p>
+        – Tầng 1: Trống 530 m2 (diện tích thuê tối thiểu là 120m2); Giá thuê: 319.5 nghìn/m2/tháng.<br>
+        – Tầng 3: Trống 141 m2 (diện tích thuê tối thiểu là 71m2); Giá thuê: 213 nghìn/m2/tháng.<br>
+        – Tầng 9: Trống 354m2 (diện tích thuê tối thiểu là 71m2); Giáthuê: 213 nghìn/m2/tháng.
+    </p>
+    <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
+</div>
+<div style="height: 35px; margin-top: 20px">
+    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;
+                                                                                                                                                                                                                                                                                                                        height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">Thông Tin Bổ Sung</h4>
+</div>
+<div style="background-color: white; padding: 20px; box-shadow: 0px 0px 10px #36ace2">
+    <ul class="clearfix" style="display: block; list-style-type: square;">
+        <li class="col-md-6 col-xs-12">Ngày Đăng Tin: {{ format_date(info._ModifyDate) }}</li>
+        <li class="col-md-6 col-xs-12">Ngày Hết Hạn: {{ format_date(info._ExpireDate) }}</li>
+        <li class="col-md-6 col-xs-12">Diện Tích: {{ info._Acreage }}</li>
+        <li class="col-md-6 col-xs-12">Giá: {{info._Price}}</li>
+        <li class="col-md-6 col-xs-12" style="padding-right: 17px;">Vị Trí: {{ info._NumberHouse }} {{ info._Street }}, Quận {{ info._Trousers }}, Phường {{ info._Ward }}, TP Đà Nẵng</li>
+        <li class="col-md-6 col-xs-12">Loại Dự Án: {{info._TypeName}}</li>
+    </ul>
+</div>
+<div style="margin-top: 20px; height: 100px; background-color: white; box-shadow: 0px 0px 10px #36ace2">
+
+    <div class="row" style="float: left; height: 100%; width: 100%">
+        <div class="col-md-2" style="height: 100%">
+            <img src="../../Content/Images/broker.jpg" style="float: left; height: 100%; padding: 10px"/>
         </div>
-        <div style="height: 35px">
-            <h4 style="padding: 5px 10px 0px 10px;margin: 0px;background-color: #36ace2;
-height: 100%;font-weight: bold;  float: left; line-height: 30px;text-transform: uppercase">Giới thiệu</h4>
+        <div class="col-md-4">
+            <h3 style="float: left; padding-top: 16px;">Liên hệ: {{info._NameCustomer}}</h3>
         </div>
-        <div style="background-color: white; padding: 20px;box-shadow: 0px 0px 10px #36ace2">
-            <p ng-bind-html="info._Decription"></p>
-            <!--<p>Văn Phòng quận Cầu Giấy tòa nhà Hoàng Ngọc phố Trần Thái Tông. Diện tích cho thuê từ 70m đến 530m, giá thuê 11$/m2/tháng đã bao gồm VAT và phí dịch vụ.</p>
-            <p>Hoàng Ngọc Tower tọa lạc tại lô C2C ngõ 72 Trần Thái tông với mặt tiền rộng 30m thuộc tuyến 2 phố Duy Tân, cắt giữa phố Trần Thái Tông và đường Phạm Hùng, tuyến đường huyết mạch của cửa ngõ phía Tây Hà Nội, Tòa nhà Hoàng Ngọc sở hữu một góc nhìn cảnh quan tuyệt đẹp hướng ra hai mặt đường.</p>
-            <p>Được xây dựng trên khu đất có diện tích 1300m2. Tòa nhà Hoàng Ngọc gồm 11 tầng với diện tích 5700m2 gộp, một tầng hầm rộng 530m2, khoảng sân rộng hơn 600m2 cùng hai mặt vỉa hè thông thoáng được bố trí làm bãi đỗ xe thuận tiện.</p>
-            <p>Hiện tại, Hoàng Ngọc Tower còn trống một số diện tích sàn cho thuê như sau:</p>
-            <p>
-                – Tầng 1: Trống 530 m2 (diện tích thuê tối thiểu là 120m2); Giá thuê: 319.5 nghìn/m2/tháng.<br>
-                – Tầng 3: Trống 141 m2 (diện tích thuê tối thiểu là 71m2); Giá thuê: 213 nghìn/m2/tháng.<br>
-                – Tầng 9: Trống 354m2 (diện tích thuê tối thiểu là 71m2); Giáthuê: 213 nghìn/m2/tháng.
-            </p>
-            <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
-        </div>
-        <div style="height: 35px; margin-top: 20px">
-            <h4 style="padding: 5px 10px 0px 10px;margin: 0px;background-color: #36ace2;
-height: 100%;font-weight: bold;  float: left; line-height: 30px;text-transform: uppercase">Thông Tin Bổ Sung</h4>
-        </div>
-        <div style="background-color: white; padding: 20px;box-shadow: 0px 0px 10px #36ace2">
-            <ul class="clearfix" style="display: block; list-style-type: square;">
-                <li class="col-md-6 col-xs-12">Ngày Đăng Tin: {{ format_date(info._ModifyDate) }}</li>
-                <li class="col-md-6 col-xs-12">Ngày Hết Hạn: {{ format_date(info._ExpireDate) }}</li>
-                <li class="col-md-6 col-xs-12">Diện Tích: {{ info._Acreage }}</li>
-                <li class="col-md-6 col-xs-12">Giá: {{info._Price}}</li>
-                <li class="col-md-6 col-xs-12" style="padding-right: 17px;">Vị Trí: {{ info._NumberHouse }} {{ info._Street }}, Quận {{ info._Trousers }}, Phường {{ info._Ward }}, TP Đà Nẵng</li>
-                <li class="col-md-6 col-xs-12">Loại Dự Án: {{info._TypeName}}</li>
-            </ul>
-        </div>
-        <div style="margin-top: 20px; height: 100px; background-color: white;box-shadow: 0px 0px 10px #36ace2">
-      
-            <div class="row" style="float: left; height: 100%; width: 100%">
-                <div class="col-md-2" style="height: 100%">
-                    <img src="../../Content/Images/broker.jpg" style="float: left; height: 100%; padding: 10px" />
-                </div>
-                <div class="col-md-4">
-                    <h3 style="float: left;    padding-top: 16px;">Liên hệ: {{info._NameCustomer}}</h3>
-                </div>
-                <div class="col-md-6">
-                    <ul style="padding-top: 14px;list-style-type: square;">
-                        <li class="button_contact"><a ng-click="open_contact()" ><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;Email : {{info._EmailCustomer}}</a></li>
-                        <li class="button_contact">
-                            <a><span class="glyphicon glyphicon-phone-alt">
+        <div class="col-md-6">
+            <ul style="padding-top: 14px; list-style-type: square;">
+                <li class="button_contact"><a ng-click="open_contact()"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;Email : {{info._EmailCustomer}}</a></li>
+                <li class="button_contact">
+                    <a><span class="glyphicon glyphicon-phone-alt">
 </span>&nbsp;&nbsp;Office : {{info._PhoneCustomer}}</a>
-                           
-                        </li>
-                        <li class="button_contact">
-                            <a>
-                                <span class="glyphicon glyphicon-earphone">
+
+                </li>
+                <li class="button_contact">
+                    <a>
+                        <span class="glyphicon glyphicon-earphone">
                                 </span>&nbsp;&nbsp;Phone : {{info._PhoneCustomer}}
-                            </a>
-                        </li>
-                    </ul>
-                  
-                </div>
-            </div>
-           
-        </div>
-        <div style="height: 35px; margin-top: 20px">
-            <h4 style="padding: 5px 10px 0px 10px;margin: 0px;background-color: #36ace2;
-height: 100%;font-weight: bold;  float: left; line-height: 30px;text-transform: uppercase">Nội thất cơ bản</h4>
-        </div>
-        <div style="background-color: white; padding: 20px;box-shadow: 0px 0px 10px #36ace2">
-            <ul class="clearfix" style="display: block; list-style-type: none;padding-left: 0px;">
-                <li class="col-md-3">
-                    <img src="../../Content/Images/LivingRoomSofa.png" /> Sofa phòng khách</li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/TeaTable.png" /> Bàn trà
+                    </a>
                 </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/TVShelf.png" /> Kệ tivi
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/KitchenCabinets.png" /> Tủ bếp
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/DiningTable.png"/> Bàn ăn
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Bed.png" /> Gường ngủ
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Mattress.png" /> Đệm
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Wardrobe.png" /> Tủ đồ
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Shower.png" /> Vòi sen
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/ToiletBowl.png"/> Toilet
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Washstand.png" /> Bồn rửa mặt
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Floor.png" /> Sàn đá
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/DropCeiling.png" /> Trần thả
-                </li>
-               
             </ul>
+
         </div>
-
-        <div style="height: 35px; margin-top: 20px">
-            <h4 style="padding: 5px 10px 0px 10px;margin: 0px;background-color: #36ace2;
-height: 100%;font-weight: bold;  float: left; line-height: 30px;text-transform: uppercase">
-                Tiện nghi cơ bản
-            </h4>
-        </div>
-        <div style="background-color: white; padding: 20px;box-shadow: 0px 0px 10px #36ace2">
-            <ul class="clearfix" style="display: block; list-style-type: none;padding-left: 0px;">
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/AirConditioner.png" /> Điều hòa
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/CableTV.png" /> Truyền hình cáp
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/Internet.png" /> Internet
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/FireSystem.png" /> Hệ thống sưởi
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/GasStove.png"/> Bếp ga
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/StorageWaterHeater.png" /> Bình nóng lạnh
-                </li>
-                
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/MotorPark.png" /> Bãi đỗ xe máy
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Park.png"/> Công viên
-
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/Cinema.png" /> Rạp chiếu phim
-                </li>
-                <li class="col-md-3">
-
-                    <img src="../../Content/Images/Funiture/Spa.png" /> Spa
-                </li>
-                
-
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/AutoPark.png" /> Bãi đỗ ô tô
-
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/CommunityChair.png" /> Ghế cộng đồng
-
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Lake.png" /> Hồ nước
-
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/Library.png"/> Thư viện
-
-                </li>
-                <li class="col-md-3">
-                    <img src="../../Content/Images/Funiture/PlayAreaForChildren.png" /> Khu vui chơi
-
-                </li>
-               
-            </ul>
-        </div>
-
     </div>
-    <div class="col-md-3 hidden-xs hidden-sm">
-        <img style="width: 100%;" ng-src="{{ app }}/Content/Images/quangcao2.png"/>
+
+</div>
+<div style="height: 35px; margin-top: 20px">
+    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">Nội thất cơ bản</h4>
+</div>
+<div style="background-color: white; padding: 20px; box-shadow: 0px 0px 10px #36ace2">
+    <ul class="clearfix" style="display: block; list-style-type: none; padding-left: 0px;">
+        <li ng-if="list_noithat_by_id.length == 0">Chưa có sẵn nội thất.</li>
+        <li class="col-md-3" style="margin-bottom: 15px;" ng-repeat="item in list_noithat" ng-if="test_noithat(item.IDFuriture)">
+
+            <img ng-src="{{app}}/{{item.Image}}"/> {{item.Furiture_Name}}
+        </li>
+        <!--<li class="col-md-3">
+            <img src="../../Content/Images/LivingRoomSofa.png"/> Sofa phòng khách</li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/TeaTable.png"/> Bàn trà
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/TVShelf.png"/> Kệ tivi
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/KitchenCabinets.png"/> Tủ bếp
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/DiningTable.png"/> Bàn ăn
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Bed.png"/> Gường ngủ
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Mattress.png"/> Đệm
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Wardrobe.png"/> Tủ đồ
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Shower.png"/> Vòi sen
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/ToiletBowl.png"/> Toilet
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Washstand.png"/> Bồn rửa mặt
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Floor.png"/> Sàn đá
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/DropCeiling.png"/> Trần thả
+        </li>-->
+
+    </ul>
+</div>
+
+<div style="height: 35px; margin-top: 20px">
+    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">
+        Tiện nghi cơ bản
+    </h4>
+</div>
+<div style="background-color: white; padding: 20px; box-shadow: 0px 0px 10px #36ace2">
+    <ul class="clearfix" style="display: block; list-style-type: none; padding-left: 0px;">
+        <li ng-if="list_tiennghi_by_id.length == 0">Chưa có sẵn tiện nghi.</li>
+        <li class="col-md-3"style="margin-bottom: 15px;" ng-repeat="item in list_tiennghi" ng-if="test_tiennghi(item.IDConvenient)">
+
+            <img ng-src="{{app}}/{{item.Image}}"/> {{item.Convenient_Name}}
+        </li>
+        <!--<li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/CableTV.png"/> Truyền hình cáp
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/Internet.png"/> Internet
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/FireSystem.png"/> Hệ thống sưởi
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/GasStove.png"/> Bếp ga
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/StorageWaterHeater.png"/> Bình nóng lạnh
+        </li>
+
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/MotorPark.png"/> Bãi đỗ xe máy
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Park.png"/> Công viên
+
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/Cinema.png"/> Rạp chiếu phim
+        </li>
+        <li class="col-md-3">
+
+            <img src="../../Content/Images/Funiture/Spa.png"/> Spa
+        </li>
+
+
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/AutoPark.png"/> Bãi đỗ ô tô
+
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/CommunityChair.png"/> Ghế cộng đồng
+
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Lake.png"/> Hồ nước
+
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/Library.png"/> Thư viện
+
+        </li>
+        <li class="col-md-3">
+            <img src="../../Content/Images/Funiture/PlayAreaForChildren.png"/> Khu vui chơi
+
+        </li>-->
+
+    </ul>
+</div>
+
+</div>
+<div class="col-md-3 hidden-xs hidden-sm">
+    <img style="width: 100%;" ng-src="{{ app }}/Content/Images/quangcao2.png"/>
+    <a id="search"></a>
+    <div style="background-color: #36ace2;">
+        <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; text-transform: uppercase;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        float: none; padding: 9px 20px 10px;">
+            TÌM KIẾM NHÀ ĐẤT
+        </h4>
+    </div>
+    <div style="">
+        <div class="clearfix list-group" style="display: block; list-style-type: square; background-color: white; box-shadow: 0px 0px 10px #36ace2">
+            <div class="col-md-12 col-xs-6 col-sm-4">
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
+                        <option value="0">Tất Cả</option>
+                        <option value="false">Cho Thuê</option>
+                        <option value="true">Cần Bán</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                        <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
+                        <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+                    </select>
+                </div>
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Phường xã</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
+                        <option value="0" selected="selected">--- Chọn Phường xã ---</option>
+                        <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+                    </select>
+                </div>
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
+                        <option value="0" selected="selected">--- Chọn Đường ---</option>
+                        <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
+
+                    </select>
+                </div>
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Kieu">
+                        <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                        <option ng-repeat="item in list_DM" value="{{ item.IDTypeDetail }}">{{ item.TypeNameDetail }}</option>
+                    </select>
+                </div>
+
+
+
+
+                <div class="col-md-12 col-xs-6 col-sm-4">
+                    <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_DienTich">
+                        <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
+                        <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-12 ">
+                    <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+                    <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Gia">
+                        <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
+                        <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
+                    </select>
+                </div>
+                <div class="col-md-12" style="float: left; margin-bottom: 20px;">
+
+                    <input type="button" value="Tìm Kiếm" style="width: 55%; margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
+                    <input type="button" value="Reset" style="width: 34%; margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
+
+                </div>
+
+            </div>
+        </div>
         <div style="background-color: #36ace2;">
-            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; text-transform: uppercase;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       float: none; padding: 9px 20px 10px;">
-                TÌM KIẾM NHÀ ĐẤT
+            <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         float: none; padding: 9px 20px 10px;">
+                PHÒNG TRỌ
             </h4>
         </div>
         <div style="">
-            <div class="clearfix list-group" style="display: block; list-style-type: square; background-color: white;box-shadow: 0px 0px 10px #36ace2">
-                <div class="col-md-12 col-xs-6 col-sm-4">
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_sell" ng-change="change_sell()">
-                            <option value="0">Tất Cả</option>
-                            <option value="false">Cho Thuê</option>
-                            <option value="true">Cần Bán</option>
+            <div class="clearfix list-group" style="display: block; list-style-type: square; box-shadow: 0px 0px 10px #36ace2">
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Sư Phạm Đà Nẵng </a>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Kinh Tế Đà Nẵng </a>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Kiến Trúc Đà Nẵng </a>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Ngoại Ngữ Đà Nẵng </a>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Kỹ Thuật Y Dược Đà Nẵng </a>
 
-                        </select>
-                    </div>
-
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                            <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                            <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
-
-                        </select>
-                    </div>
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Phường xã</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Phuong" ng-change="load_duong()">
-                            <option value="0" selected="selected">--- Chọn Phường xã ---</option>
-                            <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Đường</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Duong">
-                            <option value="0" selected="selected">--- Chọn Đường ---</option>
-                            <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
-
-                        </select>
-                    </div>
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Kiểu Dự Án</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Kieu">
-                            <option value="0" selected="selected">--- Chọn Dự Án ---</option>
-                            <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
-                        </select>
-                    </div>
-
-
-
-
-                    <div class="col-md-12 col-xs-6 col-sm-4">
-                        <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_DienTich">
-                            <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
-                            <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
-
-                        </select>
-                    </div>
-
-                    <div class="col-md-12 ">
-                        <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 30px;" ng-model="select_Gia">
-                            <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
-                            <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-12" style="float: left; margin-bottom: 20px;">
-
-                        <input type="button" value="Tìm Kiếm" style="width: 55%; margin-top: 30px; height: 30px; border-radius: 4px; background-color: white" ng-click="search_vp()">
-                        <input type="button" value="Reset" style="width: 34%; margin-left: 9px; height: 30px; border-radius: 4px; background-color: white" ng-click="reload_seach()">
-
-                    </div>
-
-                </div>
-            </div>
-            <div style="background-color: #36ace2;">
-                <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          float: none; padding: 9px 20px 10px;">
-                    PHÒNG TRỌ
-                </h4>
-            </div>
-            <div style="">
-                <div class="clearfix list-group" style="display: block; list-style-type: square;box-shadow: 0px 0px 10px #36ace2">
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Bách Khoa Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Sư Phạm Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Kinh Tế Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Kiến Trúc Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Ngoại Ngữ Đà Nẵng </a>
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Kỹ Thuật Y Dược Đà Nẵng </a>
-
-                    <a class="list-group-item col-md-12 col-xs-12">Đại Học Cao Đẳng Khác </a>
-                </div>
+                <a class="list-group-item col-md-12 col-xs-12">Đại Học Cao Đẳng Khác </a>
             </div>
         </div>
     </div>
+</div>
 
 
 

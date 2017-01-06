@@ -302,10 +302,25 @@ div.scrollmenu {
             width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #e6e6e6;
-    color: #fff;
-    font-size: 40px;
+        overflow: hidden;
+    font-size: 25px;
+    padding-top: 4px;
     text-align: center;
     line-height: 33px;
     cursor: pointer;
+    }
+  .button_heart {
+   background-color: #eb5256;
+      color: white;
+ 
+    }
+    .button_heart:hover {
+       background-color: #36ace2;
+      color: white;
+    }
+    .my_button_search {
+        background-color: #eb5255;
+    }
+    .my_button_search:hover {
+         background-color: #36ace2;
     }

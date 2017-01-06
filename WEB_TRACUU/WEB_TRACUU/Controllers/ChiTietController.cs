@@ -264,6 +264,97 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
+        [HttpGet]
+        public IEnumerable<Furiture> get_furiture()
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
 
+                var furiture = (from a in db.Furitures
+                              select a).ToList();
+                IList<Furiture> list = new List<Furiture>();
+                foreach (var item in furiture)
+                {
+                    list.Add(new Furiture
+                    {
+                        Furiture_Name = item.Furiture_Name,
+                        IDFuriture = item.IDFuriture, 
+                        Image = item.Image
+                    });
+                }
+                return list;
+            }
+
+        }
+        [HttpGet]
+        public IEnumerable<Furiture> get_furiture_by_id(Guid mavp)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+              
+                var furiture = (from a in db.Furiture_details
+                    join b in db.Furitures on a.IDFuriture equals b.IDFuriture
+                
+                where a.IDLand == mavp select b).ToList();
+                IList<Furiture> list = new List<Furiture>();
+                foreach (var item in furiture)
+                {
+                    list.Add(new Furiture
+                    {
+                        Furiture_Name = item.Furiture_Name,
+                        IDFuriture = item.IDFuriture,
+                       
+                    });
+                }
+                return list;
+            }
+
+        }
+        [HttpGet]
+        public IEnumerable<Convenient> get_convenient()
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+
+                var convenient = (from a in db.Convenients
+                              select a).ToList();
+                IList<Convenient> list = new List<Convenient>();
+                foreach (var item in convenient)
+                {
+                    list.Add(new Convenient
+                    {
+                        Convenient_Name = item.Convenient_Name,
+                        IDConvenient = item.IDConvenient,
+                        Image = item.Image
+                    });
+                }
+                return list;
+            }
+
+        }
+        [HttpGet]
+        public IEnumerable<Convenient> get_convenient_by_id(Guid mavp)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+
+                var convenient = (from a in db.Convenient_Details
+                              join b in db.Convenients on a.IDConvenient equals b.IDConvenient
+
+                              where a.IDLand == mavp
+                              select b).ToList();
+                IList<Convenient> list = new List<Convenient>();
+                foreach (var item in convenient)
+                {
+                    list.Add(new Convenient
+                    {
+                         Convenient_Name= item.Convenient_Name,
+                        IDConvenient = item.IDConvenient
+                    });
+                }
+                return list;
+            }
+
+        }
     }
 }

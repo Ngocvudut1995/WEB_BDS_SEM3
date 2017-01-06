@@ -118,11 +118,11 @@ slide_mini.ng-hide-add {
        opacity: 1;
 }
 .slide_infor {
-    font-size: 18px;
+    /*font-size: 18px;*/
     color: #fff;
   
     padding: 0;
 }
 .slide_infor > i {
-    font-size: 33px; color: white; margin-top: 10px
+    color: white; margin-top: 10px
 }

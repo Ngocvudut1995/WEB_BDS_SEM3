@@ -6,47 +6,50 @@
             Diện Tích: {{info._Acreage}}
         </p>
     </div>-->
-    <div class="row" style="">
+    <div class="row" style="" resize>
+        
         <div class="col-md-12 col-sm-10 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
             <div class="slider" style="position: relative">
+
                 <div class="slide" ng-repeat="image in images" ng-show="image.visible" style="position: relative">
-                    <img ng-src="{{ host }}/{{image.Anh}}" />
+                    <img ng-src="{{ host }}/{{image.Anh}}"/>
 
                 </div>
                 <div style="width: 100%; position: absolute; bottom: 10px" class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3" style="height: 100%">
-                        <p class="slide_infor" style="">
-                            <i style="" class="fa fa-money" aria-hidden="true"></i>
-                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1,24</span> <span>tỷ</span>
+                    <div class="col-md-1 col-xs-1"></div>
+                    <div class="col-md-3 col-xs-3" style="height: 100%">
+                        <p class="slide_infor" ng-style="((windowWidth > 700) && {'font-size': '18px'} || (windowWidth < 700) && {'font-size': '16px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '14px'})">
+
+                            <i ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '20px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" class="fa fa-money" aria-hidden="true"></i>
+                            <span ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '20px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" style="color: #ffc82e; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1,24</span> <span>tỷ</span>
                         </p>
 
                     </div>
-                    <div class="col-md-3" style="height: 100%">
-                        <p class="slide_infor" style="">
-                            <i style="" class="fa fa-area-chart" aria-hidden="true"></i>
-                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">300</span>
+                    <div class="col-md-3 col-xs-3" style="height: 100%">
+                        <p class="slide_infor" ng-style="((windowWidth > 700) && {'font-size': '18px'} || (windowWidth < 700) && {'font-size': '16px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '14px'})">
+                            <i ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '20px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" class="fa fa-area-chart" aria-hidden="true"></i>
+                            <span ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '18px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" style="color: #ffc82e; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">300</span>
                             <span>m2</span>
                         </p>
 
                     </div>
 
-                    <div class="col-md-5" style="height: 100%">
-                        <p class="slide_infor" style="">
-                            <i style="" class="fa fa-balance-scale" aria-hidden="true"></i>
-                            <span style="color: #ffc82e; font-size: 36px; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1</span> <span>tỷ/m2</span>
+                    <div class="col-md-5 col-xs-3" style="height: 100%">
+                        <p class="slide_infor" ng-style="((windowWidth > 700) && {'font-size': '18px'} || (windowWidth < 700) && {'font-size': '16px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '14px'})">
+                            <i ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '20px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" class="fa fa-balance-scale" aria-hidden="true"></i>
+                            <span ng-style="((windowWidth > 700) && {'font-size': '36px'} || (windowWidth < 700) && {'font-size': '20px'} && (windowWidth >= 400))|| ((windowWidth < 400) && {'font-size': '18px'})" style="color: #ffc82e; font-weight: bold; vertical-align: bottom; display: inline-block; line-height: 1;">1</span> <span>tỷ/m2</span>
                         </p>
 
                     </div>
                 </div>
                 <div class="arrows_left">
                     <a ng-click="prev()">
-                        <img ng-src="{{ host }}/Content/Images/left-arrow.png" />
+                        <img ng-src="{{ host }}/Content/Images/left-arrow.png"/>
                     </a>
                 </div>
                 <div class="arrows_right">
                     <a ng-click="next()">
-                        <img ng-src="{{ host }}/Content/Images/right-arrow.png" />
+                        <img ng-src="{{ host }}/Content/Images/right-arrow.png"/>
                     </a>
                 </div>
 
@@ -58,16 +61,16 @@
         padding-bottom: 16px;" ng-style="((body_width > 700) && {'height': '357px'} || (body_width < 700) && {'height': '177px'} && (body_width >= 400))">
 
 
-                <div class="slide_mini" style="width: 20%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
-                    <div class="mini_image" style="width: 100%;">
-                        <a ng-click="show($index)"><img style="width: 100%; height: 90px" ng-src="{{host}}/{{item.Anh}}"/></a>
-                    </div>
+            <div class="slide_mini" style="width: 20%;" ng-repeat="item in miniimages track by $index" ng-show="item.visible">
+                <div class="mini_image" style="width: 100%;">
+                    <a ng-click="show($index)"><img style="width: 100%; height: 90px" ng-src="{{host}}/{{item.Anh}}"/></a>
                 </div>
-                <div style="text-align: center;margin-bottom: 3px; position: absolute; bottom: 0px; right: 31%;">
-                    <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="up()"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
-                    <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="down()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
-                </div>
-            </div>-->
+            </div>
+            <div style="text-align: center;margin-bottom: 3px; position: absolute; bottom: 0px; right: 31%;">
+                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="up()"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+                <a style="font-size: 25px; color: #9a9a9a;cursor: pointer" ng-click="down()"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
+            </div>
+        </div>-->
 
     </div>
    

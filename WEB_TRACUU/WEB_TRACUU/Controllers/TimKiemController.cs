@@ -164,6 +164,45 @@ namespace WEB_TRACUU.Controllers
             }
             
         }
+
+        //Get huong nhà
+        public IEnumerable<Direction> get_Direction()
+        {
+            IList<Direction> list = new List<Direction>();
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var sql = (from a in db.Directions select a).OrderBy(b => b.IDDirection).ToList();
+                foreach (var item in sql)
+                {
+                    list.Add(new Direction
+                    {
+                        IDDirection = item.IDDirection,
+                        Direction1 = item.Direction1
+                    });
+                }
+                return list;
+            }
+
+        }
+        public IEnumerable<TypeDetail> get_DanhMuc_By_Sell_and_Type(bool sell,int type)
+        {
+            IList<TypeDetail> list = new List<TypeDetail>();
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var sql = (from a in db.TypeDetails where a.Sell == sell && a.IDType == type select a).ToList();
+                foreach (var item in sql)
+                {
+                    list.Add(new TypeDetail
+                    {
+                        IDTypeDetail = item.IDTypeDetail,
+                        TypeNameDetail = item.TypeNameDetail,
+                        Sell = item.Sell
+                    });
+                }
+                return list;
+            }
+
+        }
         public IEnumerable<Price> get_Price(bool sell)
         {
             IList<Price> list = new List<Price>();

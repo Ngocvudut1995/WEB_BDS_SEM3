@@ -9,7 +9,8 @@ app.directive('slider', function ($timeout) {
             images: '=',
             miniimages:'=',
             info: '=',
-            host: '='
+            host: '=',
+            windowWidths: '=',
         },
         link: function(scope, elem, attrs) {
             scope.currentIndex = 0;

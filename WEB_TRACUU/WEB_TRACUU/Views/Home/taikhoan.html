@@ -23,7 +23,7 @@
 
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_khachhang">Quản Lý Khách Hàng</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_baidang">Quản Lý Bài Đăng</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_tracuu">Quản Lý Hệ Thống Tra Cứu</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#/TaiKhoan/ql_tracuu">Quản Lý Hệ Thống</a></li>
 
 
                         </ul>
@@ -173,7 +173,7 @@
                                         <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
                                         <img ng-src="{{image_source}}" style="height: 100px; width: 100px; margin-top: 10px">
 
-                                        <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange=" angular.element(this).scope().setFile(this) " style="margin-top: 10px" accept="image/*">
+                                        <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange="angular.element(this).scope().setFile(this)" style="margin-top: 10px" accept="image/*">
 
                                     </div>
                                     <div class="col-md-12 col-xs-12 col-sm-12 form-group">
@@ -685,7 +685,7 @@
                                         <option value="">--- Chọn Diện Tích ---</option>
 
                                     </select>
-                                    <input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_DienTich.Acreage1" />
+                                    <input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_DienTich.Acreage1"/>
                                     <button ng-click="SaveEditArea(IsInsert,select_DienTich.Acreage1,select_DienTich.IDAcreage);show_edit_dt=0" ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
                                 </div>
                                 <div class="col-md-3 dropdown">
@@ -703,6 +703,94 @@
                                     </ul>
                                     <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
                                     <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="text-transform: uppercase;">DS Các Nội THất</div>
+                    <div class="panel-body">
+                        <div class="list-group-item row">
+                            <div class="col-md-9" ng-init="show_edit_dt=0;IsInsert=0">
+                                <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_noithat"
+                                        ng-options="x as x.Furiture_Name for x in list_noithat track by x.IDFuriture" ng-change="change_noithat(select_noithat.Image)">
+                                    <option value="">--- Chọn nội thất ---</option>
+
+                                </select>
+                                <input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_noithat.Furiture_Name"/>
+
+                                <button ng-click="SaveEditArea(IsInsert,select_DienTich.Acreage1,select_DienTich.IDAcreage);show_edit_dt=0" ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                                <input type="file" accept="image/*" id="input_file_noithat" style="display: none" ng-files="getTheFiles($files)" onchange="angular.element(this).scope().setFile_Noithat(this)"/>
+                                <!--<input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="filename"/>-->
+                                <div style="width: 80%; float: left; margin-top: 20px; height: 32px;">
+                                    <img ng-src="{{image_noithat}}" style="height: 30px; width: 30px" />
+                                </div>
+
+                                <button onclick=" document.getElementById('input_file_noithat').click() "
+                                        ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px">
+                                    <span class="glyphicon glyphicon-floppy-save"></span>
+                                </button>
+                            </div>
+                            <div class="col-md-3 dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </button>
+                                <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 1) && (select_DienTich.Acreage1='')">Thêm mới</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 0)">Sửa đổi</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-disabled="(1)">Xóa toàn bộ</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteArea(select_DienTich.IDAcreage)">Xóa mục đang chọn</a></li>
+
+                                </ul>
+                                <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-transform: uppercase;">DS Các Tiện Nghi</div>
+                        <div class="panel-body">
+                            <div class="list-group-item row">
+                                <div class="col-md-9" ng-init="show_edit_dt=0;IsInsert=0">
+                                    <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_tiennghi"
+                                            ng-options="x as x.Convenient_Name for x in list_tiennghi track by x.IDConvenient" ng-change="change_tienich(select_tiennghi.Image)">
+                                        <option value="">--- Chọn tiện nghi ---</option>
+
+                                    </select>
+                                    <input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_tiennghi.Convenient_Name" />
+
+                                    <button ng-click="SaveEditArea(IsInsert,select_DienTich.Acreage1,select_DienTich.IDAcreage);show_edit_dt=0" ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                                    <input type="file" accept="image/*" id="input_file_tienich" style="display: none" ng-files="getTheFiles($files)" onchange="angular.element(this).scope().setFile_Tienich(this)" />
+                                    <!--<input ng-disabled="(show_edit_dt == 0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="filename"/>-->
+                                    <div style="width: 80%; float: left; margin-top: 20px; height: 32px;">
+                                        <img ng-src="{{image_tienich}}" style="height: 30px; width: 30px" />
+                                    </div>
+
+                                    <button onclick=" document.getElementById('input_file_tienich').click() "
+                                            ng-disabled="(show_edit_dt == 0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px">
+                                        <span class="glyphicon glyphicon-floppy-save"></span>
+                                    </button>
+                                </div>
+                                <div class="col-md-3 dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-cog"></span>
+                                    </button>
+                                    <ul class="dropdown-menu edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 1) && (select_DienTich.Acreage1='')">Thêm mới</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="(show_edit_dt = 1) && (IsInsert = 0)">Sửa đổi</a></li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-disabled="(1)">Xóa toàn bộ</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="DeleteArea(select_DienTich.IDAcreage)">Xóa mục đang chọn</a></li>
+
+                                    </ul>
+                                    <!--<button style="height: 32px;"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button style="height: 32px;"><span class="glyphicon glyphicon-cog"></span></button>-->
 
                                 </div>
                             </div>

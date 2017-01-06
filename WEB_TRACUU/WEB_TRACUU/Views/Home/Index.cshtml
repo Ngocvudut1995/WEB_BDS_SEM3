@@ -57,15 +57,31 @@
 
 <div ng-controller="index" style="">
     <a id="top"></a>
+<div style="position: fixed; bottom: 3px; right: 5px; z-index: 15">
+    <div class="control_scroll_top button_heart" style="margin-bottom: 5px" scroll>
+        <a style="width: 100%; height: 100%;color: white"  href="#/TheoDoi/{{ taikhoan.makh }}">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+        </a>
 
-    <div class="control_scroll_top" style="position: fixed; bottom: 3px; right: 5px; z-index: 14" ng-click="gotoElement('top')" scroll ng-show="hien_nav_mini == 0">
-        <i class="fa fa-angle-up"></i>
     </div>
-    <div style="text-align: center; position: fixed;
-                                                                                                                                                                                                                                                                                                                                             width: 100%;
-                                                                                                                                                                                                                                                                                                                                             top: 50%;
-                                                                                                                                                                                                                                                                                                                                             z-index: 14;" ng-show="loading == 1">
-        <img ng-src="{{ app }}/Content/Images/default.gif"/>
+    <div class="control_scroll_top button_heart" style="margin-bottom: 5px" ng-click="gotoElement('search')" scroll>
+        <a style="width: 100%; height: 100%;color: white" class="">
+            <i class="fa fa-search"></i>
+        </a>
+
+    </div>
+    <div class="control_scroll_top" style="background: #e6e6e6; color: #fff;" ng-click="gotoElement('top')" scroll ng-show="hien_nav_mini == 0">
+        <a style="width: 100%; height: 100%;color: white">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        
+    </div>
+
+</div>
+   
+    <div style="text-align: center; position: fixed;width: 100%;top: 50%;z-index: 14;" ng-show="loading == 1">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
     </div>
     <div class="khung_den" ng-show="show_dn == 1">
         <div class="col-lg-4">
@@ -255,8 +271,9 @@
     </div>
 </div>
 
-<div class="container-fluid" style="padding: 0px;">
+<div class="container-fluid" style="padding: 0px;" resize>
     <div ng-controller="main" style="margin-top: 0px;">
+        
 
         @*<div style="position: relative; height: 330px" class="hidden-xs hidden-sm">
             <div style="position: absolute; width: 100%; height: 60%; z-index: 11;background-size: cover;" ng-style="{'background-image': 'url({{img1}})'}">

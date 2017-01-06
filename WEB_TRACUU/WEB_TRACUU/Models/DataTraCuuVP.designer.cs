@@ -30,12 +30,12 @@ namespace WEB_TRACUU.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertWard(Ward instance);
-    partial void UpdateWard(Ward instance);
-    partial void DeleteWard(Ward instance);
     partial void InsertAcreage(Acreage instance);
     partial void UpdateAcreage(Acreage instance);
     partial void DeleteAcreage(Acreage instance);
+    partial void InsertWard(Ward instance);
+    partial void UpdateWard(Ward instance);
+    partial void DeleteWard(Ward instance);
     partial void InsertAddress(Address instance);
     partial void UpdateAddress(Address instance);
     partial void DeleteAddress(Address instance);
@@ -63,9 +63,6 @@ namespace WEB_TRACUU.Models
     partial void InsertImage_Detail(Image_Detail instance);
     partial void UpdateImage_Detail(Image_Detail instance);
     partial void DeleteImage_Detail(Image_Detail instance);
-    partial void InsertInternetProtocol(InternetProtocol instance);
-    partial void UpdateInternetProtocol(InternetProtocol instance);
-    partial void DeleteInternetProtocol(InternetProtocol instance);
     partial void InsertLand(Land instance);
     partial void UpdateLand(Land instance);
     partial void DeleteLand(Land instance);
@@ -84,6 +81,9 @@ namespace WEB_TRACUU.Models
     partial void InsertTrouser(Trouser instance);
     partial void UpdateTrouser(Trouser instance);
     partial void DeleteTrouser(Trouser instance);
+    partial void InsertInternetProtocol(InternetProtocol instance);
+    partial void UpdateInternetProtocol(InternetProtocol instance);
+    partial void DeleteInternetProtocol(InternetProtocol instance);
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
@@ -116,19 +116,19 @@ namespace WEB_TRACUU.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Ward> Wards
-		{
-			get
-			{
-				return this.GetTable<Ward>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Acreage> Acreages
 		{
 			get
 			{
 				return this.GetTable<Acreage>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Ward> Wards
+		{
+			get
+			{
+				return this.GetTable<Ward>();
 			}
 		}
 		
@@ -204,14 +204,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<InternetProtocol> InternetProtocols
-		{
-			get
-			{
-				return this.GetTable<InternetProtocol>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Land> Lands
 		{
 			get
@@ -260,6 +252,14 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<InternetProtocol> InternetProtocols
+		{
+			get
+			{
+				return this.GetTable<InternetProtocol>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Address_Lan> Address_Lans
 		{
 			get
@@ -274,6 +274,120 @@ namespace WEB_TRACUU.Models
 			{
 				return this.GetTable<Overview_Land>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Acreage")]
+	public partial class Acreage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDAcreage;
+		
+		private string _Acreage1;
+		
+		private EntitySet<Land> _Lands;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDAcreageChanging(int value);
+    partial void OnIDAcreageChanged();
+    partial void OnAcreage1Changing(string value);
+    partial void OnAcreage1Changed();
+    #endregion
+		
+		public Acreage()
+		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAcreage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDAcreage
+		{
+			get
+			{
+				return this._IDAcreage;
+			}
+			set
+			{
+				if ((this._IDAcreage != value))
+				{
+					this.OnIDAcreageChanging(value);
+					this.SendPropertyChanging();
+					this._IDAcreage = value;
+					this.SendPropertyChanged("IDAcreage");
+					this.OnIDAcreageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Acreage", Storage="_Acreage1", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Acreage1
+		{
+			get
+			{
+				return this._Acreage1;
+			}
+			set
+			{
+				if ((this._Acreage1 != value))
+				{
+					this.OnAcreage1Changing(value);
+					this.SendPropertyChanging();
+					this._Acreage1 = value;
+					this.SendPropertyChanged("Acreage1");
+					this.OnAcreage1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Acreage_Land", Storage="_Lands", ThisKey="IDAcreage", OtherKey="IDAcreage")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Acreage = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Acreage = null;
 		}
 	}
 	
@@ -453,120 +567,6 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Ward = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Acreage")]
-	public partial class Acreage : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDAcreage;
-		
-		private string _Acreage1;
-		
-		private EntitySet<Land> _Lands;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDAcreageChanging(int value);
-    partial void OnIDAcreageChanged();
-    partial void OnAcreage1Changing(string value);
-    partial void OnAcreage1Changed();
-    #endregion
-		
-		public Acreage()
-		{
-			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAcreage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDAcreage
-		{
-			get
-			{
-				return this._IDAcreage;
-			}
-			set
-			{
-				if ((this._IDAcreage != value))
-				{
-					this.OnIDAcreageChanging(value);
-					this.SendPropertyChanging();
-					this._IDAcreage = value;
-					this.SendPropertyChanged("IDAcreage");
-					this.OnIDAcreageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Acreage", Storage="_Acreage1", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string Acreage1
-		{
-			get
-			{
-				return this._Acreage1;
-			}
-			set
-			{
-				if ((this._Acreage1 != value))
-				{
-					this.OnAcreage1Changing(value);
-					this.SendPropertyChanging();
-					this._Acreage1 = value;
-					this.SendPropertyChanged("Acreage1");
-					this.OnAcreage1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Acreage_Land", Storage="_Lands", ThisKey="IDAcreage", OtherKey="IDAcreage")]
-		public EntitySet<Land> Lands
-		{
-			get
-			{
-				return this._Lands;
-			}
-			set
-			{
-				this._Lands.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Acreage = this;
-		}
-		
-		private void detach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Acreage = null;
 		}
 	}
 	
@@ -759,6 +759,8 @@ namespace WEB_TRACUU.Models
 		
 		private string _Convenient_Name;
 		
+		private string _Image;
+		
 		private EntitySet<Convenient_Detail> _Convenient_Details;
 		
     #region Extensibility Method Definitions
@@ -769,6 +771,8 @@ namespace WEB_TRACUU.Models
     partial void OnIDConvenientChanged();
     partial void OnConvenient_NameChanging(string value);
     partial void OnConvenient_NameChanged();
+    partial void OnImageChanging(string value);
+    partial void OnImageChanged();
     #endregion
 		
 		public Convenient()
@@ -813,6 +817,26 @@ namespace WEB_TRACUU.Models
 					this._Convenient_Name = value;
 					this.SendPropertyChanged("Convenient_Name");
 					this.OnConvenient_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this.OnImageChanging(value);
+					this.SendPropertyChanging();
+					this._Image = value;
+					this.SendPropertyChanged("Image");
+					this.OnImageChanged();
 				}
 			}
 		}
@@ -1701,6 +1725,8 @@ namespace WEB_TRACUU.Models
 		
 		private string _Furiture_Name;
 		
+		private string _Image;
+		
 		private EntitySet<Furiture_detail> _Furiture_details;
 		
     #region Extensibility Method Definitions
@@ -1711,6 +1737,8 @@ namespace WEB_TRACUU.Models
     partial void OnIDFuritureChanged();
     partial void OnFuriture_NameChanging(string value);
     partial void OnFuriture_NameChanged();
+    partial void OnImageChanging(string value);
+    partial void OnImageChanged();
     #endregion
 		
 		public Furiture()
@@ -1755,6 +1783,26 @@ namespace WEB_TRACUU.Models
 					this._Furiture_Name = value;
 					this.SendPropertyChanged("Furiture_Name");
 					this.OnFuriture_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this.OnImageChanging(value);
+					this.SendPropertyChanging();
+					this._Image = value;
+					this.SendPropertyChanged("Image");
+					this.OnImageChanged();
 				}
 			}
 		}
@@ -2123,116 +2171,6 @@ namespace WEB_TRACUU.Models
 						this._IDLand = default(System.Guid);
 					}
 					this.SendPropertyChanged("Land");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InternetProtocol")]
-	public partial class InternetProtocol : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _stt;
-		
-		private System.Nullable<System.Guid> _idLand;
-		
-		private string _ip;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnsttChanging(int value);
-    partial void OnsttChanged();
-    partial void OnidLandChanging(System.Nullable<System.Guid> value);
-    partial void OnidLandChanged();
-    partial void OnipChanging(string value);
-    partial void OnipChanged();
-    #endregion
-		
-		public InternetProtocol()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stt", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int stt
-		{
-			get
-			{
-				return this._stt;
-			}
-			set
-			{
-				if ((this._stt != value))
-				{
-					this.OnsttChanging(value);
-					this.SendPropertyChanging();
-					this._stt = value;
-					this.SendPropertyChanged("stt");
-					this.OnsttChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLand", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> idLand
-		{
-			get
-			{
-				return this._idLand;
-			}
-			set
-			{
-				if ((this._idLand != value))
-				{
-					this.OnidLandChanging(value);
-					this.SendPropertyChanging();
-					this._idLand = value;
-					this.SendPropertyChanged("idLand");
-					this.OnidLandChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(50)")]
-		public string ip
-		{
-			get
-			{
-				return this._ip;
-			}
-			set
-			{
-				if ((this._ip != value))
-				{
-					this.OnipChanging(value);
-					this.SendPropertyChanging();
-					this._ip = value;
-					this.SendPropertyChanged("ip");
-					this.OnipChanged();
 				}
 			}
 		}
@@ -3906,6 +3844,116 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InternetProtocol")]
+	public partial class InternetProtocol : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _stt;
+		
+		private System.Nullable<System.Guid> _idLand;
+		
+		private string _ip;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnsttChanging(int value);
+    partial void OnsttChanged();
+    partial void OnidLandChanging(System.Nullable<System.Guid> value);
+    partial void OnidLandChanged();
+    partial void OnipChanging(string value);
+    partial void OnipChanged();
+    #endregion
+		
+		public InternetProtocol()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stt", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int stt
+		{
+			get
+			{
+				return this._stt;
+			}
+			set
+			{
+				if ((this._stt != value))
+				{
+					this.OnsttChanging(value);
+					this.SendPropertyChanging();
+					this._stt = value;
+					this.SendPropertyChanged("stt");
+					this.OnsttChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLand", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> idLand
+		{
+			get
+			{
+				return this._idLand;
+			}
+			set
+			{
+				if ((this._idLand != value))
+				{
+					this.OnidLandChanging(value);
+					this.SendPropertyChanging();
+					this._idLand = value;
+					this.SendPropertyChanged("idLand");
+					this.OnidLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(50)")]
+		public string ip
+		{
+			get
+			{
+				return this._ip;
+			}
+			set
+			{
+				if ((this._ip != value))
+				{
+					this.OnipChanging(value);
+					this.SendPropertyChanging();
+					this._ip = value;
+					this.SendPropertyChanged("ip");
+					this.OnipChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Address_Lan")]
 	public partial class Address_Lan
 	{
@@ -4132,6 +4180,8 @@ namespace WEB_TRACUU.Models
 		private string _Type_Name;
 		
 		private string _TypeNameDetail;
+		
+		private System.Nullable<int> _IDDirection;
 		
 		public Overview_Land()
 		{
@@ -4549,6 +4599,22 @@ namespace WEB_TRACUU.Models
 				if ((this._TypeNameDetail != value))
 				{
 					this._TypeNameDetail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int")]
+		public System.Nullable<int> IDDirection
+		{
+			get
+			{
+				return this._IDDirection;
+			}
+			set
+			{
+				if ((this._IDDirection != value))
+				{
+					this._IDDirection = value;
 				}
 			}
 		}

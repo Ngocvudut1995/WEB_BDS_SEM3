@@ -8,7 +8,7 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope',function ($
     $rootScope.show_form_contact = 0;
     $rootScope.app = host;
     //$rootScope.MaKH = 'KH10001';
-    $rootScope.loading = 1;
+   // $rootScope.loading = 1;
    
     $rootScope.change_money = function (money) {
         money = money.replace(/,/g, ".");
@@ -105,8 +105,6 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $cookies, $rootScope, $http, $location, $route,anchorSmoothScroll) {
     $scope.username = "";
     $scope.password = "";
-    $rootScope.body_width = window.innerWidth;
-    $rootScope.body_height = window.innerHeight;
     $rootScope.taikhoan = { test: 0, tenkh: null, username: null ,makh:null,admin:false};
     //var expireDate = new Date();
     //expireDate.setMonth(11);
@@ -123,12 +121,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
     $rootScope.open_dangbai = function () {
         $location.path('/TaiKhoan/dangbai/');
     };
-    $http.get(host + "/api/TimKiem/get_VP").then(function (response) {
-        //$scope.listVP = response.data;
-        list_all = response.data;
-
-        $rootScope.loading = 0;
-    });
+   
     //$cookies.put('technology', 'Web', { 'expires': expireDate });
     // Kiem tra co cookies luu tai khoan hay khong
     var str = $cookies.get('user');
@@ -221,7 +214,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
             var data = response.data;
             test = data;
             
-            console.log(test);
+            //console.log(test);
             //return test;
         });
         return test;
@@ -412,13 +405,14 @@ app.directive("scroll", function ($window) {
             }
             if (this.pageYOffset - scope.pageYOffsetCurrent >= 1) {
                 scope.boolChange = 0;
-                scope.pageYOffsetCurrent = this.pageYOffset;
+                scope.pageYOffsetCurrent = this.pageYOffset -1 ;
              
             } else {
                 scope.boolChange = 1;
                 scope.pageYOffsetCurrent = this.pageYOffset;
               
             }
+            //console.log(scope.boolChange);
             scope.$apply();
         });
     };
@@ -683,3 +677,30 @@ app.directive('fbLike', [
             }
         }
     });
+app.directive('resize', function($window) {
+    return function(scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function() {
+            return {
+                'h': w.height(),
+                'w': w.width()
+            };
+        };
+        scope.$watch(scope.getWindowDimensions, function(newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+            scope.style = function() {
+                return {
+                    'height': (newValue.h - 100) + 'px',
+                    'width': (newValue.w - 100) + 'px'
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function() {
+            scope.$apply();
+        });
+    }
+});

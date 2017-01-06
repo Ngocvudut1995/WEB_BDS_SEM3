@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BatDongSan" Class="DataTraCuuVPDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=VuDang;Initial Catalog=BatDongSan;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BatDongSanConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Acreage" Member="Acreages">
+    <Type Name="Acreage">
+      <Column Name="IDAcreage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Acreage" Member="Acreage1" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="Acreage_Land" Member="Lands" ThisKey="IDAcreage" OtherKey="IDAcreage" Type="Land" />
+    </Type>
+  </Table>
   <Table Name="dbo.Ward" Member="Wards">
     <Type Name="Ward">
       <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -7,13 +14,6 @@
       <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Ward_Street" Member="Streets" ThisKey="IDWard" OtherKey="IDWard" Type="Street" />
       <Association Name="Trouser_Ward" Member="Trouser" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Trouser" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Acreage" Member="Acreages">
-    <Type Name="Acreage">
-      <Column Name="IDAcreage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Acreage" Member="Acreage1" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Association Name="Acreage_Land" Member="Lands" ThisKey="IDAcreage" OtherKey="IDAcreage" Type="Land" />
     </Type>
   </Table>
   <Table Name="dbo.Address" Member="Addresses">
@@ -29,6 +29,7 @@
     <Type Name="Convenient">
       <Column Name="IDConvenient" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Convenient_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Convenient_Convenient_Detail" Member="Convenient_Details" ThisKey="IDConvenient" OtherKey="IDConvenient" Type="Convenient_Detail" />
     </Type>
   </Table>
@@ -77,6 +78,7 @@
     <Type Name="Furiture">
       <Column Name="IDFuriture" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Furiture_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Furiture_Furiture_detail" Member="Furiture_details" ThisKey="IDFuriture" OtherKey="IDFuriture" Type="Furiture_detail" />
     </Type>
   </Table>
@@ -95,13 +97,6 @@
       <Column Name="Image_detail" Member="Image_detail1" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Association Name="Land_Image_Detail" Member="Land" ThisKey="IDLand" OtherKey="IDLand" Type="Land" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.InternetProtocol" Member="InternetProtocols">
-    <Type Name="InternetProtocol">
-      <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="idLand" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="ip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Land" Member="Lands">
@@ -180,6 +175,13 @@
       <Association Name="Trouser_Ward" Member="Wards" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Ward" />
     </Type>
   </Table>
+  <Table Name="dbo.InternetProtocol" Member="InternetProtocols">
+    <Type Name="InternetProtocol">
+      <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idLand" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Address_Lan" Member="Address_Lans">
     <Type Name="Address_Lan">
       <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -221,6 +223,7 @@
       <Column Name="IDType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Type_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="TypeNameDetail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IDDirection" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
