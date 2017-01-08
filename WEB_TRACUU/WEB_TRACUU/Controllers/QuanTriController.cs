@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -781,6 +784,273 @@ namespace WEB_TRACUU.Controllers
 
 
         }
+        [System.Web.Http.HttpPost]
+        public string UploadImage_Furniture(int id)
+        {
+            if (test_quyenadmin() == false) return "false";
+            int iUploadedCnt = 0;
 
+            // DEFINE THE PATH WHERE WE WANT TO SAVE THE FILES.
+            //string sPath = "";
+            //string sPath = "C:\\inetpub\\wwwroot\\Content\\Images\\Image_VP\\";
+            //string sPath = "D:\\";
+            string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Funiture/");
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var nt = (from a in db.Furitures
+                          where a.IDFuriture == id
+                          select a).SingleOrDefault();
+
+                for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+                {
+                    //System.Web.HttpPostedFile hpf = hfc[iCnt];
+                    HttpPostedFile hpf = hfc[iCnt];
+                    if (hpf.ContentLength > 0)
+                    {
+                        Random rd = new Random();
+                        string fileName =  nt.Furiture_Name + "_" + rd.Next(1, 100).ToString() + ".png";
+                        string saveAsPath = Path.Combine(sPath, fileName);
+
+
+                        foreach (string f in Directory.GetFiles(sPath, nt.Furiture_Name + "_*.png"))
+                        {
+                            File.Delete(f);
+                        }
+                        hpf.SaveAs(saveAsPath);
+                        nt.Image = "Content/Images/Funiture/" + fileName;
+                        iUploadedCnt = iUploadedCnt + 1;
+                        //var img = Image.FromFile(saveAsPath);
+                        using (Image image = Image.FromFile(saveAsPath))
+                        {
+                            // Prevent using images internal thumbnail
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            Image NewImage = image.GetThumbnailImage(40, 40, null, IntPtr.Zero);
+                            NewImage.Save(saveAsPath, ImageFormat.Png);
+
+                        }
+                    }
+
+                }
+
+                db.SubmitChanges();
+                if (iUploadedCnt > 0)
+                {
+                    return iUploadedCnt + " Files Uploaded Successfully";
+                }
+                else
+                {
+                    return "Upload Failed";
+                }
+            }
+
+
+
+        }
+        [System.Web.Http.HttpPost]
+        public string UploadImage_Convenient(int id)
+        {
+            if (test_quyenadmin() == false) return "false";
+            int iUploadedCnt = 0;
+
+            // DEFINE THE PATH WHERE WE WANT TO SAVE THE FILES.
+            //string sPath = "";
+            //string sPath = "C:\\inetpub\\wwwroot\\Content\\Images\\Image_VP\\";
+            //string sPath = "D:\\";
+            string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Funiture/");
+
+            System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var nt = (from a in db.Convenients
+                          where a.IDConvenient == id
+                          select a).SingleOrDefault();
+
+                for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)
+                {
+                    //System.Web.HttpPostedFile hpf = hfc[iCnt];
+                    HttpPostedFile hpf = hfc[iCnt];
+                    if (hpf.ContentLength > 0)
+                    {
+                        Random rd = new Random();
+                        string fileName = nt.Convenient_Name + "_" + rd.Next(1, 100).ToString() + ".png";
+                        string saveAsPath = Path.Combine(sPath, fileName);
+
+
+                        foreach (string f in Directory.GetFiles(sPath, nt.Convenient_Name + "_*.png"))
+                        {
+                            File.Delete(f);
+                        }
+                        hpf.SaveAs(saveAsPath);
+                        nt.Image = "Content/Images/Funiture/" + fileName;
+                        iUploadedCnt = iUploadedCnt + 1;
+                        //var img = Image.FromFile(saveAsPath);
+                        using (Image image = Image.FromFile(saveAsPath))
+                        {
+                            // Prevent using images internal thumbnail
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            Image NewImage = image.GetThumbnailImage(40, 40, null, IntPtr.Zero);
+                            NewImage.Save(saveAsPath, ImageFormat.Png);
+
+                        }
+                    }
+
+                }
+
+                db.SubmitChanges();
+                if (iUploadedCnt > 0)
+                {
+                    return iUploadedCnt + " Files Uploaded Successfully";
+                }
+                else
+                {
+                    return "Upload Failed";
+                }
+            }
+
+
+
+        }
+
+        [System.Web.Http.HttpPost]
+        public int edit_furniture(JObject data)
+        {
+            if (test_quyenadmin() == false) return 0;
+            dynamic json = data;
+            try
+            {
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    if (json.Is_Insert == 1)
+                    {
+                        Furiture funri = new Furiture();
+                        funri.Furiture_Name = json.Name;
+                        db.Furitures.InsertOnSubmit(funri);
+                        db.SubmitChanges();
+                        var id =
+                            (from a in db.Furitures select new {a.IDFuriture}).OrderByDescending(p => p.IDFuriture)
+                                .Take(1).SingleOrDefault();
+
+                        return id.IDFuriture;
+                    }
+                    else
+                    {
+                        int idfurni = json.ID;
+                        var query = (from a in db.Furitures
+                                     where a.IDFuriture == idfurni
+                                     select a).SingleOrDefault();
+                        query.Furiture_Name = json.Name;
+                        db.SubmitChanges();
+                        return idfurni;
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete_Furniture(int id)
+        {
+            if (test_quyenadmin() == false) return NotFound();
+            try
+            {
+                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Funiture/");
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var furn = (from a in db.Furitures
+                                where a.IDFuriture == id
+                                select a).SingleOrDefault();
+
+                    foreach (string f in Directory.GetFiles(sPath, furn.Furiture_Name + "_*.png"))
+                    {
+                        File.Delete(f);
+                    }
+                    db.Furitures.DeleteOnSubmit(furn);
+                    db.SubmitChanges();
+                    return Ok();
+                }
+
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+        [System.Web.Http.HttpPost]
+        public int edit_convenient(JObject data)
+        {
+            if (test_quyenadmin() == false) return 0;
+            dynamic json = data;
+            try
+            {
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    if (json.Is_Insert == 1)
+                    {
+                        Convenient conv = new Convenient();
+                        conv.Convenient_Name = json.Name;
+                        db.Convenients.InsertOnSubmit(conv);
+                        db.SubmitChanges();
+                        var id =
+                            (from a in db.Convenients select new { a.IDConvenient }).OrderByDescending(p => p.IDConvenient)
+                                .Take(1).SingleOrDefault();
+
+                        return id.IDConvenient;
+                    }
+                    else
+                    {
+                        int idconv = json.ID;
+                        var query = (from a in db.Convenients
+                                     where a.IDConvenient == idconv
+                                     select a).SingleOrDefault();
+                        query.Convenient_Name = json.Name;
+                        db.SubmitChanges();
+                        return idconv;
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete_Convenient(int id)
+        {
+            if (test_quyenadmin() == false) return NotFound();
+            try
+            {
+                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Funiture/");
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var conv = (from a in db.Convenients
+                                where a.IDConvenient == id
+                                select a).SingleOrDefault();
+
+                    foreach (string f in Directory.GetFiles(sPath, conv.Convenient_Name + "_*.png"))
+                    {
+                        File.Delete(f);
+                    }
+                    db.Convenients.DeleteOnSubmit(conv);
+                    db.SubmitChanges();
+                    return Ok();
+                }
+
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

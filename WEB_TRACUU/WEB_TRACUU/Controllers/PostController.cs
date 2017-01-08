@@ -125,8 +125,15 @@ namespace WEB_TRACUU.Controllers
                     HttpPostedFile hpf = hfc[iCnt];
                     if (hpf.ContentLength > 0)
                     {
-                        string fileName = "avarta_" + kh.IDPost + ".jpg";
+                        Random rd = new Random();
+                        string fileName = "avarta_" + kh.IDPost + "_"+rd.Next(1,100).ToString()+".jpg";
                         string saveAsPath = Path.Combine(sPath, fileName);
+                        
+                        
+                        foreach (string f in Directory.GetFiles(sPath, "avarta_" + kh.IDPost + "_*.jpg"))
+                        {
+                           File.Delete(f);
+                        }
                         hpf.SaveAs(saveAsPath);
                         kh.Image = "Content/Images/" + fileName;
                         iUploadedCnt = iUploadedCnt + 1;

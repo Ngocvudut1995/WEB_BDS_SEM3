@@ -24,8 +24,8 @@ namespace WEB_TRACUU.Controllers
         {
             using (db = new DataTraCuuVPDataContext())
             {
-                var ma_vp = new Guid("9b8e4a0e-1fa1-4baa-9613-2e9dda5adff4");
-                var images = (from b in db.Image_Details where b.IDLand == ma_vp select b).ToList();
+                //var ma_vp = new Guid("9b8e4a0e-1fa1-4baa-9613-2e9dda5adff4");
+                var images = (from b in db.Image_Details where b.IDLand == mavp select b).ToList();
                 IList<Image_Slide_VP> list = new List<Image_Slide_VP>();
                 foreach (var item in images)
                 {

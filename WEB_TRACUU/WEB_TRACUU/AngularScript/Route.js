@@ -25,7 +25,7 @@ app.config(function ($routeProvider) {
             templateUrl: app + "Home/ChiTiet",
             controller: "chitietCtrl",
             title: "Trang Chi Tiết Văn Phòng",
-            
+
         })
          .when("/TheoDoi", {
              templateUrl: app + "Home/TheoDoi",
@@ -92,7 +92,7 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
     });
     $scope.search = function () {
         var url = '/TimKiem/' + $scope.select_sell + '/0/0/0'
-         + '/' + $scope.tab_gia + '/' + $scope.select_DienTich + '/' + $scope.tab_loaibds + '/'+$scope.type_land+'/0/?q=' + $scope.query;
+         + '/' + $scope.tab_gia + '/' + $scope.select_DienTich + '/' + $scope.tab_loaibds + '/' + $scope.type_land + '/0/?q=' + $scope.query;
         // var url = '/TimKiem/';
 
         $location.url(url);
@@ -100,7 +100,7 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
     };
     $scope.query = '';
 
-   
+
     $scope.change_sell = function (sell) {
         $scope.select_sell = sell;
         $scope.type_land = 0;
@@ -114,8 +114,8 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
 
     };
     $scope.type_land = 0;
-    $scope.change_type_land = function(id) {
-        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell_and_Type/?sell=" + $scope.select_sell + "&type="+id).then(function (response) {
+    $scope.change_type_land = function (id) {
+        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell_and_Type/?sell=" + $scope.select_sell + "&type=" + id).then(function (response) {
             $scope.list_DM = response.data;
 
         });
@@ -140,7 +140,7 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
     $scope.list_top_land_rent = [];
     $http.get(host + "/api/TrangChu/get_top_new_land_canho/?sl=4").then(function (response) {
         $scope.list_top_land_sell = response.data;
-       // console.log($scope.list_top_land_sell);
+        // console.log($scope.list_top_land_sell);
     });
     $scope.change_tab_land_sell = function (id) {
         switch (id) {
@@ -171,7 +171,7 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
                 break;
         }
     };
-   
+
     $scope.change_tab_land_rent = function (id) {
         $scope.tab_gia = id;
         //console.log($scope.tab_loaibds);
@@ -199,7 +199,7 @@ app.controller('timkiemCtrl', [
             $scope.select_DienTich = 0;
             $scope.type_land = 0;
             $scope.query = '';
-           // $scope.select_sell = '0';
+            // $scope.select_sell = '0';
             $scope.load_phuong();
             $scope.load_duong();
 
@@ -279,7 +279,7 @@ app.controller('timkiemCtrl', [
             }
 
             if ($routeParams.q != null) {
-               // console.log($routeParams.q);
+                // console.log($routeParams.q);
                 $scope.query = $routeParams.q;
             } else {
                 $scope.query = '';
@@ -575,7 +575,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
         var url = '/TimKiem/' + $scope.select_sell + '/' + $scope.select_Huyen + '/'
             + $scope.select_Phuong + '/' + $scope.select_Duong
-            + '/' + $scope.select_Gia + '/' + $scope.select_DienTich + '/' + $scope.select_Kieu+'/0/0';
+            + '/' + $scope.select_Gia + '/' + $scope.select_DienTich + '/' + $scope.select_Kieu + '/0/0';
         $location.url(url);
 
     };
@@ -603,7 +603,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
     };
 
-  //  $scope.windowWidths = windowWidth;
+    //  $scope.windowWidths = windowWidth;
     $scope.load_phuong = function () {
         $scope.select_Phuong = '0';
         $scope.load_duong();
@@ -639,7 +639,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     }
 
     //$scope.follow = $rootScope.test_follow($rootScope.taikhoan.makh, $routeParams.id);
-   // console.log($scope.follow);
+    // console.log($scope.follow);
     $scope.change_follow = function () {
 
         if ($scope.follow == false) {
@@ -651,7 +651,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     };
     $scope.show_slide = 0;
     $scope.place = {};
-   
+
     //console.log($scope);
     $scope.list_noithat = [];
     $http.get(host + "/api/ChiTiet/get_furiture").then(function (response) {
@@ -663,7 +663,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     });
     $scope.list_noithat_by_id = [];
     $scope.list_tiennghi_by_id = [];
-    $scope.test_noithat = function(id) {
+    $scope.test_noithat = function (id) {
         for (var i = 0; i < $scope.list_noithat_by_id.length; i++) {
             if ($scope.list_noithat_by_id[i].IDFuriture === id) return true;
         }
@@ -688,7 +688,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
                 $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
                     $scope.images = response.data;
                     $scope.show_slide = 1;
-                    
+
                 });
 
             });
@@ -735,7 +735,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
             $rootScope.loading = 0;
         });
 
-        
+
     };
     $scope.send_contact = function (nameown, mailto, mail, name, phone, body) {
         var data = JSON.stringify({
@@ -861,14 +861,15 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
             $scope.list_Images = response.data;
 
         });
-        $http.get(host + "/api/TaiKhoan/get_Land_by_Unconfimred/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
-            $scope.bd_chuaduyet = response.data;
+        $http.get(host + "/api/TaiKhoan/get_quality_Land_by_Signing/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
+           
+            $scope.sl_bd_dangdang = response.data;
         });
-        $http.get(host + "/api/TaiKhoan/get_Land_by_ExpiredDate/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
-            $scope.bd_hethan = response.data;
+        $http.get(host + "/api/TaiKhoan/get_quality_Land_by_Expired/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
+            $scope.sl_bd_hethan = response.data;
         });
-        $http.get(host + "/api/TaiKhoan/get_Land_by_Signing/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
-            $scope.bd_dangdang = response.data;
+        $http.get(host + "/api/TaiKhoan/get_quality_Land_by_Unconfimred/?makh=" + $rootScope.taikhoan.makh).then(function (response) {
+            $scope.sl_bd_chuaduyet = response.data;
         });
         $scope.edit_land = function (mavp) {
             $location.path('/TaiKhoan/ct_baidang/baidang/' + mavp);
@@ -900,7 +901,7 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
                 $scope.land.select_DienTich = { "Acreage1": "", "IDAcreage": "" };
                 $scope.land.select_Huyen = { "IDTrousers": "", "Trousers": "" };
                 $scope.land.select_Gia = { "Price1": "", "IDPrice": "" };
-                $scope.land.select_Kieu = { "IDType": "", "TypeName": "" };
+                $scope.land.select_Kieu = { "IDTypeDetail": "", "TypeNameDetail": "" };
                 $scope.land.image_source = "";
                 $scope.change_sell = function (sell) {
 
@@ -950,7 +951,7 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
                         $scope.land.SoNha = data._SoNha;
                         $scope.land.select_DienTich.IDAcreage = data._MaDT;
                         $scope.land.select_sell = data._Sell.toString();
-                        $scope.land.select_Kieu.IDType = data._MaPL;
+                        $scope.land.select_Kieu.IDTypeDetail = data._MaLoaiCT;
                         $scope.land.select_Gia.IDPrice = data._IDPrice;
                         $scope.land.GiaChiTiet = data._Price_detail;
                         $scope.land.image_source = data._Anh;
@@ -959,23 +960,26 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
 
                         //console.log($scope.land.expired_date);
                         $scope.land.GiaChiTiet = data._Price_detail;
+                        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.land.select_sell).then(function (response) {
+                            $scope.list_DM = response.data;
+
+                        });
+                        $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.land.select_sell).then(function (response) {
+                            $scope.list_Price = response.data;
+                        });
                     });
+                   
+                    console.log($scope.land);
                 };
                 $scope.expired_date = $scope.land.expired_date;
                 $scope.reload_vp();
                 // $scope.expired_date = $scope.land.expired_date;
-                $scope.select_sell = 'true';
+         
                 $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
                     $scope.listQuan = response.data;
 
                 });
-                $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_DM = response.data;
-
-                });
-                $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-                    $scope.list_Price = response.data;
-                });
+               
                 $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
                     $scope.listdientich = response.data;
                 });
@@ -1029,7 +1033,7 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
                 $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
                     $scope.listdientich = response.data;
                 });
-               
+
 
                 break;
             case 'thongtinkh':
@@ -1322,24 +1326,30 @@ app.controller('baidangchuaduyetCtrl', ['$scope', '$http', '$window', '$rootScop
     };
 
 }]);
-app.controller('quanlytracuuCtrl',['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
+app.controller('quanlytracuuCtrl', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
     $http.get(host + "/api/ChiTiet/get_furiture/").then(function (response) {
         $scope.list_noithat = response.data;
     });
     $http.get(host + "/api/ChiTiet/get_convenient/").then(function (response) {
         $scope.list_tiennghi = response.data;
     });
-    $scope.change_noithat = function(src) {
+    $scope.change_noithat = function (src) {
         $scope.image_noithat = $rootScope.app + '/' + src;
     };
     $scope.change_tienich = function (src) {
         $scope.image_tienich = $rootScope.app + '/' + src;
     };
-    
-    var formdata = new FormData();
-    $scope.getTheFiles = function ($files) {
+
+    var formdata_image_noithat = new FormData();
+    $scope.getTheFiles_noithat = function ($files) {
         angular.forEach($files, function (value, key) {
-            formdata.append(key, value);
+            formdata_image_noithat.append(key, value);
+        });
+    };
+    var formdata_image_tiennghi = new FormData();
+    $scope.getTheFiles_tiengnhi = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata_image_tiennghi.append(key, value);
         });
     };
 
@@ -1369,7 +1379,7 @@ app.controller('quanlytracuuCtrl',['$scope', '$http', '$window', '$rootScope', '
         // when the file is read it triggers the onload event above.
         reader.readAsDataURL(element.files[0]);
     };
-    
+
     $scope.select_noithat = { "Furiture_Name": "", "IDFuriture": 0, "Image": "" }
     $scope.select_Huyen = { "IDTrousers": "", "Trousers": "" };
     $scope.select_Phuong = { "IDWard": "", "Ward1": "" };
@@ -1716,6 +1726,139 @@ app.controller('quanlytracuuCtrl',['$scope', '$http', '$window', '$rootScope', '
 
     };
 
+
+    $scope.uploade_image_furniture = function (id, data) {
+
+        var request = {
+            method: 'POST',
+            url: host + '/api/QuanTri/UploadImage_Furniture/?id=' + id,
+            data: data,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                swal(
+                'Thông Báo!',
+                'Update Thành Công!',
+                'success'
+            );
+            })
+            .error(function () {
+            });
+
+    };
+    $scope.SaveEditFurniture = function (is_insert, name, id) {
+        var data = JSON.stringify({
+            "Name": name, "ID": id, "Is_Insert": is_insert
+        });
+
+        $http.post(host + "/api/QuanTri/edit_furniture/", data).then(function (response) {
+            var id = response.data;
+            $scope.uploade_image_furniture(id, formdata_image_noithat);
+            $http.get(host + "/api/ChiTiet/get_furiture/").then(function (response) {
+                $scope.list_noithat = response.data;
+            });
+        }, function (res) {
+            swal("Thông Báo!", "Server unavailable", "error");
+        });
+    };
+    $scope.DeleteFurniture = function (id) {
+
+        swal({
+            title: 'Thông Báo?',
+            text: "Bạn Muốn Xóa Mục Này",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function () {
+            $http.delete(host + "/api/QuanTri/Delete_Furniture/?id=" + id).then(function (response) {
+                swal(
+                    'Thông Báo!',
+                    'Delete Thành Công!',
+                    'success'
+                );
+                $http.get(host + "/api/ChiTiet/get_furiture/").then(function (response) {
+                    $scope.list_noithat = response.data;
+                });
+                // $location.path();
+            }, function (res) {
+                swal("Thông Báo!", "Server unavailable", "error");
+            });
+        });
+
+    };
+
+    $scope.uploade_image_convenient = function (id, data) {
+
+        var request = {
+            method: 'POST',
+            url: host + '/api/QuanTri/UploadImage_Convenient/?id=' + id,
+            data: data,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                swal(
+                'Thông Báo!',
+                'Update Thành Công!',
+                'success'
+            );
+            })
+            .error(function () {
+            });
+
+    };
+    $scope.SaveEditConvenient = function (is_insert, name, id) {
+        var data = JSON.stringify({
+            "Name": name, "ID": id, "Is_Insert": is_insert
+        });
+
+        $http.post(host + "/api/QuanTri/edit_convenient/", data).then(function (response) {
+            var id = response.data;
+            $scope.uploade_image_convenient(id, formdata_image_tiennghi);
+            $http.get(host + "/api/ChiTiet/get_convenient/").then(function (response) {
+                $scope.list_tiennghi = response.data;
+            });
+        }, function (res) {
+            swal("Thông Báo!", "Server unavailable", "error");
+        });
+    };
+    $scope.DeleteConvenient = function (id) {
+
+        swal({
+            title: 'Thông Báo?',
+            text: "Bạn Muốn Xóa Mục Này",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function () {
+            $http.delete(host + "/api/QuanTri/Delete_Convenient/?id=" + id).then(function (response) {
+                swal(
+                    'Thông Báo!',
+                    'Delete Thành Công!',
+                    'success'
+                );
+                $http.get(host + "/api/ChiTiet/get_convenient/").then(function (response) {
+                    $scope.list_tiennghi = response.data;
+                });
+                // $location.path();
+            }, function (res) {
+                swal("Thông Báo!", "Server unavailable", "error");
+            });
+        });
+
+    };
+
 }]);
 app.controller('ql_khachhang', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
     $scope.Customer = {};
@@ -1964,7 +2107,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
 
     // NOW UPLOAD THE FILES.
     $scope.UploadAvatar = function (idvp) {
-       // console.log(formdata);
+        // console.log(formdata);
         var request = {
             method: 'POST',
             url: host + '/api/post/UploadAvatar/?id=' + idvp,
@@ -1991,7 +2134,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
 
         var data = JSON.stringify({
             "_idLand": land.mavp, "_tieuDe": land.txtName, "_quan": land.select_Huyen.IDTrousers, "_phuong": land.select_Phuong.IDWard, "_duong": land.select_Duong.IDStreet,
-            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDType, "_dienTich": land.select_DienTich.IDAcreage, "_IDgia": land.select_Gia.IDPrice,
+            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDTypeDetail, "_dienTich": land.select_DienTich.IDAcreage, "_IDgia": land.select_Gia.IDPrice,
             "_hinhThuc": land.select_sell, "_hethan": land.expired_date, "_moTa": $rootScope.change_html(land.Mota), "_GiaChiTiet": land.GiaChiTiet,
             "_idCustomer": land.makh
 

@@ -10,6 +10,10 @@
         
         <div class="col-md-12 col-sm-10 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
             <div class="slider" style="position: relative">
+          
+                <div class="slide" style="position: relative" ng-show="images.length == 0">
+                    <img src="../../Content/Images/Slider/no-image.png"/>
+                </div>
 
                 <div class="slide" ng-repeat="image in images" ng-show="image.visible" style="position: relative">
                     <img ng-src="{{ host }}/{{image.Anh}}"/>

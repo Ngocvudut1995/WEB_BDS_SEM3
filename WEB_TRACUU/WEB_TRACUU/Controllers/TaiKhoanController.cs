@@ -18,6 +18,59 @@ namespace WEB_TRACUU.Controllers
 {
     public class TaiKhoanController : ApiController
     {
+        private bool test_user(Guid idcustomer)
+        {
+            string username = null;
+            try
+            {
+                username = HttpContext.Current.Request.Cookies["user"].Value;
+            }
+            catch (Exception)
+            {
+
+
+            }
+            if (username != null)
+            {
+                Guid id = new Guid(username);
+                if (id == idcustomer) return true;
+
+            }
+            return false;
+        }
+        private bool test_quyenadmin()
+        {
+            string username = null;
+            try
+            {
+                username = HttpContext.Current.Request.Cookies["user"].Value;
+            }
+            catch (Exception)
+            {
+
+
+            }
+            if (username != null)
+            {
+                Guid id = new Guid(username);
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var sql = (from a in db.Customers
+                               where a.IDCustomer == id
+                               select a).SingleOrDefault();
+                    if (sql != null)
+                    {
+                        if (sql.Admin == true)
+                        {
+                            return true;
+                        }
+
+                    }
+
+                }
+            }
+            return false;
+        }
         DataTraCuuVPDataContext db;
         [HttpGet]
         public int KT_TaiKhoan_TonTai(string user)
@@ -33,11 +86,11 @@ namespace WEB_TRACUU.Controllers
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
-           
-          
+
+
         }
         [HttpGet]
         public int KT_Email_TonTai(string email)
@@ -152,9 +205,9 @@ namespace WEB_TRACUU.Controllers
                     kh.Gender = Convert.ToBoolean(jsonCustomer._gioitinh);
 
 
-                   
 
-                   
+
+
                     string urlActive = string.Format("{0}/Home/Active", HttpContext.Current.Request.Url.Authority);
                     MailMessage msg = new MailMessage();
                     msg.From = new MailAddress("ngocvupct1995@gmail.com");
@@ -167,7 +220,7 @@ namespace WEB_TRACUU.Controllers
                     string url = string.Format("http://{0}/{1}", urlActive, kh.IDCustomer);
                     StrContent = StrContent.Replace("[UserName]", kh.CustomerName);
                     StrContent = StrContent.Replace("[link_active]", url);
-                    
+
                     msg.Subject = "Cảm ơn bạn đã quan tâm tới chúng tôi.";
                     //msg.Body = string.Format("Bạn Đã Tạo Tài Khoản của chúng tôi. Mời bạn Vào Link http://{0}/{1} để kích hoạt.", urlActive, kh.IDCustomer);
                     msg.Body = StrContent.ToString();
@@ -203,16 +256,16 @@ namespace WEB_TRACUU.Controllers
             using (db = new DataTraCuuVPDataContext())
             {
                 var forget = (from a in db.Customers
-                             where a.Email == email
-                        
-                             select new
-                             {
-                                 a.Email,
-                                 a.Pass,
-                             }).SingleOrDefault();
+                              where a.Email == email
+
+                              select new
+                              {
+                                  a.Email,
+                                  a.Pass,
+                              }).SingleOrDefault();
 
                 if (forget != null)
-                { 
+                {
                     MailMessage msg = new MailMessage();
 
                     msg.From = new MailAddress("ngocvupct1995@gmail.com");
@@ -224,13 +277,13 @@ namespace WEB_TRACUU.Controllers
                     //string readFile = reader.ReadToEnd();
                     //string StrContent = "";
                     //StrContent = readFile;
-                  
-                    
+
+
                     msg.Subject = "Mật Khẩu Bạn Đã Quên.";
                     msg.Body = string.Format("Hi,Mật Khẩu Của Bạn Là: {0}", forget.Pass);
                     //StrContent = StrContent.Replace("[UserName]", kh.CustomerName);
                     //StrContent = StrContent.Replace("[link_forgetPass]", url);
-                   // msg.Body = StrContent.ToString();
+                    // msg.Body = StrContent.ToString();
 
                     msg.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient();
@@ -253,6 +306,7 @@ namespace WEB_TRACUU.Controllers
         [HttpGet]
         public IEnumerable<BDS_Detail> get_Land_by_IDCustumer(Guid makh)
         {
+            if (test_user(makh) != true && test_quyenadmin() != true) return null;
             List<BDS_Detail> list = new List<BDS_Detail>();
             try
             {
@@ -275,12 +329,16 @@ namespace WEB_TRACUU.Controllers
 
                     foreach (var item in sql)
                     {
+                        //var images = (from b in db.Image_Details where b.IDLand == item.IDLand select b).ToList();
+                        //IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        //foreach (var item1 in images)
+                        //{
+                        //    list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        //}
                         list.Add(new BDS_Detail
                         {
                             _IDLand = item.IDLand,
-                            _NumberHouse = item.c.NumberHouse,
-
-
+                            _NumberHouse = item.c.NumberHouse
                         });
                     }
                     db.Connection.Close();
@@ -296,9 +354,125 @@ namespace WEB_TRACUU.Controllers
 
 
         }
+
+        [HttpGet]
+        public int get_quality_Land_by_Signing(Guid makh)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query_test =
+                    (from a in db.Customers where a.IDCustomer == makh select new {a.Admin}).SingleOrDefault();
+                if (query_test.Admin == true)
+                {
+                    var sql = (from a in db.Lands
+                        join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                        join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                        where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
+
+                        select new
+                        {
+                            a.IDLand
+                        }).ToList();
+                    return sql.Count;
+                }
+                else
+                {
+                    var sql = (from a in db.Lands
+                        join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                        join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                        where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
+                              && a.IDCustomer == makh
+                        select new
+                        {
+                            a.IDLand
+
+
+                        }).ToList();
+                    return sql.Count;
+                }
+                
+            }
+        }
+        [HttpGet]
+        public int get_quality_Land_by_Expired(Guid makh)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query_test =
+                    (from a in db.Customers where a.IDCustomer == makh select new { a.Admin }).SingleOrDefault();
+                if (query_test.Admin == true)
+                {
+                    var sql = (from a in db.Lands
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.ExpiredDate < DateTime.Now 
+
+                               select new
+                               {
+                                   a.IDLand
+                               }).ToList();
+                    return sql.Count;
+                }
+                else
+                {
+                    var sql = (from a in db.Lands
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.ExpiredDate < DateTime.Now
+                                     && a.IDCustomer == makh
+                               select new
+                               {
+                                   a.IDLand
+
+
+                               }).ToList();
+                    return sql.Count;
+                }
+
+            }
+        }
+        [HttpGet]
+        public int get_quality_Land_by_Unconfimred(Guid makh)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query_test =
+                    (from a in db.Customers where a.IDCustomer == makh select new { a.Admin }).SingleOrDefault();
+                if (query_test.Admin == true)
+                {
+                    var sql = (from a in db.Lands
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.Flag_Approval == false
+
+                               select new
+                               {
+                                   a.IDLand
+                               }).ToList();
+                    return sql.Count;
+                }
+                else
+                {
+                    var sql = (from a in db.Lands
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.Flag_Approval == false
+                                     && a.IDCustomer == makh
+                               select new
+                               {
+                                   a.IDLand
+
+
+                               }).ToList();
+                    return sql.Count;
+                }
+
+            }
+        }
         [HttpGet]
         public IEnumerable<BDS_BY_KH> get_Land_by_Signing(Guid makh)
         {
+            //if (test_user(makh) != true && test_quyenadmin() != true) return null;
             List<BDS_BY_KH> list = new List<BDS_BY_KH>();
             using (db = new DataTraCuuVPDataContext())
             {
@@ -306,24 +480,24 @@ namespace WEB_TRACUU.Controllers
                 if (query_test.Admin == true)
                 {
                     var sql = (from a in db.Lands
-                        join b in db.Customers on a.IDCustomer equals b.IDCustomer
-                        join c in db.Overview_Lands on a.IDLand equals c.IDLand
-                        where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
-                              
-                        select new
-                        {
-                            a,
-                            b.CustomerName,
-                            b.IDCustomer,
-                            c.NumberHouse,
-                            c.Street,
-                            c.Trousers,
-                            c.Ward,
-                            c.Acreage,
-                            c.TypeNameDetail,
-                            
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
 
-                        }).OrderByDescending(k=>k.a.ModifyDate);
+                               select new
+                               {
+                                   a,
+                                   b.CustomerName,
+                                   b.IDCustomer,
+                                   c.NumberHouse,
+                                   c.Street,
+                                   c.Trousers,
+                                   c.Ward,
+                                   c.Acreage,
+                                   c.TypeNameDetail,
+
+
+                               }).OrderByDescending(k => k.a.ModifyDate);
                     foreach (var item in sql)
                     {
                         BDS_Detail b = new BDS_Detail();
@@ -342,6 +516,13 @@ namespace WEB_TRACUU.Controllers
                         b._TypeName = item.TypeNameDetail;
                         b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
+                        {
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
                         list.Add(new BDS_BY_KH
                         {
                             bds = b,
@@ -356,23 +537,23 @@ namespace WEB_TRACUU.Controllers
                 else
                 {
                     var sql = (from a in db.Lands
-                              join b in db.Customers on a.IDCustomer equals b.IDCustomer
-                              join c in db.Overview_Lands on a.IDLand equals c.IDLand
-                              where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
-                              && a.IDCustomer == makh
-                              select new
-                              {
-                                  a,
-                                  b.CustomerName,
-                                  b.IDCustomer,
-                                  c.NumberHouse,
-                                  c.Street,
-                                  c.Trousers,
-                                  c.Ward,
-                                  c.Acreage,
-                                  c.TypeNameDetail,
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.ExpiredDate > DateTime.Now && a.Flag_Approval == true
+                               && a.IDCustomer == makh
+                               select new
+                               {
+                                   a,
+                                   b.CustomerName,
+                                   b.IDCustomer,
+                                   c.NumberHouse,
+                                   c.Street,
+                                   c.Trousers,
+                                   c.Ward,
+                                   c.Acreage,
+                                   c.TypeNameDetail,
 
-                              }).OrderByDescending(k => k.a.ModifyDate); ;
+                               }).OrderByDescending(k => k.a.ModifyDate); ;
                     foreach (var item in sql)
                     {
                         BDS_Detail b = new BDS_Detail();
@@ -391,6 +572,13 @@ namespace WEB_TRACUU.Controllers
                         b._TypeName = item.TypeNameDetail;
                         b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
+                        {
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
                         list.Add(new BDS_BY_KH
                         {
                             bds = b,
@@ -402,7 +590,7 @@ namespace WEB_TRACUU.Controllers
                         });
                     }
                 }
-             
+
                 return list;
             }
         }
@@ -410,11 +598,12 @@ namespace WEB_TRACUU.Controllers
         [HttpGet]
         public IEnumerable<BDS_BY_KH> get_Land_by_ExpiredDate(Guid makh)
         {
+            if (test_user(makh) != true && test_quyenadmin() != true) return null;
             List<BDS_BY_KH> list = new List<BDS_BY_KH>();
             using (db = new DataTraCuuVPDataContext())
             {
                 var query_test = (from a in db.Customers where a.IDCustomer == makh select new { a.Admin }).SingleOrDefault();
-             
+
                 if (query_test.Admin == true)
                 {
                     var sql = from a in db.Lands
@@ -452,6 +641,13 @@ namespace WEB_TRACUU.Controllers
                         b._TypeName = item.TypeNameDetail;
                         b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
+                        {
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
                         list.Add(new BDS_BY_KH
                         {
                             bds = b,
@@ -466,9 +662,78 @@ namespace WEB_TRACUU.Controllers
                 else
                 {
                     var sql = (from a in db.Lands
+                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
+                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
+                               where a.ExpiredDate < DateTime.Now && a.IDCustomer == makh
+                               select new
+                               {
+                                   a,
+                                   b.CustomerName,
+                                   b.IDCustomer,
+                                   c.NumberHouse,
+                                   c.Street,
+                                   c.Trousers,
+                                   c.Ward,
+                                   c.Acreage,
+                                   c.TypeNameDetail,
+
+                               }).ToList();
+                    foreach (var item in sql)
+                    {
+                        BDS_Detail b = new BDS_Detail();
+                        b._IDLand = item.a.IDLand;
+                        b._Name = item.a.Name;
+                        b._CreateDate = item.a.CreateDate;
+                        b._ModifyDate = item.a.ModifyDate;
+                        b._Decription = item.a.Decrition;
+                        b._NumberHouse = item.NumberHouse;
+                        b._Street = item.Street;
+                        b._Trousers = item.Trousers;
+                        b._Ward = item.Ward;
+                        b._Acreage = item.Acreage;
+                        b._ExpireDate = item.a.ExpiredDate;
+                        b._Image = item.a.Image;
+                        b._TypeName = item.TypeNameDetail;
+                        b._IDType = item.a.IDTypeDetail;
+                        b._Price_detail = item.a.Price_detail;
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
+                        {
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
+                        list.Add(new BDS_BY_KH
+                        {
+                            bds = b,
+                            Name_Customer = item.CustomerName,
+                            ID_Customer = item.IDCustomer,
+                            IDPrice = item.a.IDPrice,
+                            IDAcreage = item.a.IDAcreage,
+                            _IDPost = item.a.IDPost
+                        });
+                    }
+                }
+
+                return list;
+            }
+        }
+
+        [HttpGet]
+        public IEnumerable<BDS_BY_KH> get_Land_by_Unconfimred(Guid makh)
+        {
+            if (test_user(makh) != true && test_quyenadmin() != true) return null;
+            List<BDS_BY_KH> list = new List<BDS_BY_KH>();
+
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query_test = (from a in db.Customers where a.IDCustomer == makh select new { a.Admin }).SingleOrDefault();
+                if (query_test.Admin == true)
+                {
+                    var sql = from a in db.Lands
                               join b in db.Customers on a.IDCustomer equals b.IDCustomer
                               join c in db.Overview_Lands on a.IDLand equals c.IDLand
-                              where a.ExpiredDate < DateTime.Now && a.IDCustomer == makh
+                              where a.Flag_Approval == false
                               select new
                               {
                                   a,
@@ -481,7 +746,7 @@ namespace WEB_TRACUU.Controllers
                                   c.Acreage,
                                   c.TypeNameDetail,
 
-                              }).ToList();
+                              };
                     foreach (var item in sql)
                     {
                         BDS_Detail b = new BDS_Detail();
@@ -500,67 +765,13 @@ namespace WEB_TRACUU.Controllers
                         b._TypeName = item.TypeNameDetail;
                         b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
-                        list.Add(new BDS_BY_KH
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
                         {
-                            bds = b,
-                            Name_Customer = item.CustomerName,
-                            ID_Customer = item.IDCustomer,
-                            IDPrice = item.a.IDPrice,
-                            IDAcreage = item.a.IDAcreage,
-                            _IDPost = item.a.IDPost
-                        });
-                    }
-                }
-              
-                return list;
-            }
-        }
-
-        [HttpGet]
-        public IEnumerable<BDS_BY_KH> get_Land_by_Unconfimred(Guid makh)
-        {
-            List<BDS_BY_KH> list = new List<BDS_BY_KH>();
-
-            using (db = new DataTraCuuVPDataContext())
-            {
-                var query_test = (from a in db.Customers where a.IDCustomer == makh select new { a.Admin }).SingleOrDefault();
-                if (query_test.Admin == true)
-                {
-                    var sql = from a in db.Lands
-                        join b in db.Customers on a.IDCustomer equals b.IDCustomer
-                        join c in db.Overview_Lands on a.IDLand equals c.IDLand
-                        where a.Flag_Approval == false
-                        select new
-                        {
-                            a,
-                            b.CustomerName,
-                            b.IDCustomer,
-                            c.NumberHouse,
-                            c.Street,
-                            c.Trousers,
-                            c.Ward,
-                            c.Acreage,
-                            c.TypeNameDetail,
-
-                        };
-                    foreach (var item in sql)
-                    {
-                        BDS_Detail b = new BDS_Detail();
-                        b._IDLand = item.a.IDLand;
-                        b._Name = item.a.Name;
-                        b._CreateDate = item.a.CreateDate;
-                        b._ModifyDate = item.a.ModifyDate;
-                        b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
-                        b._Street = item.Street;
-                        b._Trousers = item.Trousers;
-                        b._Ward = item.Ward;
-                        b._Acreage = item.Acreage;
-                        b._ExpireDate = item.a.ExpiredDate;
-                        b._Image = item.a.Image;
-                        b._TypeName = item.TypeNameDetail;
-                        b._IDType = item.a.IDTypeDetail;
-                        b._Price_detail = item.a.Price_detail;
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
                         list.Add(new BDS_BY_KH
                         {
                             bds = b,
@@ -609,6 +820,13 @@ namespace WEB_TRACUU.Controllers
                         b._TypeName = item.TypeNameDetail;
                         b._IDType = item.a.IDTypeDetail;
                         b._Price_detail = item.a.Price_detail;
+                        var images = (from d in db.Image_Details where d.IDLand == item.a.IDLand select d).ToList();
+                        IList<Image_Slide_VP> list_image_detail = new List<Image_Slide_VP>();
+                        foreach (var item1 in images)
+                        {
+                            list_image_detail.Add(new Image_Slide_VP(item1.Image_detail1, item1.Title));
+                        }
+                        b._Images_detail = list_image_detail;
                         list.Add(new BDS_BY_KH
                         {
                             bds = b,
@@ -620,8 +838,8 @@ namespace WEB_TRACUU.Controllers
                         });
                     }
                 }
-                
-               
+
+
                 return list;
             }
         }
@@ -629,10 +847,12 @@ namespace WEB_TRACUU.Controllers
         [HttpPost]
         public IHttpActionResult Creat_BDS(JObject data)
         {
+
             dynamic json = data;
 
             try
             {
+                if (test_user(json._IDCustomer) != true && test_quyenadmin() != true) return null;
                 using (db = new DataTraCuuVPDataContext())
                 {
                     db.Connection.Open();
@@ -679,6 +899,7 @@ namespace WEB_TRACUU.Controllers
         [HttpGet]
         public IEnumerable<Customer> get_all_customer()
         {
+            if (test_quyenadmin() != true) return null;
             List<Customer> list = new List<Customer>();
             using (db = new DataTraCuuVPDataContext())
             {
@@ -707,18 +928,19 @@ namespace WEB_TRACUU.Controllers
         [HttpGet]
         public string send_email_Land_Expired(string id)
         {
+            if (test_quyenadmin() != true) return null;
             using (db = new DataTraCuuVPDataContext())
             {
                 var query = (from a in db.Lands
-                    join b in db.Customers
-                        on a.IDCustomer equals b.IDCustomer
-                    where a.ExpiredDate < DateTime.Now
-                    select new
-                    {
-                        a.IDLand,
-                        a.Name,
-                        b.Email
-                    }).ToList();
+                             join b in db.Customers
+                                 on a.IDCustomer equals b.IDCustomer
+                             where a.ExpiredDate < DateTime.Now
+                             select new
+                             {
+                                 a.IDLand,
+                                 a.Name,
+                                 b.Email
+                             }).ToList();
                 foreach (var item in query)
                 {
                     MailMessage msg = new MailMessage();
@@ -751,7 +973,7 @@ namespace WEB_TRACUU.Controllers
                     smtp.Send(msg);
                 }
             }
-         
+
             return "Success";
         }
     }
