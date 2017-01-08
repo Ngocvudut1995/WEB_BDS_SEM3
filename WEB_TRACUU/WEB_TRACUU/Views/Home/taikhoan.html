@@ -214,13 +214,28 @@
                 <div ng-switch-when="ct_baidang" ng-controller="ct_baidang_ctrl">
                     <!--<div ng-include="'post.html'"></div>-->
                     <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                        <h4 style="text-transform: uppercase;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;float: none; padding: 9px 20px 10px; line-height: 30px">
+                        <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">
                             Chỉnh Sửa Bài Đăng
                         </h4>
+                       
                     </div>
                     <div class="panel panel-default" style="">
-                        <div class="panel-heading" style="text-transform: uppercase;">
+                        <div class="panel-heading" style="text-transform: uppercase;position: relative">
                             <b>Bài Đăng Số {{land.idbaidang}}</b>
+                            <div style="position: absolute; height: 100%; top: 0px; right: 0px" class="dropdown">
+                                <button class="btn btn-danger btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" ng-click="delete_baidang(land)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                                <!--<ul class="dropdown-menu dropdown-menu-right edit_quantri" role="menu" aria-labelledby="dropdownMenu1">
+
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="banned(Customer.ID)">Banned</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="setAdmin(Customer.ID)">Set admin</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="unsetAdmin(Customer.ID)">Unset admin</a></li>
+
+
+
+                                </ul>-->
+                            </div>
                         </div>
                         <div class="panel-body">
                             <div class="row" style="padding-bottom: 40px; border: black solid 1px;">

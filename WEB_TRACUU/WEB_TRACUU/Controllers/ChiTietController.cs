@@ -35,6 +35,17 @@ namespace WEB_TRACUU.Controllers
             }
 
         }
+
+        public string get_title_by_id(Guid mavp)
+        {
+            using (db = new DataTraCuuVPDataContext())
+            {
+                var query = (from a in db.Lands
+                    where a.IDLand == mavp
+                    select a).SingleOrDefault();
+                return query.Name;
+            }
+        }
         public BDS_Detail get_vp_by_id(Guid mavp)
         {
             BDS_Detail vp;

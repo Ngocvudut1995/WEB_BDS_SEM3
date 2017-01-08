@@ -7,44 +7,58 @@ app.config(function ($routeProvider) {
         .when("/TrangChu", {
             templateUrl: app + "Home/TrangChu",
             controller: "trangchuCtrl",
-            title: "Trang chủ"
+            title: "Trang chủ tracuuBDS.com"
         })
         .when("/TimKiem", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", caseInsensitiveMatch: true, title: "Tìm Kiếm" })
         .when("/TimKiem/:sell/:h/:p/:d/:g/:dt/:k/:type/:huongnha", { templateUrl: app + "Home/TimKiem", controller: "timkiemCtrl", title: "Tìm Kiếm" })
         .when("/GioiThieu", {
             templateUrl: app + "Home/GioiThieu",
             controller: "gioithieuCtrl",
-            title: "Giới thiệu"
+            title: "Giới thiệu trang tracuuBDS.com"
         })
         .when("/PostBai", {
             templateUrl: app + "Home/PostBai",
             controller: "postCtrl",
             title: "Đăng Bài"
         })
-        .when("/ChiTiet/:id", {
+        .when("/ChiTiet/:id/", {
             templateUrl: app + "Home/ChiTiet",
             controller: "chitietCtrl",
-            title: "Trang Chi Tiết Văn Phòng",
+            title: "Trang Chi Tiết"
+            //resolve: {
+            //    meta: ['$rootScope', '$routeParams', '$http', function ($rootScope, $routeParams, $http) {
+            //        console.log($routeParams.id);
+            //        return $http.get(host + "/api/ChiTiet/get_title_by_id/?mavp=" + $routeParams.id).then(function (response) {
+            //            var title = response.data;
+            //            console.log(title);
+            //            $rootScope.title = title + " | TracuuBDS.com";
+            //        });
+
+
+            //    }]
+            //}
+               
+           
 
         })
          .when("/TheoDoi", {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
-             title: "Trang Theo Dõi",
+             title: "Trang Bài Đăng Đã Theo Dõi",
              authorize: true
 
          })
          .when("/TheoDoi/:id", {
              templateUrl: app + "Home/TheoDoi",
              controller: "theodoiCtrl",
-             title: "Trang Theo Dõi",
+             title: "Trang Bài Đăng Đã Theo Dõi",
              authorize: true
 
          })
         .when("/TaiKhoan", {
             templateUrl: app + "Home/TaiKhoan",
             controller: "taikhoanCtrl",
-            title: "Tài Khoản",
+            title: "Trang Tài Khoản",
             authorize: true,
             replace: true
 
@@ -76,13 +90,13 @@ app.config(function ($routeProvider) {
             title: "Trang Đăng Kí"
         })
 
-    .otherwise({ redirectTo: "/TrangChu" });
+    .otherwise({ redirectTo: "/TrangChu", dontTrack: true });
 });
 
 
 
 app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
-    $rootScope.tab_index = 0;
+    //$rootScope.tab_index = 0;
     $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
     $scope.tab_loaibds = 0;
     $scope.tab_gia = 0;
@@ -550,6 +564,11 @@ app.controller('timkiemCtrl', [
         $scope.img_item = "Content/Images/vanphong.jpg";
     }]);
 app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', '$timeout', function ($scope, $http, $routeParams, Map, $location, $rootScope, $timeout) {
+    $http.get(host + "/api/ChiTiet/get_title_by_id/?mavp=" + $routeParams.id).then(function (response) {
+                    var title = response.data;
+                    console.log(title);
+                    $rootScope.title = title + " | TracuuBDS.com";
+                });
     $scope.id_VP = $routeParams.id;
     $rootScope.loading = 1;
     $scope.select_Duong = '0';
@@ -757,7 +776,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
     //console.log($scope);
 }]);
 app.controller('gioithieuCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
-    $rootScope.tab_index = 4;
+   // $rootScope.tab_index = 4;
 }]);
 app.controller('theodoiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', '$location', function ($scope, $http, $rootScope, $routeParams, $location) {
     if ($rootScope.taikhoan.test == 1) {
@@ -2162,6 +2181,28 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
             swal("Thông báo", "Server unavailable", "error");
         });
     };
+    $scope.delete_baidang = function (land)
+    {
+      
+       
+        swal({
+            title: 'Thông Báo?',
+            text: "Bạn Sẽ Muốn Xóa Bài Đăng Này.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then(function () {
+            var date = new Date();
+            date.setDate(date.getDate() - 1);
+
+            land.expired_date = date;
+
+            $scope.update_land(land);
+            $location.patch('/TaiKhoan/');
+        });
+    }
 
 }]);
 app.controller('doiMatKhauCtrl', ['$scope', '$http', '$window', '$rootScope', function ($scope, $http, $window, $rootScope) {

@@ -1052,5 +1052,33 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult Delete_Land(int id)
+        {
+            if (test_quyenadmin() == false) return NotFound();
+            try
+            {
+                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Slider/");
+                using (db = new DataTraCuuVPDataContext())
+                {
+                    var conv = (from a in db.Convenients
+                                where a.IDConvenient == id
+                                select a).SingleOrDefault();
+
+                    foreach (string f in Directory.GetDirectories(sPath, conv.Convenient_Name + "_*.png"))
+                    {
+                        File.Delete(f);
+                    }
+                    db.Convenients.DeleteOnSubmit(conv);
+                    db.SubmitChanges();
+                    return Ok();
+                }
+
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }
