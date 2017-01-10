@@ -324,3 +324,64 @@ div.scrollmenu {
     .my_button_search:hover {
          background-color: #36ace2;
     }
+  .input-text{
+    padding: 6px 15px;
+    font-size: 15px;
+    width: 100%;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+    height: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.select-post{
+    overflow: hidden;
+    text-indent: .01px;
+    text-overflow: '';
+    cursor: pointer;
+    height: auto;
+    border-radius: 0;
+    padding: 6px 15px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    height: auto;
+}
+.label-step {
+    font-size: 24px;
+    color: #ff6666;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.label-Form {
+    width: 100%;
+    display: inline-block;
+    float: left;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #333;
+}
+
+.li-chosser{
+    list-style: none;
+    width: 25%;
+    float: left;
+    margin-bottom: 5px;
+}
+ ul:after {
+    content: " ";
+    display: table;
+ }
+
+.div-post{
+    box-shadow: 0px 2px 5px grey;
+    padding: 15px;
+    background: white;
+}
+
+
+

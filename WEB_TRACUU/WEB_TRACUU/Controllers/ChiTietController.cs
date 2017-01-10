@@ -71,7 +71,7 @@ namespace WEB_TRACUU.Controllers
                     _Acreage = sql.a.Acreage,
                     _Price = sql.a.Price,
                     _Name = sql.a.Name,
-                    _NumberHouse = sql.a.NumberHouse,
+                    _NumberHouse = sql.a.Numhouse,
                     _Trousers = sql.a.Trousers,
                     _CreateDate = sql.a.CreateDate,
                     _ModifyDate = sql.a.ModifyDate,
@@ -113,34 +113,224 @@ namespace WEB_TRACUU.Controllers
             public string _Image;
             public bool? _Sell;
         }
-        public IEnumerable<BDS> get_VP_Tuong_Tu(int id)
+        [HttpPost]
+        public IEnumerable<TKVanPhong> get_VP_Tuong_Tu(Guid id)
         {
-            IList<BDS> list = new List<BDS>();
+         
+     
+            Dictionary<Guid,int> list_vp = new Dictionary<Guid, int>();
+           
             using (db = new DataTraCuuVPDataContext())
             {
+                var land = (from a in db.Overview_Lands where a.IDLand == id select a).SingleOrDefault();
+                // xet cung loai
                 var query = (from a in db.Overview_Lands
-                             where a.IDType == id 
+                    join b in db.TypeDetails on a.IDTypeDetail equals b.IDTypeDetail
+                             where a.IDType == b.IDType && a.IDTypeDetail == land.IDTypeDetail
                              select new
                              {
                                  a.IDLand,
-                                 a.Name,
-                                 a.Image,
-                                 a.Sell
-                             }).Take(3).ToList();
+                                
+                             }).ToList();
                 foreach (var item in query)
                 {
-                    list.Add(new BDS
+                    if (list_vp.ContainsKey(item.IDLand))
                     {
-                        _IDLand = item.IDLand,
-                        _Image = item.Image,
-                        _Name = item.Name,
-                        _Sell = item.Sell
-                    });
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    } 
                 }
+                //xet cung loai chi tiet
+                query = (from a in db.Overview_Lands
+                             where a.IDTypeDetail == land.IDTypeDetail
+                             select new
+                             {
+                                 a.IDLand,
+
+                             }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                // xet cung duong
+                query = (from a in db.Overview_Lands
+                         where a.IDStreet == land.IDStreet
+                         select new
+                         {
+                             a.IDLand,
+
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                // cung phuong
+                query = (from a in db.Overview_Lands
+                         where a.IDWard == land.IDWard
+                         select new
+                         {
+                             a.IDLand,
+
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                // cung quan
+                query = (from a in db.Overview_Lands
+                         where a.IDTrousers == land.IDTrousers
+                         select new
+                         {
+                             a.IDLand,
+
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                // cung dien tich
+                query = (from a in db.Overview_Lands
+                        
+                         where a.IDAcreage == land.IDAcreage
+                         select new
+                         {
+                             a.IDLand,
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                // xet gia
+                query = (from a in db.Overview_Lands
+
+                         where a.IDPrice == land.IDPrice
+                         select new
+                         {
+                             a.IDLand,
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+
+                // xet huong
+                query = (from a in db.Overview_Lands
+
+                         where a.IDDirection == land.IDDirection
+                         select new
+                         {
+                             a.IDLand,
+                         }).ToList();
+                foreach (var item in query)
+                {
+                    if (list_vp.ContainsKey(item.IDLand))
+                    {
+                        int value = list_vp[item.IDLand] + 1;
+                        list_vp.Remove(item.IDLand);
+                        list_vp.Add(item.IDLand, value);
+                    }
+                    else
+                    {
+                        list_vp.Add(item.IDLand, 1);
+                    }
+                }
+                IList<TKVanPhong> list = new List<TKVanPhong>();
+                foreach (var item in list_vp.OrderByDescending(r => r.Value).Take(4))
+                {
+                    var vp = (from a in db.Overview_Lands
+                              where a.IDLand == item.Key
+                              select a).SingleOrDefault();
+                    
+                        list.Add(new TKVanPhong
+                        {
+                            _MaVP = vp.IDLand,
+                            _Anh = vp.Image,
+                            _MaDT = vp.IDAcreage,
+                            _Dientich = vp.Acreage,
+                            _IDPrice = vp.IDPrice,
+                            _Mota = vp.Decrition,
+                            _TenVp = vp.Name,
+                            _SoNha = vp.Numhouse,
+                            _MaQuan = (int)vp.IDTrousers,
+                            _TenQuan = vp.Trousers,
+                            _MaLoai = (int)vp.IDType,
+                            _MaLoaiCT = vp.IDTypeDetail,
+                            _Duong = vp.Street,
+                            _Phuong = vp.Ward,
+                            _MaPhuong = vp.IDWard,
+                            _MaDuong = (int)vp.IDStreet,
+                            _CreateDate = vp.CreateDate,
+                            _ModifyDate = vp.ModifyDate,
+                            _Sell = vp.Sell,
+                            _ExpiredDate = vp.ExpiredDate,
+                            _Gia = vp.Price,
+                            _Price_detail = vp.Price_detail,
+                            _HetHan = (vp.ExpiredDate > DateTime.Now) ? false : true
+                        });
+                    }
                 return list;
             }
-
-        }
+               
+            }
 
         [HttpPost]
         public string Send_Contact_To_Own(JObject data)

@@ -568,7 +568,8 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
                     var title = response.data;
                     console.log(title);
                     $rootScope.title = title + " | TracuuBDS.com";
-                });
+    });
+    console.log("Demo");
     $scope.id_VP = $routeParams.id;
     $rootScope.loading = 1;
     $scope.select_Duong = '0';
@@ -1071,236 +1072,236 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
 
     //console.log($scope);
 }]);
-app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'textAngularManager', function ($scope, $http, $rootScope, $routeParams, textAngularManager) {
-    $scope.version = textAngularManager.getVersion();
-    $scope.versionNumber = $scope.version.substring(1);
-    $scope.orightml = '';
-    $scope.Mota = $scope.orightml;
-    $scope.disabled = false;
-    $scope.select_Huyen = '0';
-    $scope.select_Phuong = '0';
-    $scope.select_Duong = '0';
-    $scope.select_DienTich = '0';
-    $scope.select_Gia = '0';
-    $scope.select_Kieu = '0';
-    $scope.select_HinhThuc = '0';
-    $scope.select_Hang = '0';
-    $scope.SoNha = '';
-    $scope.txtName = '';
-    $scope.GiaChiTiet = '';
-    $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
-        $scope.listQuan = response.data;
+//app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'textAngularManager', function ($scope, $http, $rootScope, $routeParams, textAngularManager) {
+//    $scope.version = textAngularManager.getVersion();
+//    $scope.versionNumber = $scope.version.substring(1);
+//    $scope.orightml = '';
+//    $scope.Mota = $scope.orightml;
+//    $scope.disabled = false;
+//    $scope.select_Huyen = '0';
+//    $scope.select_Phuong = '0';
+//    $scope.select_Duong = '0';
+//    $scope.select_DienTich = '0';
+//    $scope.select_Gia = '0';
+//    $scope.select_Kieu = '0';
+//    $scope.select_HinhThuc = '0';
+//    $scope.select_Hang = '0';
+//    $scope.SoNha = '';
+//    $scope.txtName = '';
+//    $scope.GiaChiTiet = '';
+//    $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
+//        $scope.listQuan = response.data;
 
-    });
-    var data_img = [];
-    var formdata = new FormData();
-    $scope.getTheFiles = function ($files) {
-        angular.forEach($files, function (value, key) {
-            formdata.append(key, value);
-        });
-    };
-    $scope.getImage_detail = function ($files) {
-        angular.forEach($files, function (value, key) {
-            var formdata1 = new FormData();
-            formdata1.append(key, value);
-            data_img.push(formdata1);
+//    });
+//    var data_img = [];
+//    var formdata = new FormData();
+//    $scope.getTheFiles = function ($files) {
+//        angular.forEach($files, function (value, key) {
+//            formdata.append(key, value);
+//        });
+//    };
+//    $scope.getImage_detail = function ($files) {
+//        angular.forEach($files, function (value, key) {
+//            var formdata1 = new FormData();
+//            formdata1.append(key, value);
+//            data_img.push(formdata1);
 
-        });
-    };
-    $scope.AppendImage = function () {
-        var myEl = angular.element(document.querySelector('#divID'));
-        myEl.append('Hi<br/>');
-    }
-    $scope.divHtmlVar = '<img style="height: 100px; width: 100px; margin-top: 10px">';
-    $scope.prependText = function () {
-        $scope.divHtmlVar = '<img src="' + $scope.image_source1 + '" style="height: 100px; width: 100px; margin-top: 10px">' + $scope.divHtmlVar;
-    }
-    $scope.setFile2 = function (element) {
-        $scope.currentFile = element.files[0];
-        var reader = new FileReader();
+//        });
+//    };
+//    $scope.AppendImage = function () {
+//        var myEl = angular.element(document.querySelector('#divID'));
+//        myEl.append('Hi<br/>');
+//    }
+//    $scope.divHtmlVar = '<img style="height: 100px; width: 100px; margin-top: 10px">';
+//    $scope.prependText = function () {
+//        $scope.divHtmlVar = '<img src="' + $scope.image_source1 + '" style="height: 100px; width: 100px; margin-top: 10px">' + $scope.divHtmlVar;
+//    }
+//    $scope.setFile2 = function (element) {
+//        $scope.currentFile = element.files[0];
+//        var reader = new FileReader();
 
-        reader.onload = function (event) {
-            $scope.image_source1 = event.target.result;
-            $scope.prependText();
-            $scope.$apply();
+//        reader.onload = function (event) {
+//            $scope.image_source1 = event.target.result;
+//            $scope.prependText();
+//            $scope.$apply();
 
-        }
-        // when the file is read it triggers the onload event above.
-        reader.readAsDataURL(element.files[0]);
-    };
+//        }
+//        // when the file is read it triggers the onload event above.
+//        reader.readAsDataURL(element.files[0]);
+//    };
 
-    // NOW UPLOAD THE FILES.
-    $scope.uploadAvatar = function (idvp, data) {
+//    // NOW UPLOAD THE FILES.
+//    $scope.uploadAvatar = function (idvp, data) {
 
-        var request = {
-            method: 'POST',
-            url: host + '/api/post/UploadAvatar/?id=' + idvp,
-            data: data,
-            headers: {
-                'Content-Type': undefined
-            }
-        };
-        // SEND THE FILES.
-        $http(request)
-            .success(function (d) {
-                swal({
-                    title: 'Đăng tin',
-                    text: "Đã đăng tin",
-                    type: 'success',
+//        var request = {
+//            method: 'POST',
+//            url: host + '/api/post/UploadAvatar/?id=' + idvp,
+//            data: data,
+//            headers: {
+//                'Content-Type': undefined
+//            }
+//        };
+//        // SEND THE FILES.
+//        $http(request)
+//            .success(function (d) {
+//                swal({
+//                    title: 'Đăng tin',
+//                    text: "Đã đăng tin",
+//                    type: 'success',
 
-                    confirmButtonColor: '#3085d6',
+//                    confirmButtonColor: '#3085d6',
 
-                    confirmButtonText: 'OK!',
+//                    confirmButtonText: 'OK!',
 
-                    confirmButtonClass: 'btn btn-success',
+//                    confirmButtonClass: 'btn btn-success',
 
-                }).then(function () {
-                    window.open(host + '/#/TaiKhoan', '_self', '');
-                }
-                     );
-            })
-            .error(function () {
-            });
+//                }).then(function () {
+//                    window.open(host + '/#/TaiKhoan', '_self', '');
+//                }
+//                     );
+//            })
+//            .error(function () {
+//            });
 
-    };
-    $scope.UploadImageDetail = function (idvp, data) {
+//    };
+//    $scope.UploadImageDetail = function (idvp, data) {
 
-        var request = {
-            method: 'POST',
-            url: host + '/api/post/UploadImageDetail/?id=' + idvp,
-            data: data,
-            headers: {
-                'Content-Type': undefined
-            }
-        };
-        // SEND THE FILES.
-        $http(request)
-            .success(function (d) {
-                swal({
-                    title: 'Đăng tin',
-                    text: "Đã đăng tin",
-                    type: 'success',
+//        var request = {
+//            method: 'POST',
+//            url: host + '/api/post/UploadImageDetail/?id=' + idvp,
+//            data: data,
+//            headers: {
+//                'Content-Type': undefined
+//            }
+//        };
+//        // SEND THE FILES.
+//        $http(request)
+//            .success(function (d) {
+//                swal({
+//                    title: 'Đăng tin',
+//                    text: "Đã đăng tin",
+//                    type: 'success',
 
-                    confirmButtonColor: '#3085d6',
+//                    confirmButtonColor: '#3085d6',
 
-                    confirmButtonText: 'OK!',
+//                    confirmButtonText: 'OK!',
 
-                    confirmButtonClass: 'btn btn-success',
+//                    confirmButtonClass: 'btn btn-success',
 
-                }).then(function () {
-                    window.open(host + '/#/TaiKhoan', '_self', '');
-                }
-                     );
-            })
-            .error(function () {
-            });
+//                }).then(function () {
+//                    window.open(host + '/#/TaiKhoan', '_self', '');
+//                }
+//                     );
+//            })
+//            .error(function () {
+//            });
 
-    };
+//    };
 
-    $scope.upload_detail = function () {
-        for (var i = 0; i < data_img.length; i++) {
-            $scope.UploadImageDetail('69ad7cce-3d15-4282-8f8d-19c7e64a96ce', data_img[i]);
-        }
-    };
-    $scope.load_phuong = function () {
-        $scope.select_Phuong = '0';
+//    $scope.upload_detail = function () {
+//        for (var i = 0; i < data_img.length; i++) {
+//            $scope.UploadImageDetail('69ad7cce-3d15-4282-8f8d-19c7e64a96ce', data_img[i]);
+//        }
+//    };
+//    $scope.load_phuong = function () {
+//        $scope.select_Phuong = '0';
 
-        $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + $scope.select_Huyen).then(function (response) {
-            $scope.listPhuong = response.data;
-            //$scope.load_duong();
-        });
-    };
+//        $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + $scope.select_Huyen).then(function (response) {
+//            $scope.listPhuong = response.data;
+//            //$scope.load_duong();
+//        });
+//    };
 
-    $scope.load_duong = function () {
-        $scope.load_dientich();
-        $scope.select_Duong = '0';
-        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
-            $scope.listDuong = response.data;
-        });
-    };
-    $scope.load_dientich = function () {
-        // $scope.load_Gia();
-        $scope.select_DienTich = '0';
-        $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
-            $scope.listdientich = response.data;
-        });
-    };
-    $scope.select_sell = 'true';
-    $scope.change_sell = function () {
-
-
-        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-            $scope.list_DM = response.data;
-
-        });
-        $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-            $scope.listgia = response.data;
-        });
+//    $scope.load_duong = function () {
+//        $scope.load_dientich();
+//        $scope.select_Duong = '0';
+//        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
+//            $scope.listDuong = response.data;
+//        });
+//    };
+//    $scope.load_dientich = function () {
+//        // $scope.load_Gia();
+//        $scope.select_DienTich = '0';
+//        $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
+//            $scope.listdientich = response.data;
+//        });
+//    };
+//    $scope.select_sell = 'true';
+//    $scope.change_sell = function () {
 
 
-    };
+//        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
+//            $scope.list_DM = response.data;
+
+//        });
+//        $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
+//            $scope.listgia = response.data;
+//        });
 
 
-    $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
-        $scope.list_DM = response.data;
-
-    });
-    $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
-        $scope.listgia = response.data;
-    });
+//    };
 
 
-    $scope.setFile = function (element) {
-        $scope.currentFile = element.files[0];
-        var reader = new FileReader();
+//    $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
+//        $scope.list_DM = response.data;
 
-        reader.onload = function (event) {
-            $scope.image_source = event.target.result;
-            $scope.$apply();
+//    });
+//    $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.select_sell).then(function (response) {
+//        $scope.listgia = response.data;
+//    });
 
-        }
-        // when the file is read it triggers the onload event above.
-        reader.readAsDataURL(element.files[0]);
-    };
 
-    $scope.huy = function () {
-        $scope.select_Huyen = '0';
-        $scope.select_Phuong = '0';
-        $scope.select_Duong = '0';
-        $scope.select_DienTich = '0';
-        $scope.select_Gia = '0';
-        $scope.select_Kieu = '0';
-        $scope.select_HinhThuc = '0';
-        $scope.select_Hang = '0';
-        $scope.SoNha = '';
-        $scope.txtName = "";
-        $scope.Mota = '';
-        $scope.GiaChiTiet = '';
+//    $scope.setFile = function (element) {
+//        $scope.currentFile = element.files[0];
+//        var reader = new FileReader();
 
-    };
-    $scope.postBai = function () {
+//        reader.onload = function (event) {
+//            $scope.image_source = event.target.result;
+//            $scope.$apply();
 
-        var data = JSON.stringify({
-            "_tieuDe": $scope.txtName, "_quan": $scope.select_Huyen, "_phuong": $scope.select_Phuong, "_duong": $scope.select_Duong,
-            "_soNha": $scope.SoNha, "_kieuBDS": $scope.select_Kieu, "_dienTich": $scope.select_DienTich, "_IDgia": $scope.select_Gia,
-            "_hinhThuc": $scope.select_HinhThuc, "_thoiHang": $scope.select_Hang, "_moTa": $scope.Mota, "_GiaChiTiet": $scope.GiaChiTiet,
-            "_idCustomer": $rootScope.taikhoan.makh
+//        }
+//        // when the file is read it triggers the onload event above.
+//        reader.readAsDataURL(element.files[0]);
+//    };
 
-        });
-        $http.post(host + "/api/Post/Creat_BDS/", data).then(function (response) {
-            //console.log(response);
-            $scope.uploadAvatar(response.data, formdata);
+//    $scope.huy = function () {
+//        $scope.select_Huyen = '0';
+//        $scope.select_Phuong = '0';
+//        $scope.select_Duong = '0';
+//        $scope.select_DienTich = '0';
+//        $scope.select_Gia = '0';
+//        $scope.select_Kieu = '0';
+//        $scope.select_HinhThuc = '0';
+//        $scope.select_Hang = '0';
+//        $scope.SoNha = '';
+//        $scope.txtName = "";
+//        $scope.Mota = '';
+//        $scope.GiaChiTiet = '';
 
-            for (var i = 0; i < data_img.length; i++) {
-                $scope.UploadImageDetail(response.data, data_img[i]);
-            }
+//    };
+//    $scope.postBai = function () {
 
-        }, function (res) {
-            swal("Thông báo", "Server unavailable", "error");
-        });
-    };
-    //console.log($scope);
-}]);
+//        var data = JSON.stringify({
+//            "_tieuDe": $scope.txtName, "_quan": $scope.select_Huyen, "_phuong": $scope.select_Phuong, "_duong": $scope.select_Duong,
+//            "_soNha": $scope.SoNha, "_kieuBDS": $scope.select_Kieu, "_dienTich": $scope.select_DienTich, "_IDgia": $scope.select_Gia,
+//            "_hinhThuc": $scope.select_HinhThuc, "_thoiHang": $scope.select_Hang, "_moTa": $scope.Mota, "_GiaChiTiet": $scope.GiaChiTiet,
+//            "_idCustomer": $rootScope.taikhoan.makh
+
+//        });
+//        $http.post(host + "/api/Post/Creat_BDS/", data).then(function (response) {
+//            //console.log(response);
+//            $scope.uploadAvatar(response.data, formdata);
+
+//            for (var i = 0; i < data_img.length; i++) {
+//                $scope.UploadImageDetail(response.data, data_img[i]);
+//            }
+
+//        }, function (res) {
+//            swal("Thông báo", "Server unavailable", "error");
+//        });
+//    };
+//    //console.log($scope);
+//}]);
 app.controller('baidangchuaduyetCtrl', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
     $scope.duyet_bai = function (id_post) {
         var data = JSON.stringify({
@@ -2234,4 +2235,250 @@ app.controller('doiMatKhauCtrl', ['$scope', '$http', '$window', '$rootScope', fu
             });
         };
     });
+}]);
+app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'textAngularManager', function ($scope, $http, $rootScope, $routeParams, textAngularManager) {
+    $scope.version = textAngularManager.getVersion();
+    $scope.versionNumber = $scope.version.substring(1);
+    $scope.orightml = '';
+    $scope.Mota = $scope.orightml;
+    $scope.disabled = false;
+ 
+    $scope.tieu_de = '';
+    $scope.select_loaiGia = '0';
+    $scope.ban_thue = '0';
+    $scope.loai = '0';
+    $scope.gia = '';
+    $scope.dien_tich = '';
+    $scope.select_Hang = '0';
+    $scope.noi_that = '0';
+    $scope.tien_nghi = '0';
+    $scope.select_sell = 'true';
+    $scope.select_Huyen = { "IDTrousers": "", "Trousers": "" };
+    $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
+        $scope.listQuan = response.data;
+
+
+    });
+    $scope.load_phuong = function (id) {
+        $scope.select_Phuong = { "IDWard": "", "Ward1": "" };
+        $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
+            $scope.listPhuong = response.data;
+        });
+        console.log($scope.select_Huyen.Trousers);
+    };
+    $scope.load_duong = function (id) {
+        $scope.select_Duong = { "Street1": "", "IDStreet": "" };
+        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
+            $scope.listDuong = response.data;
+        });
+    };
+    var data_img = [];
+    var formdata = new FormData();
+    $scope.getTheFiles = function ($files) {
+        angular.forEach($files, function (value, key) {
+            formdata.append(key, value);
+        });
+    };
+    $scope.getImage_detail = function ($files) {
+        angular.forEach($files, function (value, key) {
+            var formdata1 = new FormData();
+            formdata1.append(key, value);
+            data_img.push(formdata1);
+
+        });
+    };
+    $scope.AppendImage = function () {
+        var myEl = angular.element(document.querySelector('#divID'));
+        myEl.append('Hi<br/>');
+    }
+    $scope.divHtmlVar = '<img style="height: 100px; width: 100px; margin: 10px 15px">';
+    $scope.prependText = function () {
+        $scope.divHtmlVar = '<img src="' + $scope.image_source1 + '" style="height: 100px; width: 100px; margin-top: 10px">' + $scope.divHtmlVar;
+    }
+    $scope.setFile2 = function (element) {
+        $scope.currentFile = element.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            $scope.image_source1 = event.target.result;
+            $scope.prependText();
+            $scope.$apply();
+
+        }
+        // when the file is read it triggers the onload event above.
+        reader.readAsDataURL(element.files[0]);
+    };
+
+    // NOW UPLOAD THE FILES.
+    $scope.uploadAvatar = function (idvp, data) {
+
+        var request = {
+            method: 'POST',
+            url: host + '/api/post/UploadAvatar/?id=' + idvp,
+            data: data,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                swal({
+                    title: 'Ðãng tin',
+                    text: "Ð? ðãng tin",
+                    type: 'success',
+
+                    confirmButtonColor: '#3085d6',
+
+                    confirmButtonText: 'OK!',
+
+                    confirmButtonClass: 'btn btn-success',
+
+                }).then(function () {
+                    window.open(host + '/#/TaiKhoan', '_self', '');
+                }
+                     );
+            })
+            .error(function () {
+            });
+
+    };
+
+    $scope.UploadImageDetail = function (idvp, data) {
+
+        var request = {
+            method: 'POST',
+            url: host + '/api/post/UploadImageDetail/?id=' + idvp,
+            data: data,
+            headers: {
+                'Content-Type': undefined
+            }
+        };
+        // SEND THE FILES.
+        $http(request)
+            .success(function (d) {
+                swal({
+                    title: 'Ðãng tin',
+                    text: "Ð? ðãng tin",
+                    type: 'success',
+
+                    confirmButtonColor: '#3085d6',
+
+                    confirmButtonText: 'OK!',
+
+                    confirmButtonClass: 'btn btn-success',
+
+                }).then(function () {
+                    window.open(host + '/#/TaiKhoan', '_self', '');
+                }
+                     );
+            })
+            .error(function () {
+            });
+
+    };
+
+    $scope.upload_detail = function () {
+        for (var i = 0; i < data_img.length; i++) {
+            $scope.UploadImageDetail('69ad7cce-3d15-4282-8f8d-19c7e64a96ce', data_img[i]);
+        }
+    };
+    $http.get(host + "/api/ChiTiet/get_furiture").then(function (response) {
+        $scope.list_noithat = response.data;
+    });
+
+    $http.get(host + "/api/ChiTiet/get_convenient").then(function (response) {
+        $scope.list_tiennghi = response.data;
+    });
+    $scope.noi = [];
+    $scope.them_noiThat = function (id) {
+        var kt = true;
+        var temp = 0;
+        for (var i = 0; i < $scope.noi.length; i++) {
+            if (id === $scope.noi[i]) {
+                kt = false;
+                temp = i;
+            }
+        }
+        if (kt === true) {
+            $scope.noi.push(id);
+        } else {
+            $scope.noi.splice(temp, temp + 1);
+        }
+    };
+
+    $scope.tienNghi = [];
+    $scope.them_tienNghi = function (id) {
+        var kt = true;
+        var temp = 0;
+
+        for (var i = 0; i < $scope.tienNghi.length; i++) {
+            if (id === $scope.tienNghi[i]) {
+                kt = false;
+                temp = i;
+            }
+        }
+        if (kt === true) {
+            $scope.tienNghi.push(id);
+        } else {
+            $scope.tienNghi.splice(temp, temp + 1);
+        }
+    };
+    $scope.setFile = function (element) {
+        $scope.currentFile = element.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+            $scope.image_source = event.target.result;
+            $scope.$apply();
+
+        }
+        // when the file is read it triggers the onload event above.
+        reader.readAsDataURL(element.files[0]);
+    };
+    $scope.huy = function () {
+        $scope.disabled = false;
+        
+        $scope.tieu_de = '';
+        $scope.select_loaiGia = '0';
+        $scope.ban_thue = '0';
+        $scope.loai = '0';
+        $scope.gia = '';
+        $scope.dien_tich = '';
+        $scope.select_Hang = '';
+        $scope.noi_that = '0';
+        $scope.tien_nghi = '0';
+    };
+    var check_tt = 0;
+    $scope.thoa_thuan = function () {
+        check_tt = !check_tt;
+    };
+    $scope.select_DM = { "IDTypeDetail": "", "TypeNameDetail": "" };
+    $scope.change_type_land = function (id) {
+        $scope.select_DM.IDTypeDetail = 0;
+        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell_and_Type/?sell=true&type=" + id).then(function (response) {
+            $scope.list_DM = response.data;
+
+        });
+    };
+    $scope.postBai = function () {
+
+        var data = JSON.stringify({
+            "_tieuDe": $scope.tieu_de, "_quan": $scope.select_Huyen.IDTrousers, "_phuong": $scope.select_Phuong.IDWard, "_duong": $scope.select_Duong.IDStreet,
+            "_banThue": $scope.ban_thue, "_kieuBDS": $scope.loai, "_dienTich": $scope.dien_tich, "_gia": $scope.gia, "_loaiGia": $scope.select_loaiGia,
+            "_thoiHang": $scope.select_Hang, "_moTa": $scope.Mota, "_tienNghi": $scope.tienNghi, "_noiThat": $scope.noi, "_checkTT": check_tt,
+            "_idCustomer": $rootScope.taikhoan.makh
+
+        });
+        $http.post(host + "/api/Post/Creat_BDS/", data).then(function (response) {
+            console.log(response);
+            $scope.uploadAvatar(response.data, formdata);
+
+            for (var i = 0; i < data_img.length; i++) {
+                $scope.UploadImageDetail(response.data, data_img[i]);
+            }
+
+        }, function (res) {
+        });
+    };
 }]);

@@ -36,9 +36,6 @@ namespace WEB_TRACUU.Models
     partial void InsertWard(Ward instance);
     partial void UpdateWard(Ward instance);
     partial void DeleteWard(Ward instance);
-    partial void InsertAddress(Address instance);
-    partial void UpdateAddress(Address instance);
-    partial void DeleteAddress(Address instance);
     partial void InsertConvenient(Convenient instance);
     partial void UpdateConvenient(Convenient instance);
     partial void DeleteConvenient(Convenient instance);
@@ -63,6 +60,9 @@ namespace WEB_TRACUU.Models
     partial void InsertImage_Detail(Image_Detail instance);
     partial void UpdateImage_Detail(Image_Detail instance);
     partial void DeleteImage_Detail(Image_Detail instance);
+    partial void InsertInternetProtocol(InternetProtocol instance);
+    partial void UpdateInternetProtocol(InternetProtocol instance);
+    partial void DeleteInternetProtocol(InternetProtocol instance);
     partial void InsertLand(Land instance);
     partial void UpdateLand(Land instance);
     partial void DeleteLand(Land instance);
@@ -81,9 +81,6 @@ namespace WEB_TRACUU.Models
     partial void InsertTrouser(Trouser instance);
     partial void UpdateTrouser(Trouser instance);
     partial void DeleteTrouser(Trouser instance);
-    partial void InsertInternetProtocol(InternetProtocol instance);
-    partial void UpdateInternetProtocol(InternetProtocol instance);
-    partial void DeleteInternetProtocol(InternetProtocol instance);
     #endregion
 		
 		public DataTraCuuVPDataContext() : 
@@ -129,14 +126,6 @@ namespace WEB_TRACUU.Models
 			get
 			{
 				return this.GetTable<Ward>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Address> Addresses
-		{
-			get
-			{
-				return this.GetTable<Address>();
 			}
 		}
 		
@@ -204,6 +193,14 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<InternetProtocol> InternetProtocols
+		{
+			get
+			{
+				return this.GetTable<InternetProtocol>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Land> Lands
 		{
 			get
@@ -249,22 +246,6 @@ namespace WEB_TRACUU.Models
 			get
 			{
 				return this.GetTable<Trouser>();
-			}
-		}
-		
-		public System.Data.Linq.Table<InternetProtocol> InternetProtocols
-		{
-			get
-			{
-				return this.GetTable<InternetProtocol>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Address_Lan> Address_Lans
-		{
-			get
-			{
-				return this.GetTable<Address_Lan>();
 			}
 		}
 		
@@ -325,7 +306,7 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Acreage", Storage="_Acreage1", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Acreage", Storage="_Acreage1", DbType="VarChar(200)")]
 		public string Acreage1
 		{
 			get
@@ -403,6 +384,8 @@ namespace WEB_TRACUU.Models
 		
 		private int _IDTrousers;
 		
+		private EntitySet<Land> _Lands;
+		
 		private EntitySet<Street> _Streets;
 		
 		private EntityRef<Trouser> _Trouser;
@@ -421,6 +404,7 @@ namespace WEB_TRACUU.Models
 		
 		public Ward()
 		{
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
 			this._Streets = new EntitySet<Street>(new Action<Street>(this.attach_Streets), new Action<Street>(this.detach_Streets));
 			this._Trouser = default(EntityRef<Trouser>);
 			OnCreated();
@@ -487,6 +471,19 @@ namespace WEB_TRACUU.Models
 					this.SendPropertyChanged("IDTrousers");
 					this.OnIDTrousersChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Land", Storage="_Lands", ThisKey="IDWard", OtherKey="IDWard")]
+		public EntitySet<Land> Lands
+		{
+			get
+			{
+				return this._Lands;
+			}
+			set
+			{
+				this._Lands.Assign(value);
 			}
 		}
 		
@@ -557,6 +554,18 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		private void attach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ward = this;
+		}
+		
+		private void detach_Lands(Land entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ward = null;
+		}
+		
 		private void attach_Streets(Street entity)
 		{
 			this.SendPropertyChanging();
@@ -567,185 +576,6 @@ namespace WEB_TRACUU.Models
 		{
 			this.SendPropertyChanging();
 			entity.Ward = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Address")]
-	public partial class Address : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDAddress;
-		
-		private string _NumberHouse;
-		
-		private int _IDStreet;
-		
-		private EntitySet<Land> _Lands;
-		
-		private EntityRef<Street> _Street;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDAddressChanging(int value);
-    partial void OnIDAddressChanged();
-    partial void OnNumberHouseChanging(string value);
-    partial void OnNumberHouseChanged();
-    partial void OnIDStreetChanging(int value);
-    partial void OnIDStreetChanged();
-    #endregion
-		
-		public Address()
-		{
-			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			this._Street = default(EntityRef<Street>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAddress", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDAddress
-		{
-			get
-			{
-				return this._IDAddress;
-			}
-			set
-			{
-				if ((this._IDAddress != value))
-				{
-					this.OnIDAddressChanging(value);
-					this.SendPropertyChanging();
-					this._IDAddress = value;
-					this.SendPropertyChanged("IDAddress");
-					this.OnIDAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberHouse", DbType="NVarChar(50)")]
-		public string NumberHouse
-		{
-			get
-			{
-				return this._NumberHouse;
-			}
-			set
-			{
-				if ((this._NumberHouse != value))
-				{
-					this.OnNumberHouseChanging(value);
-					this.SendPropertyChanging();
-					this._NumberHouse = value;
-					this.SendPropertyChanged("NumberHouse");
-					this.OnNumberHouseChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStreet", DbType="Int NOT NULL")]
-		public int IDStreet
-		{
-			get
-			{
-				return this._IDStreet;
-			}
-			set
-			{
-				if ((this._IDStreet != value))
-				{
-					if (this._Street.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDStreetChanging(value);
-					this.SendPropertyChanging();
-					this._IDStreet = value;
-					this.SendPropertyChanged("IDStreet");
-					this.OnIDStreetChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Address_Land", Storage="_Lands", ThisKey="IDAddress", OtherKey="IDAddress")]
-		public EntitySet<Land> Lands
-		{
-			get
-			{
-				return this._Lands;
-			}
-			set
-			{
-				this._Lands.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Street_Address", Storage="_Street", ThisKey="IDStreet", OtherKey="IDStreet", IsForeignKey=true)]
-		public Street Street
-		{
-			get
-			{
-				return this._Street.Entity;
-			}
-			set
-			{
-				Street previousValue = this._Street.Entity;
-				if (((previousValue != value) 
-							|| (this._Street.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Street.Entity = null;
-						previousValue.Addresses.Remove(this);
-					}
-					this._Street.Entity = value;
-					if ((value != null))
-					{
-						value.Addresses.Add(this);
-						this._IDStreet = value.IDStreet;
-					}
-					else
-					{
-						this._IDStreet = default(int);
-					}
-					this.SendPropertyChanged("Street");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Address = this;
-		}
-		
-		private void detach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Address = null;
 		}
 	}
 	
@@ -2196,6 +2026,116 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InternetProtocol")]
+	public partial class InternetProtocol : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _stt;
+		
+		private System.Nullable<System.Guid> _idLand;
+		
+		private string _ip;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnsttChanging(int value);
+    partial void OnsttChanged();
+    partial void OnidLandChanging(System.Nullable<System.Guid> value);
+    partial void OnidLandChanged();
+    partial void OnipChanging(string value);
+    partial void OnipChanged();
+    #endregion
+		
+		public InternetProtocol()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stt", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int stt
+		{
+			get
+			{
+				return this._stt;
+			}
+			set
+			{
+				if ((this._stt != value))
+				{
+					this.OnsttChanging(value);
+					this.SendPropertyChanging();
+					this._stt = value;
+					this.SendPropertyChanged("stt");
+					this.OnsttChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLand", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> idLand
+		{
+			get
+			{
+				return this._idLand;
+			}
+			set
+			{
+				if ((this._idLand != value))
+				{
+					this.OnidLandChanging(value);
+					this.SendPropertyChanging();
+					this._idLand = value;
+					this.SendPropertyChanged("idLand");
+					this.OnidLandChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(50)")]
+		public string ip
+		{
+			get
+			{
+				return this._ip;
+			}
+			set
+			{
+				if ((this._ip != value))
+				{
+					this.OnipChanging(value);
+					this.SendPropertyChanging();
+					this._ip = value;
+					this.SendPropertyChanged("ip");
+					this.OnipChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Land")]
 	public partial class Land : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2213,8 +2153,6 @@ namespace WEB_TRACUU.Models
 		private System.Nullable<System.Guid> _IDCustomer;
 		
 		private System.Nullable<int> _IDTypeDetail;
-		
-		private System.Nullable<int> _IDAddress;
 		
 		private string _Image;
 		
@@ -2242,6 +2180,12 @@ namespace WEB_TRACUU.Models
 		
 		private System.Nullable<int> _IDDirection;
 		
+		private System.Nullable<int> _IDStreet;
+		
+		private System.Nullable<int> _IDWard;
+		
+		private string _Numhouse;
+		
 		private EntitySet<Convenient_Detail> _Convenient_Details;
 		
 		private EntitySet<Follow> _Follows;
@@ -2252,11 +2196,13 @@ namespace WEB_TRACUU.Models
 		
 		private EntityRef<Acreage> _Acreage;
 		
-		private EntityRef<Address> _Address;
-		
 		private EntityRef<Direction> _Direction;
 		
+		private EntityRef<Ward> _Ward;
+		
 		private EntityRef<Price> _Price;
+		
+		private EntityRef<Street> _Street;
 		
 		private EntityRef<TypeDetail> _TypeDetail;
 		
@@ -2278,8 +2224,6 @@ namespace WEB_TRACUU.Models
     partial void OnIDCustomerChanged();
     partial void OnIDTypeDetailChanging(System.Nullable<int> value);
     partial void OnIDTypeDetailChanged();
-    partial void OnIDAddressChanging(System.Nullable<int> value);
-    partial void OnIDAddressChanged();
     partial void OnImageChanging(string value);
     partial void OnImageChanged();
     partial void OnCreateDateChanging(System.Nullable<System.DateTime> value);
@@ -2306,6 +2250,12 @@ namespace WEB_TRACUU.Models
     partial void OnArea_detailChanged();
     partial void OnIDDirectionChanging(System.Nullable<int> value);
     partial void OnIDDirectionChanged();
+    partial void OnIDStreetChanging(System.Nullable<int> value);
+    partial void OnIDStreetChanged();
+    partial void OnIDWardChanging(System.Nullable<int> value);
+    partial void OnIDWardChanged();
+    partial void OnNumhouseChanging(string value);
+    partial void OnNumhouseChanged();
     #endregion
 		
 		public Land()
@@ -2315,9 +2265,10 @@ namespace WEB_TRACUU.Models
 			this._Furiture_details = new EntitySet<Furiture_detail>(new Action<Furiture_detail>(this.attach_Furiture_details), new Action<Furiture_detail>(this.detach_Furiture_details));
 			this._Image_Details = new EntitySet<Image_Detail>(new Action<Image_Detail>(this.attach_Image_Details), new Action<Image_Detail>(this.detach_Image_Details));
 			this._Acreage = default(EntityRef<Acreage>);
-			this._Address = default(EntityRef<Address>);
 			this._Direction = default(EntityRef<Direction>);
+			this._Ward = default(EntityRef<Ward>);
 			this._Price = default(EntityRef<Price>);
+			this._Street = default(EntityRef<Street>);
 			this._TypeDetail = default(EntityRef<TypeDetail>);
 			this._TypeDetail1 = default(EntityRef<TypeDetail>);
 			OnCreated();
@@ -2447,30 +2398,6 @@ namespace WEB_TRACUU.Models
 					this._IDTypeDetail = value;
 					this.SendPropertyChanged("IDTypeDetail");
 					this.OnIDTypeDetailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAddress", DbType="Int")]
-		public System.Nullable<int> IDAddress
-		{
-			get
-			{
-				return this._IDAddress;
-			}
-			set
-			{
-				if ((this._IDAddress != value))
-				{
-					if (this._Address.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDAddressChanging(value);
-					this.SendPropertyChanging();
-					this._IDAddress = value;
-					this.SendPropertyChanged("IDAddress");
-					this.OnIDAddressChanged();
 				}
 			}
 		}
@@ -2743,6 +2670,74 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStreet", DbType="Int")]
+		public System.Nullable<int> IDStreet
+		{
+			get
+			{
+				return this._IDStreet;
+			}
+			set
+			{
+				if ((this._IDStreet != value))
+				{
+					if (this._Street.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDStreetChanging(value);
+					this.SendPropertyChanging();
+					this._IDStreet = value;
+					this.SendPropertyChanged("IDStreet");
+					this.OnIDStreetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int")]
+		public System.Nullable<int> IDWard
+		{
+			get
+			{
+				return this._IDWard;
+			}
+			set
+			{
+				if ((this._IDWard != value))
+				{
+					if (this._Ward.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDWardChanging(value);
+					this.SendPropertyChanging();
+					this._IDWard = value;
+					this.SendPropertyChanged("IDWard");
+					this.OnIDWardChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Numhouse", DbType="NVarChar(50)")]
+		public string Numhouse
+		{
+			get
+			{
+				return this._Numhouse;
+			}
+			set
+			{
+				if ((this._Numhouse != value))
+				{
+					this.OnNumhouseChanging(value);
+					this.SendPropertyChanging();
+					this._Numhouse = value;
+					this.SendPropertyChanged("Numhouse");
+					this.OnNumhouseChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Land_Convenient_Detail", Storage="_Convenient_Details", ThisKey="IDLand", OtherKey="IDLand")]
 		public EntitySet<Convenient_Detail> Convenient_Details
 		{
@@ -2829,40 +2824,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Address_Land", Storage="_Address", ThisKey="IDAddress", OtherKey="IDAddress", IsForeignKey=true)]
-		public Address Address
-		{
-			get
-			{
-				return this._Address.Entity;
-			}
-			set
-			{
-				Address previousValue = this._Address.Entity;
-				if (((previousValue != value) 
-							|| (this._Address.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Address.Entity = null;
-						previousValue.Lands.Remove(this);
-					}
-					this._Address.Entity = value;
-					if ((value != null))
-					{
-						value.Lands.Add(this);
-						this._IDAddress = value.IDAddress;
-					}
-					else
-					{
-						this._IDAddress = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Address");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Direction_Land", Storage="_Direction", ThisKey="IDDirection", OtherKey="IDDirection", IsForeignKey=true)]
 		public Direction Direction
 		{
@@ -2897,6 +2858,40 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Land", Storage="_Ward", ThisKey="IDWard", OtherKey="IDWard", IsForeignKey=true)]
+		public Ward Ward
+		{
+			get
+			{
+				return this._Ward.Entity;
+			}
+			set
+			{
+				Ward previousValue = this._Ward.Entity;
+				if (((previousValue != value) 
+							|| (this._Ward.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ward.Entity = null;
+						previousValue.Lands.Remove(this);
+					}
+					this._Ward.Entity = value;
+					if ((value != null))
+					{
+						value.Lands.Add(this);
+						this._IDWard = value.IDWard;
+					}
+					else
+					{
+						this._IDWard = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Ward");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Price_Land", Storage="_Price", ThisKey="IDPrice", OtherKey="IDPrice", IsForeignKey=true)]
 		public Price Price
 		{
@@ -2927,6 +2922,40 @@ namespace WEB_TRACUU.Models
 						this._IDPrice = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Price");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Street_Land", Storage="_Street", ThisKey="IDStreet", OtherKey="IDStreet", IsForeignKey=true)]
+		public Street Street
+		{
+			get
+			{
+				return this._Street.Entity;
+			}
+			set
+			{
+				Street previousValue = this._Street.Entity;
+				if (((previousValue != value) 
+							|| (this._Street.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Street.Entity = null;
+						previousValue.Lands.Remove(this);
+					}
+					this._Street.Entity = value;
+					if ((value != null))
+					{
+						value.Lands.Add(this);
+						this._IDStreet = value.IDStreet;
+					}
+					else
+					{
+						this._IDStreet = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Street");
 				}
 			}
 		}
@@ -3216,9 +3245,9 @@ namespace WEB_TRACUU.Models
 		
 		private string _Street1;
 		
-		private int _IDWard;
+		private System.Nullable<int> _IDWard;
 		
-		private EntitySet<Address> _Addresses;
+		private EntitySet<Land> _Lands;
 		
 		private EntityRef<Ward> _Ward;
 		
@@ -3230,13 +3259,13 @@ namespace WEB_TRACUU.Models
     partial void OnIDStreetChanged();
     partial void OnStreet1Changing(string value);
     partial void OnStreet1Changed();
-    partial void OnIDWardChanging(int value);
+    partial void OnIDWardChanging(System.Nullable<int> value);
     partial void OnIDWardChanged();
     #endregion
 		
 		public Street()
 		{
-			this._Addresses = new EntitySet<Address>(new Action<Address>(this.attach_Addresses), new Action<Address>(this.detach_Addresses));
+			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
 			this._Ward = default(EntityRef<Ward>);
 			OnCreated();
 		}
@@ -3281,8 +3310,8 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int NOT NULL")]
-		public int IDWard
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int")]
+		public System.Nullable<int> IDWard
 		{
 			get
 			{
@@ -3305,16 +3334,16 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Street_Address", Storage="_Addresses", ThisKey="IDStreet", OtherKey="IDStreet")]
-		public EntitySet<Address> Addresses
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Street_Land", Storage="_Lands", ThisKey="IDStreet", OtherKey="IDStreet")]
+		public EntitySet<Land> Lands
 		{
 			get
 			{
-				return this._Addresses;
+				return this._Lands;
 			}
 			set
 			{
-				this._Addresses.Assign(value);
+				this._Lands.Assign(value);
 			}
 		}
 		
@@ -3345,7 +3374,7 @@ namespace WEB_TRACUU.Models
 					}
 					else
 					{
-						this._IDWard = default(int);
+						this._IDWard = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Ward");
 				}
@@ -3372,13 +3401,13 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		private void attach_Addresses(Address entity)
+		private void attach_Lands(Land entity)
 		{
 			this.SendPropertyChanging();
 			entity.Street = this;
 		}
 		
-		private void detach_Addresses(Address entity)
+		private void detach_Lands(Land entity)
 		{
 			this.SendPropertyChanging();
 			entity.Street = null;
@@ -3844,491 +3873,74 @@ namespace WEB_TRACUU.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.InternetProtocol")]
-	public partial class InternetProtocol : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _stt;
-		
-		private System.Nullable<System.Guid> _idLand;
-		
-		private string _ip;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnsttChanging(int value);
-    partial void OnsttChanged();
-    partial void OnidLandChanging(System.Nullable<System.Guid> value);
-    partial void OnidLandChanged();
-    partial void OnipChanging(string value);
-    partial void OnipChanged();
-    #endregion
-		
-		public InternetProtocol()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stt", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int stt
-		{
-			get
-			{
-				return this._stt;
-			}
-			set
-			{
-				if ((this._stt != value))
-				{
-					this.OnsttChanging(value);
-					this.SendPropertyChanging();
-					this._stt = value;
-					this.SendPropertyChanged("stt");
-					this.OnsttChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idLand", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> idLand
-		{
-			get
-			{
-				return this._idLand;
-			}
-			set
-			{
-				if ((this._idLand != value))
-				{
-					this.OnidLandChanging(value);
-					this.SendPropertyChanging();
-					this._idLand = value;
-					this.SendPropertyChanged("idLand");
-					this.OnidLandChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ip", DbType="VarChar(50)")]
-		public string ip
-		{
-			get
-			{
-				return this._ip;
-			}
-			set
-			{
-				if ((this._ip != value))
-				{
-					this.OnipChanging(value);
-					this.SendPropertyChanging();
-					this._ip = value;
-					this.SendPropertyChanged("ip");
-					this.OnipChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Address_Lan")]
-	public partial class Address_Lan
-	{
-		
-		private System.Guid _IDLand;
-		
-		private string _Name;
-		
-		private string _Street;
-		
-		private string _Ward;
-		
-		private string _Trousers;
-		
-		private string _NumberHouse;
-		
-		private int _IDStreet;
-		
-		private int _IDWard;
-		
-		private int _IDTrousers;
-		
-		public Address_Lan()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid IDLand
-		{
-			get
-			{
-				return this._IDLand;
-			}
-			set
-			{
-				if ((this._IDLand != value))
-				{
-					this._IDLand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street", DbType="NVarChar(50)")]
-		public string Street
-		{
-			get
-			{
-				return this._Street;
-			}
-			set
-			{
-				if ((this._Street != value))
-				{
-					this._Street = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ward", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Ward
-		{
-			get
-			{
-				return this._Ward;
-			}
-			set
-			{
-				if ((this._Ward != value))
-				{
-					this._Ward = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Trousers", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Trousers
-		{
-			get
-			{
-				return this._Trousers;
-			}
-			set
-			{
-				if ((this._Trousers != value))
-				{
-					this._Trousers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberHouse", DbType="NVarChar(50)")]
-		public string NumberHouse
-		{
-			get
-			{
-				return this._NumberHouse;
-			}
-			set
-			{
-				if ((this._NumberHouse != value))
-				{
-					this._NumberHouse = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStreet", DbType="Int NOT NULL")]
-		public int IDStreet
-		{
-			get
-			{
-				return this._IDStreet;
-			}
-			set
-			{
-				if ((this._IDStreet != value))
-				{
-					this._IDStreet = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int NOT NULL")]
-		public int IDWard
-		{
-			get
-			{
-				return this._IDWard;
-			}
-			set
-			{
-				if ((this._IDWard != value))
-				{
-					this._IDWard = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int NOT NULL")]
-		public int IDTrousers
-		{
-			get
-			{
-				return this._IDTrousers;
-			}
-			set
-			{
-				if ((this._IDTrousers != value))
-				{
-					this._IDTrousers = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Overview_Land")]
 	public partial class Overview_Land
 	{
 		
-		private string _Acreage;
-		
-		private string _Street;
-		
-		private string _Ward;
-		
-		private string _Trousers;
-		
-		private string _NumberHouse;
-		
-		private int _IDStreet;
-		
-		private int _IDWard;
-		
-		private int _IDTrousers;
-		
-		private int _IDAcreage;
-		
 		private System.Guid _IDLand;
-		
-		private System.Nullable<System.DateTime> _ModifyDate;
-		
-		private System.Nullable<System.DateTime> _CreateDate;
-		
-		private System.Nullable<int> _IDPrice;
-		
-		private System.Nullable<bool> _Flag_Approval;
-		
-		private string _Image;
 		
 		private string _Name;
 		
 		private string _Decrition;
 		
-		private System.Nullable<System.DateTime> _ExpiredDate;
+		private System.Nullable<System.Guid> _IDCustomer;
+		
+		private string _Image;
+		
+		private System.Nullable<System.DateTime> _CreateDate;
+		
+		private System.Nullable<System.DateTime> _ModifyDate;
+		
+		private System.Nullable<bool> _Flag_Approval;
 		
 		private System.Nullable<bool> _Sell;
 		
-		private string _Price;
+		private System.Nullable<System.DateTime> _ExpiredDate;
 		
 		private System.Nullable<decimal> _Price_detail;
 		
 		private System.Nullable<int> _View;
 		
-		private System.Nullable<int> _IDTypeDetail;
+		private System.Nullable<int> _Area_detail;
 		
-		private System.Nullable<int> _IDType;
+		private string _Acreage;
 		
-		private string _Type_Name;
+		private string _Numhouse;
+		
+		private int _IDAcreage;
+		
+		private int _IDPrice;
+		
+		private string _Price;
+		
+		private string _Direction;
+		
+		private int _IDDirection;
+		
+		private string _CustomerName;
+		
+		private string _PhoneNumber;
 		
 		private string _TypeNameDetail;
 		
-		private System.Nullable<int> _IDDirection;
+		private System.Nullable<int> _IDType;
+		
+		private int _IDTrousers;
+		
+		private string _Trousers;
+		
+		private string _Ward;
+		
+		private string _Street;
+		
+		private System.Nullable<int> _IDStreet;
+		
+		private int _IDTypeDetail;
+		
+		private int _IDWard;
 		
 		public Overview_Land()
 		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Acreage", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string Acreage
-		{
-			get
-			{
-				return this._Acreage;
-			}
-			set
-			{
-				if ((this._Acreage != value))
-				{
-					this._Acreage = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street", DbType="NVarChar(50)")]
-		public string Street
-		{
-			get
-			{
-				return this._Street;
-			}
-			set
-			{
-				if ((this._Street != value))
-				{
-					this._Street = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ward", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Ward
-		{
-			get
-			{
-				return this._Ward;
-			}
-			set
-			{
-				if ((this._Ward != value))
-				{
-					this._Ward = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Trousers", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Trousers
-		{
-			get
-			{
-				return this._Trousers;
-			}
-			set
-			{
-				if ((this._Trousers != value))
-				{
-					this._Trousers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberHouse", DbType="NVarChar(50)")]
-		public string NumberHouse
-		{
-			get
-			{
-				return this._NumberHouse;
-			}
-			set
-			{
-				if ((this._NumberHouse != value))
-				{
-					this._NumberHouse = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStreet", DbType="Int NOT NULL")]
-		public int IDStreet
-		{
-			get
-			{
-				return this._IDStreet;
-			}
-			set
-			{
-				if ((this._IDStreet != value))
-				{
-					this._IDStreet = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int NOT NULL")]
-		public int IDWard
-		{
-			get
-			{
-				return this._IDWard;
-			}
-			set
-			{
-				if ((this._IDWard != value))
-				{
-					this._IDWard = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int NOT NULL")]
-		public int IDTrousers
-		{
-			get
-			{
-				return this._IDTrousers;
-			}
-			set
-			{
-				if ((this._IDTrousers != value))
-				{
-					this._IDTrousers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAcreage", DbType="Int NOT NULL")]
-		public int IDAcreage
-		{
-			get
-			{
-				return this._IDAcreage;
-			}
-			set
-			{
-				if ((this._IDAcreage != value))
-				{
-					this._IDAcreage = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLand", DbType="UniqueIdentifier NOT NULL")]
@@ -4343,86 +3955,6 @@ namespace WEB_TRACUU.Models
 				if ((this._IDLand != value))
 				{
 					this._IDLand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ModifyDate
-		{
-			get
-			{
-				return this._ModifyDate;
-			}
-			set
-			{
-				if ((this._ModifyDate != value))
-				{
-					this._ModifyDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreateDate
-		{
-			get
-			{
-				return this._CreateDate;
-			}
-			set
-			{
-				if ((this._CreateDate != value))
-				{
-					this._CreateDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int")]
-		public System.Nullable<int> IDPrice
-		{
-			get
-			{
-				return this._IDPrice;
-			}
-			set
-			{
-				if ((this._IDPrice != value))
-				{
-					this._IDPrice = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Approval", DbType="Bit")]
-		public System.Nullable<bool> Flag_Approval
-		{
-			get
-			{
-				return this._Flag_Approval;
-			}
-			set
-			{
-				if ((this._Flag_Approval != value))
-				{
-					this._Flag_Approval = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
-		public string Image
-		{
-			get
-			{
-				return this._Image;
-			}
-			set
-			{
-				if ((this._Image != value))
-				{
-					this._Image = value;
 				}
 			}
 		}
@@ -4459,18 +3991,82 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiredDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ExpiredDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> IDCustomer
 		{
 			get
 			{
-				return this._ExpiredDate;
+				return this._IDCustomer;
 			}
 			set
 			{
-				if ((this._ExpiredDate != value))
+				if ((this._IDCustomer != value))
 				{
-					this._ExpiredDate = value;
+					this._IDCustomer = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(MAX)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this._Image = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this._CreateDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModifyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ModifyDate
+		{
+			get
+			{
+				return this._ModifyDate;
+			}
+			set
+			{
+				if ((this._ModifyDate != value))
+				{
+					this._ModifyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Flag_Approval", DbType="Bit")]
+		public System.Nullable<bool> Flag_Approval
+		{
+			get
+			{
+				return this._Flag_Approval;
+			}
+			set
+			{
+				if ((this._Flag_Approval != value))
+				{
+					this._Flag_Approval = value;
 				}
 			}
 		}
@@ -4491,18 +4087,18 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="NVarChar(50)")]
-		public string Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ExpiredDate
 		{
 			get
 			{
-				return this._Price;
+				return this._ExpiredDate;
 			}
 			set
 			{
-				if ((this._Price != value))
+				if ((this._ExpiredDate != value))
 				{
-					this._Price = value;
+					this._ExpiredDate = value;
 				}
 			}
 		}
@@ -4539,50 +4135,162 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTypeDetail", DbType="Int")]
-		public System.Nullable<int> IDTypeDetail
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Area_detail", DbType="Int")]
+		public System.Nullable<int> Area_detail
 		{
 			get
 			{
-				return this._IDTypeDetail;
+				return this._Area_detail;
 			}
 			set
 			{
-				if ((this._IDTypeDetail != value))
+				if ((this._Area_detail != value))
 				{
-					this._IDTypeDetail = value;
+					this._Area_detail = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int")]
-		public System.Nullable<int> IDType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Acreage", DbType="VarChar(200)")]
+		public string Acreage
 		{
 			get
 			{
-				return this._IDType;
+				return this._Acreage;
 			}
 			set
 			{
-				if ((this._IDType != value))
+				if ((this._Acreage != value))
 				{
-					this._IDType = value;
+					this._Acreage = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_Name", DbType="NVarChar(50)")]
-		public string Type_Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Numhouse", DbType="NVarChar(50)")]
+		public string Numhouse
 		{
 			get
 			{
-				return this._Type_Name;
+				return this._Numhouse;
 			}
 			set
 			{
-				if ((this._Type_Name != value))
+				if ((this._Numhouse != value))
 				{
-					this._Type_Name = value;
+					this._Numhouse = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDAcreage", DbType="Int NOT NULL")]
+		public int IDAcreage
+		{
+			get
+			{
+				return this._IDAcreage;
+			}
+			set
+			{
+				if ((this._IDAcreage != value))
+				{
+					this._IDAcreage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPrice", DbType="Int NOT NULL")]
+		public int IDPrice
+		{
+			get
+			{
+				return this._IDPrice;
+			}
+			set
+			{
+				if ((this._IDPrice != value))
+				{
+					this._IDPrice = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="NVarChar(50)")]
+		public string Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this._Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direction", DbType="NVarChar(50)")]
+		public string Direction
+		{
+			get
+			{
+				return this._Direction;
+			}
+			set
+			{
+				if ((this._Direction != value))
+				{
+					this._Direction = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int NOT NULL")]
+		public int IDDirection
+		{
+			get
+			{
+				return this._IDDirection;
+			}
+			set
+			{
+				if ((this._IDDirection != value))
+				{
+					this._IDDirection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(30)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(15)")]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this._PhoneNumber = value;
 				}
 			}
 		}
@@ -4603,18 +4311,130 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int")]
-		public System.Nullable<int> IDDirection
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDType", DbType="Int")]
+		public System.Nullable<int> IDType
 		{
 			get
 			{
-				return this._IDDirection;
+				return this._IDType;
 			}
 			set
 			{
-				if ((this._IDDirection != value))
+				if ((this._IDType != value))
 				{
-					this._IDDirection = value;
+					this._IDType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int NOT NULL")]
+		public int IDTrousers
+		{
+			get
+			{
+				return this._IDTrousers;
+			}
+			set
+			{
+				if ((this._IDTrousers != value))
+				{
+					this._IDTrousers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Trousers", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Trousers
+		{
+			get
+			{
+				return this._Trousers;
+			}
+			set
+			{
+				if ((this._Trousers != value))
+				{
+					this._Trousers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ward", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Ward
+		{
+			get
+			{
+				return this._Ward;
+			}
+			set
+			{
+				if ((this._Ward != value))
+				{
+					this._Ward = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Street", DbType="NVarChar(50)")]
+		public string Street
+		{
+			get
+			{
+				return this._Street;
+			}
+			set
+			{
+				if ((this._Street != value))
+				{
+					this._Street = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStreet", DbType="Int")]
+		public System.Nullable<int> IDStreet
+		{
+			get
+			{
+				return this._IDStreet;
+			}
+			set
+			{
+				if ((this._IDStreet != value))
+				{
+					this._IDStreet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTypeDetail", DbType="Int NOT NULL")]
+		public int IDTypeDetail
+		{
+			get
+			{
+				return this._IDTypeDetail;
+			}
+			set
+			{
+				if ((this._IDTypeDetail != value))
+				{
+					this._IDTypeDetail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int NOT NULL")]
+		public int IDWard
+		{
+			get
+			{
+				return this._IDWard;
+			}
+			set
+			{
+				if ((this._IDWard != value))
+				{
+					this._IDWard = value;
 				}
 			}
 		}

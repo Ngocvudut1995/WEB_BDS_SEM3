@@ -33,7 +33,7 @@ namespace WEB_TRACUU.Controllers
                         _IDPrice = item.IDPrice,
                         _Mota = item.Decrition,
                         _TenVp = item.Name,
-                        _SoNha = item.NumberHouse,
+                        _SoNha = item.Numhouse,
                         _MaQuan = (int)item.IDTrousers,
                         _TenQuan = item.Trousers,
                         _MaLoai = (int)item.IDType,

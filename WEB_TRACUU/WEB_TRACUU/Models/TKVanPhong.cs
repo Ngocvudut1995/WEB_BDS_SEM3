@@ -20,7 +20,7 @@ namespace WEB_TRACUU.Models
         public string _Anh { get; set; }
         public string _SoNha { get; set; }
         public string _Duong { get; set; }
-        public int _MaDuong { get; set; }
+        public int? _MaDuong { get; set; }
         public string _Phuong { get; set; }
         public int _MaPhuong { get; set; }
         public int _MaQuan { get; set; }
@@ -61,7 +61,7 @@ namespace WEB_TRACUU.Models
                         _IDPrice = item.IDPrice,
                         _Mota = item.Decrition,
                         _TenVp = item.Name,
-                        _SoNha = item.NumberHouse,
+                        _SoNha = item.Numhouse,
                         _MaQuan = (int)item.IDTrousers,
                         _TenQuan = item.Trousers,
                         _MaLoai = (int)item.IDType,

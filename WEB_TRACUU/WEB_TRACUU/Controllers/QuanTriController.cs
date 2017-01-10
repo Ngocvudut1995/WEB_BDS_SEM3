@@ -634,7 +634,7 @@ namespace WEB_TRACUU.Controllers
                     _MaDT = sql.a.IDAcreage,
                     _IDPrice = sql.a.IDPrice,
                     _TenVp = sql.a.Name,
-                    _SoNha = sql.a.NumberHouse,
+                    _SoNha = sql.a.Numhouse,
                     _MaQuan = sql.a.IDTrousers,
                     _CreateDate = sql.a.CreateDate,
                     _ModifyDate = sql.a.ModifyDate,
@@ -697,10 +697,13 @@ namespace WEB_TRACUU.Controllers
                     // Lay ID cao nhat hien tai
 
                     // update address
-                    var address = (from a in db.Addresses where a.IDAddress == lands.IDAddress select a).SingleOrDefault();
-                 
-                    address.IDStreet = json._duong;
-                    address.NumberHouse = json._soNha;
+                   lands.Numhouse = json._soNha;
+                    // Insert address
+                    if (json._MaDuong != null)
+                    {
+                        lands.IDStreet = json._MaDuong;
+                    }
+                    lands.IDWard = json._MaPhuong;
                     
                     db.SubmitChanges();
 
@@ -730,7 +733,7 @@ namespace WEB_TRACUU.Controllers
                         _MaVP = item.IDLand,
                         _TenVp = item.Name,
                         _TenLoai = item.TypeNameDetail,
-                        _DiaCHi = item.NumberHouse + " " + item.Street + ", " + item.Trousers + ", TP Đà Nẵng.",
+                        _DiaCHi = item.Numhouse + " " + item.Street + ", " + item.Trousers + ", TP Đà Nẵng.",
                         _Gia = item.Price_detail,
                         _DienTich = item.Acreage,
                         _IDDienTich = item.IDAcreage,

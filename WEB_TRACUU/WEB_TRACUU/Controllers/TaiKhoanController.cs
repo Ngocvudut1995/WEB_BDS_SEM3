@@ -338,7 +338,7 @@ namespace WEB_TRACUU.Controllers
                         list.Add(new BDS_Detail
                         {
                             _IDLand = item.IDLand,
-                            _NumberHouse = item.c.NumberHouse
+                            _NumberHouse = item.c.Numhouse
                         });
                     }
                     db.Connection.Close();
@@ -489,7 +489,7 @@ namespace WEB_TRACUU.Controllers
                                    a,
                                    b.CustomerName,
                                    b.IDCustomer,
-                                   c.NumberHouse,
+                                   c.Numhouse ,
                                    c.Street,
                                    c.Trousers,
                                    c.Ward,
@@ -506,7 +506,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -546,7 +546,7 @@ namespace WEB_TRACUU.Controllers
                                    a,
                                    b.CustomerName,
                                    b.IDCustomer,
-                                   c.NumberHouse,
+                                   c.Numhouse,
                                    c.Street,
                                    c.Trousers,
                                    c.Ward,
@@ -562,7 +562,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -615,7 +615,7 @@ namespace WEB_TRACUU.Controllers
                                   a,
                                   b.CustomerName,
                                   b.IDCustomer,
-                                  c.NumberHouse,
+                                  c.Numhouse,
                                   c.Street,
                                   c.Trousers,
                                   c.Ward,
@@ -631,7 +631,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -670,7 +670,7 @@ namespace WEB_TRACUU.Controllers
                                    a,
                                    b.CustomerName,
                                    b.IDCustomer,
-                                   c.NumberHouse,
+                                   c.Numhouse,
                                    c.Street,
                                    c.Trousers,
                                    c.Ward,
@@ -686,7 +686,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -739,7 +739,7 @@ namespace WEB_TRACUU.Controllers
                                   a,
                                   b.CustomerName,
                                   b.IDCustomer,
-                                  c.NumberHouse,
+                                  c.Numhouse,
                                   c.Street,
                                   c.Trousers,
                                   c.Ward,
@@ -755,7 +755,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -794,7 +794,7 @@ namespace WEB_TRACUU.Controllers
                                   a,
                                   b.CustomerName,
                                   b.IDCustomer,
-                                  c.NumberHouse,
+                                  c.Numhouse,
                                   c.Street,
                                   c.Trousers,
                                   c.Ward,
@@ -810,7 +810,7 @@ namespace WEB_TRACUU.Controllers
                         b._CreateDate = item.a.CreateDate;
                         b._ModifyDate = item.a.ModifyDate;
                         b._Decription = item.a.Decrition;
-                        b._NumberHouse = item.NumberHouse;
+                        b._NumberHouse = item.Numhouse;
                         b._Street = item.Street;
                         b._Trousers = item.Trousers;
                         b._Ward = item.Ward;
@@ -844,58 +844,58 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
-        [HttpPost]
-        public IHttpActionResult Creat_BDS(JObject data)
-        {
+        //[HttpPost]
+        //public IHttpActionResult Creat_BDS(JObject data)
+        //{
 
-            dynamic json = data;
+        //    dynamic json = data;
 
-            try
-            {
-                if (test_user(json._IDCustomer) != true && test_quyenadmin() != true) return null;
-                using (db = new DataTraCuuVPDataContext())
-                {
-                    db.Connection.Open();
-                    Land lands = new Land();
-                    lands.IDLand = Guid.NewGuid();
-                    lands.IDAddress = json._Name;
-                    lands.IDAcreage = json._DienTich;
-                    lands.IDPrice = json._Price;
-                    lands.IDTypeDetail = json._IDType;
-                    lands.Sell = json.Sell;
-                    lands.Decrition = json._Decription;
-                    lands.CreateDate = new DateTime();
-                    lands.ModifyDate = new DateTime();
-                    lands.ExpiredDate = json._ExpiredDate;
-                    lands.IDCustomer = json._IDCustomer;
-                    lands.Flag_Approval = false;
-                    lands.Image = json._Image();
-                    // Lay ID cao nhat hien tai
-                    var IDAddress_current = (from a in db.Addresses
-                                             select new { a.IDAddress })
-                                             .OrderByDescending(k => k.IDAddress)
-                                             .Take(1).SingleOrDefault();
-                    // Insert address
-                    Address address = new Address();
-                    address.IDStreet = json._Street;
-                    address.NumberHouse = json._NumberHouse;
-                    db.Addresses.InsertOnSubmit(address);
-                    db.SubmitChanges();
+        //    try
+        //    {
+        //        if (test_user(json._IDCustomer) != true && test_quyenadmin() != true) return null;
+        //        using (db = new DataTraCuuVPDataContext())
+        //        {
+        //            db.Connection.Open();
+        //            Land lands = new Land();
+        //            lands.IDLand = Guid.NewGuid();
+        //            lands.IDAddress = json._Name;
+        //            lands.IDAcreage = json._DienTich;
+        //            lands.IDPrice = json._Price;
+        //            lands.IDTypeDetail = json._IDType;
+        //            lands.Sell = json.Sell;
+        //            lands.Decrition = json._Decription;
+        //            lands.CreateDate = new DateTime();
+        //            lands.ModifyDate = new DateTime();
+        //            lands.ExpiredDate = json._ExpiredDate;
+        //            lands.IDCustomer = json._IDCustomer;
+        //            lands.Flag_Approval = false;
+        //            lands.Image = json._Image();
+        //            // Lay ID cao nhat hien tai
+        //            var IDAddress_current = (from a in db.Addresses
+        //                                     select new { a.IDAddress })
+        //                                     .OrderByDescending(k => k.IDAddress)
+        //                                     .Take(1).SingleOrDefault();
+        //            // Insert address
+        //            Address address = new Address();
+        //            address.IDStreet = json._Street;
+        //            address.NumberHouse = json._NumberHouse;
+        //            db.Addresses.InsertOnSubmit(address);
+        //            db.SubmitChanges();
 
-                    lands.IDAddress = IDAddress_current.IDAddress + 1;
-                    db.Lands.InsertOnSubmit(lands);
-                    db.SubmitChanges();
+        //            lands.IDAddress = IDAddress_current.IDAddress + 1;
+        //            db.Lands.InsertOnSubmit(lands);
+        //            db.SubmitChanges();
 
-                    db.Connection.Close();
-                    return Ok(json);
-                }
+        //            db.Connection.Close();
+        //            return Ok(json);
+        //        }
 
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return NotFound();
+        //    }
+        //}
         [HttpGet]
         public IEnumerable<Customer> get_all_customer()
         {

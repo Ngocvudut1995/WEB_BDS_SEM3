@@ -31,7 +31,8 @@
 
     <link href="~/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>*@
+    <script src="~/Scripts/jquery-ui.min.js"></script>
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>*@
 
 </head>
@@ -212,7 +213,7 @@
                         <li><a href="#/TimKiem" ng-click="change_tab(4)">Dự án đang giao dịch</a></li>
                     </ul>
                 </li>*@
-                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                <li class="dropdown navtab tab_menu hidden-xs " style="">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-usd"></span> MUA BÁN <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
@@ -221,13 +222,13 @@
 
                         <li><a href="#/TimKiem/true/0/0/0/0/0/0/1/0" ng-click="change_tab(4)">Căn hộ</a></li>
                         <li><a href="#/TimKiem/true/0/0/0/0/0/0/2/0" ng-click="change_tab(4)">Nhà</a></li>
-                        <li><a href="#/TimKiemtrue/0/0/0/0/0/0/3/0" ng-click="change_tab(4)">Văn phòng</a></li>
-                        <li><a href="#/TimKiemtrue/0/0/0/0/0/0/4/0" ng-click="change_tab(4)">Đất</a></li>
-                        <li><a href="#/TimKiemtrue/0/0/0/0/0/0/5/0" ng-click="change_tab(4)">Khác</a></li>
+                        <li><a href="#/TimKiem/true/0/0/0/0/0/0/3/0" ng-click="change_tab(4)">Văn phòng</a></li>
+                        <li><a href="#/TimKiem/true/0/0/0/0/0/0/4/0" ng-click="change_tab(4)">Đất</a></li>
+                        <li><a href="#/TimKiem/true/0/0/0/0/0/0/5/0" ng-click="change_tab(4)">Khác</a></li>
 
                     </ul>
                 </li>
-                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                <li class="dropdown navtab tab_menu hidden-xs " style="">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-tasks"></span> CHO THUÊ <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
@@ -241,7 +242,7 @@
                         <li><a href="#/TimKiem/false/0/0/0/0/0/0/5/0" ng-click="change_tab(4)">Khác</a></li>
                     </ul>
                 </li>
-                <li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
+                <li class="dropdown navtab tab_menu hidden-xs " style="">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-user"></span> Tài Khoản <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
@@ -318,7 +319,7 @@
 
     </div>
     @*<hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>*@
-    <div class="" ng-controller="route_view" ng-view style="padding: 0px; margin-top: 20px">
+    <div class="" ng-view style="padding: 0px; margin-top: 20px">
 
     </div>
     <div class="body-content">
