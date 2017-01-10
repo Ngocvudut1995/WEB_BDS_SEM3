@@ -117,41 +117,41 @@
                                 </div>
                                 <div class="div-post col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px">
 
-                                    <div class="form-group col-md-12 col-xs-12 col-sm-12" ng-init="ban_thue = 0">
+                                    <div class="form-group col-md-12 col-xs-12 col-sm-12">
                                         <div class="col-md-3 col-xs-3 col-sm-3">
                                             <label style="width: 100%; text-align: right" class="label-Form">Loại dự án<span style="color: #ff6666">(*)</span></label>
                                         </div>
                                         <div style="font-size: 14px" class="col-md-9 col-xs-9 col-sm-9">
                                             <ul class="nav my_nav_tab_2 container" style="padding-left: 0px">
-                                                <li ng-class="[{active:ban_thue==1}]" class="navtab2" style="margin-left: 0px">
-                                                    <a ng-click="ban_thue =1" style="padding: 7px 10px">Bán</a>
+                                                <li ng-class="[{active:ban_thue==true}]" class="navtab2" style="margin-left: 0px">
+                                                    <a ng-click="ban_thue =true;change_type_land(loai)" style="padding: 7px 10px">Bán</a>
                                                 </li>
-                                                <li ng-class="[{active:ban_thue==2}]" class="navtab2" style="margin-left: 0px">
-                                                    <a ng-click="ban_thue =2" style="padding: 7px 10px">Cho Thuê</a>
+                                                <li ng-class="[{active:ban_thue==false}]" class="navtab2" style="margin-left: 0px">
+                                                    <a ng-click="ban_thue =false;change_type_land(loai)" style="padding: 7px 10px">Cho Thuê</a>
                                                 </li>
                                             </ul>
-                                            <span style="color: #ff6666" ng-if="ban_thue == 0">Vui lòng chọn loại đăng tin.</span>
+                                           
                                         </div>
                                        
                                     </div>
-                                    <div class="form-group col-md-12 col-xs-12 col-sm-12" style="margin-top: 10px" ng-init="loai=0">
+                                    <div class="form-group col-md-12 col-xs-12 col-sm-12" style="margin-top: 10px">
                                         <div class="col-md-3 col-xs-3 col-sm-3">
                                             <label style="width: 100%; text-align: right" class="label-Form">Loại bất động sản<span style="color: #ff6666">(*)</span></label>
 
                                         </div>
                                         <div style="padding-left: 14px; font-size: 14px;" class="col-md-9 col-sm-9 col-xs-9">
                                             <ul class="nav my_nav_tab_2 container" style="padding-left: 0px">
-                                                <li ng-class="[{active:loai==1}]" class="navtab2" style="margin-left: 0px">
-                                                    <a ng-click="loai =1;change_type_land(1)" style="padding: 7px 10px">Nhà</a>
+                                                <li ng-class="[{active:loai==2}]" class="navtab2" style="margin-left: 0px">
+                                                    <a ng-click="loai =1;change_type_land(2)" style="padding: 7px 10px">Nhà</a>
                                                 </li>
-                                                <li ng-class="[{active:loai==2}]" class="navtab2">
-                                                    <a ng-click="loai =2;change_type_land(2)" style="padding: 7px 10px">Căn hộ</a>
-                                                </li>
-                                                <li ng-class="[{active:loai==3}]" class="navtab2">
-                                                    <a ng-click="loai =3;change_type_land(3)" style="padding: 7px 10px">Văn phòng</a>
+                                                <li ng-class="[{active:loai==1}]" class="navtab2">
+                                                    <a ng-click="loai =2;change_type_land(1)" style="padding: 7px 10px">Căn hộ</a>
                                                 </li>
                                                 <li ng-class="[{active:loai==4}]" class="navtab2">
-                                                    <a ng-click="loai =4;change_type_land(4)" style="padding: 7px 10px">Nhà đất</a>
+                                                    <a ng-click="loai =3;change_type_land(4)" style="padding: 7px 10px">Văn phòng</a>
+                                                </li>
+                                                <li ng-class="[{active:loai==3}]" class="navtab2">
+                                                    <a ng-click="loai =4;change_type_land(3)" style="padding: 7px 10px">Nhà đất</a>
                                                 </li>
                                                 <li ng-class="[{active:loai==5}]" class="navtab2">
                                                     <a ng-click="loai =5;change_type_land(5)" style="padding: 7px 10px">Nhà đất khác</a>
@@ -192,15 +192,18 @@
                                             <label style="width: 100%; text-align: right" class="label-Form">Giá tiền<span style="color: #ff6666">(*)</span></label>
                                         </div>
                                         <div style="float: left; padding-left: 14px" class="col-md-9 col-sm-9 col-xs-9">
-                                            <input type="number" class="input-text" style="width: 35%; float: left" placeholder="Giá sản phẩm" name="gia"ng-model="gia" required>
-                                            <select class="select-post" style="width: 28%; margin-left: 10px; float: left" ng-model="select_loaiGia">
-                                                <option value="0" selected="selected">Tỉ </option>
+                                            <input ng-hide="check_tt == 1" type="number" min="1" class="input-text" style="width: 35%; float: left" placeholder="Giá sản phẩm" name="gia"ng-model="gia" required>
+                                           
+                                             <select ng-hide="check_tt == 1" class="select-post" style="width: 28%; margin-left: 10px; float: left" ng-model="select_loaiGia">
+                                                <option value="0" selected="selected" ng-hide="ban_thue==false">Tỉ </option>
                                                 <option value="1" selected="selected">Triệu </option>
 
                                             </select>
                                             <input type="checkbox" style="float: left; margin: 10px -5px auto 10px" ng-click="thoa_thuan()" />
                                             <label style="font-size: 14px; margin-top: 5px; width: 28%; padding-left: 10px; font-weight: 400;margin-bottom: 4%;">Giá thỏa thuận</label>
-                                            <span style="color: #ff6666" ng-show="myForm.gia.$invalid && myForm.gia.$error.required">Vui lòng nhập giá</span>
+                                            <span style="color: #ff6666"
+                                                   ng-show="(myForm.gia.$invalid && myForm.gia.$error.required || myForm.gia.$error.min) 
+                                                  && (check_tt == 0)">Vui lòng nhập giá.</span>
                                         </div>
 
                                         
@@ -209,10 +212,24 @@
                                         <div class="col-md-3 col-xs-3 col-sm-3">
                                             <label style="width: 100%; text-align: right" class="label-Form">Diện tích<span style="color: #ff6666">(*)</span></label>
                                         </div>
-                                        <div style="float :left; padding-left:14px" class="col-md-9 col-sm-9 col-xs-9">
+                                        <div style="float: left; padding-left: 14px" class="col-md-9 col-sm-9 col-xs-9">
                                             <input type="number" class="input-text" style="width: 35%; float: left" placeholder="Diện tích" ng-model="dien_tich" required name="dien_tich">
-                                            <span style="width: 62%; float: left; padding-top: 7px; font-size: 14px; margin-left: 10px;margin-bottom: 4%;">m<sup>2</sup></span>
+                                            <span style="width: 62%; float: left; padding-top: 7px; font-size: 14px; margin-left: 10px; margin-bottom: 4%;">m<sup>2</sup></span>
                                             <span style="color: #ff6666" ng-show="myForm.dien_tich.$invalid && myForm.dien_tich.$error.required">Vui lòng nhập diện tích</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-12 col-xs-12 col-sm-12" style="margin-top: 10px">
+                                        <div class="col-md-3 col-xs-3 col-sm-3">
+                                            <label style="width: 100%; text-align: right" class="label-Form">Hướng nhà</label>
+                                        </div>
+                                        <div style="float: left; padding-left: 14px" class="col-md-9 col-sm-9 col-xs-9">
+                                            <select class="form-control select-post" style="width: 50%; float: left;" ng-model="select_huong"
+                                                    ng-options="x as x.Direction1 for x in listHuong track by x.IDDirection">
+                                                <option style="width: 50%" value="">--- Chọn hướng nhà ---</option>
+                                            </select>
+                                            
+                                 
                                         </div>
 
                                     </div>
@@ -234,14 +251,14 @@
                                     </div>
                                     <div class="form-group col-md-12 col-xs-12 col-sm-12">
                                         <div class="col-md-3 col-xs-3 col-sm-3">
-                                            <label style="width: 100%; text-align: right" class="label-Form">Mô tả<span style="color: #ff6666">(*)</span></label>
+                                            <label style="width: 100%; text-align: right" class="label-Form">Mô tả</label>
                                         </div>
                                         <div style="float: left;padding-left: 14px" class="col-md-12 col-sm-12 col-xs-12">
                                             <!--<h1>Editor <small>{{version}}</small></h1>-->
                                             <!--<button ng-click="disabled = !disabled" unselectable>Disable text-angular Toggle</button>-->
                                             <div text-angular="text-angular" name="Mota" ng-model="Mota" ta-disabled='disabled'></div>
-                                            <!--<h1>Raw HTML in a text area</h1>
-                        <textarea ng-model="Mota" style="width: 100%"></textarea>-->
+                                           
+                        <textarea ng-model="Mota" style="width: 100%"></textarea>
                                         </div>
                                     </div>
 

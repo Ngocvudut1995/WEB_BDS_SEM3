@@ -1,4 +1,4 @@
-﻿var list_all = [];
+﻿
 var app = angular.module('AngularApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies', 'textAngular']);
 var show_dn = 0;
 app.controller("main", ['$scope', '$window', '$cookies','$rootScope',function ($scope, $window, $cookies,$rootScope) {
@@ -118,6 +118,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
         anchorSmoothScroll.scrollTo(eID);
 
     };
+    
     $rootScope.open_dangbai = function () {
         $location.path('/TaiKhoan/dangbai/');
     };

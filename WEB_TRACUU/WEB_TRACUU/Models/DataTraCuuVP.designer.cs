@@ -3915,7 +3915,7 @@ namespace WEB_TRACUU.Models
 		
 		private string _Direction;
 		
-		private int _IDDirection;
+		private System.Nullable<int> _IDDirection;
 		
 		private string _CustomerName;
 		
@@ -4247,8 +4247,8 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int NOT NULL")]
-		public int IDDirection
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDDirection", DbType="Int")]
+		public System.Nullable<int> IDDirection
 		{
 			get
 			{

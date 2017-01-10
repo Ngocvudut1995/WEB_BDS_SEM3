@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json.Linq;
@@ -22,7 +23,7 @@ namespace WEB_TRACUU.Controllers
         private BDS_Detail bds = new BDS_Detail();
         private DataTraCuuVPDataContext db;
         [HttpPost]
-        public Guid? Creat_BDS(JObject data)
+        public IHttpActionResult Creat_BDS(JObject data)
         {
             dynamic json = data;
             int i = 0;
@@ -48,8 +49,8 @@ namespace WEB_TRACUU.Controllers
                         }
                         else
                         {
-                            if (loaiGia == 0 || loaiGia == 2)
-                            {
+                            if (loaiGia == 1)
+                            {   
                                 if (gia < 500)
                                 {
                                     lands.IDPrice = 1;
@@ -65,31 +66,32 @@ namespace WEB_TRACUU.Controllers
                             }
                             else
                             {
-                                if (gia >= 1 && gia < 2)
+                                gia = gia*1000;
+                                if (gia >= 1000 && gia < 2000)
                                 {
                                     lands.IDPrice = 4;
                                 }
-                                else if (gia >= 2 && gia < 3)
+                                else if (gia >= 2000 && gia < 3000)
                                 {
                                     lands.IDPrice = 5;
                                 }
-                                else if (gia >= 3 && gia < 5)
+                                else if (gia >= 3000 && gia < 5000)
                                 {
                                     lands.IDPrice = 6;
                                 }
-                                else if (gia >= 5 && gia < 7)
+                                else if (gia >= 5000 && gia < 7000)
                                 {
                                     lands.IDPrice = 7;
                                 }
-                                else if (gia >= 7 && gia < 10)
+                                else if (gia >= 7000 && gia < 10000)
                                 {
                                     lands.IDPrice = 8;
                                 }
-                                else if (gia >= 10 && gia < 20)
+                                else if (gia >= 10000 && gia < 20000)
                                 {
                                     lands.IDPrice = 9;
                                 }
-                                else if (gia >= 20)
+                                else if (gia >= 20000)
                                     lands.IDPrice = 10;
                             }
                         }
@@ -179,7 +181,11 @@ namespace WEB_TRACUU.Controllers
                     lands.Name = json._tieuDe;
                     lands.Price_detail = Convert.ToDecimal(gia);
                     lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
-
+                    if (json._huongnha.ToString() != "")
+                    {
+                        lands.IDDirection = json._huongnha;
+                    }
+                    
                     lands.Decrition = json._moTa;
                     DateTime date = DateTime.Now;
                     lands.CreateDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
@@ -212,13 +218,18 @@ namespace WEB_TRACUU.Controllers
                     lands.Flag_Approval = false;
                     //lands.Image = json._Image();
                     // Lay ID cao nhat hien tai
-                    lands.Numhouse = json._soNha;
-                    // Insert address
-                    if (json._MaDuong != null)
+                    if (json._soNha.ToString() != "")
                     {
-                        lands.IDStreet = json._MaDuong;
+                        lands.Numhouse = json._soNha;
                     }
-                    lands.IDWard = json._MaPhuong;
+                    if (json._duong.ToString() != "")
+                    {
+                        lands.IDStreet = json._duong;
+                    }
+
+                    // Insert address 
+                    
+                    lands.IDWard = json._phuong;
                     lands.View = 0;
                     db.Lands.InsertOnSubmit(lands);
                     db.SubmitChanges();
@@ -240,13 +251,14 @@ namespace WEB_TRACUU.Controllers
                         db.SubmitChanges();
                     }
                     db.Connection.Close();
-                    return id;
+                    return Ok(id);
                 }
 
             }
             catch (Exception)
             {
-                return null;
+                return NotFound();
+                
             }
         }
         //[HttpPost]

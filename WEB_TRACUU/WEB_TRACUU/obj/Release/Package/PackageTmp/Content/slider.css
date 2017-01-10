@@ -31,14 +31,18 @@
 
 .arrows_right {
     position: absolute;
-    top: 195px;
-    right: 20px;
+    top: 46%;
+    right: 8px;
+        background-color: #a5a3a3;
+        width: 33px;
 }
 
 .arrows_left {
     position: absolute;
-    top: 195px;
-    left: 20px;
+    top: 46%;
+    left: 8px;
+        background-color: #a5a3a3;
+        width: 33px;
 }
 
     .arrows_right img, .arrows_left img {
@@ -53,19 +57,30 @@ h1 {
 }
 
 .slide.ng-hide-add, .slide.ng-hide-remove {
-    -webkit-transition: all linear 0.5s;
+    /*-webkit-transition: all linear 0.5s;
     -moz-transition: all linear 0.5s;
     -o-transition: all linear 0.5s;
     transition: all linear 0.5s;
-    display: block !important;
+    display: block !important;*/
 }
 
-    .slide.ng-hide-add.ng-hide-add-active, .slide.ng-hide-remove {
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+/* flip in */
+@keyframes fadeIn {
+    from {
         opacity: 0;
     }
 
+    to {
+        opacity: 1;
+    }
+}
+    .slide.ng-hide-remove {
+        animation:1.5s fadeIn ease;
+    }
+
         .slide.ng-hide-add, .slide.ng-hide-remove.ng-hide-remove-active {
-            opacity: 1;
+            /*opacity: 1;*/
         }
 
 .mini_image {
@@ -77,10 +92,12 @@ h1 {
     }
 
 .title {
-    background-image: -webkit-linear-gradient(right, #040133 0%, #0a1cf3 100%);
+    /*background-image: -webkit-linear-gradient(right, #040133 0%, #0a1cf3 100%);
     background-image: -o-linear-gradient(right, #040133 0%, #0a1cf3 100%);
     background-image: -webkit-gradient(linear, left, rigth, from(#040133), to(#0a1cf3));
-    background-image: linear-gradient(to right, #040133 0%, #0a1cf3 100%);
+    background-image: linear-gradient(to right, #040133 0%, #0a1cf3 100%);*/
+    background-color: rgb(9, 30, 116);
+    background-color: rgba(34, 49, 78, 0.772549);
     padding-top: 10px;
 }
 .slide_mini.ng-hide-remove,
@@ -99,4 +116,13 @@ slide_mini.ng-hide-add {
 
 .slide_mini.ng-hide-add, .slide_mini.ng-hide-remove.ng-hide-remove-active {
        opacity: 1;
+}
+.slide_infor {
+    /*font-size: 18px;*/
+    color: #fff;
+  
+    padding: 0;
+}
+.slide_infor > i {
+    color: white; margin-top: 10px
 }

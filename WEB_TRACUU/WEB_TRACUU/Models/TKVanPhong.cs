@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WEB_TRACUU.Models
 {
-    public class TKVanPhong : Land
+    public class TKVanPhong 
     {
         private DataTraCuuVPDataContext db;
         public Guid _MaVP { get; set; }
@@ -27,6 +27,9 @@ namespace WEB_TRACUU.Models
         public string _TenQuan { get; set; }
         public int? _MaLoai { get; set; }
         public int? _MaLoaiCT { get; set; }
+        public int? _IDDirection { get; set; }
+        public System.Nullable<int> _Area_detail;
+        public string _PhoneNumber;
         public System.Nullable<decimal> _Price_detail;
         public System.Nullable<System.DateTime> _ModifyDate;
 
@@ -76,7 +79,10 @@ namespace WEB_TRACUU.Models
                         _ExpiredDate = item.ExpiredDate,
                         _Gia = item.Price,
                         _Price_detail = item.Price_detail,
-                        IDDirection = item.IDDirection,
+                        _IDDirection = item.IDDirection,
+                        _Area_detail = item.Area_detail,
+                        _TenKH = item.CustomerName,
+                        _PhoneNumber = item.PhoneNumber,
                         _HetHan = (item.ExpiredDate > DateTime.Now )? false:true
                     });
                 }

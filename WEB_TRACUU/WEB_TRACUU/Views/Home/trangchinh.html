@@ -1,6 +1,6 @@
 ﻿
 
-<div ng-controller="trangchuCtrl" style="margin-top: -20px">
+<div style="margin-top: -20px">
     <div class="container-fluid" style="padding: 0px;position: relative"
          ng-style="((windowWidth > 700) && {'height': '650px'} || (windowWidth < 700) && {'height': '440px'} && (windowWidth >= 400) )|| ((windowWidth < 400) && {'height': '440px'})">
         <div style="width: 100%; position: absolute; height: 100%; background-position: center; background-size: cover;" ng-style="{'background-image': 'url({{img1}})'}">
@@ -237,31 +237,31 @@
 
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Can-ho.png"
                              ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})" />
-                        <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1">CĂN HỘ</a>
+                        <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1;change_tab_land_sell(1)">CĂN HỘ</a>
                     </li>
                     <li ng-class="[{active:tab_muanha_active == 2}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Nha.png"
                              ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2">NHÀ</a>
+                        <a ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2;change_tab_land_sell(2)">NHÀ</a>
                     </li>
                     <li ng-class="[{active:tab_muanha_active == 3}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Dat.png"
                              ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3">ĐẤT</a>
+                        <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3;change_tab_land_sell(3)">ĐẤT</a>
                     </li>
                     <li ng-class="[{active:tab_muanha_active == 4}]" class="navtab2"
                         style="text-align: center">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Van-phong.png"
                              ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4">VĂN PHÒNG</a>
+                        <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4;change_tab_land_sell(4)">VĂN PHÒNG</a>
                     </li>
                     <li ng-class="[{active:tab_muanha_active == 5}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Khac.png"
                              ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =5">NHÀ ĐẤT KHÁC</a>
+                        <a ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =5;change_tab_land_sell(5)">NHÀ ĐẤT KHÁC</a>
                     </li>
                 </ul>
             </div>
@@ -287,15 +287,16 @@
 overflow: hidden; text-overflow: ellipsis;">{{ item._TenVp }}</p>
                             </a>
                             <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: {{item._Area_detail}} m<sup>2</sup> &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: {{item._Price_detail}}tr/tháng
                             </p>
                             <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>:
+                                {{item._SoNha}} {{item._Duong}}, phường {{item._Phuong}}, quận {{item._TenQuan}}, Thành phố Đà Nẵng
                             </p>
                         </div>
                         <div style="border-top: 1px solid #C1C1C1; padding: 10px">
                             <img style="width: 32px;" src="../../Content/Images/broker.jpg" />
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                            <span style="font-size: 10pt">{{item._TenKH}} </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
                         </div>
 
                     </div>
@@ -305,47 +306,47 @@ overflow: hidden; text-overflow: ellipsis;">{{ item._TenVp }}</p>
 
         </div>
         <div style="padding-right: 7%; margin-top: 20px">
-            <a style="float: right; border-top: 2px red solid;font-size: 22px" href="#/TimKiem/?sell=true">Xem Thêm </a>
+            <a style="float: right; border-top: 2px red solid;font-size: 22px" href="#/TimKiem/?sell=true&type={{tab_muanha_active}}">Xem Thêm </a>
         </div>
     </div>
     <div style="margin-top: 100px;">
         <h2 style="color: #36ace2; text-align: center; font-weight: bold">BẠN MUỐN THUÊ NHÀ?</h2>
         <div class="row" style="border-bottom: 1px solid #36ace2">
             <div class="col-md-3"></div>
-            <div class="col-md-6 col-xs-12" ng-init="tab_muanha_active = 1">
+            <div class="col-md-6 col-xs-12" ng-init="tab_thuenha_active = 1">
                 <div style="width: 100%">
                 </div>
                 <ul class="nav my_nav_tab_2" style="width: 100%; text-align: center">
-                    <li ng-class="[{active:tab_muanha_active == 1}]" class="navtab2"
+                    <li ng-class="[{active:tab_thuenha_active == 1}]" class="navtab2"
                         style="text-align: center;">
 
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Can-ho.png"
-                             ng-style="((tab_muanha == 1 || tab_muanha_active == 1) && {'opacity': '1'} || (tab_muanha != 1) && {'opacity': '0'})" />
-                        <a ng-mouseover="tab_muanha = 1" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =1">CĂN HỘ</a>
+                             ng-style="((tab_thuenha == 1 || tab_thuenha_active == 1) && {'opacity': '1'} || (tab_thuenha != 1) && {'opacity': '0'})" />
+                        <a ng-mouseover="tab_thuenha = 1" ng-mouseleave="tab_thuenha = tab_thuenha_active" ng-click="tab_thuenha_active =1;change_tab_land_rent(tab_thuenha_active)">CĂN HỘ</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 2}]" class="navtab2"
+                    <li ng-class="[{active:tab_thuenha_active == 2}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Nha.png"
-                             ng-style="((tab_muanha == 2 || tab_muanha_active == 2) && {'opacity': '1'} || (tab_muanha != 2) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 2" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =2">NHÀ</a>
+                             ng-style="((tab_thuenha == 2 || tab_thuenha_active == 2) && {'opacity': '1'} || (tab_thuenha != 2) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_thuenha = 2" ng-mouseleave="tab_thuenha = tab_thuenha_active" ng-click="tab_thuenha_active =2;change_tab_land_rent(tab_thuenha_active)">NHÀ</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 3}]" class="navtab2"
+                    <li ng-class="[{active:tab_thuenha_active == 3}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Dat.png"
-                             ng-style="((tab_muanha == 3 ||tab_muanha_active == 3) && {'opacity': '1'} || (tab_muanha != 3) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 3" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =3">ĐẤT</a>
+                             ng-style="((tab_thuenha == 3 ||tab_thuenha_active == 3) && {'opacity': '1'} || (tab_thuenha != 3) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_thuenha = 3" ng-mouseleave="tab_thuenha = tab_thuenha_active" ng-click="tab_thuenha_active =3;change_tab_land_rent(tab_thuenha_active)">ĐẤT</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 4}]" class="navtab2"
+                    <li ng-class="[{active:tab_thuenha_active == 4}]" class="navtab2"
                         style="text-align: center">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Van-phong.png"
-                             ng-style="((tab_muanha == 4 || tab_muanha_active == 4) && {'opacity': '1'} || (tab_muanha != 4) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 4" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =4">VĂN PHÒNG</a>
+                             ng-style="((tab_thuenha == 4 || tab_thuenha_active == 4) && {'opacity': '1'} || (tab_thuenha != 4) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_thuenha = 4" ng-mouseleave="tab_thuenha = tab_thuenha_active" ng-click="tab_thuenha_active =4;change_tab_land_rent(tab_thuenha_active)">VĂN PHÒNG</a>
                     </li>
-                    <li ng-class="[{active:tab_muanha_active == 5}]" class="navtab2"
+                    <li ng-class="[{active:tab_thuenha_active == 5}]" class="navtab2"
                         style="text-align: center;">
                         <img class="navtab2" style="opacity: 0" src="../../Content/Images/Khac.png"
-                             ng-style="((tab_muanha == 5 || tab_muanha_active == 5) && {'opacity': '1'} || (tab_muanha != 5) && {'opacity': '0'} )" />
-                        <a ng-mouseover="tab_muanha = 5" ng-mouseleave="tab_muanha = tab_muanha_active" ng-click="tab_muanha_active =5">NHÀ ĐẤT KHÁC</a>
+                             ng-style="((tab_thuenha == 5 || tab_thuenha_active == 5) && {'opacity': '1'} || (tab_thuenha != 5) && {'opacity': '0'} )" />
+                        <a ng-mouseover="tab_thuenha = 5" ng-mouseleave="tab_thuenha = tab_thuenha_active" ng-click="tab_thuenha_active =5;change_tab_land_rent(tab_thuenha_active)">NHÀ ĐẤT KHÁC</a>
                     </li>
                 </ul>
             </div>
@@ -355,107 +356,34 @@ overflow: hidden; text-overflow: ellipsis;">{{ item._TenVp }}</p>
 
             <div class="col-md-12 row" style="padding-right: 5%; padding-left: 5%;">
 
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
+                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%" ng-repeat="item in list_top_land_rent">
 
                     <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
 
                         <div class="" style="position: relative; overflow: hidden;">
 
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg" />
+                            <img style="width: 100%" ng-src="{{ app }}/{{ item._Anh }}" />
                             <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
                             <span class="rotate" style="text-align: center; font-weight: bold; position: absolute; right: 0px; top: 18px; padding: 14px 12px 10px 12px; width: 85px; height: 43px; background-color: #f03939; color: white" ng-if="1">NEW</span>
                         </div>
                         <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
+                            <!--<a class="title_land_index"><p style="color: red; text-decoration: none">{{item._TenVp}}</p></a>-->
+                            <a href="#/ChiTiet/{{ item._MaVP }}" title="{{ item._TenVp }}" style="color: #eb5255">
+                                <p style="text-transform: uppercase;    font-size: 14px;
+    line-height: 20px; font-weight: bolder; margin-top: 5px; height: 15%; /*white-space: nowrap;*/max-width: 100%;
+overflow: hidden; text-overflow: ellipsis;">{{ item._TenVp }}</p>
+                            </a>
                             <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
+                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: {{item._Area_detail}} m<sup>2</sup> &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: {{item._Price_detail}}tr/tháng
                             </p>
                             <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg" />
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg" />
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
+                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: 
+                                {{item._SoNha}} {{item._Duong}}, phường {{item._Phuong}}, quận {{item._TenQuan}}, Thành phố Đà Nẵng
                             </p>
                         </div>
                         <div style="border-top: 1px solid #C1C1C1; padding: 10px">
                             <img style="width: 32px;" src="../../Content/Images/broker.jpg" />
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg" />
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg" />
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-3 col-xs-12 col-sm-12 animate-repeat" style="margin-top: 5%">
-
-                    <div class="" style="box-shadow: 0px 0px 5px #eb5255; background-color: white; padding: 0px 0px">
-
-                        <div class="" style="position: relative">
-
-                            <img style="width: 100%" src="../../Content/Images/vanphong2.jpg" />
-                            <div style="text-align: center; font-weight: bold; position: absolute; left: 0px; bottom: 0px; width: 105px; height: 27px; background-color: #36ace2" ng-if="1">1,7 tỷ</div>
-                        </div>
-                        <div style="padding: 10px">
-                            <p style="color: red; text-decoration: none">Căn hộ Q.7 mặt tiền,đối diện Big C Nguyễn Thị Thập, gần trường và bệnh viện, 1tỷ7/căn2PN</p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-area-chart" aria-hidden="true"></i>: 300 m2 &nbsp;&nbsp;<i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-money" aria-hidden="true"></i>: 3tr/m2
-                            </p>
-                            <p>
-                                <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: K140/1 Hoàng Diệu, Quận Hải Châu, Thành phố Đà Nẵng
-                            </p>
-                        </div>
-                        <div style="border-top: 1px solid #C1C1C1; padding: 10px">
-                            <img style="width: 32px;" src="../../Content/Images/broker.jpg" />
-                            <span style="font-size: 10pt">Đặng Ngọc Vũ </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
+                            <span style="font-size: 10pt">{{item._TenKH}} </span><i style="float: right; font-size: 23pt;" class="fa fa-mobile" aria-hidden="true"></i>
                         </div>
 
                     </div>
@@ -465,7 +393,7 @@ overflow: hidden; text-overflow: ellipsis;">{{ item._TenVp }}</p>
 
         </div>
         <div style="padding-right: 7%; margin-top: 20px">
-            <a style="float: right; border-top: 2px red solid; font-size: 22px">Xem Thêm </a>
+            <a style="float: right; border-top: 2px red solid; font-size: 22px" href="#/TimKiem/?sell=false&type={{tab_thuenha_active}}">Xem Thêm </a>
         </div>
     </div>
     <div style="margin-top: 100px;">

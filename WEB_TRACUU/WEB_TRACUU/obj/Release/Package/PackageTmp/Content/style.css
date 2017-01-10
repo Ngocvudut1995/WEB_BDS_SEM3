@@ -10,7 +10,7 @@
 
     .navtab > a {
         color: white;
-        font-size: 18pt;
+        font-size: 16px;
     }
 
         .navtab > a:hover {
@@ -18,19 +18,86 @@
         }
 
     .navtab.active {
-        background-color: rgb(9, 30, 116);
+        /*background-color: rgb(9, 30, 116);*/
         color: white;
     }
      .navtab.active > a:hover {
-        background-color: rgb(9, 30, 116);
+        /*background-color: rgb(9, 30, 116);*/
         
     }
-
-.my_drop_menu {
-    background-color: #5f5d5d;
-    font-size: 18pt;
+.navtab2 {
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: center;
+    margin-left: -4px;
 }
 
+    .navtab2 > a {
+        color: white;
+        font-size: 16px;
+       background-color: #eb5255;
+    }
+
+        .navtab2 > a:hover {
+            background-color: #36ace2;
+        }
+
+    .navtab2.active > a{
+        background-color: #36ace2;
+        color: white;
+    }
+     .navtab2.active > a:hover {
+        background-color: #36ace2;
+        
+    }
+     .my_nav_tab_2 {
+         /*background-color: #eb5255;*/
+         
+     }
+     .my_nav_tab_2 > li{
+        display: inline-block;
+     }
+     .my_nav_tab_2 > .active {
+          /*background-color: #36ace2;*/
+     }
+.my_drop_menu {
+    background-color: #5f5d5d;
+    font-size: 16px;
+}
+.my_nav_search > .active {
+    background-color: rgba(0, 0, 0, 0.56);
+    border-width: 0px;
+    /*box-shadow: 0px 0px 5px #888888;*/
+    border-top: 3px #eb5255 solid;
+    
+}
+.my_nav_search > .active > a {
+    color: white;
+    
+}
+.my_nav_search > li > a {
+    color: black;
+    font-weight: 600;
+    font-size: 16px
+}
+.my_nav_search > li {
+    background-color: rgba(255, 255, 255, 0.66);
+}
+.my_list_group2 > a {
+    color: black;
+            height: 31px;
+                padding: 4px 12px;
+}
+.my_list_group > .my_list_item {
+ background-color: rgba(0, 0, 0, 0); color: white; border-width: 0px; border-bottom: 1px solid;
+}
+.my_list_group > a {
+      height: 31px;
+                padding: 4px 12px;
+}
+.my_list_group > .active {
+     background-color: blue;
+}
 .tab_menu {
     /*background-color:#1b1b1b;*/
 }
@@ -69,7 +136,7 @@ h3 img {
 }
 
 .contact {
-    background-color: rgba(0, 0, 0, 0.77);
+    /*background-color: rgba(0, 0, 0, 0.77);*/
     position: fixed;
     
     /*min-height: 1000px;
@@ -85,7 +152,7 @@ h3 img {
     z-index: 20;
     
     /*height: 330px;*/
-    border: solid 3px blue;
+    box-shadow: 0px 0px 20px rgb(235, 82, 85);
     background-color: white;
   
 }
@@ -136,20 +203,21 @@ h3 img {
         }
 
 .rotate {
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(-90deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
     transform-origin: bottom right;
 }
 .icon_society {
    float: left;
     text-align: center;
     /*width: 114px;*/
-    height: 40px;
+    height: 30px;
     background-color: rgba(100, 99, 99, 0.52);
+    background-color: rgb(235, 82, 85);
     color: white;
     font-weight: bold;
-    padding: 9px;
-    font-size: 15px;
+  border-radius: 5px;
+    font-size: 13px;
     border: solid 1px white;
 }
 .edit_quantri > li > a {
@@ -162,5 +230,158 @@ div.scrollmenu {
         max-height: 400px;
     }
 .select_tracuu {
-    background-color: rgba(91, 100, 109, 0.14)
+    background-color: rgba(91, 100, 109, 0.14);
+
 }
+
+ .container1 {
+        min-width: 560px;
+    }
+    .wrapper {
+        white-space: nowrap;
+        overflow-x: scroll;
+    }
+
+    .scroll-wrapper {
+        width: 2010px;
+    }
+
+    .item {
+        width: 320px;
+        margin-right: 10px;
+        /*background-color: tomato;*/
+        color: white;
+        padding: 10px;
+        float: left;
+    }
+
+    .item:last-of-type {
+        margin-right: 0;
+    }
+    .button_loai > span {
+        font-weight: 700; border: 1px solid #eb5256; color: #eb5256; line-height: 1; padding-left: 4px; margin-right: 5px;
+    }
+    .button_loai > span > i {
+        background: #eb5256; color: #fff; padding: 3px 5px; display: inline-block; margin-left: 3px; font-style: normal
+    }
+    .button_loai:hover > span {
+        color: #36ace2;
+        border: 1px solid #36ace2;
+    }
+    .button_loai:hover > span  > i {
+        background: #36ace2;
+    }
+    .button_diachi {
+        color: #36ace2;
+    }
+    .button_diachi:hover {
+        color: #eb5256;
+    }
+    .button_contact > a {
+         color: #eb5256;
+        text-decoration: none;
+    }
+    .button_contact > a:hover {
+        color: #36ace2;
+
+    }
+    .clearfix > li> img {
+        width: 35px;
+        height: 35px;
+    }
+    .clearfix > li {
+        margin-bottom: 5px;
+    }
+    .nav_title_index > a {
+        color: white;
+    }
+    .nav_title_index > a:hover {
+       color: #36ace2;
+    }
+    .control_scroll_top {
+            width: 40px;
+    height: 40px;
+    border-radius: 50%;
+        overflow: hidden;
+    font-size: 25px;
+    padding-top: 4px;
+    text-align: center;
+    line-height: 33px;
+    cursor: pointer;
+    }
+  .button_heart {
+   background-color: #eb5256;
+      color: white;
+ 
+    }
+    .button_heart:hover {
+       background-color: #36ace2;
+      color: white;
+    }
+    .my_button_search {
+        background-color: #eb5255;
+    }
+    .my_button_search:hover {
+         background-color: #36ace2;
+    }
+  .input-text{
+    padding: 6px 15px;
+    font-size: 15px;
+    width: 100%;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+    height: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.select-post{
+    overflow: hidden;
+    text-indent: .01px;
+    text-overflow: '';
+    cursor: pointer;
+    height: auto;
+    border-radius: 0;
+    padding: 6px 15px;
+    font-size: 14px;
+    border: 1px solid #e0e0e0;
+    height: auto;
+}
+.label-step {
+    font-size: 24px;
+    color: #ff6666;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.label-Form {
+    width: 100%;
+    display: inline-block;
+    float: left;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #333;
+}
+
+.li-chosser{
+    list-style: none;
+    width: 25%;
+    float: left;
+    margin-bottom: 5px;
+}
+ ul:after {
+    content: " ";
+    display: table;
+ }
+
+.div-post{
+    box-shadow: 0px 2px 5px grey;
+    padding: 15px;
+    background: white;
+}
+
+
+

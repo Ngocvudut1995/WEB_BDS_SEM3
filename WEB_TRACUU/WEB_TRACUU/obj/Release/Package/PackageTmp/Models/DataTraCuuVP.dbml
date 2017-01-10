@@ -3,17 +3,34 @@
   <Table Name="dbo.Acreage" Member="Acreages">
     <Type Name="Acreage">
       <Column Name="IDAcreage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Acreage" Member="Acreage1" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Acreage" Member="Acreage1" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Association Name="Acreage_Land" Member="Lands" ThisKey="IDAcreage" OtherKey="IDAcreage" Type="Land" />
     </Type>
   </Table>
-  <Table Name="dbo.Address" Member="Addresses">
-    <Type Name="Address">
-      <Column Name="IDAddress" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NumberHouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDStreet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Address_Land" Member="Lands" ThisKey="IDAddress" OtherKey="IDAddress" Type="Land" />
-      <Association Name="Street_Address" Member="Street" ThisKey="IDStreet" OtherKey="IDStreet" Type="Street" IsForeignKey="true" />
+  <Table Name="dbo.Ward" Member="Wards">
+    <Type Name="Ward">
+      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ward" Member="Ward1" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ward_Land" Member="Lands" ThisKey="IDWard" OtherKey="IDWard" Type="Land" />
+      <Association Name="Ward_Street" Member="Streets" ThisKey="IDWard" OtherKey="IDWard" Type="Street" />
+      <Association Name="Trouser_Ward" Member="Trouser" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Trouser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Convenient" Member="Convenients">
+    <Type Name="Convenient">
+      <Column Name="IDConvenient" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Convenient_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Convenient_Convenient_Detail" Member="Convenient_Details" ThisKey="IDConvenient" OtherKey="IDConvenient" Type="Convenient_Detail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Convenient_Detail" Member="Convenient_Details">
+    <Type Name="Convenient_Detail">
+      <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDConvenient" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Convenient_Convenient_Detail" Member="Convenient" ThisKey="IDConvenient" OtherKey="IDConvenient" Type="Convenient" IsForeignKey="true" />
+      <Association Name="Land_Convenient_Detail" Member="Land" ThisKey="IDLand" OtherKey="IDLand" Type="Land" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Customer" Member="Customers">
@@ -34,12 +51,35 @@
       <Association Name="Customer_Follow" Member="Follows" ThisKey="IDCustomer" OtherKey="IDCustomer" Type="Follow" />
     </Type>
   </Table>
+  <Table Name="dbo.Direction" Member="Directions">
+    <Type Name="Direction">
+      <Column Name="IDDirection" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Direction" Member="Direction1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Direction_Land" Member="Lands" ThisKey="IDDirection" OtherKey="IDDirection" Type="Land" />
+    </Type>
+  </Table>
   <Table Name="dbo.Follow" Member="Follows">
     <Type Name="Follow">
       <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Customer_Follow" Member="Customer" ThisKey="IDCustomer" OtherKey="IDCustomer" Type="Customer" IsForeignKey="true" />
       <Association Name="Land_Follow" Member="Land" ThisKey="IDLand" OtherKey="IDLand" Type="Land" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Furiture" Member="Furitures">
+    <Type Name="Furiture">
+      <Column Name="IDFuriture" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Furiture_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Furiture_Furiture_detail" Member="Furiture_details" ThisKey="IDFuriture" OtherKey="IDFuriture" Type="Furiture_detail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Furiture_detail" Member="Furiture_details">
+    <Type Name="Furiture_detail">
+      <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDFuriture" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Furiture_Furiture_detail" Member="Furiture" ThisKey="IDFuriture" OtherKey="IDFuriture" Type="Furiture" IsForeignKey="true" />
+      <Association Name="Land_Furiture_detail" Member="Land" ThisKey="IDLand" OtherKey="IDLand" Type="Land" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Image_Detail" Member="Image_Details">
@@ -55,7 +95,7 @@
     <Type Name="InternetProtocol">
       <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="idLand" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="ip" Type="System.String" DbType="NChar(15)" CanBeNull="true" />
+      <Column Name="ip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Land" Member="Lands">
@@ -65,8 +105,7 @@
       <Column Name="Decrition" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="IDAcreage" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="IDType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IDAddress" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDTypeDetail" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -78,12 +117,22 @@
       <Column Name="Price_detail" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="IDPost" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="[View]" Member="View" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Area_detail" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDDirection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDStreet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDWard" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Numhouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Land_Convenient_Detail" Member="Convenient_Details" ThisKey="IDLand" OtherKey="IDLand" Type="Convenient_Detail" />
       <Association Name="Land_Follow" Member="Follows" ThisKey="IDLand" OtherKey="IDLand" Type="Follow" />
+      <Association Name="Land_Furiture_detail" Member="Furiture_details" ThisKey="IDLand" OtherKey="IDLand" Type="Furiture_detail" />
       <Association Name="Land_Image_Detail" Member="Image_Details" ThisKey="IDLand" OtherKey="IDLand" Type="Image_Detail" />
       <Association Name="Acreage_Land" Member="Acreage" ThisKey="IDAcreage" OtherKey="IDAcreage" Type="Acreage" IsForeignKey="true" />
-      <Association Name="Address_Land" Member="Address" ThisKey="IDAddress" OtherKey="IDAddress" Type="Address" IsForeignKey="true" />
+      <Association Name="Direction_Land" Member="Direction" ThisKey="IDDirection" OtherKey="IDDirection" Type="Direction" IsForeignKey="true" />
+      <Association Name="Ward_Land" Member="Ward" ThisKey="IDWard" OtherKey="IDWard" Type="Ward" IsForeignKey="true" />
       <Association Name="Price_Land" Member="Price" ThisKey="IDPrice" OtherKey="IDPrice" Type="Price" IsForeignKey="true" />
-      <Association Name="Type_Land_Land" Member="Type_Land" ThisKey="IDType" OtherKey="IDType" Type="Type_Land" IsForeignKey="true" />
+      <Association Name="Street_Land" Member="Street" ThisKey="IDStreet" OtherKey="IDStreet" Type="Street" IsForeignKey="true" />
+      <Association Name="TypeDetail_Land" Member="TypeDetail" ThisKey="IDTypeDetail" OtherKey="IDTypeDetail" Type="TypeDetail" IsForeignKey="true" />
+      <Association Name="TypeDetail_Land1" Member="TypeDetail1" ThisKey="IDTypeDetail" OtherKey="IDTypeDetail" Type="TypeDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Price" Member="Prices">
@@ -98,9 +147,27 @@
     <Type Name="Street">
       <Column Name="IDStreet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Street" Member="Street1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Street_Address" Member="Addresses" ThisKey="IDStreet" OtherKey="IDStreet" Type="Address" />
+      <Column Name="IDWard" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Street_Land" Member="Lands" ThisKey="IDStreet" OtherKey="IDStreet" Type="Land" />
       <Association Name="Ward_Street" Member="Ward" ThisKey="IDWard" OtherKey="IDWard" Type="Ward" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeDetail" Member="TypeDetails">
+    <Type Name="TypeDetail">
+      <Column Name="IDTypeDetail" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TypeNameDetail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Sell" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IDType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TypeDetail_Land" Member="Lands" ThisKey="IDTypeDetail" OtherKey="IDTypeDetail" Type="Land" />
+      <Association Name="TypeDetail_Land1" Member="Lands1" ThisKey="IDTypeDetail" OtherKey="IDTypeDetail" Type="Land" />
+      <Association Name="TypeLand_TypeDetail" Member="TypeLand" ThisKey="IDType" OtherKey="IDType" Type="TypeLand" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeLand" Member="TypeLands">
+    <Type Name="TypeLand">
+      <Column Name="IDType" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Type_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TypeLand_TypeDetail" Member="TypeDetails" ThisKey="IDType" OtherKey="IDType" Type="TypeDetail" />
     </Type>
   </Table>
   <Table Name="dbo.Trousers" Member="Trousers">
@@ -110,62 +177,39 @@
       <Association Name="Trouser_Ward" Member="Wards" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Ward" />
     </Type>
   </Table>
-  <Table Name="dbo.Type_Land" Member="Type_Lands">
-    <Type Name="Type_Land">
-      <Column Name="IDType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Sell" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="Type_Land_Land" Member="Lands" ThisKey="IDType" OtherKey="IDType" Type="Land" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Ward" Member="Wards">
-    <Type Name="Ward">
-      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Ward" Member="Ward1" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Ward_Street" Member="Streets" ThisKey="IDWard" OtherKey="IDWard" Type="Street" />
-      <Association Name="Trouser_Ward" Member="Trouser" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Trouser" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Address_Lan" Member="Address_Lans">
-    <Type Name="Address_Lan">
-      <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Street" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Ward" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Trousers" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="NumberHouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDStreet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Overview_Land" Member="Overview_Lands">
     <Type Name="Overview_Land">
-      <Column Name="Acreage" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="TypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Street" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Ward" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Trousers" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="NumberHouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDStreet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IDAcreage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IDPrice" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Flag_Approval" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Decrition" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ExpiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Flag_Approval" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Sell" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Price" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ExpiredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Price_detail" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="[View]" Member="View" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Area_detail" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Acreage" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Numhouse" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDAcreage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDPrice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Direction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDDirection" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TypeNameDetail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IDType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Trousers" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Ward" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Street" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDStreet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDTypeDetail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDWard" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

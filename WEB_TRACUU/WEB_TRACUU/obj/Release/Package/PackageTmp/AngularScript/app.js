@@ -1,13 +1,15 @@
 ﻿
 var app = angular.module('AngularApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngCookies', 'textAngular']);
 var show_dn = 0;
-app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function ($scope, $window, $cookies,$rootScope) {
+app.controller("main", ['$scope', '$window', '$cookies','$rootScope',function ($scope, $window, $cookies,$rootScope) {
     $scope.name = 'Tra Cứu BDS';
     $rootScope.show_dn = 0;
     $rootScope.loading = 0;
     $rootScope.show_form_contact = 0;
     $rootScope.app = host;
     //$rootScope.MaKH = 'KH10001';
+   // $rootScope.loading = 1;
+   
     $rootScope.change_money = function (money) {
         money = money.replace(/,/g, ".");
         return money;
@@ -47,7 +49,7 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
          return format;
      };
     // $rootScope.app = "";
-     $scope.img1 = $rootScope.app+"/Content/Images/view.jpg";
+     $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
     $scope.img2 = "Content/Images/banner_ser_vpa.png";
     $rootScope.dangnhap = function () {
         $rootScope.show_dn = 1;
@@ -77,6 +79,7 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
         $window.scrollTo(0, 0);
         //$("body").animate({ scrollTop: $elm.offset().top }, "slow");
     };
+   
     $rootScope.change_alias =function(str) {
         
         
@@ -98,18 +101,28 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope', function (
     }
     //console.log($scope);
 }]);
-app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http', '$location', function ($scope, $window,
-    $cookies, $rootScope, $http,$location) {
+app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http', '$location','$route','anchorSmoothScroll', function ($scope, $window,
+    $cookies, $rootScope, $http, $location, $route,anchorSmoothScroll) {
     $scope.username = "";
     $scope.password = "";
-    $scope.body_width = window.innerWidth;
     $rootScope.taikhoan = { test: 0, tenkh: null, username: null ,makh:null,admin:false};
     //var expireDate = new Date();
     //expireDate.setMonth(11);
     //expireDate.setDate(expireDate.getDate() + 1);
+    $rootScope.gotoElement = function (eID) {
+        // set the location.hash to the id of
+        // the element you wish to scroll to.
+        //$location.hash('bottom');
+
+        // call $anchorScroll()
+        anchorSmoothScroll.scrollTo(eID);
+
+    };
+    
     $rootScope.open_dangbai = function () {
         $location.path('/TaiKhoan/dangbai/');
     };
+   
     //$cookies.put('technology', 'Web', { 'expires': expireDate });
     // Kiem tra co cookies luu tai khoan hay khong
     var str = $cookies.get('user');
@@ -151,7 +164,9 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
                 $rootScope.taikhoan.admin = data._Admin;
                 swal("Thông báo", "Đăng nhập thành công", "success");
                 //$window.alert("Login success!");
+               
                 $rootScope.show_dn = 0;
+                $route.reload();
             } else {
                 swal("Thông báo", "Tài Khoản Hoặc Mật Khẩu Không Hợp Lệ", "error");
             }
@@ -200,7 +215,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
             var data = response.data;
             test = data;
             
-            console.log(test);
+            //console.log(test);
             //return test;
         });
         return test;
@@ -238,7 +253,8 @@ app.controller("route_view", ['$scope', '$window', '$cookies', function ($scope,
    
    
 }]);
-app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', function ($location, $rootScope, $cookies, $http, $window, $timeout) {
+app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', '$route',
+    function ($location, $rootScope, $cookies, $http, $window, $timeout, $route) {
      var routespermision = ['/TaiKhoan', '/TaiKhoan/dangbai'];
     var routespermision3 = ['/TaiKhoan/ql_tracuu', '/TaiKhoan/ql_khachhang', '/TaiKhoan/ql_baidang'];
     var routespermision2 = ['/TheoDoi/'];
@@ -246,10 +262,10 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
        
         $rootScope.title = current.$$route.title;
-
+       
         $rootScope.scrolltotop();
-        if (current.view === true) {
-           
+        if (current.replace === true) {
+            
         }
     });
     //console.log($location.path());
@@ -260,10 +276,12 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
    
     $rootScope.$on('$routeChangeStart', function (evt, to, from) {
         //console.log(to.authorize);
+       
         if (to.authorize === true) {
            
             var str = $cookies.get('user');
             //console.log(str);
+            
             if (str != null) {
                 $http.get(host + "/api/DangNhap/ThongTinKH/?makh=" + str).then(function(res) {
                     var data = res.data;
@@ -312,7 +330,7 @@ app.run(['$location', '$rootScope', '$cookies', '$http', '$window', '$timeout', 
            
         }
         if (to.admin === true) {
-            if (routespermision3.indexOf($location.path()) != -1 && $rootScope.taikhoan.admin != true) {
+            if ($rootScope.taikhoan.admin != true) {
                 swal("Thông báo", "Bạn Không Có Quyền Hạn", "warning");
                 // $window.history.back();
                 $window.history.back();
@@ -378,18 +396,312 @@ app.directive("scroll", function ($window) {
     
     return function (scope, element, attrs) {
         scope.pageYOffsetCurrent = 0;
+        scope.hien_nav_mini = 1;
+        scope.boolChange = 1;
         angular.element($window).bind("scroll", function () {
-            
-            if (this.pageYOffset - scope.pageYOffsetCurrent >= 1 && this.pageYOffset > 300) {
+            if (this.pageYOffset < 100) {
+                scope.hien_nav_mini = 1;
+            } else {
+                scope.hien_nav_mini = 0;
+            }
+            if (this.pageYOffset - scope.pageYOffsetCurrent >= 1) {
                 scope.boolChange = 0;
-                scope.pageYOffsetCurrent = this.pageYOffset;
+                scope.pageYOffsetCurrent = this.pageYOffset -1 ;
              
             } else {
                 scope.boolChange = 1;
                 scope.pageYOffsetCurrent = this.pageYOffset;
               
             }
+            //console.log(scope.boolChange);
             scope.$apply();
         });
     };
+});
+app.service('anchorSmoothScroll', function () {
+
+    this.scrollTo = function (eID) {
+
+        // This scrolling function 
+        // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
+
+        var startY = currentYPosition();
+        var stopY = elmYPosition(eID);
+        var distance = stopY > startY ? stopY - startY : startY - stopY;
+        if (distance < 100) {
+            scrollTo(0, stopY); return;
+        }
+        var speed = Math.round(distance / 100);
+        if (speed >= 20) speed = 20;
+        var step = Math.round(distance / 25);
+        var leapY = stopY > startY ? startY + step : startY - step;
+        var timer = 0;
+        if (stopY > startY) {
+            for (var i = startY; i < stopY; i += step) {
+                setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+                leapY += step; if (leapY > stopY) leapY = stopY; timer++;
+            } return;
+        }
+        for (var i = startY; i > stopY; i -= step) {
+            setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+            leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
+        }
+
+        function currentYPosition() {
+            // Firefox, Chrome, Opera, Safari
+            if (self.pageYOffset) return self.pageYOffset;
+            // Internet Explorer 6 - standards mode
+            if (document.documentElement && document.documentElement.scrollTop)
+                return document.documentElement.scrollTop;
+            // Internet Explorer 6, 7 and 8
+            if (document.body.scrollTop) return document.body.scrollTop;
+            return 0;
+        }
+
+        function elmYPosition(eID) {
+            var elm = document.getElementById(eID);
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
+            } return y;
+        }
+
+    };
+
+});
+app.directive('fbLike', [
+    '$window', '$rootScope', function($window, $rootScope) {
+        return {
+            restrict: 'A',
+            scope: {
+                fbLike: '=?'
+            },
+            link: function(scope, element, attrs) {
+                if (!$window.FB) {
+                    // Load Facebook SDK if not already loaded
+                    $.getScript('//connect.facebook.net/en_US/sdk.js', function() {
+                        $window.FB.init({
+                            appId: $rootScope.facebookAppId,
+                            xfbml: true,
+                            version: 'v2.0'
+                        });
+                        renderLikeButton();
+                    });
+                } else {
+                    renderLikeButton();
+                }
+
+                var watchAdded = false;
+
+                function renderLikeButton() {
+                    if (!!attrs.fbLike && !scope.fbLike && !watchAdded) {
+                        // wait for data if it hasn't loaded yet
+                        watchAdded = true;
+                        var unbindWatch = scope.$watch('fbLike', function(newValue, oldValue) {
+                            if (newValue) {
+                                renderLikeButton();
+
+                                // only need to run once
+                                unbindWatch();
+                            }
+
+                        });
+                        return;
+                    } else {
+                        element.html('<div class="fb-like"' + (!!scope.fbLike ? ' data-href="' + scope.fbLike + '"' : '') + ' data-layout="button_count" data-size="large" data-action="like" data-show-faces="true" data-share="true"></div>');
+                        $window.FB.XFBML.parse(element.parent()[0]);
+                    }
+                }
+            }
+        };
+    }
+]);
+    app.directive('googlePlus', [
+        '$window', function($window) {
+            return {
+                restrict: 'A',
+                scope: {
+                    googlePlus: '=?'
+                },
+                link: function(scope, element, attrs) {
+                    if (!$window.gapi) {
+                        // Load Google SDK if not already loaded
+                        $.getScript('//apis.google.com/js/platform.js', function() {
+                            renderPlusButton();
+                        });
+                    } else {
+                        renderPlusButton();
+                    }
+
+                    var watchAdded = false;
+
+                    function renderPlusButton() {
+                        if (!!attrs.googlePlus && !scope.googlePlus && !watchAdded) {
+                            // wait for data if it hasn't loaded yet
+                            watchAdded = true;
+                            var unbindWatch = scope.$watch('googlePlus', function(newValue, oldValue) {
+                                if (newValue) {
+                                    renderPlusButton();
+
+                                    // only need to run once
+                                    unbindWatch();
+                                }
+
+                            });
+                            return;
+                        } else {
+                            element.html('<div class="g-plusone"' + (!!scope.googlePlus ? ' data-href="' + scope.googlePlus + '"' : '') + ' data-size="standard"></div>');
+                            $window.gapi.plusone.go(element.parent()[0]);
+                        }
+                    }
+                }
+            };
+        }
+    ]);
+    app.directive('tweet', [
+        '$window', '$location',
+        function($window, $location) {
+            return {
+                restrict: 'A',
+                scope: {
+                    tweet: '=',
+                    tweetUrl: '='
+                },
+                link: function(scope, element, attrs) {
+                    if (!$window.twttr) {
+                        // Load Twitter SDK if not already loaded
+                        $.getScript('//platform.twitter.com/widgets.js', function() {
+                            renderTweetButton();
+                        });
+                    } else {
+                        renderTweetButton();
+                    }
+
+                    var watchAdded = false;
+
+                    function renderTweetButton() {
+                        if (!scope.tweet && !watchAdded) {
+                            // wait for data if it hasn't loaded yet
+                            watchAdded = true;
+                            var unbindWatch = scope.$watch('tweet', function(newValue, oldValue) {
+                                if (newValue) {
+                                    renderTweetButton();
+
+                                    // only need to run once
+                                    unbindWatch();
+                                }
+                            });
+                            return;
+                        } else {
+                            element.html('<a href="https://twitter.com/share" class="twitter-share-button" data-text="' + scope.tweet + '" data-url="' + (scope.tweetUrl || $location.absUrl()) + '">Tweet</a>');
+                            $window.twttr.widgets.load(element.parent()[0]);
+                        }
+                    }
+                }
+            };
+        }
+    ]);
+
+    app.directive('pinIt', [
+         '$window', '$location',
+         function ($window, $location) {
+             return {
+                 restrict: 'A',
+                 scope: {
+                     pinIt: '=',
+                     pinItImage: '=',
+                     pinItUrl: '='
+                 },
+                 link: function (scope, element, attrs) {
+                     if (!$window.parsePins) {
+                         // Load Pinterest SDK if not already loaded
+                         (function (d) {
+                             var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+                             p.type = 'text/javascript';
+                             p.async = true;
+                             p.src = '//assets.pinterest.com/js/pinit.js';
+                             p['data-pin-build'] = 'parsePins';
+                             p.onload = function () {
+                                 if (!!$window.parsePins) {
+                                     renderPinItButton();
+                                 } else {
+                                     setTimeout(p.onload, 100);
+                                 }
+                             };
+                             f.parentNode.insertBefore(p, f);
+                         }($window.document));
+                     } else {
+                         renderPinItButton();
+                     }
+
+                     var watchAdded = false;
+                     function renderPinItButton() {
+                         if (!scope.pinIt && !watchAdded) {
+                             // wait for data if it hasn't loaded yet
+                             watchAdded = true;
+                             var unbindWatch = scope.$watch('pinIt', function (newValue, oldValue) {
+                                 if (newValue) {
+                                     renderPinItButton();
+                                      
+                                     // only need to run once
+                                     unbindWatch();
+                                 }
+                             });
+                             return;
+                         } else {
+                             element.html('<a href="//www.pinterest.com/pin/create/button/?url=' + (scope.pinItUrl || $location.absUrl()) + '&media=' + scope.pinItImage + '&description=' + scope.pinIt + '" data-pin-do="buttonPin" data-pin-config="beside"></a>');
+                             $window.parsePins(element.parent()[0]);
+                         }
+                     }
+                 }
+             };
+         }
+    ]);
+    app.directive('myDraggable',function(){
+        return{
+            restrict: 'A', // directive confined to be an attribute only
+            link: function(scope,el,attrs){
+                var opts = scope.$eval(attrs.myDraggable); // user $eval because the value of the our attribute is an actual JS Object
+                // $apply is used because jQuery UI events occur outside the context of our directive and its controller and we need them to be "applied" to the scope of our directive
+                var evts = {
+                    drag: function(evt){ 
+                        scope.$apply(function(){ scope.$emit('dragging',{}); });
+                    },
+                    stop: function(evt){ 
+                        scope.$apply(function(){ scope.$emit('dragging.stopped',{}); });
+                    }
+                }; // end evts (events)
+                var options = $.extend({},opts,evts) // extending the options to feed to the "draggable" function
+                el.draggable(options); // jQuery UI
+            }
+        }
+    });
+app.directive('resize', function($window) {
+    return function(scope, element) {
+        var w = angular.element($window);
+        scope.getWindowDimensions = function() {
+            return {
+                'h': w.height(),
+                'w': w.width()
+            };
+        };
+        scope.$watch(scope.getWindowDimensions, function(newValue, oldValue) {
+            scope.windowHeight = newValue.h;
+            scope.windowWidth = newValue.w;
+
+            scope.style = function() {
+                return {
+                    'height': (newValue.h - 100) + 'px',
+                    'width': (newValue.w - 100) + 'px'
+                };
+            };
+
+        }, true);
+
+        w.bind('resize', function() {
+            scope.$apply();
+        });
+    }
 });
