@@ -182,7 +182,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
         //$rootScope.taikhoan.test = 0;
         $rootScope.taikhoan = { test: 0, tenkh: "", username: "", makh: "", admin: false };
         $cookies.remove('user');
-        $location.path('/TimKiem');
+        $location.path('/TrangChu');
     };
     $rootScope.add_office_follow = function (mavp) {
        
@@ -518,6 +518,53 @@ app.directive('fbLike', [
         };
     }
 ]);
+app.directive('fbLikem', [
+    '$window', '$rootScope', function ($window, $rootScope) {
+        return {
+            restrict: 'A',
+            scope: {
+                fbLike: '=?'
+            },
+            link: function (scope, element, attrs) {
+                if (!$window.FB) {
+                    // Load Facebook SDK if not already loaded
+                    $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
+                        $window.FB.init({
+                            appId: $rootScope.facebookAppId,
+                            xfbml: true,
+                            version: 'v2.0'
+                        });
+                        renderLikeButton();
+                    });
+                } else {
+                    renderLikeButton();
+                }
+
+                var watchAdded = false;
+
+                function renderLikeButton() {
+                    if (!!attrs.fbLike && !scope.fbLike && !watchAdded) {
+                        // wait for data if it hasn't loaded yet
+                        watchAdded = true;
+                        var unbindWatch = scope.$watch('fbLike', function (newValue, oldValue) {
+                            if (newValue) {
+                                renderLikeButton();
+
+                                // only need to run once
+                                unbindWatch();
+                            }
+
+                        });
+                        return;
+                    } else {
+                        element.html('<div class="fb-like"' + (!!scope.fbLike ? ' data-href="' + scope.fbLike + '"' : '') + ' data-layout="button_count" data-size="small" data-action="like" data-show-faces="true" data-share="true"></div>');
+                        $window.FB.XFBML.parse(element.parent()[0]);
+                    }
+                }
+            }
+        };
+    }
+]);
     app.directive('googlePlus', [
         '$window', function($window) {
             return {
@@ -704,4 +751,25 @@ app.directive('resize', function($window) {
             scope.$apply();
         });
     }
+});
+app.directive('fancybox', function ($compile, $http) {
+    return {
+        restrict: 'A',
+
+        controller: function ($scope) {
+            $scope.openFancybox = function (url) {
+
+                $http.get(url).then(function (response) {
+                    if (response.status == 200) {
+
+                        var template = angular.element(response.data);
+                        var compiledTemplate = $compile(template);
+                        compiledTemplate($scope);
+
+                        $.fancybox.open({ content: template, type: 'html' });
+                    }
+                });
+            };
+        }
+    };
 });

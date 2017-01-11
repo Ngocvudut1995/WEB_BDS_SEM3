@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 using WEB_TRACUU.Models;
 
@@ -11,7 +12,7 @@ namespace WEB_TRACUU.Controllers
     public class TrangChuController : ApiController
     {
         private DataTraCuuVPDataContext db;
-
+      
         [HttpGet]
         public IEnumerable<TKVanPhong> get_top_new_land_sell_canho(int sl)
         {
@@ -25,6 +26,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _MaVP = item.IDLand,
                         _Anh = item.Image,
                         _MaDT = item.IDAcreage,
@@ -70,6 +72,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -115,6 +118,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -160,6 +164,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -205,6 +210,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -250,6 +256,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -295,6 +302,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -340,6 +348,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -385,6 +394,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,
@@ -430,6 +440,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     list.Add(new TKVanPhong
                     {
+                        _LoaiDat = item.TypeNameDetail,
                         _TenKH = item.CustomerName,
                         _PhoneNumber = item.PhoneNumber,
                         _MaVP = item.IDLand,

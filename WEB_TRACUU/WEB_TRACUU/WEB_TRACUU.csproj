@@ -296,6 +296,10 @@
     <Content Include="Content\Images\anh-bia%282%29.jpg_223x126.jpg" />
     <Content Include="Content\Images\anh-bia%283%29.jpg_710x432.jpg" />
     <Content Include="Content\Images\anh-bia.jpg_223x126.jpg" />
+    <Content Include="Content\Images\avatar-636175052590992219.jpg" />
+    <Content Include="Content\Images\avatar-636179157739239057.jpg" />
+    <Content Include="Content\Images\avatar-636191428451532553.jpg" />
+    <Content Include="Content\Images\avatar-636192277861835186.jpg" />
     <Content Include="Content\Images\bando.png" />
     <Content Include="Content\Images\banner_ser_vpa.png" />
     <Content Include="Content\Images\broker.jpg" />
@@ -334,11 +338,14 @@
     <Content Include="Content\Images\Funiture\Washstand.png" />
     <Content Include="Content\Images\Khac.png" />
     <Content Include="Content\Images\khu-can-ho-Masteri-Thao-Dien.jpg" />
+    <Content Include="Content\Images\khu-do-thi-FPT-City-Da-Nang.jpg" />
+    <Content Include="Content\Images\khu-phuc-hop-can-ho-River-City.jpg" />
     <Content Include="Content\Images\Kien-truc.png" />
     <Content Include="Content\Images\left-arrow.png" />
     <Content Include="Content\Images\LivingRoomSofa.png" />
     <Content Include="Content\Images\logo-homedy-xmas.png" />
     <Content Include="Content\Images\maxresdefault.jpg" />
+    <Content Include="Content\Images\nam-long-636193091806992805.jpg" />
     <Content Include="Content\Images\Ngoai-that.png" />
     <Content Include="Content\Images\Nha.png" />
     <Content Include="Content\Images\Noi-that.png" />
@@ -358,6 +365,8 @@
     <Content Include="Content\Images\vanphong5.jpg" />
     <Content Include="Content\Images\vanphong6.jpg" />
     <Content Include="Content\Images\view.jpg" />
+    <Content Include="Content\Images\Vinhomes-Central-Park.jpg" />
+    <Content Include="Content\Images\Vinhomes-Times-City.jpg" />
     <Content Include="Content\Images\Xay-dung.png" />
     <Content Include="Content\slider.css" />
     <Content Include="Content\style.css" />
@@ -439,6 +448,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sweetalert2.min.js" />
+    <Content Include="template.html" />
     <Content Include="Views\Home\chitiet.html" />
     <Content Include="Views\Home\dangki.html" />
     <Content Include="Views\Home\gioithieu.html" />
@@ -450,6 +460,7 @@
     <Content Include="Views\Shared\SendEmail.html" />
     <Content Include="Views\Shared\sendmail_contact.html" />
     <Content Include="Views\Shared\slider.html" />
+    <Content Include="Views\Shared\slider_index.html" />
     <Content Include="Views\trangchinh.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

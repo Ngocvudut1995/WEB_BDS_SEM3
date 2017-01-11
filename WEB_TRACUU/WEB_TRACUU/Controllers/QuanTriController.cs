@@ -15,7 +15,7 @@ using WEB_TRACUU.Areas.Administrator.Models;
 using WEB_TRACUU.Models;
 
 namespace WEB_TRACUU.Controllers
-{   
+{
     public class QuanTriController : ApiController
     {
         private DataTraCuuVPDataContext db;
@@ -33,7 +33,8 @@ namespace WEB_TRACUU.Controllers
 
             }
             if (username != null)
-            {   Guid id = new Guid(username);
+            {
+                Guid id = new Guid(username);
                 using (db = new DataTraCuuVPDataContext())
                 {
                     var sql = (from a in db.Customers
@@ -47,7 +48,7 @@ namespace WEB_TRACUU.Controllers
                         }
 
                     }
-                    
+
                 }
             }
             return false;
@@ -69,7 +70,7 @@ namespace WEB_TRACUU.Controllers
             {
                 Guid id = new Guid(username);
                 if (id == idcustomer) return true;
-               
+
             }
             return false;
         }
@@ -95,13 +96,13 @@ namespace WEB_TRACUU.Controllers
                     {
                         int maQuan = json.ID;
                         var query = (from a in db.Trousers
-                            where a.IDTrousers == maQuan
-                            select a).SingleOrDefault();
+                                     where a.IDTrousers == maQuan
+                                     select a).SingleOrDefault();
                         query.Trousers = json.Name;
                         db.SubmitChanges();
                         return Ok(json);
                     }
-                   
+
                 }
 
             }
@@ -119,9 +120,9 @@ namespace WEB_TRACUU.Controllers
                 using (db = new DataTraCuuVPDataContext())
                 {
                     var phuongs = (from a in db.Wards where a.IDTrousers == id_quan select a).ToList();
-                    foreach (var item in phuongs)
+                    foreach (var sql in phuongs)
                     {
-                        Delete_Wards(item.IDWard);
+                        Delete_Wards(sql.IDWard);
                     }
                     var quan = (from a in db.Trousers
                                 where a.IDTrousers == id_quan
@@ -138,7 +139,7 @@ namespace WEB_TRACUU.Controllers
             }
         }
 
-        
+
         [System.Web.Http.HttpPost]
         public IHttpActionResult edit_Wards(JObject data)
         {
@@ -148,7 +149,7 @@ namespace WEB_TRACUU.Controllers
             {
                 using (db = new DataTraCuuVPDataContext())
                 {
-                    
+
                     if (json.Is_Insert == 1)
                     {
                         Ward phuong = new Ward();
@@ -186,13 +187,13 @@ namespace WEB_TRACUU.Controllers
                 using (db = new DataTraCuuVPDataContext())
                 {
                     var duongs = (from a in db.Streets where a.IDWard == id select a).ToList();
-                    foreach (var item in duongs)
+                    foreach (var sql in duongs)
                     {
-                        Delete_Streets(item.IDStreet);
+                        Delete_Streets(sql.IDStreet);
                     }
                     var phuong = (from a in db.Wards
-                                where a.IDWard == id
-                                select a).SingleOrDefault();
+                                  where a.IDWard == id
+                                  select a).SingleOrDefault();
                     db.Wards.DeleteOnSubmit(phuong);
                     db.SubmitChanges();
                     return Ok();
@@ -204,7 +205,7 @@ namespace WEB_TRACUU.Controllers
                 return NotFound();
             }
         }
-        
+
 
 
         [System.Web.Http.HttpPost]
@@ -253,8 +254,8 @@ namespace WEB_TRACUU.Controllers
                 using (db = new DataTraCuuVPDataContext())
                 {
                     var duong = (from a in db.Streets
-                                  where a.IDStreet == id
-                                  select a).SingleOrDefault();
+                                 where a.IDStreet == id
+                                 select a).SingleOrDefault();
                     db.Streets.DeleteOnSubmit(duong);
                     db.SubmitChanges();
                     return Ok();
@@ -375,7 +376,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     var type = (from a in db.TypeDetails
                                 where a.IDType == id
-                                 select a).SingleOrDefault();
+                                select a).SingleOrDefault();
                     db.TypeDetails.DeleteOnSubmit(type);
                     db.SubmitChanges();
                     return Ok();
@@ -457,8 +458,8 @@ namespace WEB_TRACUU.Controllers
                 using (db = new DataTraCuuVPDataContext())
                 {
                     var kh = (from a in db.Customers
-                                where a.IDCustomer == id
-                                select a).SingleOrDefault();
+                              where a.IDCustomer == id
+                              select a).SingleOrDefault();
                     kh.Flag_Active = false;
                     MailMessage msg = new MailMessage();
 
@@ -466,7 +467,7 @@ namespace WEB_TRACUU.Controllers
                     string to_mail = kh.Email;
                     msg.To.Add(to_mail);
                     msg.Subject = "Banned Tài Khoản!";
-                    msg.Body = string.Format("Tài Khoản "+kh.CustomerName+" Của Bạn Đã Bị Cấm. Mời bạn Liên Hệ Với Chúng Tôi Để Xác Nhận Lại!");
+                    msg.Body = string.Format("Tài Khoản " + kh.CustomerName + " Của Bạn Đã Bị Cấm. Mời bạn Liên Hệ Với Chúng Tôi Để Xác Nhận Lại!");
                     msg.IsBodyHtml = false;
                     SmtpClient smtp = new SmtpClient();
                     smtp.Host = "smtp.gmail.com";
@@ -499,7 +500,7 @@ namespace WEB_TRACUU.Controllers
                               where a.IDCustomer == id
                               select a).SingleOrDefault();
                     kh.Admin = false;
-                  
+
                     db.SubmitChanges();
                     return Ok();
                 }
@@ -545,8 +546,8 @@ namespace WEB_TRACUU.Controllers
                 {
                     Guid IDKH = json._makh;
                     var query = (from a in db.Customers
-                        where a.IDCustomer == IDKH
-                        select a).SingleOrDefault();
+                                 where a.IDCustomer == IDKH
+                                 select a).SingleOrDefault();
                     query.CustomerName = json._tenkh;
                     query.Organization = json._coquan;
                     query.Email = json._email;
@@ -620,111 +621,312 @@ namespace WEB_TRACUU.Controllers
             {
                 db.Connection.Open();
                 var sql = (from a in db.Overview_Lands
-                           join b in db.Lands
-                           on a.IDLand equals b.IDLand
                            where a.IDLand == mavp
-                           select new
-                           {
-                               a ,b.IDPost
-                           }).SingleOrDefault();
+                           select a).SingleOrDefault();
                 vp = new TKVanPhong
                 {
-                    _MaVP = sql.a.IDLand,
-                    _Anh = sql.a.Image,
-                    _MaDT = sql.a.IDAcreage,
-                    _IDPrice = sql.a.IDPrice,
-                    _TenVp = sql.a.Name,
-                    _SoNha = sql.a.Numhouse,
-                    _MaQuan = sql.a.IDTrousers,
-                    _CreateDate = sql.a.CreateDate,
-                    _ModifyDate = sql.a.ModifyDate,
-                    _MaDuong = sql.a.IDStreet,
-                    _MaLoaiCT = sql.a.IDTypeDetail,
-                    _MaPhuong = sql.a.IDWard,
-                    _Mota = sql.a.Decrition,
-                    _ExpiredDate= sql.a.ExpiredDate,
-                    _Sell = sql.a.Sell,
-                    _Price_detail = sql.a.Price_detail,
-                    _MaBaiDang = sql.IDPost
-                    
-                    
+                    _LoaiDat = sql.TypeNameDetail,
+                    _TenKH = sql.CustomerName,
+                    _PhoneNumber = sql.PhoneNumber,
+                    _MaVP = sql.IDLand,
+                    _Anh = sql.Image,
+                    _MaDT = sql.IDAcreage,
+                    _Dientich = sql.Acreage,
+                    _IDPrice = sql.IDPrice,
+                    _Mota = sql.Decrition,
+                    _TenVp = sql.Name,
+                    _SoNha = sql.Numhouse,
+                    _MaQuan = (int)sql.IDTrousers,
+                    _TenQuan = sql.Trousers,
+                    _MaLoai = (int)sql.IDType,
+                    _MaLoaiCT = sql.IDTypeDetail,
+                    _Duong = sql.Street,
+                    _Phuong = sql.Ward,
+                    _MaPhuong = sql.IDWard,
+                    _MaDuong = sql.IDStreet,
+                    _CreateDate = sql.CreateDate,
+                    _ModifyDate = sql.ModifyDate,
+                    _Sell = sql.Sell,
+                    _ExpiredDate = sql.ExpiredDate,
+                    _Gia = sql.Price,
+                    _Price_detail = sql.Price_detail,
+                    _Area_detail = sql.Area_detail,
+                    _HetHan = (sql.ExpiredDate > DateTime.Now) ? false : true
+
+
                 };
                 var kh = (from a in db.Customers
-                    join b in db.Lands
-                        on a.IDCustomer equals b.IDCustomer
-                    where b.IDLand == sql.a.IDLand
-                    select a).SingleOrDefault();
-
-                vp._MaKH = kh.IDCustomer;
-                vp._TenKH = kh.CustomerName;
+                          join b in db.Lands
+                              on a.IDCustomer equals b.IDCustomer
+                          where b.IDLand == sql.IDLand
+                          select new
+                          {
+                              a,
+                              b.IDPost
+                          }).SingleOrDefault();
+                vp._MaBaiDang = kh.IDPost;
+                vp._MaKH = kh.a.IDCustomer;
+                vp._TenKH = kh.a.CustomerName;
                 db.Connection.Close();
                 return vp;
 
             }
 
         }
+
         [System.Web.Http.HttpPut]
         public IHttpActionResult Update_BDS(JObject data)
         {
             dynamic json = data;
-            try
+
+            using (db = new DataTraCuuVPDataContext())
             {
-                using (db = new DataTraCuuVPDataContext())
+
+                try
                 {
-                    
                     Guid mavp = new Guid();
                     mavp = json._idLand;
                     var lands = (from a in db.Lands where a.IDLand == mavp select a).SingleOrDefault();
                     Guid idcustomer = new Guid();
                     idcustomer = (Guid) lands.IDCustomer;
-                    if (test_user(idcustomer) != true && test_quyenadmin() != true) return NotFound(); 
+                    if (test_user(idcustomer) != true && test_quyenadmin() != true) return NotFound();
+                    // delete noi that va add lai
+                    var deleteNoithat = (from a in db.Furiture_details
+                        join b in db.Furitures on a.IDFuriture equals b.IDFuriture
+
+                        where a.IDLand == mavp
+                        select b).ToList();
+                    foreach (var item in deleteNoithat)
+                    {
+                        Furiture_detail furni = (from a in db.Furiture_details
+                            where a.IDLand == mavp && a.IDFuriture == item.IDFuriture
+                            select a).SingleOrDefault();
+                        db.Furiture_details.DeleteOnSubmit(furni);
+
+                    }
+                    db.SubmitChanges();
+                    // delete tien nghi va add lai
+                    var deleteTiennghi = (from a in db.Convenient_Details
+                        join b in db.Convenients on a.IDConvenient equals b.IDConvenient
+
+                        where a.IDLand == mavp
+                        select b).ToList();
+                    foreach (var item in deleteTiennghi)
+                    {
+                        Convenient_Detail conv = (from a in db.Convenient_Details
+                            where a.IDLand == mavp && a.IDConvenient == item.IDConvenient
+                            select a).SingleOrDefault();
+                        db.Convenient_Details.DeleteOnSubmit(conv);
+                    }
+                    db.SubmitChanges();
+                    foreach (var item in json._listtiennghi)
+                    {
+                        Convenient_Detail conven = new Convenient_Detail();
+                        conven.IDConvenient = (int) item.IDConvenient;
+                        conven.IDLand = lands.IDLand;
+                        db.Convenient_Details.InsertOnSubmit(conven);
+
+                    }
+                    db.SubmitChanges();
+                    foreach (var item in json._listnoithat)
+                    {
+
+                        Furiture_detail furinture = new Furiture_detail();
+                        furinture.IDFuriture = (int) item.IDFuriture;
+                        furinture.IDLand = lands.IDLand;
+                        db.Furiture_details.InsertOnSubmit(furinture);
+
+                    }
+                    db.SubmitChanges();
+                    int loaiGia = 1;
+                    Double gia = Convert.ToDouble(json._GiaChiTiet);
+                    bool banThue = json._hinhThuc;
+
+                    if (banThue == true)
+                    {
+                        lands.Sell = true;
+
+                        if (gia == 0)
+                        {
+                            lands.IDPrice = 18;
+                        }
+                        else if (gia < 500)
+                        {
+                            lands.IDPrice = 1;
+                        }
+                        else if (gia >= 500 && gia < 800)
+                        {
+                            lands.IDPrice = 2;
+                        }
+                        else if (gia >= 800 && gia < 1000)
+                        {
+                            lands.IDPrice = 3;
+                        }
+                        else if (gia >= 1000 && gia < 2000)
+                        {
+                            lands.IDPrice = 4;
+                        }
+                        else if (gia >= 2000 && gia < 3000)
+                        {
+                            lands.IDPrice = 5;
+                        }
+                        else if (gia >= 3000 && gia < 5000)
+                        {
+                            lands.IDPrice = 6;
+                        }
+                        else if (gia >= 5000 && gia < 7000)
+                        {
+                            lands.IDPrice = 7;
+                        }
+                        else if (gia >= 7000 && gia < 10000)
+                        {
+                            lands.IDPrice = 8;
+                        }
+                        else if (gia >= 10000 && gia < 20000)
+                        {
+                            lands.IDPrice = 9;
+                        }
+                        else if (gia >= 20000)
+                            lands.IDPrice = 10;
+
+                    }
+
+                    else
+                    {
+                        lands.Sell = false;
+
+                        if (gia == 0)
+                        {
+                            lands.IDPrice = 19;
+                        }
+                        else if (gia < 1)
+                        {
+                            lands.IDPrice = 11;
+                        }
+                        else if (gia >= 1 && gia < 5)
+                        {
+                            lands.IDPrice = 12;
+                        }
+                        else if (gia >= 5 && gia < 10)
+                        {
+                            lands.IDPrice = 13;
+                        }
+                        else if (gia >= 10 && gia < 40)
+                        {
+                            lands.IDPrice = 14;
+                        }
+                        else if (gia >= 40 && gia < 70)
+                        {
+                            lands.IDPrice = 15;
+                        }
+                        else if (gia >= 70 && gia < 100)
+                        {
+                            lands.IDPrice = 16;
+                        }
+                        else if (gia >= 100)
+                        {
+                            lands.IDPrice = 17;
+                        }
+                    }
+
+
+                    //Dien tich
+                    if (json._dienTich < 30)
+                    {
+                        lands.IDAcreage = 1;
+                    }
+                    else if (json._dienTich >= 30 && json._dienTich < 50)
+                    {
+                        lands.IDAcreage = 2;
+                    }
+                    else if (json._dienTich >= 50 && json._dienTich < 100)
+                    {
+                        lands.IDAcreage = 3;
+                    }
+                    else if (json._dienTich >= 100 && json._dienTich < 200)
+                    {
+                        lands.IDAcreage = 4;
+                    }
+                    else if (json._dienTich >= 200 && json._dienTich < 300)
+                    {
+                        lands.IDAcreage = 5;
+                    }
+                    else if (json._dienTich >= 300 && json._dienTich < 400)
+                    {
+                        lands.IDAcreage = 6;
+                    }
+                    else if (json._dienTich >= 400 && json._dienTich < 500)
+                    {
+                        lands.IDAcreage = 7;
+                    }
+                    else if (json._dienTich >= 500 && json._dienTich < 1000)
+                    {
+                        lands.IDAcreage = 8;
+                    }
+                    else if (json._dienTich >= 1000)
+                    {
+                        lands.IDAcreage = 9;
+                    }
+                    lands.Area_detail = json._dienTich;
+
                     lands.Name = json._tieuDe;
-                    lands.IDAcreage = Convert.ToInt32(json._dienTich);
-                    lands.IDPrice = Convert.ToInt32(json._IDgia);
-                    lands.Price_detail = Convert.ToDecimal(json._GiaChiTiet);
+                    lands.Price_detail = Convert.ToDecimal(gia);
                     lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
-                    bool sell =  Convert.ToBoolean(json._hinhThuc);
-                    lands.Sell = sell;
+                    if (json._huong.ToString() != "")
+                    {
+                        lands.IDDirection = json._huongnha;
+                    }
+                    // lands.Image = "Content/Images/vanphong.jpg";
                     lands.Decrition = json._moTa;
-                    DateTime today = DateTime.Now;
-                    lands.ModifyDate = DateTime.Parse(today.ToString("yyyy-MM-dd"));
+                    DateTime date = DateTime.Now;
+
+                    lands.ModifyDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
                     DateTime expri_date = Convert.ToDateTime(json._hethan);
                     lands.ExpiredDate = expri_date;
 
-                    lands.IDCustomer = json._idCustomer;
                     lands.Flag_Approval = false;
                     //lands.Image = json._Image();
                     // Lay ID cao nhat hien tai
-
-                    // update address
-                   lands.Numhouse = json._soNha;
-                    // Insert address
-                    if (json._MaDuong != null)
+                    if (json._soNha.ToString() != "")
                     {
-                        lands.IDStreet = json._MaDuong;
+                        lands.Numhouse = json._soNha;
                     }
-                    lands.IDWard = json._MaPhuong;
-                    
+                    if (json._duong.ToString() != "")
+                    {
+                        lands.IDStreet = json._duong;
+                    }
+
+                    // Insert address 
+
+                    lands.IDWard = json._phuong;
+
+                    // delete cac noi that trong cua land do
+
+
+                    // delete cac tien nghi trong cua land do
+
                     db.SubmitChanges();
 
-                   
+
                     return Ok(json);
                 }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
+
 
             }
-            catch (Exception)
-            {
-                return NotFound();
-            }
         }
+
         public IEnumerable<QuanTriBDS> get_thongtin_BDS()
         {
             var listvp = new List<QuanTriBDS>();
             using (db = new DataTraCuuVPDataContext())
             {
-             
+
                 var sql = (from a in db.Overview_Lands
-                          
+
                            select a).ToList();
                 foreach (var item in sql)
                 {
@@ -740,8 +942,8 @@ namespace WEB_TRACUU.Controllers
                         _CreateDate = item.CreateDate,
                         _ModifyDate = item.ModifyDate,
                         _ExpireDate = item.ExpiredDate,
-                        HetHan = (item.ExpiredDate < DateTime.Now)?true:false,
-                        
+                        HetHan = (item.ExpiredDate < DateTime.Now) ? true : false,
+
                     });
                 }
                 return listvp;
@@ -813,7 +1015,7 @@ namespace WEB_TRACUU.Controllers
                     if (hpf.ContentLength > 0)
                     {
                         Random rd = new Random();
-                        string fileName =  nt.Furiture_Name + "_" + rd.Next(1, 100).ToString() + ".png";
+                        string fileName = nt.Furiture_Name + "_" + rd.Next(1, 100).ToString() + ".png";
                         string saveAsPath = Path.Combine(sPath, fileName);
 
 
@@ -934,7 +1136,7 @@ namespace WEB_TRACUU.Controllers
                         db.Furitures.InsertOnSubmit(funri);
                         db.SubmitChanges();
                         var id =
-                            (from a in db.Furitures select new {a.IDFuriture}).OrderByDescending(p => p.IDFuriture)
+                            (from a in db.Furitures select new { a.IDFuriture }).OrderByDescending(p => p.IDFuriture)
                                 .Take(1).SingleOrDefault();
 
                         return id.IDFuriture;
@@ -958,7 +1160,7 @@ namespace WEB_TRACUU.Controllers
                 return 0;
             }
         }
-        
+
         [System.Web.Http.HttpDelete]
         public IHttpActionResult Delete_Furniture(int id)
         {

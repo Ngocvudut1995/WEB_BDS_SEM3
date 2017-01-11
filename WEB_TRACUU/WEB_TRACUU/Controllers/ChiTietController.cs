@@ -113,7 +113,7 @@ namespace WEB_TRACUU.Controllers
             public string _Image;
             public bool? _Sell;
         }
-        [HttpPost]
+        [HttpGet]
         public IEnumerable<TKVanPhong> get_VP_Tuong_Tu(Guid id)
         {
          
@@ -126,7 +126,7 @@ namespace WEB_TRACUU.Controllers
                 // xet cung loai
                 var query = (from a in db.Overview_Lands
                     join b in db.TypeDetails on a.IDTypeDetail equals b.IDTypeDetail
-                             where a.IDType == b.IDType && a.IDTypeDetail == land.IDTypeDetail
+                             where a.IDType == b.IDType && a.IDTypeDetail == land.IDTypeDetail && a.Flag_Approval == true
                              select new
                              {
                                  a.IDLand,
@@ -147,8 +147,8 @@ namespace WEB_TRACUU.Controllers
                 }
                 //xet cung loai chi tiet
                 query = (from a in db.Overview_Lands
-                             where a.IDTypeDetail == land.IDTypeDetail
-                             select new
+                             where a.IDTypeDetail == land.IDTypeDetail && a.Flag_Approval == true
+                         select new
                              {
                                  a.IDLand,
 
@@ -168,7 +168,7 @@ namespace WEB_TRACUU.Controllers
                 }
                 // xet cung duong
                 query = (from a in db.Overview_Lands
-                         where a.IDStreet == land.IDStreet
+                         where a.IDStreet == land.IDStreet && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -189,7 +189,7 @@ namespace WEB_TRACUU.Controllers
                 }
                 // cung phuong
                 query = (from a in db.Overview_Lands
-                         where a.IDWard == land.IDWard
+                         where a.IDWard == land.IDWard && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -210,7 +210,7 @@ namespace WEB_TRACUU.Controllers
                 }
                 // cung quan
                 query = (from a in db.Overview_Lands
-                         where a.IDTrousers == land.IDTrousers
+                         where a.IDTrousers == land.IDTrousers && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -232,7 +232,7 @@ namespace WEB_TRACUU.Controllers
                 // cung dien tich
                 query = (from a in db.Overview_Lands
                         
-                         where a.IDAcreage == land.IDAcreage
+                         where a.IDAcreage == land.IDAcreage && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -253,7 +253,7 @@ namespace WEB_TRACUU.Controllers
                 // xet gia
                 query = (from a in db.Overview_Lands
 
-                         where a.IDPrice == land.IDPrice
+                         where a.IDPrice == land.IDPrice && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -275,7 +275,7 @@ namespace WEB_TRACUU.Controllers
                 // xet huong
                 query = (from a in db.Overview_Lands
 
-                         where a.IDDirection == land.IDDirection
+                         where a.IDDirection == land.IDDirection && a.Flag_Approval == true
                          select new
                          {
                              a.IDLand,
@@ -302,6 +302,9 @@ namespace WEB_TRACUU.Controllers
                     
                         list.Add(new TKVanPhong
                         {
+                            _LoaiDat = vp.TypeNameDetail,
+                            _TenKH = vp.CustomerName,
+                            _PhoneNumber = vp.PhoneNumber,
                             _MaVP = vp.IDLand,
                             _Anh = vp.Image,
                             _MaDT = vp.IDAcreage,
@@ -317,13 +320,14 @@ namespace WEB_TRACUU.Controllers
                             _Duong = vp.Street,
                             _Phuong = vp.Ward,
                             _MaPhuong = vp.IDWard,
-                            _MaDuong = (int)vp.IDStreet,
+                            _MaDuong = vp.IDStreet,
                             _CreateDate = vp.CreateDate,
                             _ModifyDate = vp.ModifyDate,
                             _Sell = vp.Sell,
                             _ExpiredDate = vp.ExpiredDate,
                             _Gia = vp.Price,
                             _Price_detail = vp.Price_detail,
+                            _Area_detail = vp.Area_detail,
                             _HetHan = (vp.ExpiredDate > DateTime.Now) ? false : true
                         });
                     }

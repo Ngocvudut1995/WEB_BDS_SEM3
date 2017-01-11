@@ -28,8 +28,7 @@ namespace WEB_TRACUU.Controllers
             dynamic json = data;
             int i = 0;
             var id = Guid.NewGuid();
-            try
-            {
+           
                 using (db = new DataTraCuuVPDataContext())
                 {
                     db.Connection.Open();
@@ -185,7 +184,7 @@ namespace WEB_TRACUU.Controllers
                     {
                         lands.IDDirection = json._huongnha;
                     }
-                    
+                    lands.Image = "Content/Images/vanphong.jpg";
                     lands.Decrition = json._moTa;
                     DateTime date = DateTime.Now;
                     lands.CreateDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
@@ -254,12 +253,8 @@ namespace WEB_TRACUU.Controllers
                     return Ok(id);
                 }
 
-            }
-            catch (Exception)
-            {
-                return NotFound();
-                
-            }
+           
+           
         }
         //[HttpPost]
         //public Guid? Creat_BDS(JObject data)

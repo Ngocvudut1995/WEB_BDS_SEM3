@@ -41,6 +41,11 @@ namespace WEB_TRACUU.Controllers
             var result = new FilePathResult("../Views/Shared/slider.html", "text/html");
             return result;
         }
+        public ActionResult Slide_Index()
+        {
+            var result = new FilePathResult("../Views/Shared/slider_index.html", "text/html");
+            return result;
+        }
         public ActionResult ChiTiet()
         {
             var result = new FilePathResult("../Views/Home/chitiet.html", "text/html");

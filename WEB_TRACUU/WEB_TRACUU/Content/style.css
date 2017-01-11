@@ -119,7 +119,7 @@
     -webkit-transition: all ease 0.4s;
     z-index: 20;
     /*height: 330px;*/
-    border: solid 3px blue;
+     box-shadow: 0px 0px 5px red;
     background-color: white;
     top: 10%;
 }
@@ -134,7 +134,23 @@ h3 img {
     border-radius: 5px;
     border: 1px solid silver;
 }
+@keyframes example {
+    from {margin-right: -200px}
+    to {margin-right: 0px}
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
 
+    to {
+        opacity: 1;
+    }
+}
+ .contact.ng-hide-remove {
+        animation:1.5s fadeIn ease;
+         animation:1s example ease;
+    }
 .contact {
     /*background-color: rgba(0, 0, 0, 0.77);*/
     position: fixed;
