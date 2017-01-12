@@ -182,7 +182,7 @@ app.controller("index", ['$scope', '$window', '$cookies', '$rootScope', '$http',
         //$rootScope.taikhoan.test = 0;
         $rootScope.taikhoan = { test: 0, tenkh: "", username: "", makh: "", admin: false };
         $cookies.remove('user');
-        $location.path('/TrangChu');
+        $location.path('/TrangChu/');
     };
     $rootScope.add_office_follow = function (mavp) {
        

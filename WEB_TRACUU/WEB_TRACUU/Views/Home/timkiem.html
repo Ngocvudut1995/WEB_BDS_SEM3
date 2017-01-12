@@ -1,9 +1,9 @@
 ﻿<div class="container-fluid" style="padding: 0px">
     <a id="search"></a>
 <div class="row" style="position: relative; bottom: 0px; height: 40px; z-index: 14; background-color: rgb(165, 164, 164); padding: 5px" scroll
-     ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} ||((hien_nav_mini == 1) && {'position':'relative'}))">
+     ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} ||((hien_nav_mini == 1) && {'position':'relative'}))" ng-init="boloc = 0">
 
-    <div class="col-md-2"
+    <div class="col-md-2 hidden-xs"
          style="padding-top: -10px; margin-left: 20px; background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); padding: 0px;"
          ng-init="show_loai = 0" ng-mouseleave="show_loai = 0">
 
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2" style="background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia=0">
+    <div class="col-md-2 hidden-xs" style="background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_gia = 0" ng-mouseleave="show_gia=0">
 
         <a ng-click="show_gia=(!show_gia)" ng-mouseover="show_gia=1"style="margin-top: -4px; color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 top: 4px;
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2" style="background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave="show_dientich = 0">
+    <div class="col-md-2 hidden-xs" style="background-color: white; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); padding: 0px;" ng-init="show_dientich = 0" ng-mouseleave="show_dientich = 0">
 
         <a ng-click="show_dientich=(!show_dientich)" ng-mouseover="show_dientich=1" style="margin-top: -4px; color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          top: 4px;
@@ -72,11 +72,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-1" style="background-color: white; width: 10%; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_ht = 0" ng-mouseleave="show_ht=0">
+    <div class="col-md-1 hidden-xs" style="background-color: white; width: 10%; height: 100%; border-right: 1px solid rgba(166, 166, 166, 0.83); ; padding: 0px;" ng-init="show_ht = 0" ng-mouseleave="show_ht=0">
 
         <a ng-click="show_ht=(!show_ht)" ng-mouseover="show_ht=1" style="margin-top: -4px; color: black; font-size: 15px; text-decoration: none; width: 89%; position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      top: 4px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      left: 12px;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     top: 4px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     left: 12px;">
             <span class="fa fa-home" aria-hidden="true" style="color: rgb(54, 172, 226); font-size: 25px"></span> {{tab_sell}} <i style="float: right; margin-top: 6px;" class="fa fa-caret-down" aria-hidden="true"></i>
         </a>
         <div style="max-height: 200px; background-color: white; margin-top: 30px" ng-show="show_ht == 1">
@@ -90,11 +90,14 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-xs-3 hidden-md hidden-lg" >
+        <button class="btn btn-info" ng-click ="boloc = !boloc">Bộ Lọc</button>
+    </div>
+    <div class="col-md-4 col-xs-9">
         <form style="height: 100%;" ng-submit="search_vp()">
             <div class="input-group" style="height: 100%">
                 <input ng-enter="search_vp()" type="text" ng-model="query" class="form-control" placeholder="Tìm kiếm theo tên dự án, tên BDS, đường, phường, quận "
-                       style="height: 100%; border: #eb5255 1.7px solid; border-radius: 0px;">
+                       style="height: 137%; border: #eb5255 1.7px solid; border-radius: 0px;">
                 <div class="input-group-btn" style="height: 100%">
                     <button class="btn btn-default" type="submit" style="background-color: #eb5255; border-width: 0px;">
                         <i class="glyphicon glyphicon-search"></i>
@@ -105,7 +108,91 @@
             </div>
         </form>
     </div>
-    <div class="" style="height: 100%">
+    <div class="col-xs-12 hidden-md" ng-show="boloc==1" style="background-color: white; padding-bottom: 30px">
+        <div class="col-md-3 col-xs-12 col-sm-4">
+            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_sell" ng-change="change_sell(select_sell)">
+                <option value="true" selected="selected">Bán</option>
+                <option value="false" selected="selected">Cho thuê</option>
+              
+
+            </select>
+        </div>
+        <div style="width: 100%; color: black">
+            <div style="float: left; width: 30%">
+                <input style="height: 17px; width: 17px; margin: 10px; margin-right: 0px;" type="radio" ng-click="type_land = 1;change_type_land(1)" ng-checked="type_land == 1"/> Căn hộ
+            </div>
+            <div style="float: left; width: 30%">
+                <input style="height: 17px; width: 17px; margin: 10px; margin-right: 0px;" type="radio" ng-click="type_land = 2;change_type_land(2)" ng-checked="type_land == 2"/> Nhà
+            </div>
+            <div style="float: left; width: 30%">
+                <input style="height: 17px; width: 17px; margin: 10px; margin-right: 0px;" type="radio" ng-click="type_land = 3;change_type_land(3)" ng-checked="type_land == 3"/> Đất
+            </div>
+            <div style="float: left; width: 50%">
+                <input style="height: 17px; width: 17px; margin: 10px; margin-right: 0px;" type="radio" ng-click="type_land = 4;change_type_land(4)" ng-checked="type_land == 4"/> Văn phòng
+
+            </div>
+            <div style="float: left; width: 50%">
+                <input style="height: 17px; width: 17px; margin: 10px; margin-right: 0px;" type="radio" ng-click="type_land = 5;change_type_land(5)" ng-checked="type_land == 5"/> Khác
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-4">
+
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Kieu" >
+                <option value="0" selected="selected">--- Chọn Dự Án ---</option>
+                <option ng-repeat="item in list_DM  | filter : {TypeNameDetail: text_loai}" value="{{ item.IDTypeDetail }}">{{ item.TypeNameDetail }}</option>
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-4">
+            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_DienTich">
+                <option value="0" selected="selected">--- Chọn Diện Tích ---</option>
+                <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
+
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-12 col-sm-4">
+            <!--<label style="width: 100%;margin-top: 30px">Giá (Min)</label>-->
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Gia">
+                <option value="0" selected="selected">--- Chọn Mức Giá ---</option>
+                <option ng-repeat="item in list_Price" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-4">
+
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
+                <option value="0" selected="selected">--- Chọn quận huyện ---</option>
+                <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
+
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-4">
+
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
+                <option value="0" selected="selected">--- Chọn phường xã ---</option>
+                <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 col-xs-12 col-sm-4">
+
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="search_vp()">
+                <option value="0" selected="selected">--- Chọn đường ---</option>
+                <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
+
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-12 col-sm-4">
+
+            <select class="select_tracuu" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Huong" ng-change="search_vp()">
+                <option value="0" selected="selected">--- Chọn hướng nhà ---</option>
+                <option ng-repeat="item in listHuong" value="{{ item.IDDirection }}">{{ item.Direction1 }}</option>
+
+            </select>
+        </div>
+    </div>
+    <div class="hidden-xs" style="height: 100%">
         <a style="color: black; font-size: 21px" ng-click="reload_seach()">
             <i class="fa fa-refresh" aria-hidden="true"></i>
 
@@ -125,7 +212,21 @@
                     Có <b>{{filteredItems.length}}</b> bất động sản được tìm thấy.
                 </h5>
             </div>
-            <div class="row">
+            <div class="col-xs-12 hidden-md" style="float: right; margin: 10px; width: 100%">
+                <label style="margin: 6px; float: left">Sort By:</label>
+                <select style="float: left; height: 32px; border-radius: 4px" ng-model="select_sort" ng-change="change_sort()">
+                    <option value="0">Mặc Định</option>
+                    <option value="1">Thời Gian Mới Nhất</option>
+                    <option value="2">Thời Gian Cũ Nhất</option>
+                    <option value="3">Diện Tích Lớn Nhất</option>
+                    <option value="4">Diện Tích Bé Nhất</option>
+                    <option value="5">Giá Cao Nhất</option>
+                    <option value="6">Giá Thấp Nhất</option>
+
+                </select>
+                
+            </div>
+            <div class="row hidden-xs">
                 <div class="col-md-12">
                     <label>Lọc theo:</label>
                 </div>
@@ -210,11 +311,11 @@
                                 <p style="line-height: 35px; margin-bottom: -10px; margin-top: -4px; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
                                     <i style="font-size: 20px; color: rgba(83, 82, 82, 0.87)" class="fa fa-map-marker" aria-hidden="true"></i>: {{ item._SoNha }} {{ item._Duong }}, Quận {{ item._TenQuan }}, Phường {{ item._Phuong }}, TP Đà Nẵng
                                 </p>
-                                <p style="line-height: 24px; margin-bottom: 0px; margin-top: 7px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                <p style="line-height: 24px; margin-bottom: 5px; margin-top: 7px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
                                     <b>Mô Tả:</b>
                                     <span ng-bind-html="item._Mota"></span>
                                 </p>
-                                <p style="line-height: 35px; margin-bottom: -10px; margin-top: -4px; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis;">
+                                <p style="line-height: 24px; margin-bottom: 0px; margin-top: -4px; white-space: normal; max-width: 100%;">
                                     <b class="button_diachi">Người đăng: {{ item._TenKH }} - {{item._EmailCustomer}}</b>
                                 </p>
 

@@ -37,8 +37,8 @@
 
 </head>
 <script>
-   //var host = "http://" + document.location.hostname + ":" + window.location.port;
-   var host = "http://" + document.location.hostname ;
+   var host = "http://" + document.location.hostname + ":" + window.location.port;
+   //var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.1);;font-family: 'Open Sans', sans-serif;font-size: 14px">
@@ -85,10 +85,10 @@
         <span class="sr-only">Loading...</span>
     </div>
     <div class="khung_den slide" ng-show="show_dn == 1">
-        <div class="col-lg-4" ng-click="thoat()" style="cursor: pointer;height:100%">
+        <div class="col-lg-4 col-xs-1" ng-click="thoat()" style="cursor: pointer;height:100%">
 
         </div>
-        <div class="col-lg-4 col-xs-12 dangnhap">
+        <div class="col-lg-4 col-xs-10 dangnhap">
             <div class="col-md-12" style="margin: auto">
                 <h3 style="font-family: Arial; font-size: 36px; color: #eb5255; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
                 <form class="form-horizontal" role="form">
@@ -121,7 +121,7 @@
 
     <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll
          ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} || (hien_nav_mini == 1) && {'position':'relative'})">
-        <div style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
+        <div class="hidden-xs" style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
             <ul class="nav nav-pills" style="float: left; margin-left: 30px">
                 <li><a href="http://fb.com" style="color: white; font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                 <li><a href="http://google.com" style="color: white; font-size: 12px;"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
@@ -143,7 +143,7 @@
                     <ul class="dropdown-menu my_drop_menu" style="width: 100%">
 
                         <li><a href="#/TaiKhoan" style="color: white; font-size: 12px;" ng-click="">Thông tin cá nhân</a></li>
-                        <li><a href="#/TimKiem" style="color: white; font-size: 12px;" ng-click="dang_xuat()">Đăng xuât</a></li>
+                        <li><a style="color: white; font-size: 12px;" ng-click="dang_xuat()">Đăng xuât</a></li>
 
                     </ul>
                 </li>
@@ -165,15 +165,38 @@
                         <span class="glyphicon glyphicon-th-list"></span>
 
                     </a>
-                    <ul class="dropdown-menu my_drop_menu" style="width: 133%">
+                    <ul class="dropdown-menu my_drop_menu nav_mini" style="background-color: rgba(34, 49, 78,1)"ng-style="{'width': windowWidth*0.8}">
+                        <li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu" style="" ng-init="tab_tt = 0">
+                            <a ng-click="tab_tt= !tab_tt" style="color: white; font-size: 12px;">
+                                <i class="fa fa-user-o" aria-hidden="true"></i> Xin chào {{ taikhoan.username }} <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
-                        <li><a href="#/PostBai">Home</a></li>
-                        <li><a href="#/TimKiem">Tìm Kiếm</a></li>
-                        <li><a href="#/TheoDoi/{{ taikhoan.username }}">Theo Doi</a></li>
-                        <li><a href="#/TaiKhoan" ng-show="taikhoan.test == 1">{{ taikhoan.username }}</a></li>
-                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Nhập</a></li>
-                        <li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
-                        <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>
+                            </a>
+                            <ul class="dropdown" ng-show="tab_tt==1" style="width: 100%">
+
+                                <li><a href="#/TaiKhoan" style="color: white; font-size: 12px;" ng-click="">Thông tin cá nhân</a></li>
+                                <li><a style="color: white; font-size: 12px;" ng-click="dang_xuat()">Đăng xuât</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a style="">
+                                <i class="fa fa-user-o" aria-hidden="true"></i> Xin chào {{ taikhoan.username }}
+
+                            </a>
+                        </li>
+                        <li>
+                            <div style="width: 100%">
+                                <a href="#/DangKy" style="text-align: center; float: left; width: 50%; color: white; font-size: 16px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a>
+                                <a ng-click="dangnhap()" style="text-align: center;float: left; width: 50%;color: white; font-size: 16px;"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
+                            </div>
+                        </li>
+                        <li><a href="#/TimKiem">Giới thiệu</a></li>
+                        <li><a href="#/TimKiem/?sell=true">Mua bán</a></li>
+                        <li><a href="#/TimKiem/?sell=false">Cho thuê</a></li>
+                        <li><a ng-click="#/TaiKhoan">Đăng bài</a></li>
+                        <li><a ng-click="dang_xuat()">Đăng xuât</a></li>
+                        @*<li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
+                        <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>*@
                     </ul>
                 </li>
             </ul>

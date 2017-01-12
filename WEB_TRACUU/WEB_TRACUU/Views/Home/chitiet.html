@@ -228,8 +228,7 @@
     <p>* Giá trên đã bao gồm thuế VAT + dịch vụ.</p>-->
 </div>
 <div style="height: 35px; margin-top: 20px">
-    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;
-                                                                                                                                                                                                                                                                                                                        height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">Thông Tin Bổ Sung</h4>
+    <h4 style="padding: 5px 10px 0px 10px; margin: 0px; background-color: #36ace2;height: 100%; font-weight: bold; float: left; line-height: 30px; text-transform: uppercase">Thông Tin Bổ Sung</h4>
 </div>
 <div style="background-color: white; padding: 20px; box-shadow: 0px 0px 10px #36ace2">
     <ul class="clearfix" style="display: block; list-style-type: square;">
@@ -241,16 +240,16 @@
         <li class="col-md-6 col-xs-12">Loại Dự Án: {{info._TypeName}}</li>
     </ul>
 </div>
-<div style="margin-top: 20px; height: 100px; background-color: white; box-shadow: 0px 0px 10px #36ace2">
+<div style="margin-top: 20px; height: 100px; background-color: white; box-shadow: 0px 0px 10px #36ace2" ng-style="((windowWidth > 700) && {'height': '100px'} || (windowWidth < 700) && {'height': '200px'} && (windowWidth >= 400) )|| ((windowWidth < 400) && {'height': '200px'})">
 
     <div class="row" style="float: left; height: 100%; width: 100%">
-        <div class="col-md-2" style="height: 100%">
+        <div class="col-md-2 hidden-xs" style="height: 100%">
             <img src="../../Content/Images/broker.jpg" style="float: left; height: 100%; padding: 10px"/>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-xs-12">
             <h3 style="float: left; padding-top: 16px;">Liên hệ: {{info._NameCustomer}}</h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <ul style="padding-top: 14px; list-style-type: square;">
                 <li class="button_contact"><a ng-click="open_contact()"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;Email : {{info._EmailCustomer}}</a></li>
                 <li class="button_contact">

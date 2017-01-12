@@ -402,8 +402,8 @@ app.controller('timkiemCtrl', [
             $scope.select_sell = sell;
             $scope.type_land = 0;
             $scope.tab_sell = ($scope.select_sell == 'true') ? 'MUA' : 'THUÊ';
-            $scope.select_Kieu = 0;
-            $scope.select_Gia = 0;
+            $scope.select_Kieu = '0';
+            $scope.select_Gia = '0';
             $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
                 $scope.list_DM = response.data;
 
