@@ -228,7 +228,10 @@ app.controller('timkiemCtrl', [
         var _MAX = 1000000000;
         // 
         var list_all = [];
-        
+        $scope.tinhtientrenm2 = function (dt, gia) {
+            var tien = gia / dt;
+            return Math.round(tien * 100) / 100;
+        };
         // Function reset
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
@@ -598,10 +601,10 @@ app.controller('timkiemCtrl', [
 app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', '$timeout', function ($scope, $http, $routeParams, Map, $location, $rootScope, $timeout) {
     $http.get(host + "/api/ChiTiet/get_title_by_id/?mavp=" + $routeParams.id).then(function (response) {
                     var title = response.data;
-                    console.log(title);
+                   // console.log(title);
                     $rootScope.title = title + " | TracuuBDS.com";
     });
-    console.log("Demo");
+    //console.log("Demo");
     $scope.id_VP = $routeParams.id;
     $rootScope.loading = 1;
     $scope.select_Duong = '0';
@@ -737,10 +740,14 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
             // load image slide
             $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
                 $scope.miniImage = response.data;
+                
                 $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
                     $scope.images = response.data;
                     $scope.show_slide = 1;
-
+                    if ($scope.images.length == 0) {
+                        $scope.images.push({ 'Anh': 'Content/Images/Slider/no-image.png' });
+                        $scope.miniImage.push({ 'Anh': 'Content/Images/Slider/no-image.png' });
+                    }
                 });
 
             });
@@ -1832,7 +1839,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
     };
     $scope.load_phuong = function (id) {
         $scope.land.select_Phuong.IDWard = '';
-
+        $scope.land.select_Phuong.Ward1 = '';
         //$scope.load_dientich();
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
@@ -1884,7 +1891,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         for (var i = 0; i < list_image.length; i++) {
             $scope.divHtmlVar = $scope.divHtmlVar + '<div style="width:110px;float:left"><img style="height: 100px; width: 100px; margin-right:15px;" src="' + $rootScope.app + '/' + list_image[i].Anh + '"/></div>';
         };
-        console.log($scope.divHtmlVar);
+       // console.log($scope.divHtmlVar);
 
     });
     $scope.reload_vp = function () {
@@ -1902,12 +1909,14 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
             $scope.land.select_Phuong.IDWard = data._MaPhuong;
             $scope.land.select_Phuong.Ward1 = data._Phuong;
             $scope.load_duong($scope.land.select_Phuong.IDWard);
-            $scope.land.select_Duong.IDStreet = data._MaDuong;
+            $scope.land.select_Duong.IDStreet = data._MaDuong | '';
             $scope.land.SoNha = data._SoNha;
             $scope.land.DienTich = data._Area_detail;
             $scope.land.select_sell = data._Sell.toString();
+            $scope.change_sell(data._Sell);
             $scope.land.select_Kieu.IDTypeDetail = data._MaLoaiCT;
-            $scope.land.select_huong.IDDirection = data._IDDirection;
+            $scope.land.select_Kieu.TypeNameDetail = data._LoaiDat;
+            $scope.land.select_huong.IDDirection = data._IDDirection | '';
             $scope.land.select_Gia.IDPrice = data._IDPrice;
             $scope.land.GiaChiTiet = data._Price_detail;
             $scope.land.image_source = data._Anh;
@@ -1933,7 +1942,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
             });
         });
 
-        console.log($scope.land);
+        //console.log($scope.land);
     };
   
     
@@ -2083,8 +2092,8 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         $scope.UploadAvatar(land.mavp);
 
         var data = JSON.stringify({
-            "_idLand": land.mavp, "_tieuDe": land.txtName, "_quan": land.select_Huyen.IDTrousers, "_phuong": land.select_Phuong.IDWard, "_duong": land.select_Duong.IDStreet,
-            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDTypeDetail, "_dienTich": land.DienTich, "_huong": land.select_huong.IDDirection,
+            "_idLand": land.mavp, "_tieuDe": land.txtName, "_quan": land.select_Huyen.IDTrousers, "_phuong": land.select_Phuong.IDWard, "_duong":(land.select_Duong!=null)? land.select_Duong.IDStreet:'',
+            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDTypeDetail, "_dienTich": land.DienTich, "_huong":(land.select_huong!=null)? land.select_huong.IDDirection:'',
             "_hinhThuc": land.select_sell, "_hethan": land.expired_date, "_moTa": land.Mota, "_GiaChiTiet": land.GiaChiTiet,
             "_idCustomer": land.makh, "_listnoithat": land.list_noithat_by_id,"_listtiennghi":land.list_tiennghi_by_id
 
@@ -2192,7 +2201,7 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
         });
-        console.log($scope.select_Huyen.Trousers);
+        //console.log($scope.select_Huyen.Trousers);
     };
     $scope.load_duong = function (id) {
         $scope.select_Duong = { "Street1": "", "IDStreet": "" };
@@ -2402,14 +2411,14 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
     $scope.postBai = function () {
 
         var data = JSON.stringify({
-            "_tieuDe": $scope.tieu_de, "_phuong": $scope.select_Phuong.IDWard, "_duong": $scope.select_Duong.IDStreet,
-            "_banThue": $scope.ban_thue, "_kieuBDS": $scope.loai, "_dienTich": $scope.dien_tich, "_gia": $scope.gia, "_loaiGia": $scope.select_loaiGia,
+            "_tieuDe": $scope.tieu_de, "_phuong": $scope.select_Phuong.IDWard, "_duong": ($scope.select_Duong!=null)?$scope.select_Duong.IDStreet:'',
+            "_banThue": $scope.ban_thue, "_kieuBDS": $scope.select_DM.IDTypeDetail, "_dienTich": $scope.dien_tich, "_gia": $scope.gia, "_loaiGia": $scope.select_loaiGia,
             "_thoiHang": $scope.select_Hang, "_moTa": $scope.Mota, "_tienNghi": $scope.tienNghi, "_noiThat": $scope.noi, "_checkTT": $scope.check_tt,
-            "_idCustomer": $rootScope.taikhoan.makh, "_soNha": $scope.so_nha, "_huongnha": $scope.select_huong.IDDirection
+            "_idCustomer": $rootScope.taikhoan.makh, "_soNha": $scope.so_nha, "_huongnha":($scope.select_huong!=null)? $scope.select_huong.IDDirection:''
 
         });
         $http.post(host + "/api/Post/Creat_BDS/", data).then(function (response) {
-            console.log(response);
+          //  console.log(response);
             if (response.data != null) {
                 $scope.uploadAvatar(response.data, formdata);
 

@@ -101,7 +101,7 @@
   <Table Name="dbo.Land" Member="Lands">
     <Type Name="Land">
       <Column Name="IDLand" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="Decrition" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="IDAcreage" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />

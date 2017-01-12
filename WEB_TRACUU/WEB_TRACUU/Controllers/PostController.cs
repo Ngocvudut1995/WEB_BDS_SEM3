@@ -221,6 +221,7 @@ namespace WEB_TRACUU.Controllers
                     {
                         lands.Numhouse = json._soNha;
                     }
+                   
                     if (json._duong.ToString() != "")
                     {
                         lands.IDStreet = json._duong;

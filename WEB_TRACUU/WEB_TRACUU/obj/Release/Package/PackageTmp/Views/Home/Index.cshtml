@@ -37,8 +37,8 @@
 
 </head>
 <script>
-  // var host = "http://" + document.location.hostname + ":" + window.location.port;
-    var host = "http://" + document.location.hostname ;
+   //var host = "http://" + document.location.hostname + ":" + window.location.port;
+   var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
 <body style="background-color: rgba(189, 191, 193, 0.1);;font-family: 'Open Sans', sans-serif;font-size: 14px">
@@ -84,13 +84,13 @@
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         <span class="sr-only">Loading...</span>
     </div>
-    <div class="khung_den" ng-show="show_dn == 1">
-        <div class="col-lg-4">
+    <div class="khung_den slide" ng-show="show_dn == 1">
+        <div class="col-lg-4" ng-click="thoat()" style="cursor: pointer;height:100%">
 
         </div>
         <div class="col-lg-4 col-xs-12 dangnhap">
             <div class="col-md-12" style="margin: auto">
-                <h3 style="font-family: Arial; font-size: 40px; color: blue; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
+                <h3 style="font-family: Arial; font-size: 36px; color: #eb5255; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
                 <form class="form-horizontal" role="form">
 
                     <div class="form-group">
@@ -101,19 +101,21 @@
                         <label>Password:</label>
                         <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
                     </div>
-                    <div>
-                        <a href="/Home/RecoverPassWord">? Quên mật khẩu</a>
+                    <div style="width: 100%;float: right">
+                        <a style="float: right"href="/Home/RecoverPassWord">Quên mật khẩu ?</a>
                     </div>
                     <div style="text-align: center">
-                        <button ng-click="ktdangnhap()" type="submit" class="btn btn-info btn-lg" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
-                        <button ng-click="thoat()" type="reset" class="btn btn-info btn-lg" style="width: 120px; margin-top: 5px">Cancel</button>
+                        <button ng-click="ktdangnhap()" type="submit" class="btn btn-info" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
+                        <button ng-click="thoat()" type="reset" class="btn btn-info" style="width: 120px; margin-top: 5px">Cancel</button>
                     </div>
 
                 </form>
                 <br><br>
             </div>
         </div>
+        <div class="col-lg-4" ng-click="thoat()" style="cursor: pointer;height:100%">
 
+        </div>
 
     </div>
 
@@ -121,15 +123,17 @@
          ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} || (hien_nav_mini == 1) && {'position':'relative'})">
         <div style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
             <ul class="nav nav-pills" style="float: left; margin-left: 30px">
-                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                <li><a href="http://fb.com" style="color: white; font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="http://google.com" style="color: white; font-size: 12px;"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="http://youtube.com" style="color: white; font-size: 12px;"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
                 <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
                 <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                <li style="margin-bottom: -10px;"><a href="#" style="color: white; font-size: 12px;"><i fb-likem></i></a></li>
+                @*<div style="float: left; white-space: nowrap;" fb-like></div>*@
             </ul>
             <ul class="nav nav-pills hidden-xs" style="float: right; margin-right: 30px">
                 <li><a href="#/TaiKhoan/dangbai" style="color: white; font-size: 12px;"><i class="fa fa-file-text" aria-hidden="true"></i> Đăng tin</a></li>
-                <li><a href="#/DangKy" style="color: white; font-size: 12px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a></li>
+                <li ng-if="taikhoan.test == 0"><a href="#/DangKy" style="color: white; font-size: 12px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a></li>
                 <li ng-if="taikhoan.test == 0"><a ng-click="dangnhap()" style="color: white; font-size: 12px;"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a></li>
                 <li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu hidden-xs " style="">
                     <a class="dropdown-toggle" data-toggle="dropdown" style="color: white; font-size: 12px;">
@@ -319,7 +323,7 @@
 
     </div>
     @*<hr width="90%" size="5px" align="center" color="red" style="border: solid #a7a8a8 thin"/>*@
-    <div class="" ng-view style="padding: 0px; margin-top: 20px">
+    <div class="" ng-view style="padding: 0px;">
 
     </div>
     <div class="body-content">

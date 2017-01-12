@@ -1,0 +1,34 @@
+﻿<div>
+    <div class="row" style="" resize>
+
+        <div class="col-md-12 col-sm-10 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
+            <div class="slider" style="position: relative">
+
+                
+
+                <div class="slide" ng-repeat="image in images" ng-show="image.visible" style="position: relative">
+                    <img ng-src="{{ host }}/{{image.Anh}}" />
+
+                </div>
+                
+                <div class="arrows_left">
+                    <a ng-click="prev()">
+                        <img ng-src="{{ host }}/Content/Images/left-arrow.png" />
+                    </a>
+                </div>
+                <div class="arrows_right">
+                    <a ng-click="next()">
+                        <img ng-src="{{ host }}/Content/Images/right-arrow.png" />
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+       
+
+    </div>
+
+   
+</div>
+

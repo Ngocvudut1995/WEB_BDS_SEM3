@@ -651,6 +651,7 @@ namespace WEB_TRACUU.Controllers
                     _Gia = sql.Price,
                     _Price_detail = sql.Price_detail,
                     _Area_detail = sql.Area_detail,
+                    _IDDirection = sql.IDDirection,
                     _HetHan = (sql.ExpiredDate > DateTime.Now) ? false : true
 
 
@@ -876,6 +877,10 @@ namespace WEB_TRACUU.Controllers
                     {
                         lands.IDDirection = json._huongnha;
                     }
+                    else
+                    {
+                        lands.IDDirection = null;
+                    }
                     // lands.Image = "Content/Images/vanphong.jpg";
                     lands.Decrition = json._moTa;
                     DateTime date = DateTime.Now;
@@ -891,9 +896,17 @@ namespace WEB_TRACUU.Controllers
                     {
                         lands.Numhouse = json._soNha;
                     }
+                    else
+                    {
+                        lands.Numhouse = null;
+                    }
                     if (json._duong.ToString() != "")
                     {
                         lands.IDStreet = json._duong;
+                    }
+                    else
+                    {
+                        lands.IDStreet = null;
                     }
 
                     // Insert address 

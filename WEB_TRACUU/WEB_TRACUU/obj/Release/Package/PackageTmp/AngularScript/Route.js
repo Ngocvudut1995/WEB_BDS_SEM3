@@ -63,7 +63,7 @@ app.config(function ($routeProvider) {
             replace: true
 
         })
-        .when("/TaiKhoan/:select", {
+        .when("/TaiKhoan/:select/", {
             templateUrl: app + "Home/TaiKhoan",
             controller: "taikhoanCtrl",
             title: "Tài Khoản",
@@ -97,6 +97,10 @@ app.config(function ($routeProvider) {
 
 app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
     //$rootScope.tab_index = 0;
+    $scope.tinhtientrenm2 = function (dt, gia) {
+        var tien = gia / dt;
+        return Math.round(tien * 100) / 100;
+    };
     $scope.img1 = $rootScope.app + "/Content/Images/khu-can-ho-Masteri-Thao-Dien.jpg";
     $scope.tab_loaibds = 0;
     $scope.tab_gia = 0;
@@ -224,7 +228,10 @@ app.controller('timkiemCtrl', [
         var _MAX = 1000000000;
         // 
         var list_all = [];
-        
+        $scope.tinhtientrenm2 = function (dt, gia) {
+            var tien = gia / dt;
+            return Math.round(tien * 100) / 100;
+        };
         // Function reset
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
@@ -481,11 +488,11 @@ app.controller('timkiemCtrl', [
                     && ($scope.select_Gia == 0 || $scope.select_Gia == item._IDPrice)
                      && ($scope.type_land == 0 || $scope.type_land == item._MaLoai)
                     && ($scope.select_sell == item._Sell.toString() || $scope.select_sell == '0')) {
-                    //if ((searchMatch(item._TenVp, $scope.query)
-                    //    || searchMatch(item._SoNha + ' ' + item._Duong + ',Quận ' + item._TenQuan + ', Phường' + item._Phuong + ', TP Đà Nẵng', $scope.query))) {
-                    //    return true;
-                    //}
-                    return true;
+                    if ((searchMatch(item._TenVp, $scope.query)
+                        || searchMatch(item._SoNha + ' ' + item._Duong + ',Quận ' + item._TenQuan + ', Phường' + item._Phuong + ', TP Đà Nẵng', $scope.query))) {
+                        return true;
+                    }
+                    
                 }
 
                 return false;
@@ -594,10 +601,10 @@ app.controller('timkiemCtrl', [
 app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$location', '$rootScope', '$timeout', function ($scope, $http, $routeParams, Map, $location, $rootScope, $timeout) {
     $http.get(host + "/api/ChiTiet/get_title_by_id/?mavp=" + $routeParams.id).then(function (response) {
                     var title = response.data;
-                    console.log(title);
+                   // console.log(title);
                     $rootScope.title = title + " | TracuuBDS.com";
     });
-    console.log("Demo");
+    //console.log("Demo");
     $scope.id_VP = $routeParams.id;
     $rootScope.loading = 1;
     $scope.select_Duong = '0';
@@ -733,18 +740,22 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
             // load image slide
             $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
                 $scope.miniImage = response.data;
+                
                 $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $scope.id_VP).then(function (response) {
                     $scope.images = response.data;
                     $scope.show_slide = 1;
-
+                    if ($scope.images.length == 0) {
+                        $scope.images.push({ 'Anh': 'Content/Images/Slider/no-image.png' });
+                        $scope.miniImage.push({ 'Anh': 'Content/Images/Slider/no-image.png' });
+                    }
                 });
 
             });
             // load land tuong tu
-            //$http.get(host + "/api/ChiTiet/get_VP_Tuong_Tu/?id=" + id).then(function (response) {
-            //    $scope.list_BDS_LQ = response.data;
+            $http.get(host + "/api/ChiTiet/get_VP_Tuong_Tu/?id=" + id).then(function (response) {
+                $scope.list_BDS_LQ = response.data;
 
-            //});
+            });
             // load noi that va tien nhi cua van phong
             $http.get(host + "/api/ChiTiet/get_furiture_by_id/?mavp=" + id).then(function (response) {
                 $scope.list_noithat_by_id = response.data;
@@ -941,97 +952,7 @@ app.controller('taikhoanCtrl', ['$scope', '$http', '$window', '$rootScope', '$ro
 
                 break;
             case 'ct_baidang':
-                $scope.land = {};
-                //$scope.land.MaVP = $routeParams.id;
-                $scope.land.select_Huyen = { "IDTrousers": "", "Trousers": "" };
-                $scope.land.select_Phuong = { "IDWard": "", "Ward1": "" };
-                $scope.land.select_Duong = { "Street1": "", "IDStreet": "" };
-                $scope.land.select_DienTich = { "Acreage1": "", "IDAcreage": "" };
-                $scope.land.select_Huyen = { "IDTrousers": "", "Trousers": "" };
-                $scope.land.select_Gia = { "Price1": "", "IDPrice": "" };
-                $scope.land.select_Kieu = { "IDTypeDetail": "", "TypeNameDetail": "" };
-                $scope.land.image_source = "";
-                $scope.change_sell = function (sell) {
-
-
-                    $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + sell).then(function (response) {
-                        $scope.list_DM = response.data;
-
-                    });
-                    $http.get(host + "/api/TimKiem/get_Price/?sell=" + sell).then(function (response) {
-                        $scope.list_Price = response.data;
-                    });
-
-
-                };
-                $scope.load_phuong = function (id) {
-                    $scope.land.select_Phuong.IDWard = '';
-
-                    //$scope.load_dientich();
-                    $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
-                        $scope.listPhuong = response.data;
-                    });
-                    $scope.load_duong('0');
-
-                };
-
-                $scope.load_duong = function (id) {
-                    $scope.land.select_Duong.IDStreet = '';
-                    $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
-                        $scope.listDuong = response.data;
-                    });
-                };
-
-                $scope.reload_vp = function () {
-                    $http.get(host + "/api/QuanTri/get_bds_by_id/?mavp=" + $routeParams.id).then(function (response) {
-                        var data = response.data;
-                        $scope.tenkh = data._TenKH;
-                        $scope.land.makh = data._MaKH;
-                        $scope.land.idbaidang = data._MaBaiDang;
-                        $scope.land.mavp = data._MaVP;
-                        $scope.land.txtName = data._TenVp;
-                        $scope.land.select_Huyen.IDTrousers = data._MaQuan;
-                        $scope.load_phuong($scope.land.select_Huyen.IDTrousers);
-                        $scope.land.Mota = $rootScope.change_text_from_html(data._Mota);
-                        $scope.land.select_Phuong.IDWard = data._MaPhuong;
-                        $scope.load_duong($scope.land.select_Phuong.IDWard);
-                        $scope.land.select_Duong.IDStreet = data._MaDuong;
-                        $scope.land.SoNha = data._SoNha;
-                        $scope.land.select_DienTich.IDAcreage = data._MaDT;
-                        $scope.land.select_sell = data._Sell.toString();
-                        $scope.land.select_Kieu.IDTypeDetail = data._MaLoaiCT;
-                        $scope.land.select_Gia.IDPrice = data._IDPrice;
-                        $scope.land.GiaChiTiet = data._Price_detail;
-                        $scope.land.image_source = data._Anh;
-                        //$scope.land._ExpiredDate = $scope.info._ExpiredDate;
-                        $scope.land.expired_date = data._ExpiredDate;
-
-                        //console.log($scope.land.expired_date);
-                        $scope.land.GiaChiTiet = data._Price_detail;
-                        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.land.select_sell).then(function (response) {
-                            $scope.list_DM = response.data;
-
-                        });
-                        $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.land.select_sell).then(function (response) {
-                            $scope.list_Price = response.data;
-                        });
-                    });
-                   
-                    console.log($scope.land);
-                };
-                $scope.expired_date = $scope.land.expired_date;
-                $scope.reload_vp();
-                // $scope.expired_date = $scope.land.expired_date;
-         
-                $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
-                    $scope.listQuan = response.data;
-
-                });
                
-                $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
-                    $scope.listdientich = response.data;
-                });
-
                 break;
             case 'ql_khachhang':
                 $http.get(host + "/api/TaiKhoan/get_all_customer/").then(function (response) {
@@ -1893,6 +1814,58 @@ app.controller('ql_ct_khachhang', ['$scope', '$http', '$window', '$rootScope', '
     };
 }]);
 app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $rootScope, $routeParams, $location) {
+    $scope.land = {};
+    //$scope.land.MaVP = $routeParams.id;
+    $scope.land.select_Huyen = { "IDTrousers": "", "Trousers": "" };
+    $scope.land.select_Phuong = { "IDWard": "", "Ward1": "" };
+    $scope.land.select_Duong = { "Street1": "", "IDStreet": "" };
+    $scope.land.select_DienTich = { "Acreage1": "", "IDAcreage": "" };
+    $scope.land.select_Huyen = { "IDTrousers": "", "Trousers": "" };
+    $scope.land.select_Gia = { "Price1": "", "IDPrice": "" };
+    $scope.land.select_Kieu = { "IDTypeDetail": "", "TypeNameDetail": "" };
+    $scope.land.image_source = "";
+    $scope.change_sell = function (sell) {
+
+
+        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + sell).then(function (response) {
+            $scope.list_DM = response.data;
+
+        });
+        $http.get(host + "/api/TimKiem/get_Price/?sell=" + sell).then(function (response) {
+            $scope.list_Price = response.data;
+        });
+
+
+    };
+    $scope.load_phuong = function (id) {
+        $scope.land.select_Phuong.IDWard = '';
+        $scope.land.select_Phuong.Ward1 = '';
+        //$scope.load_dientich();
+        $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
+            $scope.listPhuong = response.data;
+        });
+        $scope.load_duong('0');
+
+    };
+
+    $scope.load_duong = function (id) {
+        $scope.land.select_Duong.IDStreet = '';
+        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
+            $scope.listDuong = response.data;
+        });
+    };
+
+    // $scope.expired_date = $scope.land.expired_date;
+
+    $http.get(host + "/api/TimKiem/get_trouser").then(function (response) {
+        $scope.listQuan = response.data;
+
+    });
+
+    $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
+        $scope.listdientich = response.data;
+    });
+
     $scope.change_expiredDate = function () {
         //console.log(expired_date);
         var date = new Date($scope.expired_date);
@@ -1903,13 +1876,164 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         // console.log(date);
         $scope.land.expired_date = date;
     };
+    $scope.land.select_huong = { "Direction1": "", "IDDirection": "" };
+    $http.get(host + "/api/TimKiem/get_Direction").then(function (response) {
+
+        $scope.listHuong = response.data;
+
+    });
+    $scope.divHtmlVar = '';
+    $http.get(host + "/api/ChiTiet/get_image_VP/?mavp=" + $routeParams.id).then(function (response) {
+        $scope.land.images_detail = response.data;
+        var list_image = response.data;
+        
+        $scope.show_slide = 1;
+        for (var i = 0; i < list_image.length; i++) {
+            $scope.divHtmlVar = $scope.divHtmlVar + '<div style="width:110px;float:left"><img style="height: 100px; width: 100px; margin-right:15px;" src="' + $rootScope.app + '/' + list_image[i].Anh + '"/></div>';
+        };
+       // console.log($scope.divHtmlVar);
+
+    });
+    $scope.reload_vp = function () {
+        $http.get(host + "/api/QuanTri/get_bds_by_id/?mavp=" + $routeParams.id).then(function (response) {
+            var data = response.data;
+            $scope.tenkh = data._TenKH;
+            $scope.land.makh = data._MaKH;
+            $scope.land.idbaidang = data._MaBaiDang;
+            $scope.land.mavp = data._MaVP;
+            $scope.land.txtName = data._TenVp;
+            $scope.land.select_Huyen.IDTrousers = data._MaQuan;
+            $scope.land.select_Huyen.Trousers = data._TenQuan;
+            $scope.load_phuong($scope.land.select_Huyen.IDTrousers);
+            $scope.land.Mota = $rootScope.change_text_from_html(data._Mota);
+            $scope.land.select_Phuong.IDWard = data._MaPhuong;
+            $scope.land.select_Phuong.Ward1 = data._Phuong;
+            $scope.load_duong($scope.land.select_Phuong.IDWard);
+            $scope.land.select_Duong.IDStreet = data._MaDuong | '';
+            $scope.land.SoNha = data._SoNha;
+            $scope.land.DienTich = data._Area_detail;
+            $scope.land.select_sell = data._Sell.toString();
+            $scope.change_sell(data._Sell);
+            $scope.land.select_Kieu.IDTypeDetail = data._MaLoaiCT;
+            $scope.land.select_Kieu.TypeNameDetail = data._LoaiDat;
+            $scope.land.select_huong.IDDirection = data._IDDirection | '';
+            $scope.land.select_Gia.IDPrice = data._IDPrice;
+            $scope.land.GiaChiTiet = data._Price_detail;
+            $scope.land.image_source = data._Anh;
+            //$scope.land._ExpiredDate = $scope.info._ExpiredDate;
+            $scope.land.expired_date = data._ExpiredDate;
+
+            //console.log($scope.land.expired_date);
+            
+            $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.land.select_sell).then(function (response) {
+                $scope.list_DM = response.data;
+
+            });
+            $http.get(host + "/api/TimKiem/get_Price/?sell=" + $scope.land.select_sell).then(function (response) {
+                $scope.list_Price = response.data;
+            });
+            $http.get(host + "/api/ChiTiet/get_furiture_by_id/?mavp=" + $routeParams.id).then(function (response) {
+                $scope.land.list_noithat_by_id = response.data;
+
+            });
+            $http.get(host + "/api/ChiTiet/get_convenient_by_id/?mavp=" + $routeParams.id).then(function (response) {
+                $scope.land.list_tiennghi_by_id = response.data;
+
+            });
+        });
+
+        //console.log($scope.land);
+    };
+  
+    
+    $scope.list_noithat = [];
+    $http.get(host + "/api/ChiTiet/get_furiture").then(function (response) {
+        $scope.land.list_noithat = response.data;
+    });
+    $scope.list_tiennghi = [];
+    $http.get(host + "/api/ChiTiet/get_convenient").then(function (response) {
+        $scope.land.list_tiennghi = response.data;
+    });
+    $scope.land.list_noithat_by_id = [];
+    $scope.land.list_tiennghi_by_id = [];
+    $scope.test_noithat = function (id) {
+        for (var i = 0; i < $scope.land.list_noithat_by_id.length; i++) {
+            if ($scope.land.list_noithat_by_id[i].IDFuriture === id) return true;
+        }
+        return false;
+    };
+    $scope.test_tiennghi = function (id) {
+        for (var i = 0; i < $scope.land.list_tiennghi_by_id.length; i++) {
+            if ($scope.land.list_tiennghi_by_id[i].IDConvenient === id) return true;
+        }
+        return false;
+    };
+    $scope.them_noiThat = function (id) {
+        var kt = true;
+        var temp = 0;
+        for (var i = 0; i < $scope.land.list_noithat_by_id.length; i++) {
+            if (id === $scope.land.list_noithat_by_id[i].IDFuriture) {
+                kt = false;
+                temp = i;
+            }
+        }
+        if (kt === true) {
+            var noithat = {"IDFuriture":id}
+            $scope.land.list_noithat_by_id.push(noithat);
+        } else {
+            $scope.land.list_noithat_by_id.splice(temp, temp + 1);
+        }
+    };
+
+ 
+    $scope.them_tienNghi = function (id) {
+        var kt = true;
+        var temp = 0;
+
+        for (var i = 0; i < $scope.land.list_tiennghi_by_id.length; i++) {
+            if (id === $scope.land.list_tiennghi_by_id[i].IDConvenient) {
+                kt = false;
+                temp = i;
+            }
+        }
+        if (kt === true) {
+            var tiennghi= {"IDConvenient":id}
+            $scope.land.list_tiennghi_by_id.push(tiennghi);
+        } else {
+            $scope.land.list_tiennghi_by_id.splice(temp, temp + 1);
+        }
+    };
+    $scope.expired_date = $scope.land.expired_date;
+    $scope.reload_vp();
+    $scope.select_DM = { "IDTypeDetail": "", "TypeNameDetail": "" };
+    $scope.change_type_land = function (id) {
+        $scope.select_DM.IDTypeDetail = 0;
+        $scope.loai = id;
+        $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell_and_Type/?sell=true&type=" + id).then(function (response) {
+            $scope.list_DM = response.data;
+
+        });
+    };
+    var data_img = [];
     var formdata = new FormData();
     $scope.getTheFiles = function ($files) {
         angular.forEach($files, function (value, key) {
             formdata.append(key, value);
         });
     };
+    $scope.getImage_detail = function ($files) {
+        angular.forEach($files, function (value, key) {
+            var formdata1 = new FormData();
+            formdata1.append(key, value);
+            data_img.push(formdata1);
 
+        });
+    };
+    $scope.upload_detail = function (id) {
+        for (var i = 0; i < data_img.length; i++) {
+            $scope.UploadImageDetail(id, data_img[i]);
+        }
+    };
     $scope.setFile = function (element) {
         $scope.currentFile = element.files[0];
         var reader = new FileReader();
@@ -1923,7 +2047,23 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         // when the file is read it triggers the onload event above.
         reader.readAsDataURL(element.files[0]);
     };
+   
+    $scope.prependText = function () {
+        $scope.divHtmlVar = '<img src="' + $scope.image_source1 + '" style="height: 100px; width: 100px; margin-top: 10px">' + $scope.divHtmlVar;
+    }
+    $scope.setFile2 = function (element) {
+        $scope.currentFile = element.files[0];
+        var reader = new FileReader();
 
+        reader.onload = function (event) {
+            $scope.image_source1 = event.target.result;
+            $scope.prependText();
+            $scope.$apply();
+
+        }
+        // when the file is read it triggers the onload event above.
+        reader.readAsDataURL(element.files[0]);
+    };
     // NOW UPLOAD THE FILES.
     $scope.UploadAvatar = function (idvp) {
         // console.log(formdata);
@@ -1952,10 +2092,10 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         $scope.UploadAvatar(land.mavp);
 
         var data = JSON.stringify({
-            "_idLand": land.mavp, "_tieuDe": land.txtName, "_quan": land.select_Huyen.IDTrousers, "_phuong": land.select_Phuong.IDWard, "_duong": land.select_Duong.IDStreet,
-            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDTypeDetail, "_dienTich": land.select_DienTich.IDAcreage, "_IDgia": land.select_Gia.IDPrice,
-            "_hinhThuc": land.select_sell, "_hethan": land.expired_date, "_moTa": $rootScope.change_html(land.Mota), "_GiaChiTiet": land.GiaChiTiet,
-            "_idCustomer": land.makh
+            "_idLand": land.mavp, "_tieuDe": land.txtName, "_quan": land.select_Huyen.IDTrousers, "_phuong": land.select_Phuong.IDWard, "_duong":(land.select_Duong!=null)? land.select_Duong.IDStreet:'',
+            "_soNha": land.SoNha, "_kieuBDS": land.select_Kieu.IDTypeDetail, "_dienTich": land.DienTich, "_huong":(land.select_huong!=null)? land.select_huong.IDDirection:'',
+            "_hinhThuc": land.select_sell, "_hethan": land.expired_date, "_moTa": land.Mota, "_GiaChiTiet": land.GiaChiTiet,
+            "_idCustomer": land.makh, "_listnoithat": land.list_noithat_by_id,"_listtiennghi":land.list_tiennghi_by_id
 
         });
         $http.put(host + "/api/QuanTri/Update_BDS/", data).then(function (response) {
@@ -2061,7 +2201,7 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
         });
-        console.log($scope.select_Huyen.Trousers);
+        //console.log($scope.select_Huyen.Trousers);
     };
     $scope.load_duong = function (id) {
         $scope.select_Duong = { "Street1": "", "IDStreet": "" };
@@ -2271,19 +2411,24 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
     $scope.postBai = function () {
 
         var data = JSON.stringify({
-            "_tieuDe": $scope.tieu_de, "_phuong": $scope.select_Phuong.IDWard, "_duong": $scope.select_Duong.IDStreet,
-            "_banThue": $scope.ban_thue, "_kieuBDS": $scope.loai, "_dienTich": $scope.dien_tich, "_gia": $scope.gia, "_loaiGia": $scope.select_loaiGia,
+            "_tieuDe": $scope.tieu_de, "_phuong": $scope.select_Phuong.IDWard, "_duong": ($scope.select_Duong!=null)?$scope.select_Duong.IDStreet:'',
+            "_banThue": $scope.ban_thue, "_kieuBDS": $scope.select_DM.IDTypeDetail, "_dienTich": $scope.dien_tich, "_gia": $scope.gia, "_loaiGia": $scope.select_loaiGia,
             "_thoiHang": $scope.select_Hang, "_moTa": $scope.Mota, "_tienNghi": $scope.tienNghi, "_noiThat": $scope.noi, "_checkTT": $scope.check_tt,
-            "_idCustomer": $rootScope.taikhoan.makh, "_soNha": $scope.so_nha, "_huongnha": $scope.select_huong.IDDirection
+            "_idCustomer": $rootScope.taikhoan.makh, "_soNha": $scope.so_nha, "_huongnha":($scope.select_huong!=null)? $scope.select_huong.IDDirection:''
 
         });
         $http.post(host + "/api/Post/Creat_BDS/", data).then(function (response) {
-            console.log(response);
-            $scope.uploadAvatar(response.data, formdata);
+          //  console.log(response);
+            if (response.data != null) {
+                $scope.uploadAvatar(response.data, formdata);
 
-            for (var i = 0; i < data_img.length; i++) {
-                $scope.UploadImageDetail(response.data, data_img[i]);
+                for (var i = 0; i < data_img.length; i++) {
+                    $scope.UploadImageDetail(response.data, data_img[i]);
+                }
+            } else {
+                swal("Thông báo", "Server unavailable", "error");
             }
+          
 
         }, function (res) {
             swal("Thông báo", "Server unavailable", "error");

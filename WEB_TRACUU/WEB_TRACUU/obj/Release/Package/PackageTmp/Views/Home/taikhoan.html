@@ -4,7 +4,7 @@
     <div class="row" style="">
         <div class="col-md-4" style="">
             <div style="background-color: #C1C1C1; height: 40px">
-                <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px;text-transform: uppercase">Thông Tin Tài Khoản</h4>
+                <h4 style="color: white;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px;text-transform: uppercase">Thông Tin Tài Khoản</h4>
             </div>
             <div style="padding: 20px; text-transform: uppercase">
                 <div class="clearfix list-group" style="display: block; list-style-type: square;">
@@ -97,7 +97,7 @@
 
                                         <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="select_Duong"
                                                 ng-options="x as x.Street1 for x in listDuong track by x.IDStreet">
-                                            <option style="width: 50%" value="">--- Chọn Ðường ---</option>
+                                            <option style="width: 50%" ng-click="select_Duong.IDStreet" value="">--- Chọn Ðường ---</option>
                                             <!--<option style="width: 50%" ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>-->
 
                                         </select>
@@ -107,7 +107,7 @@
                                             <label style="width: 100%; text-align: left" class="label-Form">Ðịa chỉ</label>
                                         </div>
                                         <div style="width: 72%; float: left; padding-left: 10px">
-                                            <input type="text" class="input-text form-control" ng-value="select_Duong.Street1+', '+select_Phuong.Ward1+', '+select_Huyen.Trousers" />
+                                            <input type="text" class="input-text form-control" ng-value="so_nha+' '+select_Duong.Street1+', '+select_Phuong.Ward1+', '+select_Huyen.Trousers" />
                                         </div>
                                     </div>
 
@@ -124,10 +124,10 @@
                                         <div style="font-size: 14px" class="col-md-9 col-xs-9 col-sm-9">
                                             <ul class="nav my_nav_tab_2 container" style="padding-left: 0px">
                                                 <li ng-class="[{active:ban_thue==true}]" class="navtab2" style="margin-left: 0px">
-                                                    <a ng-click="ban_thue =true;change_type_land(loai)" style="padding: 7px 10px">Bán</a>
+                                                    <a ng-click="ban_thue =true;change_type_land(loai);select_loaiGia = '0'" style="padding: 7px 10px">Bán</a>
                                                 </li>
                                                 <li ng-class="[{active:ban_thue==false}]" class="navtab2" style="margin-left: 0px">
-                                                    <a ng-click="ban_thue =false;change_type_land(loai)" style="padding: 7px 10px">Cho Thuê</a>
+                                                    <a ng-click="ban_thue =false;change_type_land(loai);select_loaiGia = '1'" style="padding: 7px 10px">Cho Thuê</a>
                                                 </li>
                                             </ul>
                                            
@@ -182,8 +182,9 @@
 
                                         </div>
                                         <div style="float: left; padding-left: 14px" class="col-md-9 col-sm-9 col-xs-9">
-                                            <input type="text" class="input-text form-control" placeholder="Tiên đề bài đăng" ng-model="tieu_de" name="tieu_de" required>
-                                            <span style="color: #ff6666" ng-show="myForm.tieu_de.$invalid && myForm.gia.$error.required">Vui lòng nhập tiêu đề </span>
+                                            <input type="text" class="input-text form-control" ng-minlength="30" placeholder="Tiên đề bài đăng" ng-model="tieu_de" name="tieu_de" required>
+                                            <span style="color: #ff6666" ng-show="myForm.tieu_de.$error.required">Vui lòng nhập tiêu đề. </span>
+                                            <span style="color: #ff6666" ng-show="myForm.tieu_de.$error.minlength"> Tiêu đề nhiều hơn 30 kí tự.</span>
                                         </div>
 
                                     </div>
@@ -195,8 +196,9 @@
                                             <input ng-hide="check_tt == 1" type="number" min="1" class="input-text" style="width: 35%; float: left" placeholder="Giá sản phẩm" name="gia"ng-model="gia" required>
                                            
                                              <select ng-hide="check_tt == 1" class="select-post" style="width: 28%; margin-left: 10px; float: left" ng-model="select_loaiGia">
-                                                <option value="0" selected="selected" ng-hide="ban_thue==false">Tỉ </option>
-                                                <option value="1" selected="selected">Triệu </option>
+                                                 <option value="0" selected="selected" ng-hide="ban_thue==false">Tỉ </option>
+                                                 <option value="1" selected="selected" ng-hide="ban_thue==false">Triệu </option>
+                                                <option value="1" selected="selected" ng-hide="ban_thue==true">Triệu/tháng </option>
 
                                             </select>
                                             <input type="checkbox" style="float: left; margin: 10px -5px auto 10px" ng-click="thoa_thuan()" />
@@ -226,7 +228,7 @@
                                         <div style="float: left; padding-left: 14px" class="col-md-9 col-sm-9 col-xs-9">
                                             <select class="form-control select-post" style="width: 50%; float: left;" ng-model="select_huong"
                                                     ng-options="x as x.Direction1 for x in listHuong track by x.IDDirection">
-                                                <option style="width: 50%" value="">--- Chọn hướng nhà ---</option>
+                                                <option style="width: 50%" ng-click="select_huong.IDDirection=''" value="">--- Chọn hướng nhà ---</option>
                                             </select>
                                             
                                  
@@ -351,7 +353,7 @@
                                     <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                                         <input class="btn" type="submit" value="Ðăng tin" ng-disabled="select_Hang == 0 || myForm.dien_tich.$invalid
                                                 || myForm.gia.$invalid || myForm.dien_tich.$invalid || myForm.tieu_de.$invalid || select_DM.IDTypeDetail == 0
-                                               || loai == 0 || ban_thue == 0 || select_Phuong.Ward1 == '' || select_Huyen.Trousers == '' "
+                                               || loai == 0 || select_Phuong.Ward1 == '' || select_Huyen.Trousers == '' "
                                                style="width: 40%; margin-top: 30px; text-align: center; float: right;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="postBai()" />
 
                                     </div>
@@ -369,169 +371,11 @@
             </div>
 
 
-        <!--<div ng-switch-when="dangbai" ng-controller="postCtrl">
     
-            <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             float: none; padding: 9px 20px 10px; line-height: 30px">
-                    Đăng Tin
-                </h4>
-            </div>
-            <div class="panel panel-default" style="">
-
-                <div class="panel-body">
-                    <div class="row" style="padding-bottom: 40px; border: black solid 1px;">
-
-                        <form name="myForm">
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
-                                <input class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" name="txtName" ng-model="txtName" required>
-                                <span style="color: red" ng-show="myForm.txtName.$touched && myForm.txtName.$invalid">
-                                            <span ng-show="myForm.txtName.$error.required">Tên không được để trống.</span>
-                                        </span>
-
-
-                            </div>
-
-
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Huyen" ng-change="load_phuong()">
-                                    <option value="0" selected="selected">--- Chọn Quận Huyện ---</option>
-                                    <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>
-
-                                </select>
-                            
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Phường xã</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong()">
-                                    <option value="0" selected="selected">--- Chọn Phường xã ---</option>
-                                    <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>
-                                </select>
-                               
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Đường</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Duong" ng-change="load_dientich()">
-                                    <option value="0" selected="selected">--- Chọn Đường ---</option>
-                                    <option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>
-
-                                </select>
-                            >
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Số Nhà</label>
-                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="SoNha"/>
-                           
-                            </div>
-
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Diện tích</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_DienTich" ng-change="load_Gia()">
-                                    <option value="0" selected="selected">--- Chọn Diện tích ---</option>
-
-                                    <option ng-repeat="item in listdientich" value="{{ item.IDAcreage }}">{{ item.Acreage1 }}</option>
-
-                                </select>
-                          
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Hình thức</label>
-                               
-                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_sell" ng-change="change_sell()">
-                                    <option value="0">Tất Cả</option>
-                                    <option value="false">Cho Thuê</option>
-                                    <option value="true">Cần Bán</option>
-
-                                </select>
-
-                             
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Kiểu Dự Án</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Kieu" ng-change="load_KieuBDS()">
-                                    <option value="0" selected="selected">--- Chọn Dự Án ---</option>
-                                    <option ng-repeat="item in list_DM" value="{{ item.IDType }}">{{ item.TypeName }}</option>
-                                </select>
-                               
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Giá </label>
-                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Gia" ng-change="load_HinhThuc()">
-                                    <option value="0" selected="selected">---Chọn mức giá---</option>
-                                    <option ng-repeat="item in listgia" value="{{ item.IDPrice }}">{{ item.Price1 }}</option>
-
-                                </select>
-
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Giá chi tiết</label>
-                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="GiaChiTiet"/>
-
-                            </div>
-
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Thời hạng</label>
-                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="select_Hang">
-                                    <option value="0" selected="selected">--- Chọn thời hạng ---</option>
-                                    <option value="1" selected="selected">1 tháng</option>
-                                    <option value="2" selected="selected">2 tháng</option>
-                                    <option value="3" selected="selected">3 tháng</option>
-                                    <option value="6" selected="selected">6 tháng</option>
-                                    <option value="12" selected="selected">12 tháng</option>
-
-                                </select>
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
-                                <img ng-src="{{image_source}}" style="height: 100px; width: 100px; margin-top: 10px">
-
-                                <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange=" angular.element(this).scope().setFile(this) " style="margin-top: 10px" accept="image/*">
-
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <label style="width: 100%; margin-top: 30px">Hình ảnh Chi Tiết</label>
-                                <div ng-bind-html="divHtmlVar">
-
-                                </div>
-                                <input type="file" id="trigger1" ng-files="getImage_detail($files)" onchange=" angular.element(this).scope().setFile2(this) " style="margin-top: 10px" accept="image/*">
-                                <button ng-click="upload_detail()">Upload</button>
-
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <label style="width: 100%; margin-top: 30px">Mô Tả</label>
-                              
-                                <div text-angular="text-angular" name="Mota" ng-model="Mota" ta-disabled='disabled'></div>
-                                <h1>Raw HTML in a text area</h1>
-                                <textarea ng-model="Mota" style="width: 100%"></textarea>
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                    <input type="submit" value="Đăng tin" ng-disabled="(myForm.txtName.$invalid)  "
-                                           style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="postBai()"/>
-
-                                </div>
-                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                    <input type="button" value="Hủy bỏ" style="width: 20%; margin-top: 30px; text-align: center" ng-click="huy()"/>
-
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>-->
         <div ng-switch-when="ct_baidang" ng-controller="ct_baidang_ctrl">
             <!--<div ng-include="'post.html'"></div>-->
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">
                     Chỉnh Sửa Bài Đăng
                 </h4>
 
@@ -555,160 +399,234 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div class="row" style="padding-bottom: 40px; border: black solid 1px;">
-                        <form name="myForm">
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
-                                <input class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" name="txtName" ng-model="land.txtName" required>
-                                <span style="color: red" ng-show="myForm.txtName.$touched && myForm.txtName.$invalid">
-                                            <span ng-show="myForm.txtName.$error.required">Tên không được để trống.</span>
-                                        </span>
-
-
+                    <div class="row" style="padding-bottom: 40px;">
+                        <form name="myForm" novalidate>
+                            <div style="font-weight: bold" class="label-step">
+                                Thông tin cơ bản
                             </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                            <div class="row" style="box-shadow: 0px 2px 5px grey; padding: 10px;">
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
 
-                                <label style="width: 100%; margin-top: 30px">Tài khoản đăng</label>
-                                <input readonly class="form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; border-radius: 4px; margin-top: 10px;" ng-model="tenkh" required>
+                                    <label style="width: 100%; margin-top: 30px">Tiêu đề</label>
+                                    <input class="input-text form-control" type="text" ng-minlength="30" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; margin-top: 10px;" name="txtName" ng-model="land.txtName" required>
+                                    <span style="color: #ff6666" ng-show="myForm.txtName.$error.required">Vui lòng nhập tiêu đề. </span>
+                                    <span style="color: #ff6666" ng-show="myForm.txtName.$error.minlength"> Tiêu đề nhiều hơn 30 kí tự.</span>
+
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Tài khoản đăng</label>
+                                    <input readonly class="input-text form-control" type="text" placeholder="Tên tiêu đề" style="width: 100%; height: 30px; margin-top: 10px;" ng-model="tenkh" required>
 
 
 
+                                </div>
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+
+                                    <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
+
+                                    <select class="select-post form-control" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_Huyen" ng-change="load_phuong(land.select_Huyen.IDTrousers)"
+                                            ng-options="x as x.Trousers for x in listQuan track by x.IDTrousers">
+
+                                        <!--<option value="">--- Chọn Quận Huyện ---</option>-->
+                                        <!-- <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>-->
+                                    </select>
+                                    <span style="color: #ff6666" ng-show="land.select_Huyen==null">Vui lòng chọn quận, huyện. </span>
+                                    <!--<span ng-switch="select_Huyen">
+                    <span ng-switch-when="0" style="color: red">Chọn quận/huyện</span>
+                </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Phường xã</label>
+                                    <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_Phuong" ng-change="load_duong(land.select_Phuong.IDWard)"
+                                            ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
+
+                                        <option ng-show="land.select_Phuong.Ward1 ==''" value="">--- Chọn Phường xã ---</option>
+                                        <!--<option ng-repeat="item in listPhuong track by $index" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
+
+                                    </select>
+                                    <span style="color: #ff6666" ng-show="land.select_Phuong.Ward1==''">Vui lòng chọn phường, xã. </span>
+                                    <!--<span ng-switch="select_Phuong">
+                    <span ng-switch-when="0" style="color: red">Chọn xã/phường</span>
+                </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Số nhà</label>
+                                    <input class="input-text form-control" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.SoNha"/>
+                                    <!--<span style="color: red" ng-show="myForm.SoNha.$touched && myForm.SoNha.$invalid">
+                    <span ng-show="myForm.SoNha.$error.required">Tên không được để trống.</span>
+                </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Đường</label>
+
+                                    <select class="select-post form-control" style="width: 100%; height: 32px; margin-top: 10px;" style="width: 100%; height: 32px; border-radius: 4px;" ng-model="land.select_Duong"
+                                            ng-options="x as x.Street1 for x in listDuong track by x.IDStreet">
+
+                                        <option ng-click="land.select_Duong.IDStreet=''" value="">--- Chọn Đường ---</option>
+                                        <!--<option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>-->
+                                    </select>
+                                    <!--<span ng-switch="select_Duong">
+                    <span ng-switch-when="0" style="color: red">Chọn đường</span>
+                </span>-->
+                                </div>
+
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Diện tích</label>
+                                    <div>
+                                        <input type="number" class="input-text form-control" style="float: left;width: 80%; height: 32px; margin-top: 10px;" name="dientich" ng-model="land.DienTich" />
+                                        <span style="float: left; width: 20%;margin-top: 15px;">m<sup>2</sup></span>
+                                    </div>
+                                    <span style="color: #ff6666" ng-show="myForm.dientich.$error.required">Vui lòng nhập diện tích. </span>
+
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hình thức</label>
+                                    <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
+                                    <select class="select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_sell" ng-change="change_sell(land.select_sell)">
+
+                                        <option value="false">Cho Thuê</option>
+                                        <option value="true">Bán</option>
+
+                                    </select>
+
+                                    <!--<span ng-switch="select_HinhThuc">
+                    <span ng-switch-when="0" style="color: red">Chọn hình thức</span>
+                </span>-->
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Kiểu dự án</label>
+
+                                    <select class="select-post form-control" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_Kieu"
+                                            ng-options="x as x.TypeNameDetail for x in list_DM track by x.IDTypeDetail">
+                                        <option value="">--- Chọn Loại Dự Án ---</option>
+
+                                    </select>
+                                    <span style="color: #ff6666" ng-show="land.select_Kieu.TypeNameDetail == ''">Vui lòng chọn loại dự án. </span>
+                                </div>
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hướng nhà</label>
+
+                                    <select class="select-post form-control" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_huong"
+                                            ng-options="x as x.Direction1 for x in listHuong track by x.IDDirection">
+                                        <option ng-click="land.select_huong.IDDirection=''" value="">--- Chọn Hướng Nhà ---</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-12 col-xs-6 col-sm-6 form-group" ng-init="tab_gia=1">
+                                    <label style="width: 100%; margin-top: 30px">Giá</label>
+                                    <div ng-hide="tab_gia == 0" style="width: 70%;float: left">
+                                        <input class="input-text form-control" type="text" style="float: left;width: 66%; height: 32px; margin-top: 10px;" ng-model="land.GiaChiTiet" name="gia"/>
+                                        <span style="float: left;width: 20%;margin-top: 15px;" ng-if="land.select_sell =='false'"> triệu/tháng</span>
+                                        <span style="float: left; width: 20%; margin-top: 15px;" ng-if="land.select_sell =='true'"> triệu</span>
+                                    </div>
+
+                                    <input style="float: left; margin-top: 15px;" type="checkbox" ng-click="land.GiaChiTiet = !land.GiaChiTiet;tab_gia = !tab_gia"/>
+                                    <span style="float: left; margin-top: 11px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                margin-left: 10px;">Giá thương lượng</span>
+                                    <span style="color: #ff6666" ng-show="myForm.gia.$error.required && land.GiaChiTiet == false">Vui lòng nhập giá. </span>
+                                </div>
+
+                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Hết hạn</label>
+                                    <input class="select-post form-control" style="width: 100%; height: 32px; margin-top: 10px;" type="date"
+                                           ng-value="format_date_picker(land.expired_date)" ng-model="expired_date" ng-change="change_expiredDate()" name="expired_date" class="form-control" placeholder="Enter expired date" required>
+                                    <span style="color: red" ng-show="myForm.expired_date.$touched && myForm.expired_date.$invalid">
+                                        <span ng-show="myForm.expired_date.$error.required">Expired Date is required.</span>
+                                    </span>
+                                    <!--<p>{{land.expired_date}}</p>-->
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group" ng-init="noi_that=1">
+                                    <div class="col-md-3 col-xs-3 col-sm-3">
+                                        <label style="font-weight: bold; text-align: left; margin-top: 5px;width: 100%" class="label-Form">Nôi thất</label>
+                                    </div>
+                                    <div class="form-group col-md-8 col-xs-8 col-sm-8">
+                  
+                                    </div>
+                                    <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid #e0e0e0; padding: 14px 14px 10px 14px; margin-bottom: 14px;">
+                                        <ul style="margin: 0px" class="col-md-12 col-xs-12 col-sm-12">
+                                            <li class="li-chosser" ng-repeat="item in land.list_noithat">
+                                                <input type="checkbox" name="check" style="float: left" ng-click="them_noiThat(item.IDFuriture)" ng-checked="test_noithat(item.IDFuriture) == true"/>
+                                                <label style="font-size: 14px; color: #666; font-weight: normal; width: 80%"> {{item.Furiture_Name}}</label>
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <div class="col-md-3 col-xs-3 col-sm-3">
+                                        <label style="font-weight: bold; text-align: left;width: 100%" class="label-Form">Tiện nghi</label>
+                                    </div>
+                                    <div class="form-group col-md-8 col-xs-8 col-sm-8">
+            
+                                    </div>
+                                    <div class="col-md-12 col-xs-12 col-sm-12" style="border: 1px solid #e0e0e0; padding: 14px 14px 10px 14px; margin-bottom: 14px;">
+
+                                        <ul style="margin: 0px" class="col-md-12 col-xs-12 col-sm-12">
+                                            <li class="li-chosser" ng-repeat="item in land.list_tiennghi">
+                                                <input type="checkbox" style="float: left" ng-click="them_tienNghi(item.IDConvenient)" ng-checked="test_tiennghi(item.IDConvenient) == true"/>
+                                                <label style="font-size: 14px; color: #666; font-weight: normal; width: 90%"> {{item.Convenient_Name}}</label>
+                                            </li>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <label style="width: 100%; margin-top: 30px">Mô tả</label>
+                                    <div text-angular="text-angular" name="Mota" ng-model="land.Mota" ta-disabled='disabled'></div>
+                                </div>
                             </div>
 
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Quận Huyện</label>
-
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Huyen" ng-change="load_phuong(land.select_Huyen.IDTrousers)"
-                                        ng-options="x as x.Trousers for x in listQuan track by x.IDTrousers">
-
-                                    <option value="">--- Chọn Quận Huyện ---</option>
-                                    <!-- <option ng-repeat="item in listQuan" value="{{ item.IDTrousers }}">{{ item.Trousers }}</option>-->
-                                </select>
-                                <!--<span ng-switch="select_Huyen">
-                                            <span ng-switch-when="0" style="color: red">Chọn quận/huyện</span>
-                                        </span>-->
+                            <div style="font-weight: bold;margin-top: 20px;" class="label-step">
+                                Hình ảnh
                             </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Phường xã</label>
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Phuong" ng-change="load_duong(land.select_Phuong.IDWard)"
-                                        ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
-
-                                    <option value="">--- Chọn Phường xã ---</option>
-                                    <!--<option ng-repeat="item in listPhuong track by $index" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
-
-                                </select>
-                                <!--<span ng-switch="select_Phuong">
-                                            <span ng-switch-when="0" style="color: red">Chọn xã/phường</span>
-                                        </span>-->
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Số nhà</label>
-                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.SoNha"/>
-                                <!--<span style="color: red" ng-show="myForm.SoNha.$touched && myForm.SoNha.$invalid">
-                                            <span ng-show="myForm.SoNha.$error.required">Tên không được để trống.</span>
-                                        </span>-->
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Đường</label>
-
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" style="width: 100%; height: 32px; border-radius: 4px;" ng-model="land.select_Duong"
-                                        ng-options="x as x.Street1 for x in listDuong track by x.IDStreet">
-
-                                    <option value="">--- Chọn Đường ---</option>
-                                    <!--<option ng-repeat="item in listDuong" value="{{ item.IDStreet }}">{{ item.Street1 }}</option>-->
-                                </select>
-                                <!--<span ng-switch="select_Duong">
-                                            <span ng-switch-when="0" style="color: red">Chọn đường</span>
-                                        </span>-->
-                            </div>
-
-
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Diện tích</label>
-
-
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_DienTich"
-                                        ng-options="x as x.Acreage1 for x in listdientich track by x.IDAcreage">
-                                    <option value="">--- Chọn Diện Tích ---</option>
-
-                                </select>
-                                <!--<span ng-switch="select_DienTich">
-                                            <span ng-switch-when="0" style="color: red">Chọn Diện tích</span>
-                                        </span>-->
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Hình thức</label>
-                                <!--<label style="width: 100%;margin-top: 30px">Quận Huyện</label>-->
-                                <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_sell" ng-change="change_sell(land.select_sell)">
-
-                                    <option value="false">Cho Thuê</option>
-                                    <option value="true">Cần Bán</option>
-
-                                </select>
-
-                                <!--<span ng-switch="select_HinhThuc">
-                                            <span ng-switch-when="0" style="color: red">Chọn hình thức</span>
-                                        </span>-->
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Kiểu dự án</label>
-
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Kieu"
-                                        ng-options="x as x.TypeNameDetail for x in list_DM track by x.IDTypeDetail">
-                                    <option value="">--- Chọn Loại Dự Án ---</option>
-
-                                </select>
-                                <!--<span ng-switch="select_Kieu">
-                                            <span ng-switch-when="0" style="color: red">Chọn Kiểu dự án</span>
-                                        </span>-->
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-
-                                <label style="width: 100%; margin-top: 30px">Giá </label>
-
-                                <select class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.select_Gia"
-                                        ng-options="x as x.Price1 for x in list_Price track by x.IDPrice">
-                                    <option value="">--- Chọn Mức Giá ---</option>
-
-                                </select>
-
-                            </div>
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Giá chi tiết</label>
-                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" ng-model="land.GiaChiTiet"/>
-
-                            </div>
-
-                            <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                <label style="width: 100%; margin-top: 30px">Hết hạn</label>
-                                <input class="form-control" style="width: 100%; height: 32px; border-radius: 4px; margin-top: 10px;" type="date"
-                                       ng-value="format_date_picker(land.expired_date)" ng-model="expired_date" ng-change="change_expiredDate()" name="expired_date" class="form-control" placeholder="Enter expired date" required>
-                                <span style="color: red" ng-show="myForm.expired_date.$touched && myForm.expired_date.$invalid">
-                                            <span ng-show="myForm.expired_date.$error.required">Expired Date is required.</span>
-                                        </span>
-                                <!--<p>{{land.expired_date}}</p>-->
-                            </div>
-
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                            <!--<div class="col-md-12 col-xs-12 col-sm-12 form-group">
                                 <label style="width: 100%; margin-top: 30px">Hình ảnh</label>
                                 <img ng-src="{{land.image_source}}" style="height: 100px; width: 100px; margin-top: 10px">
 
                                 <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange=" angular.element(this).scope().setFile(this) " style="margin-top: 10px" accept="image/*">
-                                <!--<input type="button" ng-click="uploadFiles(land.mavp)" value="Upload"/>-->
+                                
 
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <label style="width: 100%; margin-top: 30px">Mô tả</label>
-                                <div text-angular="text-angular" name="Mota" ng-model="land.Mota" ta-disabled='disabled'></div>
-                            </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                                <div class="col-md-6 col-xs-6 col-sm-6 form-group">
-                                    <input type="submit" value="Lưu" ng-disabled="(myForm.txtName.$invalid)"
-                                           style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="update_land(land)"/>
+                            </div>-->
+
+                            <!--<div class="label-step col-md-12 col-xs-12 col-sm-12" style="margin-top: 30px">
+                                Hình ảnh
+                            </div>-->
+                            <div class="row" style="box-shadow: 0px 2px 5px grey; padding: 10px;">
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <input type="file" id="trigger" ng-files="getTheFiles($files)" onchange=" angular.element(this).scope().setFile(this) " style="margin: 14px; display: none" accept="image/*">
+                                    <a class="btn btn-animated btn-primary" style="margin-bottom: 20px" onclick=" document.getElementById('trigger').click() ">
+                                        <span class="glyphicon glyphicon-plus" style="background: #2e6da4">
+                                        </span>Thay đổi hình ảnh...
+                                    </a>
+                                    <img ng-src="{{land.image_source}}" style="height: 100px; width: 100px; margin: 10px 14px; display: block">
+                                </div>
+                                <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                                    <input multiple type="file" id="trigger1" ng-files="getImage_detail($files)" onchange="angular.element(this).scope().setFile2(this) " style="margin-top: 10px;display: none" accept="image/*">
+                                    <!--<button ng-click="upload_detail()">Upload</button>-->
+                                    <a class="btn btn-animated btn-primary" style="margin-bottom: 20px" onclick="document.getElementById('trigger1').click() ">
+                                        <span class="glyphicon glyphicon-plus" style="background: #2e6da4">
+                                        </span>Hình ảnh chi tiết
+                                    </a>
+                                    <div ng-bind-html="divHtmlVar" style="margin: 14px">
+                                    </div>
 
                                 </div>
+                            </div>
+                            
+                            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+
+                                <input class="btn btn-sm btn-info"type="submit" value="Lưu" ng-disabled="(myForm.txtName.$invalid) || (myForm.gia.$error.required && land.GiaChiTiet == false)
+                                       || land.select_Kieu.TypeNameDetail == '' || myForm.dientich.$error.required || land.select_Phuong.Ward1 == '' || land.select_Huyen.Trousers==''
+                                       || myForm.txtName.$invalid"
+                                           style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="update_land(land)"/>
+
+                                
 
                             </div>
                         </form>
@@ -720,7 +638,7 @@
         </div>
         <div ng-switch-when="thongtinkh" ng-controller="ql_khachhang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng</h4>
             </div>
             <div class="panel panel-default" style="">
                 <div class="panel-heading" style="text-transform: uppercase;">Thông Tin Tài Khoản</div>
@@ -846,7 +764,7 @@
         </div>
         <div ng-switch-when="ql_tracuu" ng-controller="quanlytracuuCtrl" class="list-group">
         <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-            <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h4>
+            <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Tra Cứu</h4>
         </div>
         <div class="panel panel-default" style="">
             <div class="panel-heading" style="text-transform: uppercase;">DS Các Quận</div>
@@ -968,14 +886,14 @@
                             <option value="true">Cần Bán</option>
 
                         </select>
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 20px" ng-model="select_Gia"
+                        <select style="width: 100%; height: 32px; margin-top: 20px" ng-model="select_Gia"
                                 ng-options="x as x.Price1 for x in list_Price track by x.IDPrice">
                             <option value="">--- Chọn Mức Giá ---</option>
 
                         </select>
                         <input ng-disabled="(show_edit_price==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Gia.Price1"/>
                         <button ng-click="SaveEditPrice(IsInsert,select_Gia.Price1,select_Gia.IDPrice,select_sell);show_edit_price=0" ng-disabled="(show_edit_price==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
-                        <select style="width: 100%; height: 32px; border-radius: 4px; margin-top: 20px" ng-model="select_Kieu"
+                        <select style="width: 100%; height: 32px; margin-top: 20px" ng-model="select_Kieu"
                                 ng-options="x as x.TypeName for x in list_DM track by x.IDType">
                             <option value="">--- Chọn Loại Dự Án ---</option>
 
@@ -1129,7 +1047,7 @@
         </div>
         <div ng-switch-when="ql_khachhang" class="list-group" ng-controller="ql_khachhang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-transform: uppercase;">Danh Sách Khách Hàng</div>
@@ -1168,7 +1086,7 @@
         </div>
         <div ng-switch-when="ql_baidang" class="list-group" ng-controller="ql_baidang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-transform: uppercase;">Danh Sách Bài Đăng</div>
@@ -1212,7 +1130,7 @@
         <div ng-switch-when="khachhang" class="list-group" ng-controller="ql_ct_khachhang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
 
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng {{Customer.fullname}}</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Thông Tin Khách Hàng {{Customer.fullname}}</h4>
             </div>
             <div class="panel panel-default" style="">
                 <div class="panel-heading" style="text-transform: uppercase; position: relative">
@@ -1355,7 +1273,7 @@
         </div>
         <div ng-switch-when="ql_baidangchuaduyet" ng-controller="baidangchuaduyetCtrl">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h4>
             </div>
             <div class="panel panel-default" ng-repeat="item in bd_chuaduyet">
                 <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
@@ -1379,7 +1297,8 @@
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> {{item.bds._TypeName}}
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
+                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
@@ -1405,15 +1324,15 @@
                             </div>
                         </li>
                     </ul>
-                    <button style="float: right; margin-left: 10px" ng-click="duyet_bai(item._IDPost)" ng-hide="(taikhoan.admin != true)">Duyệt</button>
-                    <button style="float: right; margin-left: 10px" ng-click="huy_bai(item._IDPost)">Hủy</button>
+                    <button class="btn btn-sm btn-info" style="float: right; margin-left: 10px" ng-click="duyet_bai(item._IDPost)" ng-hide="(taikhoan.admin != true)">Duyệt</button>
+                    <button class="btn btn-sm btn-info" style="float: right; margin-left: 10px" ng-click="huy_bai(item._IDPost)">Hủy</button>
 
                 </div>
             </div>
         </div>
         <div ng-switch-when="ql_baidanghethan">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h4>
             </div>
             <div class="panel panel-default" ng-repeat="item in bd_hethan">
                 <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
@@ -1438,7 +1357,8 @@
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> {{item.bds._TypeName}}
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
+                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
@@ -1464,14 +1384,14 @@
                             </div>
                         </li>
                     </ul>
-                    <button style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh sửa</button>
+                    <button class="btn btn-sm btn-info" style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh sửa</button>
 
                 </div>
             </div>
         </div>
         <div ng-switch-when="ql_baidangdangdang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h4>
             </div>
 
             <div class="panel panel-default" ng-repeat="item in bd_dangdang">
@@ -1498,7 +1418,8 @@
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> {{item.bds._TypeName}}
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
+                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
@@ -1525,13 +1446,13 @@
 
                         </li>
                     </ul>
-                    <button style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh sửa</button>
+                    <button class="btn btn-sm btn-info" style="float: right; margin-left: 10px" ng-click="edit_land(item.bds._IDLand)">Chỉnh sửa</button>
                 </div>
             </div>
         </div>
         <div ng-switch-when="thayDoiMatKhau" ng-controller="doiMatKhauCtrl">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
+                <h4 style="color: white;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         float: none; padding: 9px 20px 10px; line-height: 30px">
                     THAY ĐỔI MẬT KHẨU
                 </h4>

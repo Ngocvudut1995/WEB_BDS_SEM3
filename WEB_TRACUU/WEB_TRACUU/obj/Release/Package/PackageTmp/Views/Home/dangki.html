@@ -16,12 +16,12 @@
                     <div class="form-group">
                         <label for="pwd">Tên đầy đủ<span style="color: red">(*)</span>:</label>
                         <div class="row" style="width: 100%">
-                            <input type="text" style="float: left; width: 97%" ng-model="fullname" name="fullname" class="form-control" placeholder="Enter full name" required>
+                            <input type="text" style="float: left; width: 97%" ng-model="fullname" ng-minlength="8" name="fullname" class="form-control" placeholder="Enter full name" required>
                             <i ng-show="!myForm.fullname.$invalid" style="float: left;width: 3%;padding: 5px;font-size: 20px;color: green;" class="fa fa-check-circle" aria-hidden="true"></i>
                         </div>
 
                         <div style="padding: 6px; margin-bottom: 0px;width: 97%" class="alert alert-warning" ng-show="myForm.fullname.$touched && myForm.fullname.$invalid && myForm.fullname.$error.required">
-                            <strong>Warning!</strong> Tên đầy đủ không được để trông..
+                            <strong>Warning!</strong> Vui lòng nhập tên đầy đủ
                         </div>
 
                     </div>
@@ -34,7 +34,7 @@
                         </div>
 
                         <div style="padding: 6px; margin-bottom: 0px;width: 97%" class="alert alert-warning" ng-show="myForm.email.$touched && myForm.email.$invalid ">
-                            <span ng-show="myForm.email.$error.required"><strong>Warning!</strong> Email không được để trông..</span>
+                            <span ng-show="myForm.email.$error.required"><strong>Warning!</strong> Vui lòng nhập email..</span>
                             <span ng-show="myForm.email.$error.email"><strong>Warning!</strong> Email không hợp lệ.</span>
                         </div>
                         <div style="padding: 6px; margin-bottom: 0px;width: 97%" class="alert alert-warning" ng-show="test_email==1">
@@ -51,7 +51,7 @@
                         </div>
 
                         <div style="padding: 6px; margin-bottom: 0px;width: 97%" class="alert alert-warning" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid && myForm.birthdate.$error.required">
-                            <strong>Warning!</strong> Ngày sinh không được để trống.
+                            <strong>Warning!</strong> Vui lòng nhập ngày sinh.
                         </div>
 
                     </div>
@@ -72,7 +72,7 @@
 
                         <div style="padding: 6px; margin-bottom: 0px; width: 97%" class="alert alert-warning"
                              ng-show="myForm.address.$touched && myForm.address.$invalid && myForm.address.$error.required">
-                            <strong>Warning!</strong> Địa chỉ không được bỏ trống.
+                            <strong>Warning!</strong> Vui lòng nhập địa chỉ
                         </div>
 
                     </div>
@@ -85,7 +85,7 @@
                         </div>
                         <div style="padding: 6px; margin-bottom: 0px; width: 97%" class="alert alert-warning"
                              ng-show="myForm.cmnd.$touched && myForm.cmnd.$invalid && myForm.cmnd.$error.required">
-                            <strong>Warning!</strong> CMND không được bỏ trống.
+                            <strong>Warning!</strong> Vui lòng nhập CMND
                         </div>
 
                     </div>
@@ -108,7 +108,7 @@
 
                         <div style="padding: 6px; margin-bottom: 0px; width: 97%" class="alert alert-warning"
                              ng-show="myForm.phone.$touched && myForm.phone.$invalid && myForm.phone.$error.required">
-                            <strong>Warning!</strong> Phone không được bổ trống.
+                            <strong>Warning!</strong> Vui lòng nhập điện thoại di động
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                                style="float: left; width: 3%; padding: 5px; font-size: 20px; color: green;" class="fa fa-check-circle" aria-hidden="true"></i>
                         </div>
                         <div style="padding: 6px; margin-bottom: 0px" class="alert alert-warning" ng-show="myForm.username.$touched && myForm.username.$invalid">
-                            <span ng-show="myForm.username.$error.required"><strong>Warning!</strong> Tên đăng ký không được để trông.</span>
+                            <span ng-show="myForm.username.$error.required"><strong>Warning!</strong> Vui lòng nhập tên đăng ký.</span>
                             <span ng-hide="!myForm.username.$error.minlength"><strong>Warning!</strong> Tên đăng ký phải nhiều hơn 8 kí tự.</span>
                         </div>
                         <div style="padding: 6px; margin-bottom: 0px" class="alert alert-warning" ng-show="test_tk==1">
@@ -145,7 +145,7 @@
                         </div>
 
                         <div style="padding: 6px; margin-bottom: 0px" class="alert alert-warning" ng-show="myForm.password.$touched && myForm.password.$invalid">
-                            <span ng-show="myForm.password.$error.required"><strong>Warning!</strong> Mật khẩu không được để trông.</span>
+                            <span ng-show="myForm.password.$error.required"><strong>Warning!</strong> Vui lòng nhập mật khẩu.</span>
                             <span ng-hide="!myForm.password.$error.minlength"><strong>Warning!</strong> Mật khẩu phải nhiều hơn 8 kí tự.</span>
                         </div>
 
@@ -177,7 +177,7 @@
                 <div style="text-align: center">
                     <input type="submit" value="Đăng kí" class="btn btn-info" ng-disabled="(password != rePassword) || myForm.fullname.$invalid || myForm.username.$invalid ||
                    myForm.phone.$invalid || myForm.email.$invalid ||myForm.password.$invalid || myForm.address.$invalid
-                   || myForm.cmnd.$invalid || myForm.birthdate.$invalid">
+                   || myForm.cmnd.$invalid || myForm.birthdate.$invalid || test_email==1">
                     <button type="reset" class="btn btn-info">Hủy</button>
                 </div>
 
