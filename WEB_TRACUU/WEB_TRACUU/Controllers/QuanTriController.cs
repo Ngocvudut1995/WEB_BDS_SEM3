@@ -952,6 +952,7 @@ namespace WEB_TRACUU.Controllers
                         _IDDienTich = item.IDAcreage,
                         _CreateDate = item.CreateDate,
                         _ModifyDate = item.ModifyDate,
+                        tenKH = item.CustomerName,
                         _ExpireDate = item.ExpiredDate,
                         HetHan = (item.ExpiredDate < DateTime.Now) ? true : false,
 

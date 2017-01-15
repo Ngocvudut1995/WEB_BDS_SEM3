@@ -83,7 +83,7 @@
                                     <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 14px" ng-init="select_Phuong.Ward1 = '';">
                                         <label style="width: 100%;font-size: 14px">Phường xã<span style="color: #ff6666">(*)</span></label>
 
-                                        <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong(select_Phuong.IDWard)"
+                                        <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="select_Phuong" ng-change=""
                                                 ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
                                             <option value="" style="width: 50%" ng-show="select_Phuong.Ward1 == ''" ng-click="select_Phuong.IDWard = 0">--- Chọn Phường Xã ---</option>
                                             <!-- <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
@@ -352,7 +352,9 @@
                                 <div class="col-md-12 col-xs-12 col-sm-12 form-group" style="margin-bottom: -30px">
                                     <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                                         <input class="btn" type="submit" value="Ðăng tin" ng-disabled="select_Hang == 0 || myForm.dien_tich.$invalid
-                                                || myForm.gia.$invalid || myForm.dien_tich.$invalid || myForm.tieu_de.$invalid || select_DM.IDTypeDetail == 0
+                                                || (myForm.gia.$invalid && myForm.gia.$error.required || myForm.gia.$error.min) 
+                                                  && (check_tt == 0) || myForm.dien_tich.$invalid || myForm.tieu_de.$invalid || 
+                                               select_DM.IDTypeDetail == 0
                                                || loai == 0 || select_Phuong.Ward1 == '' || select_Huyen.Trousers == '' "
                                                style="margin-top: 30px; text-align: center; float: right;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="postBai()" />
 
@@ -516,7 +518,7 @@
                                     </select>
 
                                 </div>
-                                <div class="col-md-12 col-xs-6 col-sm-6 form-group" ng-init="tab_gia=1">
+                                <div class="col-md-12 col-xs-6 col-sm-6 form-group">
                                     <label style="width: 100%; margin-top: 30px">Giá</label>
                                     <div ng-hide="tab_gia == 0" style="width: 70%;float: left">
                                         <input class="input-text form-control" type="text" style="float: left;width: 66%; height: 32px; margin-top: 10px;" ng-model="land.GiaChiTiet" name="gia"/>
@@ -524,8 +526,8 @@
                                         <span style="float: left; width: 20%; margin-top: 15px;" ng-if="land.select_sell =='true'"> triệu</span>
                                     </div>
 
-                                    <input style="float: left; margin-top: 15px;" type="checkbox" ng-click="land.GiaChiTiet = !land.GiaChiTiet;tab_gia = !tab_gia"/>
-                                    <span style="float: left; margin-top: 11px;
+                                    <input style="float: left; margin-top: 15px;" type="checkbox" ng-checked="tab_gia == 0" ng-click="land.GiaChiTiet = !land.GiaChiTiet;tab_gia = !tab_gia"/>
+                                    <span style="float: left; margin-top: 11px; 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 margin-left: 10px;">Giá thương lượng</span>
                                     <span style="color: #ff6666" ng-show="myForm.gia.$error.required && land.GiaChiTiet == false">Vui lòng nhập giá. </span>
                                 </div>
@@ -624,7 +626,7 @@
 
                                 <input class="btn btn-sm btn-info"type="submit" value="Lưu" ng-disabled="(myForm.txtName.$invalid) || (myForm.gia.$error.required && land.GiaChiTiet == false)
                                        || land.select_Kieu.TypeNameDetail == '' || myForm.dientich.$error.required || land.select_Phuong.Ward1 == '' || land.select_Huyen.Trousers==''
-                                       || myForm.txtName.$invalid || myForm.expired_date.$invalid"
+                                       || myForm.txtName.$invalid || myForm.expired_date.$error.date"
                                            style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="update_land(land)"/>
 
                                 
@@ -1100,10 +1102,12 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên BDS <a ng-click="sort_by('_TenVp')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                            <th>Chủ bài đăng <a ng-click="sort_by('tenKH')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th>Loại BDS <a ng-click="sort_by('_TenLoai')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th>Địa Chỉ <a ng-click="sort_by('_DiaCHi')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th>Giá <a ng-click="sort_by('_Gia')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
-                            <th>Diện Tích <a ng-click="sort_by('_IDDienTich')"><i class="fa fa-sort" aria-hidden="true"></i></a>></th>
+                            <th>Diện Tích <a ng-click="sort_by('_IDDienTich')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                        
                             <th>Ngày Tạo <a ng-click="sort_by('_CreateDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th>Ngày Cập Nhật <a ng-click="sort_by('_ModifyDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th>Ngày Hết Hạn <a ng-click="sort_by('_ExpireDate')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
@@ -1114,10 +1118,12 @@
                         <tr ng-repeat="item in list_Land | orderBy:sortingOrder:reverse">
                             <td>{{$index + 1}}</td>
                             <td><a href="#/TaiKhoan/ct_baidang/baidang/{{item._MaVP}}">{{item._TenVp}}</a></td>
+                            <td>{{item.tenKH}}</td>
                             <td>{{item._TenLoai}}</td>
                             <td>{{item._DiaCHi}}</td>
                             <td>{{item._Gia}}</td>
                             <td>{{item._DienTich}}</td>
+                            
                             <td>{{format_date(item._CreateDate)}}</td>
                             <td>{{format_date(item._ModifyDate)}}</td>
                             <td>{{format_date(item._ExpireDate)}}</td>
@@ -1278,9 +1284,11 @@
         </div>
         <div ng-switch-when="ql_baidangchuaduyet" ng-controller="baidangchuaduyetCtrl">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h4>
+                <h4 style="color: white; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Chưa Duyệt</h4>
             </div>
-            <div class="panel panel-default" ng-repeat="item in bd_chuaduyet">
+            <input type="text" style="margin-bottom: 10px;width: 50%" placeholder="Lọc theo tên chủ bài đăng" ng-model="tenkh"/>
+            <div class="panel panel-default" ng-repeat="item in bd_chuaduyet | filter : {Name_Customer: tenkh}">
+               
                 <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
                     {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
                     <button class="btn btn-info" style="height: 100%; top: 0px; position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
@@ -1297,13 +1305,13 @@
                             <b>Ngày hết hạn:</b> {{format_date(item.bds._ExpireDate)}}
                         </li>
                         <li class="col-md-6 col-xs-12"><b>Diện tích:</b> {{item.bds._Acreage}}</li>
-                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}} <span ng-if="item.bds._IDType < 44">triệu</span><span ng-if="item.bds._IDType >= 44">triệu/tháng</span></li>
                         <li class="col-md-6 col-xs-12">
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
-                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 44">Bán </span>
+                            <span ng-if="item.bds._IDType >= 44">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
@@ -1337,9 +1345,10 @@
         </div>
         <div ng-switch-when="ql_baidanghethan">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h4>
+                <h4 style="color: white; text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Hết Hạn</h4>
             </div>
-            <div class="panel panel-default" ng-repeat="item in bd_hethan">
+            <input type="text" style="margin-bottom: 10px;width: 50%" placeholder="Lọc theo tên chủ bài đăng" ng-model="tenkh" />
+            <div class="panel panel-default" ng-repeat="item in bd_hethan | filter : {Name_Customer:tenkh}" >
                 <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
                     {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
                     <button class="btn btn-info" style="height: 100%; top: 0px; position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
@@ -1357,13 +1366,13 @@
                             }}
                         </li>
                         <li class="col-md-6 col-xs-12"><b>Diện tích:</b> {{item.bds._Acreage}}</li>
-                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}} <span ng-if="item.bds._IDType < 44">triệu</span><span ng-if="item.bds._IDType >= 44">triệu/tháng</span></li>
                         <li class="col-md-6 col-xs-12">
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
-                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 44">Bán </span>
+                            <span ng-if="item.bds._IDType >= 44">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
@@ -1398,8 +1407,8 @@
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
                 <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Danh Sách Các Bài Đăng Đang Đăng</h4>
             </div>
-
-            <div class="panel panel-default" ng-repeat="item in bd_dangdang">
+            <input type="text" style="margin-bottom: 10px;width: 50%" placeholder="Lọc theo tên chủ bài đăng" ng-model="tenkh" />
+            <div class="panel panel-default" ng-repeat="item in bd_dangdang | filter :{Name_Customer:tenkh}">
                 <div class="panel-heading" style="text-transform: uppercase; position: relative" ng-init="show = 0">
                     {{item.bds._Name}} - Bài Đăng Số {{item._IDPost}}
                     <button class="btn btn-info" style="height: 100%; top: 0px; position: absolute; right: 0px" ng-click="show=1" ng-show="show==0"><span class="glyphicon glyphicon-chevron-down"></span></button>
@@ -1418,13 +1427,13 @@
 
 
                         <li class="col-md-6 col-xs-12"><b>Diện tích:</b> {{item.bds._Acreage}}</li>
-                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}}</li>
+                        <li class="col-md-6 col-xs-12"><b>Giá:</b> {{item.bds._Price_detail}} <span ng-if="item.bds._IDType < 44">triệu</span><span ng-if="item.bds._IDType >= 44">triệu/tháng</span></li>
                         <li class="col-md-6 col-xs-12">
                             <b>Vị trí:</b> {{ item.bds._NumberHouse }} {{ item.bds._Street }}, Phường {{ item.bds._Ward }}, Quận {{ item.bds._Trousers }}, TP Đà Nẵng
                         </li>
                         <li class="col-md-6 col-xs-12">
-                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 48">Bán </span>
-                            <span ng-if="item.bds._IDType >= 48">Bán </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
+                            <b>Loại dự án:</b> <span ng-if="item.bds._IDType < 44">Bán </span>
+                            <span ng-if="item.bds._IDType >= 44">Thuê </span><span style="text-transform: lowercase">{{item.bds._TypeName}}</span>
                         </li>
                         <li class="col-md-12 col-xs-12">
                             <b>Mô tả:</b>
