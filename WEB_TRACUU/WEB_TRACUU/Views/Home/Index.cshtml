@@ -14,6 +14,13 @@
     <script src="~/Scripts/angular-route.min.js"></script>
     <script src="~/AngularScript/app.js"></script>
     <script src="~/AngularScript/Route.js"></script>
+    <script src="~/AngularScript/trangchinh.js"></script>
+    <script src="~/AngularScript/tiemkiem.js"></script>
+    <script src="~/AngularScript/chitiet.js"></script>
+    <script src="~/AngularScript/theodoi.js"></script>
+    <script src="~/AngularScript/dangki.js"></script>
+    <script src="~/AngularScript/gioithieu.js"></script>
+    <script src="~/AngularScript/taikhoan.js"></script>
     <script src="~/AngularScript/slider.js"></script>
     <script src="~/AngularScript/map.js"></script>
     <link href="~/Content/slider.css" rel="stylesheet" />
@@ -41,7 +48,7 @@
    //var host = "http://" + document.location.hostname ;
     //console.log(host);
 </script>
-<body style="background-color: rgba(189, 191, 193, 0.1);;font-family: 'Open Sans', sans-serif;font-size: 14px">
+<body style="background-color: rgba(189, 191, 193, 0.1);;font-family: 'Open Sans', sans-serif; font-size: 14px;min-height: ">
     <div id="fb-root"></div>
     <script>
 (function(d, s, id) {
@@ -80,7 +87,7 @@
 
 </div>
    
-    <div style="text-align: center; position: fixed;width: 100%;top: 50%;z-index: 14;" ng-show="loading == 1">
+    <div style="text-align: center; position: fixed;width: 100%;top: 50%;z-index: 17;" ng-show="loading == 1">
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         <span class="sr-only">Loading...</span>
     </div>
@@ -91,21 +98,21 @@
         <div class="col-lg-4 col-xs-10 dangnhap">
             <div class="col-md-12" style="margin: auto">
                 <h3 style="font-family: Arial; font-size: 36px; color: #eb5255; margin: 20px 10px 20px 10px;">Đăng Nhập Tài Khoản</h3>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" ng-submit="ktdangnhap()" autocomplete='on'>
 
                     <div class="form-group">
                         <label>User:</label>
-                        <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username">
+                        <input name="username" type="text" class="form-control" placeholder="Tên Đăng Nhập" ng-model="username" autocomplete='on'>
                     </div>
                     <div class="form-group">
                         <label>Password:</label>
-                        <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password">
+                        <input type="password" class="form-control" placeholder="Mật Khẩu" required ng-model="password" autocomplete='on'>
                     </div>
                     <div style="width: 100%;float: right">
                         <a style="float: right"href="/Home/RecoverPassWord">Quên mật khẩu ?</a>
                     </div>
                     <div style="text-align: center">
-                        <button ng-click="ktdangnhap()" type="submit" class="btn btn-info" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
+                        <button type="submit" class="btn btn-info" style="margin-top: 5px; width: 120px; text-align: center;">Đăng Nhập</button>
                         <button ng-click="thoat()" type="reset" class="btn btn-info" style="width: 120px; margin-top: 5px">Cancel</button>
                     </div>
 
@@ -114,12 +121,10 @@
             </div>
         </div>
         <div class="col-lg-4" ng-click="thoat()" style="cursor: pointer;height:100%">
-
         </div>
-
     </div>
 
-    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.77);" scroll
+    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.92);" scroll
          ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} || (hien_nav_mini == 1) && {'position':'relative'})">
         <div class="hidden-xs" style="width: 100%; background-color: #eb5255; height: 37px" ng-show="hien_nav_mini">
             <ul class="nav nav-pills" style="float: left; margin-left: 30px">
@@ -150,23 +155,23 @@
             </ul>
         </div>
         <div style="height: 65px; position: relative;" ng-show="boolChange == 1">
-            <ul class="nav nav-pills hidden-md hidden-lg" style="text-align: center; margin-left: 6%; width: 100%">
-                <li class="navtab" style="width: 100%">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="white-space: nowrap; padding: 8px;">
-                        <img src="~/Content/Images/logo-homedy-xmas.png"/></a>
+            <ul class="nav nav-pills hidden-md hidden-lg" style="height: 100%;text-align: center; margin-left: 6%; width: 100%">
+                <li class="navtab" style="width: 100%;height: 100%">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="height: 100%;white-space: nowrap; padding: 8px;">
+                        <img style="height: 100%"src="~/Content/Images/logo4.png"/></a>
                 </li>
             </ul>
-            <ul class="nav nav-pills hidden-md hidden-lg" style="text-align: center; float: left; width: 100%; position: absolute;
+            <ul class="nav nav-pills hidden-md hidden-lg" style="height: 100%;text-align: center; float: left; width: 100%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      left: 0px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      bottom: 0px;">
                 @*rgb(20, 2, 119)*@
-                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
+                <li class="dropdown col-md-2 col-xs-2 navtab tab_menu hidden-md hidden-lg" style="height: 100%">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="height: 100%;
+    font-size: 27px;">
                         <span class="glyphicon glyphicon-th-list"></span>
-
                     </a>
                     <ul class="dropdown-menu my_drop_menu nav_mini" style="background-color: rgba(34, 49, 78,1)"ng-style="{'width': windowWidth*0.8}">
-                        <li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu" style="" ng-init="tab_tt = 0">
+                        @*<li ng-if="taikhoan.test == 1" class="dropdown navtab tab_menu" style="" ng-init="tab_tt = 0">
                             <a ng-click="tab_tt= !tab_tt" style="color: white; font-size: 12px;">
                                 <i class="fa fa-user-o" aria-hidden="true"></i> Xin chào {{ taikhoan.username }} <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
@@ -177,54 +182,41 @@
                                 <li><a style="color: white; font-size: 12px;" ng-click="dang_xuat()">Đăng xuât</a></li>
 
                             </ul>
-                        </li>
+                        </li>*@
                         <li>
-                            <a style="">
+                            <a style="" href="#/TaiKhoan/thongtinkh/">
                                 <i class="fa fa-user-o" aria-hidden="true"></i> Xin chào {{ taikhoan.username }}
 
                             </a>
                         </li>
-                        <li>
+                        <li ng-if="taikhoan.test == 0">
                             <div style="width: 100%">
                                 <a href="#/DangKy" style="text-align: center; float: left; width: 50%; color: white; font-size: 16px;"><i class="fa fa-registered" aria-hidden="true"></i> Đăng kí</a>
                                 <a ng-click="dangnhap()" style="text-align: center;float: left; width: 50%;color: white; font-size: 16px;"><span class="glyphicon glyphicon-log-in"></span> Đăng nhập</a>
                             </div>
                         </li>
-                        <li><a href="#/TimKiem">Giới thiệu</a></li>
+                        <li><a href="#/GioiThieu">Giới thiệu</a></li>
                         <li><a href="#/TimKiem/?sell=true">Mua bán</a></li>
                         <li><a href="#/TimKiem/?sell=false">Cho thuê</a></li>
-                        <li><a ng-click="#/TaiKhoan">Đăng bài</a></li>
-                        <li><a ng-click="dang_xuat()">Đăng xuât</a></li>
+                        <li><a href="#/TaiKhoan/dangbai/">Đăng bài</a></li>
+                        <li ng-if="taikhoan.test == 1"><a ng-click="dang_xuat()">Đăng xuât</a></li>
                         @*<li><a ng-click="dangnhap()" ng-show="taikhoan.test == 0">Đăng Ký</a></li>
                         <li><a ng-click="dang_xuat()" ng-show="taikhoan.test == 1">Đăng Xuất</a></li>*@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav nav-pills hidden-xs hidden-sm" style="text-align: center; float: left; margin-left: 6%;">
-                <li class="navtab" style="">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="white-space: nowrap; padding: 8px;">
-                        <img src="~/Content/Images/logo-homedy-xmas.png"/>
+            <ul class="nav nav-pills hidden-xs hidden-sm" style="height: 100%;text-align: center; float: left; margin-left: 6%;">
+                <li class="navtab" style="height: 100%">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="height: 100%;white-space: nowrap; padding: 8px;">
+                        <img style="height: 100%"src="~/Content/Images/logo4.png"/>
                     </a>
                 </li>
             </ul>
             <ul class="nav nav-pills hidden-xs hidden-sm" style="text-align: center; float: right; margin-right: 6%; position: absolute;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     right: 0px;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     bottom: 0px;">
-                @*rgb(20, 2, 119)*@
-
-                @*<li class="navtab hidden-lg hidden-md" ng-class="[{active:tab_index == 0}]" style="">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
-                </li>
-                <li class="navtab hidden-xs hidden-sm" ng-class="[{active:tab_index == 0}]" style="">
-                    <a ng-click="change_tab(1)" id="nav1" href="#/TimKiem" style="white-space: nowrap;">TraCuuBDS.COM</a>
-                </li>*@
-                @*<li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 1}]" style="">
-                    <a ng-click="change_tab(1)" href="#/TimKiem" style="white-space: nowrap;"><span class="glyphicon glyphicon-home"></span>Dự Án</a>
-                </li>
-                <li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 4}]" style="">
-                    <a ng-click="change_tab(4)" href="#/Home" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> Giới Thiệu</a>
-                </li>*@
-                <li class="hidden-xs hidden-sm navtab" ng-class="[{active:tab_index == 4}]" style="">
+             
+                <li class="hidden-xs navtab" style="">
                     <a href="#/GioiThieu" style="white-space: nowrap;"><span class="glyphicon glyphicon-info-sign"></span> GIỚI THIỆU</a>
                 </li>
                 @*<li class="dropdown navtab tab_menu hidden-xs " style="" ng-class="[{active:tab_index == 4}]">
@@ -240,7 +232,7 @@
                         <li><a href="#/TimKiem" ng-click="change_tab(4)">Dự án đang giao dịch</a></li>
                     </ul>
                 </li>*@
-                <li class="dropdown navtab tab_menu hidden-xs " style="">
+                <li class="dropdown navtab tab_menu hidden-xs" style="">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-usd"></span> MUA BÁN <span style="font-size: 10px;" class="glyphicon glyphicon-chevron-down"></span>
 
@@ -299,7 +291,7 @@
     </div>
 </div>
 
-<div class="container-fluid" style="padding: 0px;" resize>
+<div class="container-fluid" style="padding: 0px;" ng-style="{'height':windowHeight}" resize>
     <div ng-controller="main" style="margin-top: 0px;">
         
 

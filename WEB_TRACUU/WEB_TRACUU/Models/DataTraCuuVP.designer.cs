@@ -386,8 +386,6 @@ namespace WEB_TRACUU.Models
 		
 		private EntitySet<Land> _Lands;
 		
-		private EntitySet<Street> _Streets;
-		
 		private EntityRef<Trouser> _Trouser;
 		
     #region Extensibility Method Definitions
@@ -405,7 +403,6 @@ namespace WEB_TRACUU.Models
 		public Ward()
 		{
 			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			this._Streets = new EntitySet<Street>(new Action<Street>(this.attach_Streets), new Action<Street>(this.detach_Streets));
 			this._Trouser = default(EntityRef<Trouser>);
 			OnCreated();
 		}
@@ -487,19 +484,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Street", Storage="_Streets", ThisKey="IDWard", OtherKey="IDWard")]
-		public EntitySet<Street> Streets
-		{
-			get
-			{
-				return this._Streets;
-			}
-			set
-			{
-				this._Streets.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Trouser_Ward", Storage="_Trouser", ThisKey="IDTrousers", OtherKey="IDTrousers", IsForeignKey=true)]
 		public Trouser Trouser
 		{
@@ -561,18 +545,6 @@ namespace WEB_TRACUU.Models
 		}
 		
 		private void detach_Lands(Land entity)
-		{
-			this.SendPropertyChanging();
-			entity.Ward = null;
-		}
-		
-		private void attach_Streets(Street entity)
-		{
-			this.SendPropertyChanging();
-			entity.Ward = this;
-		}
-		
-		private void detach_Streets(Street entity)
 		{
 			this.SendPropertyChanging();
 			entity.Ward = null;
@@ -3243,13 +3215,11 @@ namespace WEB_TRACUU.Models
 		
 		private int _IDStreet;
 		
+		private System.Nullable<int> _IDTrousers;
+		
 		private string _Street1;
 		
-		private System.Nullable<int> _IDWard;
-		
 		private EntitySet<Land> _Lands;
-		
-		private EntityRef<Ward> _Ward;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3257,16 +3227,15 @@ namespace WEB_TRACUU.Models
     partial void OnCreated();
     partial void OnIDStreetChanging(int value);
     partial void OnIDStreetChanged();
+    partial void OnIDTrousersChanging(System.Nullable<int> value);
+    partial void OnIDTrousersChanged();
     partial void OnStreet1Changing(string value);
     partial void OnStreet1Changed();
-    partial void OnIDWardChanging(System.Nullable<int> value);
-    partial void OnIDWardChanged();
     #endregion
 		
 		public Street()
 		{
 			this._Lands = new EntitySet<Land>(new Action<Land>(this.attach_Lands), new Action<Land>(this.detach_Lands));
-			this._Ward = default(EntityRef<Ward>);
 			OnCreated();
 		}
 		
@@ -3286,6 +3255,26 @@ namespace WEB_TRACUU.Models
 					this._IDStreet = value;
 					this.SendPropertyChanged("IDStreet");
 					this.OnIDStreetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDTrousers", DbType="Int")]
+		public System.Nullable<int> IDTrousers
+		{
+			get
+			{
+				return this._IDTrousers;
+			}
+			set
+			{
+				if ((this._IDTrousers != value))
+				{
+					this.OnIDTrousersChanging(value);
+					this.SendPropertyChanging();
+					this._IDTrousers = value;
+					this.SendPropertyChanged("IDTrousers");
+					this.OnIDTrousersChanged();
 				}
 			}
 		}
@@ -3310,30 +3299,6 @@ namespace WEB_TRACUU.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDWard", DbType="Int")]
-		public System.Nullable<int> IDWard
-		{
-			get
-			{
-				return this._IDWard;
-			}
-			set
-			{
-				if ((this._IDWard != value))
-				{
-					if (this._Ward.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDWardChanging(value);
-					this.SendPropertyChanging();
-					this._IDWard = value;
-					this.SendPropertyChanged("IDWard");
-					this.OnIDWardChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Street_Land", Storage="_Lands", ThisKey="IDStreet", OtherKey="IDStreet")]
 		public EntitySet<Land> Lands
 		{
@@ -3344,40 +3309,6 @@ namespace WEB_TRACUU.Models
 			set
 			{
 				this._Lands.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ward_Street", Storage="_Ward", ThisKey="IDWard", OtherKey="IDWard", IsForeignKey=true)]
-		public Ward Ward
-		{
-			get
-			{
-				return this._Ward.Entity;
-			}
-			set
-			{
-				Ward previousValue = this._Ward.Entity;
-				if (((previousValue != value) 
-							|| (this._Ward.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ward.Entity = null;
-						previousValue.Streets.Remove(this);
-					}
-					this._Ward.Entity = value;
-					if ((value != null))
-					{
-						value.Streets.Add(this);
-						this._IDWard = value.IDWard;
-					}
-					else
-					{
-						this._IDWard = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Ward");
-				}
 			}
 		}
 		

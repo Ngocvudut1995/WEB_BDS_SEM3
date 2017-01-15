@@ -278,14 +278,21 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularScript\chitiet.js" />
+    <Content Include="AngularScript\dangki.js" />
+    <Content Include="AngularScript\gioithieu.js" />
     <Content Include="AngularScript\map.js" />
     <Content Include="AngularScript\Route.js" />
     <Content Include="AngularScript\slider.js" />
+    <Content Include="AngularScript\taikhoan.js" />
     <Content Include="AngularScript\TextEditor\textAngular-rangy.min.js" />
     <Content Include="AngularScript\TextEditor\textAngular-sanitize.min.js" />
     <Content Include="AngularScript\TextEditor\textAngular.css" />
     <Content Include="AngularScript\TextEditor\textAngular.min.js" />
     <Content Include="AngularScript\TextEditor\textAngularSetup.js" />
+    <Content Include="AngularScript\theodoi.js" />
+    <Content Include="AngularScript\tiemkiem.js" />
+    <Content Include="AngularScript\trangchinh.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -304,6 +311,10 @@
     <Content Include="Content\Images\banner_ser_vpa.png" />
     <Content Include="Content\Images\broker.jpg" />
     <Content Include="Content\Images\Can-ho.png" />
+    <Content Include="Content\Images\logo4.png" />
+    <Content Include="Content\Images\logo3.png" />
+    <Content Include="Content\Images\logo2.png" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\Dat.png" />
     <Content Include="Content\Images\default.gif" />
     <Content Include="Content\Images\Funiture\AirConditioner.png" />

@@ -223,11 +223,12 @@ app.controller('trangchuCtrl', ['$scope', '$rootScope', '$location', '$http', fu
     };
 
 }]);
+var list_all = [];
 app.controller('timkiemCtrl', [
     '$scope', '$http', '$window', '$filter', '$rootScope', '$routeParams', '$location', function ($scope, $http, $window, $filter, $rootScope, $routeParams, $location) {
         var _MAX = 1000000000;
         // 
-        var list_all = [];
+       
         $scope.tinhtientrenm2 = function (dt, gia) {
             var tien = gia / dt;
             return Math.round(tien * 100) / 100;
@@ -236,16 +237,16 @@ app.controller('timkiemCtrl', [
         $scope.reload_seach = function () {
             $scope.select_Duong = '0';
             $scope.select_Huong = '0';
-            $scope.select_Gia = 0;
+            $scope.select_Gia = '0';
             $scope.select_Huyen = '0';
             $scope.select_Phuong = '0';
-            $scope.select_Kieu = 0;
-            $scope.select_DienTich = 0;
-            $scope.type_land = 0;
+            $scope.select_Kieu = '0';
+            $scope.select_DienTich = '0';
+            $scope.type_land = '0';
             $scope.query = '';
             // $scope.select_sell = '0';
             $scope.load_phuong();
-            $scope.load_duong();
+           // $scope.load_duong();
 
         };
         $scope.change_type_land = function (id) {
@@ -305,13 +306,15 @@ app.controller('timkiemCtrl', [
         } else {
             $scope.select_Huyen = '0';
         }
+        $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + $scope.select_Huyen).then(function (response) {
+            $scope.listDuong = response.data;
+           
+        });
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + $scope.select_Huyen).then(function (response) {
             $scope.listPhuong = response.data;
             if ($routeParams.p != null) {
                 $scope.select_Phuong = $routeParams.p;
-                $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
-                    $scope.listDuong = response.data;
-                });
+               
 
             } else {
                 $scope.select_Phuong = '0';
@@ -342,7 +345,7 @@ app.controller('timkiemCtrl', [
                 $rootScope.loading = 0;
                 $scope.search();
             });
-          
+           
         });
 
 
@@ -402,8 +405,8 @@ app.controller('timkiemCtrl', [
             $scope.select_sell = sell;
             $scope.type_land = 0;
             $scope.tab_sell = ($scope.select_sell == 'true') ? 'MUA' : 'THUÊ';
-            $scope.select_Kieu = 0;
-            $scope.select_Gia = 0;
+            $scope.select_Kieu = '0';
+            $scope.select_Gia = '0';
             $http.get(host + "/api/TimKiem/get_DanhMuc_By_Sell/?sell=" + $scope.select_sell).then(function (response) {
                 $scope.list_DM = response.data;
 
@@ -423,14 +426,17 @@ app.controller('timkiemCtrl', [
             $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + $scope.select_Huyen).then(function (response) {
                 $scope.listPhuong = response.data;
             });
+           
         };
 
         $scope.load_duong = function () {
             $scope.select_Duong = '0';
-            $scope.search_vp();
-            $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
+            $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + $scope.select_Huyen).then(function (response) {
                 $scope.listDuong = response.data;
+               // console.log($scope.listDuong);
             });
+            //$scope.search_vp();
+           
         };
         $http.get(host + "/api/TimKiem/get_Acreage/").then(function (response) {
             $scope.listdientich = response.data;
@@ -577,16 +583,16 @@ app.controller('timkiemCtrl', [
                     $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_ModifyDate', false);
                     break;
                 case '3':
-                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_MaDT', true);
+                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_Area_detail', true);
                     break;
                 case '4':
-                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_MaDT', false);
+                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_Area_detail', false);
                     break;
                 case '5':
-                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_IDPrice', true);
+                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_Price_detail', true);
                     break;
                 case '6':
-                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_IDPrice', false);
+                    $scope.filteredItems = $filter('orderBy')($scope.filteredItems, '_Price_detail', false);
                     break;
 
                 default:
@@ -670,7 +676,7 @@ app.controller('chitietCtrl', ['$scope', '$http', '$routeParams', 'Map', '$locat
 
     $scope.load_duong = function () {
         $scope.select_Duong = '0';
-        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + $scope.select_Phuong).then(function (response) {
+        $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + $scope.select_Huyen).then(function (response) {
             $scope.listDuong = response.data;
         });
     };
@@ -1149,13 +1155,13 @@ app.controller('quanlytracuuCtrl', ['$scope', '$http', '$window', '$rootScope', 
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
         });
-        //$scope.load_duong('0');
+        $scope.load_duong(id);
 
     };
 
     $scope.load_duong = function (id) {
         $scope.select_Duong = { "Street1": "", "IDStreet": "" };
-        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
+        $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + id).then(function (response) {
             $scope.listDuong = response.data;
         });
     };
@@ -1277,9 +1283,9 @@ app.controller('quanlytracuuCtrl', ['$scope', '$http', '$window', '$rootScope', 
         });
 
     };
-    $scope.SaveEditStreet = function (is_insert, name, id, id_ward) {
+    $scope.SaveEditStreet = function (is_insert, name, id, id_trouser) {
         var data = JSON.stringify({
-            "Is_Insert": is_insert, "Name": name, "ID": id, "IDWard": id_ward
+            "Is_Insert": is_insert, "Name": name, "ID": id, "IDtrouser": id_trouser
         });
 
         $http.post(host + "/api/QuanTri/edit_Streets/", data).then(function (response) {
@@ -1288,7 +1294,7 @@ app.controller('quanlytracuuCtrl', ['$scope', '$http', '$window', '$rootScope', 
                 'Update Thành Công!',
                 'success'
             );
-            $scope.load_duong($scope.select_Phuong.IDWard);
+            $scope.load_duong($scope.select_Huyen.IDTrousers);
         }, function (res) {
             swal("Thông Báo!", "Server unavailable", "error");
         });
@@ -1310,7 +1316,7 @@ app.controller('quanlytracuuCtrl', ['$scope', '$http', '$window', '$rootScope', 
                     'Delete Thành Công!',
                     'success'
                 );
-                $scope.load_duong($scope.select_Phuong.IDWard);
+                $scope.load_duong($scope.select_Huyen.IDTrousers);
                 // $location.path();
             }, function (res) {
                 swal("Thông Báo!", "Server unavailable", "error");
@@ -1844,13 +1850,13 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
         });
-        $scope.load_duong('0');
+        $scope.load_duong(id);
 
     };
 
     $scope.load_duong = function (id) {
         $scope.land.select_Duong.IDStreet = '';
-        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
+        $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + id).then(function (response) {
             $scope.listDuong = response.data;
         });
     };
@@ -1869,7 +1875,10 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
     $scope.change_expiredDate = function () {
         //console.log(expired_date);
         var date = new Date($scope.expired_date);
-
+        
+        //if (date.getFullYear() == year && d.getMonth() == month && d.getDate() == day) {
+        //    return true;
+        //}
         //console.log(date);
         //date.setDate(date.getDate() + 1);
         date.setHours(00);
@@ -1908,7 +1917,8 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
             $scope.land.Mota = $rootScope.change_text_from_html(data._Mota);
             $scope.land.select_Phuong.IDWard = data._MaPhuong;
             $scope.land.select_Phuong.Ward1 = data._Phuong;
-            $scope.load_duong($scope.land.select_Phuong.IDWard);
+            $scope.load_duong($scope.land.select_Huyen.IDTrousers);
+           // console.log(data._MaDuong);
             $scope.land.select_Duong.IDStreet = data._MaDuong | '';
             $scope.land.SoNha = data._SoNha;
             $scope.land.DienTich = data._Area_detail;
@@ -2087,6 +2097,7 @@ app.controller('ct_baidang_ctrl', ['$scope', '$http', '$window', '$rootScope', '
         //    $scope.load_phuong();
         //});
     };
+   // console.log($scope.land.select_Duong);
     $scope.update_land = function (land) {
 
         $scope.UploadAvatar(land.mavp);
@@ -2201,11 +2212,12 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
         $http.get(host + "/api/TimKiem/get_ward_by_IDTrousers/" + id).then(function (response) {
             $scope.listPhuong = response.data;
         });
+        $scope.load_duong(id);
         //console.log($scope.select_Huyen.Trousers);
     };
     $scope.load_duong = function (id) {
         $scope.select_Duong = { "Street1": "", "IDStreet": "" };
-        $http.get(host + "/api/TimKiem/get_Street_by_IDWard/" + id).then(function (response) {
+        $http.get(host + "/api/TimKiem/get_Street_by_IDTrouser/" + id).then(function (response) {
             $scope.listDuong = response.data;
         });
     };
@@ -2378,6 +2390,7 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
     $scope.ban_thue = true;
     $scope.loai = 0;
     $scope.gia = '';
+    $scope.so_nha = '';
     $scope.dien_tich = '';
     $scope.select_Hang = '0';
     $scope.noi_that = '0';
@@ -2394,6 +2407,7 @@ app.controller('postCtrl', ['$scope', '$http', '$rootScope', '$routeParams', 'te
         $scope.select_Hang = '';
         $scope.noi_that = '0';
         $scope.tien_nghi = '0';
+        $scope.so_nha = '';
     };
     $scope.check_tt = 0;
     $scope.thoa_thuan = function () {

@@ -50,8 +50,13 @@
                             <i ng-show="!myForm.birthdate.$invalid && test_email==0" style="float: left;width: 3%;padding: 5px;font-size: 20px;color: green;" class="fa fa-check-circle" aria-hidden="true"></i>
                         </div>
 
-                        <div style="padding: 6px; margin-bottom: 0px;width: 97%" class="alert alert-warning" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid && myForm.birthdate.$error.required">
+                        <div style="padding: 6px; margin-bottom: 0px; width: 97%" class="alert alert-warning" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid && myForm.birthdate.$error.required">
                             <strong>Warning!</strong> Vui lòng nhập ngày sinh.
+                        </div>
+
+                        <div style="padding: 6px; margin-bottom: 0px; width: 97%" class="alert alert-warning" 
+                             ng-show= "myForm.birthdate.$invalid && myForm.birthdate.$error.date">
+                            <strong>Warning!</strong> Ngày sinh không hợp lệ.
                         </div>
 
                     </div>

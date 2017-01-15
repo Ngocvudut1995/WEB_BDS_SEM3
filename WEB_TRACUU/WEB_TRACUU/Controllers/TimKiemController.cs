@@ -77,7 +77,7 @@ namespace WEB_TRACUU.Controllers
         }
 
         //Get DS Cac Duong
-        public IEnumerable<Street> get_Street_by_IDWard(int id)
+        public IEnumerable<Street> get_Street_by_IDTrouser(int id)
         {
             
             IList<Street> list = new List<Street>();
@@ -88,6 +88,7 @@ namespace WEB_TRACUU.Controllers
                 {
                     if (id == 0)
                     {
+                        return null;
                         var sql = (from a in db.Streets select a).OrderBy(b => b.Street1).ToList();
                         foreach (var item in sql)
                         {
@@ -100,7 +101,7 @@ namespace WEB_TRACUU.Controllers
                     }
                     else
                     {
-                        var sql = (from a in db.Streets where a.IDWard == id select a).OrderBy(b => b.Street1).ToList();
+                        var sql = (from a in db.Streets where a.IDTrousers == id select a).OrderBy(b => b.Street1).ToList();
                         foreach (var item in sql)
                         {
                             list.Add(new Street

@@ -10,13 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="AngularScript/app.js">
-      <publishTime>01/11/2017 11:41:50</publishTime>
+      <publishTime>01/14/2017 23:35:03</publishTime>
     </File>
     <File Include="AngularScript/map.js">
       <publishTime>12/27/2016 20:42:30</publishTime>
     </File>
     <File Include="AngularScript/Route.js">
-      <publishTime>01/12/2017 15:28:37</publishTime>
+      <publishTime>01/14/2017 23:22:08</publishTime>
     </File>
     <File Include="AngularScript/slider.js">
       <publishTime>01/12/2017 15:32:13</publishTime>
@@ -112,40 +112,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 19:11:06</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>03/02/2015 09:32:26</publishTime>
+      <publishTime>02/03/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>03/02/2015 09:32:26</publishTime>
+      <publishTime>02/03/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>12/07/2015 19:04:38</publishTime>
+      <publishTime>07/12/2015 19:04:38</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
-      <publishTime>03/10/2016 14:26:18</publishTime>
+      <publishTime>10/03/2016 14:26:18</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
-      <publishTime>03/10/2016 14:26:26</publishTime>
+      <publishTime>10/03/2016 14:26:26</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
-      <publishTime>03/09/2016 12:00:14</publishTime>
+      <publishTime>09/03/2016 12:00:14</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Web.dll">
-      <publishTime>03/10/2016 14:26:26</publishTime>
+      <publishTime>10/03/2016 14:26:26</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.WindowsServer.dll">
-      <publishTime>03/10/2016 14:26:26</publishTime>
+      <publishTime>10/03/2016 14:26:26</publishTime>
     </File>
     <File Include="bin/Microsoft.ApplicationInsights.dll">
-      <publishTime>03/09/2016 11:57:34</publishTime>
+      <publishTime>09/03/2016 11:57:34</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>04/03/2015 17:07:22</publishTime>
+      <publishTime>03/04/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>04/03/2015 17:07:22</publishTime>
+      <publishTime>03/04/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>04/03/2015 17:07:22</publishTime>
+      <publishTime>03/04/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/15/2015 02:06:24</publishTime>
@@ -181,7 +181,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2012 15:23:58</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>08/03/2014 20:33:56</publishTime>
+      <publishTime>03/08/2014 20:33:56</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>11/27/2012 13:00:52</publishTime>
@@ -241,7 +241,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:02:18</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>02/11/2014 15:26:04</publishTime>
+      <publishTime>11/02/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>01/28/2015 04:02:32</publishTime>
@@ -256,10 +256,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>09/10/2013 17:28:38</publishTime>
+      <publishTime>10/09/2013 17:28:38</publishTime>
     </File>
     <File Include="bin/WEB_TRACUU.dll">
-      <publishTime>01/12/2017 15:29:12</publishTime>
+      <publishTime>01/15/2017 14:21:53</publishTime>
     </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>10/31/2016 12:30:56</publishTime>
@@ -286,7 +286,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2016 12:29:26</publishTime>
     </File>
     <File Include="Content/Images/14874831_636705686503903_75934659_n.jpg">
-      <publishTime>11/01/2016 09:40:59</publishTime>
+      <publishTime>01/11/2016 09:40:59</publishTime>
     </File>
     <File Include="Content/Images/anh-bia%281%29.jpg_223x126.jpg">
       <publishTime>01/02/2017 19:01:07</publishTime>
@@ -313,7 +313,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/11/2017 08:59:00</publishTime>
     </File>
     <File Include="Content/Images/bando.png">
-      <publishTime>11/02/2016 09:34:01</publishTime>
+      <publishTime>02/11/2016 09:34:01</publishTime>
     </File>
     <File Include="Content/Images/banner_ser_vpa.png">
       <publishTime>11/24/2016 10:17:26</publishTime>
@@ -436,13 +436,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/02/2017 20:47:26</publishTime>
     </File>
     <File Include="Content/Images/left-arrow.png">
-      <publishTime>11/02/2016 14:38:59</publishTime>
+      <publishTime>02/11/2016 14:38:59</publishTime>
     </File>
     <File Include="Content/Images/LivingRoomSofa.png">
       <publishTime>12/31/2016 15:26:35</publishTime>
     </File>
     <File Include="Content/Images/logo-homedy-xmas.png">
       <publishTime>12/27/2016 16:57:36</publishTime>
+    </File>
+    <File Include="Content/Images/logo.png">
+      <publishTime>01/15/2017 07:50:53</publishTime>
+    </File>
+    <File Include="Content/Images/logo2.png">
+      <publishTime>01/15/2017 07:59:19</publishTime>
+    </File>
+    <File Include="Content/Images/logo3.png">
+      <publishTime>01/15/2017 11:08:10</publishTime>
+    </File>
+    <File Include="Content/Images/logo4.png">
+      <publishTime>01/15/2017 11:17:00</publishTime>
     </File>
     <File Include="Content/Images/maxresdefault.jpg">
       <publishTime>10/30/2016 08:50:59</publishTime>
@@ -460,10 +472,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/02/2017 20:47:26</publishTime>
     </File>
     <File Include="Content/Images/quangcao2.png">
-      <publishTime>12/03/2016 16:27:58</publishTime>
+      <publishTime>03/12/2016 16:27:58</publishTime>
     </File>
     <File Include="Content/Images/right-arrow.png">
-      <publishTime>11/02/2016 14:38:59</publishTime>
+      <publishTime>02/11/2016 14:38:59</publishTime>
     </File>
     <File Include="Content/Images/Slider/no-image.png">
       <publishTime>01/08/2017 18:37:10</publishTime>
@@ -523,7 +535,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/11/2017 12:01:53</publishTime>
     </File>
     <File Include="Content/style.css">
-      <publishTime>01/11/2017 12:14:29</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/sweetalert2.min.css">
       <publishTime>11/28/2016 11:50:30</publishTime>
@@ -574,7 +586,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 19:10:23</publishTime>
     </File>
     <File Include="Models/DataTraCuuVP.dbml">
-      <publishTime>01/11/2017 23:07:06</publishTime>
+      <publishTime>01/14/2017 11:55:48</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>11/27/2016 19:37:34</publishTime>
@@ -586,22 +598,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2016 19:11:06</publishTime>
     </File>
     <File Include="Scripts/angular-animate.js">
-      <publishTime>11/03/2016 20:11:14</publishTime>
+      <publishTime>03/11/2016 20:11:14</publishTime>
     </File>
     <File Include="Scripts/angular-animate.min.js">
-      <publishTime>11/03/2016 20:11:14</publishTime>
+      <publishTime>03/11/2016 20:11:14</publishTime>
     </File>
     <File Include="Scripts/angular-animate.min.js.map">
-      <publishTime>11/03/2016 20:11:14</publishTime>
+      <publishTime>03/11/2016 20:11:14</publishTime>
     </File>
     <File Include="Scripts/angular-cookies.js">
-      <publishTime>11/03/2016 21:23:38</publishTime>
+      <publishTime>03/11/2016 21:23:38</publishTime>
     </File>
     <File Include="Scripts/angular-cookies.min.js">
-      <publishTime>11/03/2016 21:23:38</publishTime>
+      <publishTime>03/11/2016 21:23:38</publishTime>
     </File>
     <File Include="Scripts/angular-cookies.min.js.map">
-      <publishTime>11/03/2016 21:23:38</publishTime>
+      <publishTime>03/11/2016 21:23:38</publishTime>
     </File>
     <File Include="Scripts/angular-mocks.js">
       <publishTime>10/31/2016 09:35:35</publishTime>
@@ -667,34 +679,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/13/2016 23:41:17</publishTime>
     </File>
     <File Include="Views/Home/chitiet.html">
-      <publishTime>01/11/2017 14:44:07</publishTime>
+      <publishTime>01/14/2017 12:47:09</publishTime>
     </File>
     <File Include="Views/Home/dangki.html">
-      <publishTime>01/12/2017 15:41:28</publishTime>
+      <publishTime>01/12/2017 19:45:59</publishTime>
     </File>
     <File Include="Views/Home/gioithieu.html">
       <publishTime>01/11/2017 16:29:13</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/12/2017 15:05:11</publishTime>
+      <publishTime>01/15/2017 14:21:37</publishTime>
     </File>
     <File Include="Views/Home/post.html">
-      <publishTime>12/09/2016 18:14:26</publishTime>
+      <publishTime>09/12/2016 18:14:26</publishTime>
     </File>
     <File Include="Views/Home/RecoverPassWord.cshtml">
       <publishTime>12/23/2016 20:01:53</publishTime>
     </File>
     <File Include="Views/Home/taikhoan.html">
-      <publishTime>01/12/2017 15:03:06</publishTime>
+      <publishTime>01/14/2017 23:24:01</publishTime>
     </File>
     <File Include="Views/Home/theodoi.html">
-      <publishTime>01/11/2017 15:46:37</publishTime>
+      <publishTime>01/13/2017 10:15:47</publishTime>
     </File>
     <File Include="Views/Home/timkiem.html">
-      <publishTime>01/12/2017 13:27:02</publishTime>
+      <publishTime>01/15/2017 14:21:23</publishTime>
     </File>
     <File Include="Views/Home/trangchinh.html">
-      <publishTime>01/12/2017 13:09:08</publishTime>
+      <publishTime>01/15/2017 10:56:19</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>10/26/2016 19:10:23</publishTime>

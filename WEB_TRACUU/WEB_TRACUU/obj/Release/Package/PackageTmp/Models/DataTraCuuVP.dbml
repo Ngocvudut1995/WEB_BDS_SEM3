@@ -13,7 +13,6 @@
       <Column Name="Ward" Member="Ward1" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="IDTrousers" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Ward_Land" Member="Lands" ThisKey="IDWard" OtherKey="IDWard" Type="Land" />
-      <Association Name="Ward_Street" Member="Streets" ThisKey="IDWard" OtherKey="IDWard" Type="Street" />
       <Association Name="Trouser_Ward" Member="Trouser" ThisKey="IDTrousers" OtherKey="IDTrousers" Type="Trouser" IsForeignKey="true" />
     </Type>
   </Table>
@@ -146,10 +145,9 @@
   <Table Name="dbo.Street" Member="Streets">
     <Type Name="Street">
       <Column Name="IDStreet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDTrousers" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Street" Member="Street1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDWard" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Street_Land" Member="Lands" ThisKey="IDStreet" OtherKey="IDStreet" Type="Land" />
-      <Association Name="Ward_Street" Member="Ward" ThisKey="IDWard" OtherKey="IDWard" Type="Ward" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TypeDetail" Member="TypeDetails">

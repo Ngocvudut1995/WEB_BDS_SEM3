@@ -28,234 +28,236 @@ namespace WEB_TRACUU.Controllers
             dynamic json = data;
             int i = 0;
             var id = Guid.NewGuid();
-           
-                using (db = new DataTraCuuVPDataContext())
+
+            using (db = new DataTraCuuVPDataContext())
+            {
+                db.Connection.Open();
+
+                Land lands = new Land();
+                int loaiGia = Convert.ToInt32(json._loaiGia);
+                Double gia = Convert.ToDouble(json._gia);
+                int banThue = Convert.ToInt32(json._banThue);
+
+                if (banThue == 1)
                 {
-                    db.Connection.Open();
-
-                    Land lands = new Land();
-                    int loaiGia = Convert.ToInt32(json._loaiGia);
-                    Double gia = Convert.ToDouble(json._gia);
-                    int banThue = Convert.ToInt32(json._banThue);
-
-                    if (banThue == 1)
+                    lands.Sell = true;
+                    if (json._checkTT == 1)
                     {
-                        lands.Sell = true;
-                        if (json._checkTT == 1)
-                        {
-                            lands.IDPrice = 18;
-                            gia = 0;
-                        }
-                        else
-                        {
-                            if (loaiGia == 1)
-                            {   
-                                if (gia < 500)
-                                {
-                                    lands.IDPrice = 1;
-                                }
-                                else if (gia >= 500 && gia < 800)
-                                {
-                                    lands.IDPrice = 2;
-                                }
-                                else if (gia >= 800 && gia < 1000)
-                                {
-                                    lands.IDPrice = 3;
-                                }
-                            }
-                            else
-                            {
-                                gia = gia*1000;
-                                if (gia >= 1000 && gia < 2000)
-                                {
-                                    lands.IDPrice = 4;
-                                }
-                                else if (gia >= 2000 && gia < 3000)
-                                {
-                                    lands.IDPrice = 5;
-                                }
-                                else if (gia >= 3000 && gia < 5000)
-                                {
-                                    lands.IDPrice = 6;
-                                }
-                                else if (gia >= 5000 && gia < 7000)
-                                {
-                                    lands.IDPrice = 7;
-                                }
-                                else if (gia >= 7000 && gia < 10000)
-                                {
-                                    lands.IDPrice = 8;
-                                }
-                                else if (gia >= 10000 && gia < 20000)
-                                {
-                                    lands.IDPrice = 9;
-                                }
-                                else if (gia >= 20000)
-                                    lands.IDPrice = 10;
-                            }
-                        }
-
-
+                        lands.IDPrice = 18;
+                        gia = 0;
                     }
                     else
                     {
-                        lands.Sell = false;
-                        if (json._checkTT == 1)
+                        if (loaiGia == 1)
                         {
-                            lands.IDPrice = 19;
-                            gia = 0;
+                            if (gia < 500)
+                            {
+                                lands.IDPrice = 1;
+                            }
+                            else if (gia >= 500 && gia < 800)
+                            {
+                                lands.IDPrice = 2;
+                            }
+                            else if (gia >= 800 && gia < 1000)
+                            {
+                                lands.IDPrice = 3;
+                            }
                         }
                         else
                         {
-                            if (gia < 1)
+                            gia = gia * 1000;
+                            if (gia >= 1000 && gia < 2000)
                             {
-                                lands.IDPrice = 11;
+                                lands.IDPrice = 4;
                             }
-                            else if (gia >= 1 && gia < 5)
+                            else if (gia >= 2000 && gia < 3000)
                             {
-                                lands.IDPrice = 12;
+                                lands.IDPrice = 5;
                             }
-                            else if (gia >= 5 && gia < 10)
+                            else if (gia >= 3000 && gia < 5000)
                             {
-                                lands.IDPrice = 13;
+                                lands.IDPrice = 6;
                             }
-                            else if (gia >= 10 && gia < 40)
+                            else if (gia >= 5000 && gia < 7000)
                             {
-                                lands.IDPrice = 14;
+                                lands.IDPrice = 7;
                             }
-                            else if (gia >= 40 && gia < 70)
+                            else if (gia >= 7000 && gia < 10000)
                             {
-                                lands.IDPrice = 15;
+                                lands.IDPrice = 8;
                             }
-                            else if (gia >= 70 && gia < 100)
+                            else if (gia >= 10000 && gia < 20000)
                             {
-                                lands.IDPrice = 16;
+                                lands.IDPrice = 9;
                             }
-                            else if (gia >= 100)
-                            {
-                                lands.IDPrice = 17;
-                            }
+                            else if (gia >= 20000)
+                                lands.IDPrice = 10;
                         }
                     }
 
-                    //Dien tich
-                    if (json._dienTich < 30)
-                    {
-                        lands.IDAcreage = 1;
-                    }
-                    else if (json._dienTich >= 30 && json._dienTich < 50)
-                    {
-                        lands.IDAcreage = 2;
-                    }
-                    else if (json._dienTich >= 50 && json._dienTich < 100)
-                    {
-                        lands.IDAcreage = 3;
-                    }
-                    else if (json._dienTich >= 100 && json._dienTich < 200)
-                    {
-                        lands.IDAcreage = 4;
-                    }
-                    else if (json._dienTich >= 200 && json._dienTich < 300)
-                    {
-                        lands.IDAcreage = 5;
-                    }
-                    else if (json._dienTich >= 300 && json._dienTich < 400)
-                    {
-                        lands.IDAcreage = 6;
-                    }
-                    else if (json._dienTich >= 400 && json._dienTich < 500)
-                    {
-                        lands.IDAcreage = 7;
-                    }
-                    else if (json._dienTich >= 500 && json._dienTich < 1000)
-                    {
-                        lands.IDAcreage = 8;
-                    }
-                    else if (json._dienTich >= 1000)
-                    {
-                        lands.IDAcreage = 9;
-                    }
-                    lands.Area_detail = json._dienTich;
-                    lands.IDLand = id;
-                    lands.Name = json._tieuDe;
-                    lands.Price_detail = Convert.ToDecimal(gia);
-                    lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
-                    if (json._huongnha.ToString() != "")
-                    {
-                        lands.IDDirection = json._huongnha;
-                    }
-                    lands.Image = "Content/Images/vanphong.jpg";
-                    lands.Decrition = json._moTa;
-                    DateTime date = DateTime.Now;
-                    lands.CreateDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
-                    lands.ModifyDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
 
-                    i = Convert.ToInt32(json._thoiHang);
-                    if (i == 1)
+                }
+                else
+                {
+                    lands.Sell = false;
+                    if (json._checkTT == 1)
                     {
-                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(1);
+                        lands.IDPrice = 19;
+                        gia = 0;
                     }
-                    else if (i == 2)
+                    else
                     {
-                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(2);
+                        if (gia < 1)
+                        {
+                            lands.IDPrice = 11;
+                        }
+                        else if (gia >= 1 && gia < 5)
+                        {
+                            lands.IDPrice = 12;
+                        }
+                        else if (gia >= 5 && gia < 10)
+                        {
+                            lands.IDPrice = 13;
+                        }
+                        else if (gia >= 10 && gia < 40)
+                        {
+                            lands.IDPrice = 14;
+                        }
+                        else if (gia >= 40 && gia < 70)
+                        {
+                            lands.IDPrice = 15;
+                        }
+                        else if (gia >= 70 && gia < 100)
+                        {
+                            lands.IDPrice = 16;
+                        }
+                        else if (gia >= 100)
+                        {
+                            lands.IDPrice = 17;
+                        }
                     }
-                    else if (i == 3)
-                    {
-                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(3);
-                    }
-                    else if (i == 6)
-                    {
-                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(6);
-                    }
-                    else if (i == 12)
-                    {
-                        lands.ExpiredDate = ((DateTime)lands.CreateDate).AddYears(1);
-                    }
-
-
-                    lands.IDCustomer = json._idCustomer;
-                    lands.Flag_Approval = false;
-                    //lands.Image = json._Image();
-                    // Lay ID cao nhat hien tai
-                    if (json._soNha.ToString() != "")
-                    {
-                        lands.Numhouse = json._soNha;
-                    }
-                   
-                    if (json._duong.ToString() != "")
-                    {
-                        lands.IDStreet = json._duong;
-                    }
-
-                    // Insert address 
-                    
-                    lands.IDWard = json._phuong;
-                    lands.View = 0;
-                    db.Lands.InsertOnSubmit(lands);
-                    db.SubmitChanges();
-                    foreach (var item in json._noiThat)
-                    {
-
-                        Furiture_detail furinture = new Furiture_detail();
-                        furinture.IDFuriture = item;
-                        furinture.IDLand = id;
-                        db.Furiture_details.InsertOnSubmit(furinture);
-                        db.SubmitChanges();
-                    }
-                    foreach (var item in json._tienNghi)
-                    {
-                        Convenient_Detail conven = new Convenient_Detail();
-                        conven.IDConvenient = item;
-                        conven.IDLand = id;
-                        db.Convenient_Details.InsertOnSubmit(conven);
-                        db.SubmitChanges();
-                    }
-                    db.Connection.Close();
-                    return Ok(id);
                 }
 
-           
-           
+                //Dien tich
+                if (json._dienTich < 30)
+                {
+                    lands.IDAcreage = 1;
+                }
+                else if (json._dienTich >= 30 && json._dienTich < 50)
+                {
+                    lands.IDAcreage = 2;
+                }
+                else if (json._dienTich >= 50 && json._dienTich < 100)
+                {
+                    lands.IDAcreage = 3;
+                }
+                else if (json._dienTich >= 100 && json._dienTich < 200)
+                {
+                    lands.IDAcreage = 4;
+                }
+                else if (json._dienTich >= 200 && json._dienTich < 300)
+                {
+                    lands.IDAcreage = 5;
+                }
+                else if (json._dienTich >= 300 && json._dienTich < 400)
+                {
+                    lands.IDAcreage = 6;
+                }
+                else if (json._dienTich >= 400 && json._dienTich < 500)
+                {
+                    lands.IDAcreage = 7;
+                }
+                else if (json._dienTich >= 500 && json._dienTich < 1000)
+                {
+                    lands.IDAcreage = 8;
+                }
+                else if (json._dienTich >= 1000)
+                {
+                    lands.IDAcreage = 9;
+                }
+                lands.Area_detail = json._dienTich;
+                lands.IDLand = id;
+                lands.Name = json._tieuDe;
+                lands.Price_detail = Convert.ToDecimal(gia);
+                lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
+                if (json._huongnha.ToString() != "")
+                {
+                    //if (json.IDDirection == 0) lands.IDDirection = null;
+                    lands.IDDirection = json._huongnha;
+                }
+                lands.Image = "Content/Images/vanphong.jpg";
+                lands.Decrition = json._moTa;
+                DateTime date = DateTime.Now;
+                lands.CreateDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
+                lands.ModifyDate = DateTime.Parse(date.ToString("yyyy-MM-dd"));
+
+                i = Convert.ToInt32(json._thoiHang);
+                if (i == 1)
+                {
+                    lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(1);
+                }
+                else if (i == 2)
+                {
+                    lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(2);
+                }
+                else if (i == 3)
+                {
+                    lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(3);
+                }
+                else if (i == 6)
+                {
+                    lands.ExpiredDate = ((DateTime)lands.CreateDate).AddMonths(6);
+                }
+                else if (i == 12)
+                {
+                    lands.ExpiredDate = ((DateTime)lands.CreateDate).AddYears(1);
+                }
+
+
+                lands.IDCustomer = json._idCustomer;
+                lands.Flag_Approval = false;
+                //lands.Image = json._Image();
+                // Lay ID cao nhat hien tai
+                if (json._soNha.ToString() != "")
+                {
+                    lands.Numhouse = json._soNha;
+                }
+
+                if (json._duong.ToString() != "")
+                {
+                   // if (json._duong == 0) lands.IDStreet = null;
+                    lands.IDStreet = json._duong;
+                }
+
+                // Insert address 
+
+                lands.IDWard = json._phuong;
+                lands.View = 0;
+                db.Lands.InsertOnSubmit(lands);
+                db.SubmitChanges();
+                foreach (var item in json._noiThat)
+                {
+
+                    Furiture_detail furinture = new Furiture_detail();
+                    furinture.IDFuriture = item;
+                    furinture.IDLand = id;
+                    db.Furiture_details.InsertOnSubmit(furinture);
+                    db.SubmitChanges();
+                }
+                foreach (var item in json._tienNghi)
+                {
+                    Convenient_Detail conven = new Convenient_Detail();
+                    conven.IDConvenient = item;
+                    conven.IDLand = id;
+                    db.Convenient_Details.InsertOnSubmit(conven);
+                    db.SubmitChanges();
+                }
+                db.Connection.Close();
+                return Ok(id);
+            }
+
+
+
         }
         //[HttpPost]
         //public Guid? Creat_BDS(JObject data)
@@ -345,7 +347,7 @@ namespace WEB_TRACUU.Controllers
             //string sPath = "";
             //string sPath = "C:\\inetpub\\wwwroot\\Content\\Images\\Image_VP\\";
             //string sPath = "D:\\";
-           string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/");
+            string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/");
 
             System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
             using (db = new DataTraCuuVPDataContext())
@@ -361,13 +363,13 @@ namespace WEB_TRACUU.Controllers
                     if (hpf.ContentLength > 0)
                     {
                         Random rd = new Random();
-                        string fileName = "avarta_" + kh.IDPost + "_"+rd.Next(1,100).ToString()+".jpg";
+                        string fileName = "avarta_" + kh.IDPost + "_" + rd.Next(1, 100).ToString() + ".jpg";
                         string saveAsPath = Path.Combine(sPath, fileName);
-                        
-                        
+
+
                         foreach (string f in Directory.GetFiles(sPath, "avarta_" + kh.IDPost + "_*.jpg"))
                         {
-                           File.Delete(f);
+                            File.Delete(f);
                         }
                         hpf.SaveAs(saveAsPath);
                         kh.Image = "Content/Images/" + fileName;
@@ -380,12 +382,12 @@ namespace WEB_TRACUU.Controllers
                             image.RotateFlip(RotateFlipType.Rotate180FlipNone);
                             Image NewImage = image.GetThumbnailImage(540, 360, null, IntPtr.Zero);
                             NewImage.Save(saveAsPath, ImageFormat.Jpeg);
-                           
+
                         }
                     }
-                    
+
                 }
-                
+
                 db.SubmitChanges();
                 if (iUploadedCnt > 0)
                 {
@@ -396,8 +398,8 @@ namespace WEB_TRACUU.Controllers
                     return "Upload Failed";
                 }
             }
-            
-           
+
+
 
         }
         [HttpPost]
@@ -406,11 +408,11 @@ namespace WEB_TRACUU.Controllers
             int iUploadedCnt = 0;
             System.Web.HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
             using (db = new DataTraCuuVPDataContext())
-            {   
+            {
                 Image_Detail imageDetail = new Image_Detail();
                 imageDetail.IDLand = id;
 
-                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Slider/" +id.ToString()+"/");
+                string sPath = System.Web.Hosting.HostingEnvironment.MapPath("~/Content/Images/Slider/" + id.ToString() + "/");
                 if (!System.IO.Directory.Exists(sPath))
                     System.IO.Directory.CreateDirectory(sPath);
                 for (int iCnt = 0; iCnt <= hfc.Count - 1; iCnt++)

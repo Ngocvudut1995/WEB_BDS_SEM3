@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row" style="">
-        <div class="col-md-4" style="">
+        <div class="col-md-4" style="" ng-style="">
             <div style="background-color: #C1C1C1; height: 40px">
                 <h4 style="color: white;font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px;text-transform: uppercase">Thông Tin Tài Khoản</h4>
             </div>
@@ -83,7 +83,7 @@
                                     <div class="col-md-4 col-sm-4 col-xs-12" style="margin-top: 14px" ng-init="select_Phuong.Ward1 = '';">
                                         <label style="width: 100%;font-size: 14px">Phường xã<span style="color: #ff6666">(*)</span></label>
 
-                                        <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="select_Phuong" ng-change="load_duong(select_Phuong.IDWard)"
+                                        <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="select_Phuong" ng-change=""
                                                 ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
                                             <option value="" style="width: 50%" ng-show="select_Phuong.Ward1 == ''" ng-click="select_Phuong.IDWard = 0">--- Chọn Phường Xã ---</option>
                                             <!-- <option ng-repeat="item in listPhuong" value="{{ item.IDWard }}">{{ item.Ward1 }}</option>-->
@@ -352,14 +352,16 @@
                                 <div class="col-md-12 col-xs-12 col-sm-12 form-group" style="margin-bottom: -30px">
                                     <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                                         <input class="btn" type="submit" value="Ðăng tin" ng-disabled="select_Hang == 0 || myForm.dien_tich.$invalid
-                                                || myForm.gia.$invalid || myForm.dien_tich.$invalid || myForm.tieu_de.$invalid || select_DM.IDTypeDetail == 0
+                                                || (myForm.gia.$invalid && myForm.gia.$error.required || myForm.gia.$error.min) 
+                                                  && (check_tt == 0) || myForm.dien_tich.$invalid || myForm.tieu_de.$invalid || 
+                                               select_DM.IDTypeDetail == 0
                                                || loai == 0 || select_Phuong.Ward1 == '' || select_Huyen.Trousers == '' "
-                                               style="width: 40%; margin-top: 30px; text-align: center; float: right;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="postBai()" />
+                                               style="margin-top: 30px; text-align: center; float: right;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="postBai()" />
 
                                     </div>
                                     <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                                         <input type="button" value="Hủy bỏ"
-                                               style="width: 40%; margin-top: 30px; text-align: center; float: left;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="huy()" />
+                                               style="margin-top: 30px; text-align: center; float: left;background: #36ace1;border: none;padding: 4px 20px;display: inline-block;font-size: 19px;font-weight: 400;color: white" ng-click="huy()" />
 
                                     </div>
                                 </div>
@@ -439,7 +441,7 @@
                                 </div>
                                 <div class="col-md-6 col-xs-6 col-sm-6 form-group">
                                     <label style="width: 100%; margin-top: 30px">Phường xã</label>
-                                    <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_Phuong" ng-change="load_duong(land.select_Phuong.IDWard)"
+                                    <select class="form-control select-post" style="width: 100%; height: 32px; margin-top: 10px;" ng-model="land.select_Phuong"
                                             ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
 
                                         <option ng-show="land.select_Phuong.Ward1 ==''" value="">--- Chọn Phường xã ---</option>
@@ -536,6 +538,7 @@
                                            ng-value="format_date_picker(land.expired_date)" ng-model="expired_date" ng-change="change_expiredDate()" name="expired_date" class="form-control" placeholder="Enter expired date" required>
                                     <span style="color: red" ng-show="myForm.expired_date.$touched && myForm.expired_date.$invalid">
                                         <span ng-show="myForm.expired_date.$error.required">Expired Date is required.</span>
+                                        <span ng-show="myForm.expired_date.$error.date">Expired Date invaid.</span>
                                     </span>
                                     <!--<p>{{land.expired_date}}</p>-->
                                 </div>
@@ -623,7 +626,7 @@
 
                                 <input class="btn btn-sm btn-info"type="submit" value="Lưu" ng-disabled="(myForm.txtName.$invalid) || (myForm.gia.$error.required && land.GiaChiTiet == false)
                                        || land.select_Kieu.TypeNameDetail == '' || myForm.dientich.$error.required || land.select_Phuong.Ward1 == '' || land.select_Huyen.Trousers==''
-                                       || myForm.txtName.$invalid"
+                                       || myForm.txtName.$invalid || myForm.expired_date.$invalid"
                                            style="width: 20%; margin-top: 30px; text-align: center; float: right" ng-click="update_land(land)"/>
 
                                 
@@ -690,6 +693,7 @@
                                         <input type="date" ng-value="format_date_picker(Customer.birthdate)" ng-model="birthdate" ng-change="change_birthday()" name="birthdate" class="form-control" placeholder="Enter your birthday" required>
                                         <span style="color: red" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid">
                                                     <span ng-show="myForm.birthdate.$error.required">Birthday is required.</span>
+                                            <span ng-show="myForm.birthdate.$error.date">Birthday is invalid.</span>
                                                 </span>
                                         <!--<p>{{Customer.birthdate}}</p>-->
                                     </div>
@@ -745,7 +749,7 @@
 
                                 <div class="col-md-12" style="text-align: center">
                                     <input type="submit" class="btn btn-info" value="Submit" ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
-                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid || myForm.birthdate.$invalid
                         || myForm.cmnd.$invalid">
                                     <button type="reset" class="btn btn-info" ng-click="reload_kh()">Cancel</button>
                                 </div>
@@ -808,7 +812,7 @@
             <div class="panel-body">
                 <div class="list-group-item row">
                     <div class="col-md-9" ng-init="show_edit_phuong=0">
-                        <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Phuong" ng-change="load_duong(select_Phuong.IDWard)"
+                        <select style="width: 100%; height: 32px; border-radius: 4px;" ng-model="select_Phuong"
                                 ng-options="x as x.Ward1 for x in listPhuong track by x.IDWard">
 
                             <option value="">--- Chọn Phường xã ---</option>
@@ -841,7 +845,7 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading" style="text-transform: uppercase;">DS Các Đường Trong Phường</div>
+            <div class="panel-heading" style="text-transform: uppercase;">DS Các Đường</div>
             <div class="panel-body">
                 <div class="list-group-item row">
                     <div class="col-md-9" ng-init="show_edit_duong=0">
@@ -853,7 +857,7 @@
                         </select>
 
                         <input ng-disabled="(show_edit_duong==0)" type="text" style="width: 80%; float: left; margin-top: 20px; height: 32px;" ng-model="select_Duong.Street1"/>
-                        <button ng-click="SaveEditStreet(IsInsert,select_Duong.Street1,select_Duong.IDStreet,select_Phuong.IDWard);show_edit_duong=0" ng-disabled="(show_edit_duong==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                        <button ng-click="SaveEditStreet(IsInsert,select_Duong.Street1,select_Duong.IDStreet,select_Huyen.IDTrousers);show_edit_duong=0" ng-disabled="(show_edit_duong==0)" class="btn" style="float: left; height: 32px; margin-top: 20px; margin-left: 20px"><span class="glyphicon glyphicon-floppy-save"></span></button>
                     </div>
                     <div class="col-md-3 dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
@@ -1086,7 +1090,9 @@
         </div>
         <div ng-switch-when="ql_baidang" class="list-group" ng-controller="ql_baidang">
             <div style="background-color: #C1C1C1; margin-bottom: 20px; height: 40px">
-                <h4 style="color: white;text-transform: uppercase; font-weight: bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Khách Hàng</h4>
+                <h4 style="color: white;text-transform: uppercase; font-weight: 
+    bold; border-bottom: 1px solid #dedede; background-color: #36ace2; float: none; 
+          padding: 9px 20px 10px; line-height: 30px">Quản Trị Hệ Thống Quản Lý Bài Đăng</h4>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-transform: uppercase;">Danh Sách Bài Đăng</div>
@@ -1200,6 +1206,7 @@
                                         <input type="date" ng-value="format_date_picker(Customer.birthdate)" ng-model="birthdate" ng-change="change_birthday()" name="birthdate" class="form-control" placeholder="Enter your birthday" required>
                                         <span style="color: red" ng-show="myForm.birthdate.$touched && myForm.birthdate.$invalid">
                                                     <span ng-show="myForm.birthdate.$error.required">Birthday is required.</span>
+                                            <span ng-show="myForm.birthdate.$error.date">Birthday is invalid.</span>
                                                 </span>
                                         <!--<p>{{Customer.birthdate}}</p>-->
                                     </div>
@@ -1255,7 +1262,7 @@
 
                                 <div class="col-md-12" style="text-align: center">
                                     <input type="submit" class="btn btn-info" value="Submit" ng-disabled="myForm.fullname.$invalid || myForm.username.$invalid ||
-                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid
+                        myForm.phone.$invalid || myForm.email.$invalid || myForm.address.$invalid || myForm.birthdate.$invalid
                         || myForm.cmnd.$invalid">
 
                                 </div>

@@ -186,11 +186,7 @@ namespace WEB_TRACUU.Controllers
             {
                 using (db = new DataTraCuuVPDataContext())
                 {
-                    var duongs = (from a in db.Streets where a.IDWard == id select a).ToList();
-                    foreach (var sql in duongs)
-                    {
-                        Delete_Streets(sql.IDStreet);
-                    }
+                    
                     var phuong = (from a in db.Wards
                                   where a.IDWard == id
                                   select a).SingleOrDefault();
@@ -220,7 +216,7 @@ namespace WEB_TRACUU.Controllers
                     if (json.Is_Insert == 1)
                     {
                         Street duong = new Street();
-                        duong.IDWard = json.IDWard;
+                        duong.IDTrousers = json.IDtrouser;
                         duong.Street1 = json.Name;
                         db.Streets.InsertOnSubmit(duong);
                         db.SubmitChanges();
@@ -875,6 +871,7 @@ namespace WEB_TRACUU.Controllers
                     lands.IDTypeDetail = Convert.ToInt32(json._kieuBDS);
                     if (json._huong.ToString() != "")
                     {
+                        if (json._huongnha == 0) lands.IDDirection = null;
                         lands.IDDirection = json._huongnha;
                     }
                     else
@@ -902,6 +899,7 @@ namespace WEB_TRACUU.Controllers
                     }
                     if (json._duong.ToString() != "")
                     {
+                        if (json._duong == 0) lands.IDStreet = null;
                         lands.IDStreet = json._duong;
                     }
                     else
