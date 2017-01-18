@@ -15,6 +15,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
     $scope.test_tk = 0;
     $scope.test_email = 0;
     $scope._check = 0;
+   
     $scope.kt_taikhoan_tontai = function () {
         var url = host + "/api/TaiKhoan/KT_TaiKhoan_TonTai/?user=" + $scope.username;
         $http.get(url).then(function (response) {
@@ -58,7 +59,7 @@ app.controller('dangkiCtrl', ['$scope', '$http', '$rootScope', '$routeParams', f
                 //cancelButtonClass: 'btn btn-danger',
                 //buttonsStyling: false
             }).then(function () {
-                window.open(host + '/#/TimKiem', '_self', '');
+                window.open(host + '/#/TrangChu', '_self', '');
             }
                  );
         }, function (res) {

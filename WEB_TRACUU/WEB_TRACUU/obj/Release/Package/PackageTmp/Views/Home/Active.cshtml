@@ -23,13 +23,13 @@
     var host = "http://" + document.location.hostname + ":" + window.location.port;
     var active = angular.module('ActiveApp', []);
     active.controller("activeCtr", [
-        '$scope', '$http', '$location', function ($scope, $http, $location) {
+        '$scope', '$http', '$location', function($scope, $http, $location) {
             $scope.Ten = "@ViewBag.id";
-            $scope.active_taikhoan = function () {
-                
+            $scope.active_taikhoan = function() {
+
 
                 var data = JSON.stringify({ "makh": $scope.Ten });
-                $http.put(host + "/api/TaiKhoan/KichHoatTK/", data).then(function (response) {
+                $http.put(host + "/api/TaiKhoan/KichHoatTK/", data).then(function(response) {
                     swal({
                         title: 'Bạn Đã Kích Hoạt Thành Công',
                         text: "Mời Bạn Trở Lại Trang Chính!",
@@ -42,19 +42,52 @@
                         confirmButtonClass: 'btn btn-success',
                         //cancelButtonClass: 'btn btn-danger',
                         //buttonsStyling: false
-                    }).then(function () {
-                        window.open(host + '/#/TimKiem', '_self', '');
-                    }
-                 );
-                }, function (res) {
+                    }).then(function() {
+                            window.open(host + '/#/TimKiem', '_self', '');
+                        }
+                    );
+                }, function(res) {
                     alert("that bai!");
                 });
             };
         }
-
     ]);
 
 </script>
+    <div style="z-index: 19; width: 100%; background-color: rgba(34, 49, 78, 0.92);" scroll
+         ng-style="((hien_nav_mini == 0) && {'width':'100%','position':'fixed','top':'0px'} || (hien_nav_mini == 1) && {'position':'relative'})">
+        <div class="hidden-xs" style="width: 100%; background-color: #eb5255; height: 37px">
+            <ul class="nav nav-pills" style="float: left; margin-left: 30px">
+                <li><a href="http://fb.com" style="color: white; font-size: 12px;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="http://google.com" style="color: white; font-size: 12px;"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="http://youtube.com" style="color: white; font-size: 12px;"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+                <li><a href="#" style="color: white; font-size: 12px;"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                <li style="margin-bottom: -10px;"><a href="#" style="color: white; font-size: 12px;"><i fb-likem></i></a></li>
+                @*<div style="float: left; white-space: nowrap;" fb-like></div>*@
+            </ul>
+
+        </div>
+        <div style="height: 65px; position: relative;">
+            <ul class="nav nav-pills hidden-md hidden-lg" style="height: 100%;text-align: center; margin-left: 6%; width: 100%">
+                <li class="navtab" style="width: 100%;height: 100%">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="height: 100%;white-space: nowrap; padding: 8px;">
+                        <img style="height: 100%" src="~/Content/Images/logo4.png" />
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-pills hidden-xs hidden-sm" style="height: 100%;text-align: center; float: left; margin-left: 6%;">
+                <li class="navtab" style="height: 100%">
+                    <a ng-click="change_tab(1)" id="nav1" href="#/" style="height: 100%;white-space: nowrap; padding: 8px;">
+                        <img style="height: 100%" src="~/Content/Images/logo4.png" />
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
     <div class="container">
         <div style="text-align: center">
             <h1>Mời Bạn Click Vào Button Active Để Kích Hoạt Tài Khoản</h1>

@@ -22,7 +22,22 @@ app.controller("main", ['$scope', '$window', '$cookies','$rootScope',function ($
         var text = html.replace(/<br\s*[\/]?>/g, "\n");
         return text;
     };
-  
+    $rootScope.today = function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        if (dd < '10') {
+            dd = '0' + dd;
+        }
+        if (mm < '10') {
+            mm = '0' + mm;
+        }
+       
+        var yyyy = today.getFullYear();
+        var format = yyyy + '-' + mm + '-' + dd;
+        console.log(format);
+        return format;
+    };
      $rootScope.format_date = function (date) {
         var today = new Date(date);
         var dd = today.getDate();
